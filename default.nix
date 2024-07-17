@@ -81,9 +81,6 @@ let
 in {
   imports =
     [
-      # Include generated hardware configuration
-      ./hardware-configuration.nix 
-
       # Include home manager
       <home-manager/nixos>
     ];
