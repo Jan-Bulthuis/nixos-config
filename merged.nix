@@ -94,36 +94,36 @@ in {
   # };
 
   # Use the systemd-boot EFI boot loader.
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      systemd-boot.editor = false;
-      efi.canTouchEfiVariables = true;
-      timeout = 0;
-    };
+  # boot = {
+  #   loader = {
+  #     systemd-boot.enable = true;
+  #     systemd-boot.editor = false;
+  #     efi.canTouchEfiVariables = true;
+  #     timeout = 0;
+  #   };
 
-    tmp.cleanOnBoot = true;
+  #   tmp.cleanOnBoot = true;
 
-    consoleLogLevel = 0;
-    initrd.verbose = false;
-    initrd.checkJournalingFS = false;
+  #   consoleLogLevel = 0;
+  #   initrd.verbose = false;
+  #   initrd.checkJournalingFS = false;
 
-    plymouth = {
-      enable = false;
-      theme = "text";
-    };
+  #   plymouth = {
+  #     enable = false;
+  #     theme = "text";
+  #   };
 
-    kernelParams = [
-      "quiet"
-      "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
-      "video=efifb:nobgrt"
-      "bgrt_disable"
-    ];
-  };
+  #   kernelParams = [
+  #     "quiet"
+  #     "boot.shell_on_fail"
+  #     "loglevel=3"
+  #     "rd.systemd.show_status=false"
+  #     "rd.udev.log_level=3"
+  #     "udev.log_priority=3"
+  #     "video=efifb:nobgrt"
+  #     "bgrt_disable"
+  #   ];
+  # };
 
   # Set up console
   # console = {
@@ -136,28 +136,28 @@ in {
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.wireless.allowAuxiliaryImperativeNetworks = true;  
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # Set up graphics
-  hardware.graphics.enable32Bit = true;
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    prime = {
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-    };
-  };
+  # hardware.graphics.enable32Bit = true;
+  # hardware.graphics.enable = true;
+  # services.xserver.videoDrivers = ["nvidia"];
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   open = false;
+  #   nvidiaSettings = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   prime = {
+  #     intelBusId = "PCI:0:2:0";
+  #     nvidiaBusId = "PCI:1:0:0";
+  #     offload = {
+  #       enable = true;
+  #       enableOffloadCmd = true;
+  #     };
+  #   };
+  # };
 
   # Set up tailscale
   # services.tailscale = {
@@ -182,7 +182,7 @@ in {
   # };
 
   # Set up input
-  services.libinput.enable = true;
+  # services.libinput.enable = true;
 
   # Display manager
   # services.greetd = {
@@ -201,14 +201,14 @@ in {
   # Enable programs
   # programs.river.enable = true;
 
-  xdg.portal = {
-    enable = true;
+  # xdg.portal = {
+  #   enable = true;
 
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
-  };
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal-wlr
+  #   ];
+  # };
 
   # Gamer moment
   # programs.steam.enable = true;
@@ -225,10 +225,10 @@ in {
   # pr` 
 
   # dconf
-  programs.dconf.enable = true;
+  # programs.dconf.enable = true;
 
   # Fonts
-  fonts.packages = with pkgs; [
+  # fonts.packages = with pkgs; [
     # my-wqy-zenhei
     # my-wqy-microhei
     # my-wqy-bitmapsong
@@ -239,7 +239,7 @@ in {
     #unifont # Replace with Kissinger2
     #unifont_upper # Replace with Kissinger 2
     # (nerdfonts.override { fonts = ["NerdFontsSymbolsOnly"]; })
-  ];
+  # ];
   # fonts.fontconfig.defaultFonts = {
   #   serif = [
   #     # "DejaVu Serif"
@@ -272,12 +272,12 @@ in {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    curl
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   git
+  #   vim
+  #   wget
+  #   curl
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

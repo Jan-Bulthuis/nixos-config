@@ -18,6 +18,7 @@
 
     # Enabled modules
     modules = {
+      base.enable = true;
       pipewire.enable = true;
       wpa_supplicant.enable = true;
     };

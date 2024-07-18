@@ -3,7 +3,13 @@
 with lib; {
   imports = [
     # Import modules
+    ./base/default.nix
+    ./boot/clean-tmp.nix
+    ./boot/silent-boot.nix
+    ./boot/systemd-boot.nix
+    ./brightnessctl/default.nix
     ./fontconfig/default.nix
+    ./graphics/default.nix
     ./greeter/greetd/default.nix
     ./greeter/greetd/tuigreet.nix
     ./locale/default.nix
@@ -14,12 +20,4 @@ with lib; {
     ./vpn/tailscale.nix
     ./wifi/wpa_supplicant.nix
   ];
-
-  config.modules = {
-    # Enable default modules
-    fontconfig.enable = mkDefault true;
-    neovim.enable = mkDefault true;
-    tuigreet.enable = mkDefault true;
-    tailscale.enable = mkDefault true;
-  };
 }
