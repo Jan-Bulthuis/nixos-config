@@ -7,6 +7,7 @@
     ./discord/default.nix
     ./feishin/default.nix
     ./firefox/default.nix
+    ./fontconfig/default.nix
     ./obsidian/default.nix
     ./shell/bash.nix
     ./shell/fish.nix

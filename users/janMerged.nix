@@ -57,10 +57,10 @@ in {
 
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     fonts = {
-      monospace = {
-        package = pkgs.dina-font;
-        name = "Dina";
-      };
+      # monospace = {
+      #   package = pkgs.dina-font;
+      #   name = "Dina";
+      # };
 
       sizes = {
         terminal = 9;

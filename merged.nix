@@ -232,29 +232,29 @@ in {
     my-wqy-zenhei
     my-wqy-microhei
     my-wqy-bitmapsong
-    cozette
+    # cozette
     #uw-ttyp0
     #ucs-fonts
-    dina-font # Cool but too small :(
+    # dina-font # Cool but too small :(
     #unifont # Replace with Kissinger2
     #unifont_upper # Replace with Kissinger 2
-    (nerdfonts.override { fonts = ["NerdFontsSymbolsOnly"]; })
+    # (nerdfonts.override { fonts = ["NerdFontsSymbolsOnly"]; })
   ];
-  fonts.fontconfig.defaultFonts = {
-    serif = [
-      "DejaVu Serif"
-    ];
-    sansSerif = [
-      "DejaVu Sans"
-    ];
-    monospace = [
-      "Dina"
-    ];
-    emoji = [
-      "CozetteVector"
-      "Noto Color Emoji"
-    ];
-  };
+  # fonts.fontconfig.defaultFonts = {
+  #   serif = [
+  #     # "DejaVu Serif"
+  #   ];
+  #   sansSerif = [
+  #     # "DejaVu Sans"
+  #   ];
+  #   monospace = [
+  #     # "Dina"
+  #   ];
+  #   emoji = [
+  #     # "Cozette Vector"
+  #     # "Noto Color Emoji"
+  #   ];
+  # };
   fonts.fontconfig.localConf = ''
     <alias>
       <family>Dina</family>

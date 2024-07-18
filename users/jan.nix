@@ -1,6 +1,6 @@
 # How Jan likes his linux to be configured
 
-{ ... }:
+{ config, ... }:
 
 {
   imports = [
@@ -11,10 +11,14 @@
     # State version
     home.stateVersion = "24.05";
 
+    # Enabled modules
     modules = {
       # Window manager
       river.enable = true;
       waylock.enable = true;
+
+      # Theming
+      theming.enable = true;
 
       # Programs
       feishin.enable = true;
@@ -29,15 +33,21 @@
       unfree.enable = true;
     };
 
-    theming.themes.gruvbox = {
-      enable = false;
-      darkMode = false;
-      contrast = "hard";
-    };
+    # Theme configuration
+    theming = let fontpkgs = config.theming.fonts.pkgs; in {
+      # Fonts
+      fonts.serif = fontpkgs."DejaVu Serif";
+      fonts.sansSerif = fontpkgs."DejaVu Sans";
+      fonts.monospace = fontpkgs."Dina";
+      fonts.emoji = fontpkgs."Dina";
+      fonts.extraFonts = [
+      ];
 
-    theming.themes.catppuccin = {
-      enable = true;
-      flavor = "latte";
+      # Color scheme
+      themes.catppuccin = {
+        enable = true;
+        flavor = "latte";
+      };
     };
   };
 }

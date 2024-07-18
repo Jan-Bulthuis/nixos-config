@@ -2,6 +2,8 @@
 
 with lib;
 let
+  cfg = config.theming;
+
   # Stylix
   stylix = pkgs.fetchFromGitHub {
     owner = "danth";
@@ -9,6 +11,69 @@ let
     rev = "1ff9d37d27377bfe8994c24a8d6c6c1734ffa116";
     sha256 = "0dz8h1ga8lnfvvmvsf6iqvnbvxrvx3qxi0y8s8b72066mqgvy8y5";
   };
+
+  # Font module type
+  fontModule = types.submodule {
+    options = {
+      name = mkOption {
+        type = types.str;
+        description = "Font family name.";
+      };
+      package = mkOption {
+        type = types.anything;
+        description = "Font package";
+      };
+      recommendedSize = mkOption {
+        type = types.nullOr types.int;
+        default = null;
+        description = "Recommended size for displaying this font.";
+      };
+      fallbackFonts = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = "Fallback fonts for specified font.";
+      };
+    };
+  };
+
+  fontModules = [
+    # Import all fonts
+    ./fonts/cozette-vector.nix
+    ./fonts/cozette.nix
+    ./fonts/dejavu-sans.nix
+    ./fonts/dejavu-serif.nix
+    ./fonts/dina.nix
+    ./fonts/fira-code.nix
+    ./fonts/nerd-fonts-symbols.nix
+    ./fonts/noto-color-emoji.nix
+  ];
+
+  # Gather enabled fonts.
+  enabledFonts = [
+    cfg.fonts.serif.name
+    cfg.fonts.sansSerif.name
+    cfg.fonts.monospace.name
+    cfg.fonts.emoji.name
+  ] ++ map (font: font.name) cfg.fonts.extraFonts;
+
+  # Flatten dependencies of fonts
+  fontPackages = converge (fonts:
+    listToAttrs (map (font: {
+      name = font;
+      value = true;
+    }) (
+      flatten (map (font: 
+        [ font.name ]
+        ++ cfg.fonts.pkgs.${font.name}.fallbackFonts
+      ) (attrsToList fonts))
+    ))
+  ) (listToAttrs (map (font: {
+    name = font;
+    value = true;
+  }) enabledFonts));
+
+  # Convert set of fonts to list of packages
+  fontPackageList = map (font: cfg.fonts.pkgs.${font.name}.package) (attrsToList (traceVal fontPackages));
 in {
   imports = [
     # Import all themes
@@ -16,10 +81,15 @@ in {
     ./themes/catppuccin.nix
   ];
 
-  options.theming =
-  let 
-    colors = config.theming.schemeColors;
-  in  {
+  options.testing.test = mkOption {
+    type = types.anything;
+    default = traced;
+    description = "Wowzah";
+  };
+
+  options.modules.theming.enable = mkEnableOption "theming";
+
+  options.theming = let colors = config.theming.schemeColors; in {
     darkMode = mkOption {
       type = types.bool;
       default = false;
@@ -69,15 +139,67 @@ in {
         description = "Margin of each window, actual space between windows will be twice this number.";
       };
     };
+
+    fonts = {
+      pkgs = mkOption {
+        type = types.attrsOf fontModule;
+        default = builtins.listToAttrs (map (module: {
+          name = module.name;
+          value = module;
+        }) (map (module: (import module) { inherit lib config pkgs; }) fontModules));
+        description = "All available font modules.";
+      };
+
+      serif = mkOption {
+        type = fontModule;
+        description = "Default serif font";
+      };
+      
+      sansSerif = mkOption {
+        type = fontModule;
+        description = "Default sansSerif font.";
+      };
+      
+      monospace = mkOption {
+        type = fontModule;
+        description = "Default monospace font.";
+      };
+      
+      emoji = mkOption {
+        type = fontModule;
+        description = "Default emoji font.";
+      };
+
+      extraFonts = mkOption {
+        type = types.listOf fontModule;
+        default = [];
+        description = "Additional fonts to install.";
+      };
+    };
   };
 
-  config = {
+  config = mkIf config.modules.theming.enable {
+    # Enable fontconfig
+    modules.fontconfig.enable = true;
+
+    # Install configured fonts
+    home.packages = fontPackageList;
+
+    # Enable stylix
+    # TODO: Move to own module
     stylix = {
       enable = true;
       autoEnable = false;
 
-      base16Scheme = config.theming.colorScheme;
-      polarity = if config.theming.darkMode then "dark" else "light";
+      base16Scheme = cfg.colorScheme;
+      polarity = if cfg.darkMode then "dark" else "light";
+
+      fonts = {
+        serif = getAttrs [ "name" "package" ] cfg.fonts.serif;
+        sansSerif = getAttrs [ "name" "package" ] cfg.fonts.sansSerif;
+        monospace = getAttrs [ "name" "package" ] cfg.fonts.monospace;
+        emoji = getAttrs [ "name" "package" ] cfg.fonts.emoji;
+      };
     };
   };
 }
