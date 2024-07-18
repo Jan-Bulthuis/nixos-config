@@ -41,8 +41,8 @@ in {
     # Import home manager
     <home-manager/nixos>
 
-    # Import system configuration setup
-    # ./system.nix
+    # Import system wide configuration required for user modules
+    ./systemwide/waylock.nix
   ];
 
   options = {
