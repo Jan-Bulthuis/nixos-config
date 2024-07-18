@@ -10,6 +10,9 @@ in {
   # };
 
   config = lib.mkIf cfg.enable {
+    # Set desktop type to wayland
+    modules.desktop.wayland = true;
+
     # Change desktop to execute river
     modules.desktop.initScript = ''
       river

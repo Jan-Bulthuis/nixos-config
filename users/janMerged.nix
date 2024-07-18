@@ -26,29 +26,25 @@ in {
 
     # Utilities
     pulsemixer
-    wl-clipboard
-    pinentry-rofi
-    wtype
     # waylock
     playerctl
-    nix-tree
 
     # Fish plugin dependencies
     # grc
     # fzf
 
     # Rust development
-    rustc
-    cargo
-    rustfmt
+    # rustc
+    # cargo
+    # rustfmt
 
     # Bitwarden
-    rofi-rbw
+    # rofi-rbw
 
     # LaTeX libraries
-    (pkgs.texlive.combine {
-      inherit (pkgs.texlive) scheme-full;
-    })
+    # (pkgs.texlive.combine {
+    #   inherit (pkgs.texlive) scheme-full;
+    # })
   ];
 
   # Stylix
@@ -57,25 +53,25 @@ in {
     # polarity = "dark";
 
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    fonts = {
-      # monospace = {
-      #   package = pkgs.dina-font;
-      #   name = "Dina";
-      # };
+    # fonts = {
+    #   # monospace = {
+    #   #   package = pkgs.dina-font;
+    #   #   name = "Dina";
+    #   # };
 
-      sizes = {
-        terminal = 9;
-      };
-    };
+    #   sizes = {
+    #     terminal = 9;
+    #   };
+    # };
 
     # autoEnable = false;
-    targets = {
-      foot.enable = true;
-      nixvim.enable = true;
-      qutebrowser.enable = true;
-      vscode.enable = true;
-      # zathura.enable = true;
-    };
+    # targets = {
+    #   foot.enable = true;
+    #   nixvim.enable = true;
+    #   qutebrowser.enable = true;
+    #   vscode.enable = true;
+    #   # zathura.enable = true;
+    # };
   };
 
   # Fish shell
@@ -136,128 +132,128 @@ in {
   };
 
   # Bitwarden client
-  programs.rbw = {
-    enable = true;
-    settings = {
-      base_url = "https://keys.bulthuis.dev";
-      identity_url = "https://keys.bulthuis.dev";
-      email = "jan@bulthuis.dev";
-      pinentry = pkgs.pinentry;
-    };
-  };
+  # programs.rbw = {
+  #   enable = true;
+  #   settings = {
+  #     base_url = "https://keys.bulthuis.dev";
+  #     identity_url = "https://keys.bulthuis.dev";
+  #     email = "jan@bulthuis.dev";
+  #     pinentry = pkgs.pinentry;
+  #   };
+  # };
 
   # Firefox
-  programs.firefox = {
-    enable = true;
-    policies = {
-      AppAutoUpdate = false;
-      BlockAboutAddons = true;
-      BlockAboutConfig = true;
-      BlockAboutProfiles = true;
-      DisableAppUpdate = true;
-      DisableFeedbackCommands = true;
-      DisableMasterPasswordCreation = true;
-      DisablePocket = true;
-      DisableProfileImport = true;
-      DisableProfileRefresh = true;
-      DisableSetDesktopBackground = true;
-      DisableTelemetry = true;
-      DisplayBookmarksToolbar = "never";
-      DisplayMenuBar = "never";
-      DNSOverHTTPS = { Enabled = false; };
-      DontCheckDefaultBrowser = true;
-      PasswordManagerEnabled = false;
-      TranslateEnabled = true;
-      UseSystemPrintDialog = true;
-    };
-    profiles.nixos = {
-      search.default = "DuckDuckGo";
+  # programs.firefox = {
+  #   enable = true;
+  #   policies = {
+  #     AppAutoUpdate = false;
+  #     BlockAboutAddons = true;
+  #     BlockAboutConfig = true;
+  #     BlockAboutProfiles = true;
+  #     DisableAppUpdate = true;
+  #     DisableFeedbackCommands = true;
+  #     DisableMasterPasswordCreation = true;
+  #     DisablePocket = true;
+  #     DisableProfileImport = true;
+  #     DisableProfileRefresh = true;
+  #     DisableSetDesktopBackground = true;
+  #     DisableTelemetry = true;
+  #     DisplayBookmarksToolbar = "never";
+  #     DisplayMenuBar = "never";
+  #     DNSOverHTTPS = { Enabled = false; };
+  #     DontCheckDefaultBrowser = true;
+  #     PasswordManagerEnabled = false;
+  #     TranslateEnabled = true;
+  #     UseSystemPrintDialog = true;
+  #   };
+  #   profiles.nixos = {
+  #     search.default = "DuckDuckGo";
 
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        ublock-origin
-      ];
+  #     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+  #       ublock-origin
+  #     ];
 
-      settings = {
-        "browser.tabs.inTitlebar" = 0;
-        "extensions.autoDisableScopes" = 0;
-      };
+  #     settings = {
+  #       "browser.tabs.inTitlebar" = 0;
+  #       "extensions.autoDisableScopes" = 0;
+  #     };
 
-      # Force overwriting configuration file
-      search.force = true;
-      containersForce = true;
-    };
-  };
+  #     # Force overwriting configuration file
+  #     search.force = true;
+  #     containersForce = true;
+  #   };
+  # };
 
-  # Email setup
-  accounts.email.accounts = {
-    Personal = {
-      primary = true;
-      realName = "Jan Bulthuis";
-      userName = "jan@bulthuis.dev";
-      address = "jan@bulthuis.dev";
-      thunderbird.enable = true;
+  # # Email setup
+  # accounts.email.accounts = {
+  #   Personal = {
+  #     primary = true;
+  #     realName = "Jan Bulthuis";
+  #     userName = "jan@bulthuis.dev";
+  #     address = "jan@bulthuis.dev";
+  #     thunderbird.enable = true;
 
-      flavor = "plain";
-      imap = {
-        host = "mail.bulthuis.dev";
-        port = 993;
-      };
-      smtp = {
-        host = "mail.bulthuis.dev";
-        port = 465;
-      };
-    };
-  };
+  #     flavor = "plain";
+  #     imap = {
+  #       host = "mail.bulthuis.dev";
+  #       port = 993;
+  #     };
+  #     smtp = {
+  #       host = "mail.bulthuis.dev";
+  #       port = 465;
+  #     };
+  #   };
+  # };
 
-  # Thunderbird setup
-  programs.thunderbird = {
-    enable = true;
-    profiles.nixos = {
-      isDefault = true;
-    };
-  };
+  # # Thunderbird setup
+  # programs.thunderbird = {
+  #   enable = true;
+  #   profiles.nixos = {
+  #     isDefault = true;
+  #   };
+  # };
 
   # Rofi setup
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-    font = "${fonts.monospace.name} ${toString fonts.sizes.terminal}";
-    theme = let
-      inherit (config.lib.formats.rasi) mkLiteral;
-    in {
-      "*" = {
-        background-color = mkLiteral "rgba(0, 0, 0, 0%)";
-        border-color = mkLiteral colors.withHashtag.base05;
-        text-color = mkLiteral colors.withHashtag.base05;
-      };
-      mainbox = {
-        background-color = mkLiteral colors.withHashtag.base00;
-        border = mkLiteral "${toString borderSize}px";
-      };
-      element-text = {
-        highlight = mkLiteral colors.withHashtag.base09;
-      };
-      inputbar = {
-        children = mkLiteral "[textbox-search, entry]";
-      };
-      listview = {
-        padding = mkLiteral "2px 0px";
-      };
-      textbox-search = {
-        expand = false;
-        content = "> ";
-      };
-      "inputbar, message" = {
-        padding = mkLiteral "2px";
-      };
-      element = {
-        padding = mkLiteral "0px 2px";
-      };
-      "element selected" = {
-        background-color = mkLiteral colors.withHashtag.base02;
-      };
-    };
-  };
+  # programs.rofi = {
+  #   enable = true;
+  #   package = pkgs.rofi-wayland;
+  #   font = "${fonts.monospace.name} ${toString fonts.sizes.terminal}";
+  #   theme = let
+  #     inherit (config.lib.formats.rasi) mkLiteral;
+  #   in {
+  #     "*" = {
+  #       background-color = mkLiteral "rgba(0, 0, 0, 0%)";
+  #       border-color = mkLiteral colors.withHashtag.base05;
+  #       text-color = mkLiteral colors.withHashtag.base05;
+  #     };
+  #     mainbox = {
+  #       background-color = mkLiteral colors.withHashtag.base00;
+  #       border = mkLiteral "${toString borderSize}px";
+  #     };
+  #     element-text = {
+  #       highlight = mkLiteral colors.withHashtag.base09;
+  #     };
+  #     inputbar = {
+  #       children = mkLiteral "[textbox-search, entry]";
+  #     };
+  #     listview = {
+  #       padding = mkLiteral "2px 0px";
+  #     };
+  #     textbox-search = {
+  #       expand = false;
+  #       content = "> ";
+  #     };
+  #     "inputbar, message" = {
+  #       padding = mkLiteral "2px";
+  #     };
+  #     element = {
+  #       padding = mkLiteral "0px 2px";
+  #     };
+  #     "element selected" = {
+  #       background-color = mkLiteral colors.withHashtag.base02;
+  #     };
+  #   };
+  # };
 
   # Dark mode
   dconf.settings = {
@@ -270,34 +266,34 @@ in {
     platformTheme.name = "adwaita";
     style.name = "adwaita-dark";
   };
-  systemd.user.sessionVariables = config.home.sessionVariables;
+  # systemd.user.sessionVariables = config.home.sessionVariables;
 
   # Configure GTK
-  gtk = let
-    css = ''
-      headerbar.default-decoration {
-        margin-bottom: 50px;
-        margin-top: -100px;
-      }
+  # gtk = let
+  #   css = ''
+  #     headerbar.default-decoration {
+  #       margin-bottom: 50px;
+  #       margin-top: -100px;
+  #     }
 
-      window.csd,
-      window.csd decoration {
-        box-shadow: none;
-      }
-    '';
-  in {
-    enable = true;
+  #     window.csd,
+  #     window.csd decoration {
+  #       box-shadow: none;
+  #     }
+  #   '';
+  # in {
+  #   enable = true;
 
-    # Dark mode
-    theme = {
-     name = "Adwaita-dark";
-     package = pkgs.gnome-themes-extra;
-    };
+  #   # Dark mode
+  #   theme = {
+  #    name = "Adwaita-dark";
+  #    package = pkgs.gnome-themes-extra;
+  #   };
 
-    # Disable CSD
-    gtk3.extraCss = css;
-    gtk4.extraCss = css;
-  };
+  #   # Disable CSD
+  #   gtk3.extraCss = css;
+  #   gtk4.extraCss = css;
+  # };
 
   # Cursors
   home.pointerCursor = {
@@ -647,5 +643,5 @@ in {
     '';
   };
 
-  home.stateVersion = "24.05";
+  # home.stateVersion = "24.05";
 }

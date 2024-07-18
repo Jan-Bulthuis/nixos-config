@@ -11,6 +11,7 @@ in {
   ];
 
   options.modules.desktop = {
+    wayland = mkEnableOption "wayland";
     initScript = mkOption {
       type = types.lines;
       default = "${pkgs.bash}/bin/bash";
@@ -19,6 +20,11 @@ in {
   };
 
   config = {
+    home.packages = optionals cfg.wayland (with pkgs; [
+      pkgs.wl-clipboard
+      pkgs.wtype
+    ]);
+
     home.file.".initrc" = {
       enable = true;
       executable = true;

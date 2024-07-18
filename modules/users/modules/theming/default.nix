@@ -104,6 +104,12 @@ in {
       description = "Base 16 color scheme to use for styling. See stylix documentation for more information.";
     };
 
+    clientSideDecorations = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to enable client side decorations for windows.";
+    };
+
     schemeColors = mkOption {
       type = types.attrsOf types.anything;
       default = config.lib.stylix.colors;
@@ -207,6 +213,45 @@ in {
 
     # Install configured fonts
     home.packages = fontPackageList;
+
+    # Configure gnome theme
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = if cfg.darkMode then "prefer-dark" else "prefer-light";
+      };
+    };
+
+    # Configure qt theme
+    qt = {
+      enable = true;
+      platformTheme.name = "adwaita";
+      style.name = if cfg.darkMode then "adwaita-dark" else "adwaita-light";
+    };
+
+    # Configure gtk theme
+    gtk = let
+      disableCSD = ''
+        headerbar.default-decoration {
+          margin-bottom: 50px;
+          margin-top: -100px;
+        }
+
+        window.csd,
+        window.csd decoration {
+          box-shadow: none;
+        }
+      '';
+    in {
+      enable = true;
+
+      theme = {
+        name = if cfg.darkMode then "Adwaita-dark" else "Adwaita-light";
+        package = pkgs.gnome-themes-extra;
+      };
+
+      gtk3.extraCss = mkIf !cfg.clientSideDecorations disableCSD;
+      gtk4.extraCss = mkIf !cfg.clientSideDecorations disableCSD;
+    }
 
     # Enable stylix
     # TODO: Move to own module

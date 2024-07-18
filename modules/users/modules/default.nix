@@ -11,6 +11,8 @@
     ./foot/default.nix
     ./mako/default.nix
     ./obsidian/default.nix
+    ./rofi/default.nix
+    ./rofi/rofi-rbw.nix
     ./shell/bash.nix
     ./shell/fish.nix
     ./steam/default.nix
