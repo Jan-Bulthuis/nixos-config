@@ -4,9 +4,6 @@
   imports = [
     # Import environment
     ../default.nix
-
-    # TODO: Remove later
-    ../merged.nix
   ];
 
   config = {
