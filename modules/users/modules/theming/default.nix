@@ -46,6 +46,12 @@ let
     ./fonts/fira-code.nix
     ./fonts/nerd-fonts-symbols.nix
     ./fonts/noto-color-emoji.nix
+    ./fonts/wqy-bitmapsong.nix
+    ./fonts/wqy-microhei-mono.nix
+    ./fonts/wqy-microhei.nix
+    ./fonts/wqy-zenhei-mono.nix
+    ./fonts/wqy-zenhei-sharp.nix
+    ./fonts/wqy-zenhei.nix
   ];
 
   # Gather enabled fonts.

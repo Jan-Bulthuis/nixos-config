@@ -1,6 +1,6 @@
 # How Jan likes his linux to be configured
 
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   # TODO: Remove later

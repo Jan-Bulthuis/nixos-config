@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  name = "WenQuanYi Zen Hei";
-  package = pkgs.wqy-zenhei;
+  name = "WenQuanYi Micro Hei";
+  package = pkgs.wqy-microhei;
   recommendedSize = 12;
   fallbackFonts = [];
 }

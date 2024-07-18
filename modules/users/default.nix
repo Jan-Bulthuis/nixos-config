@@ -64,6 +64,9 @@ in {
 
       # Modules
       ./modules/default.nix
+
+      # Custom packages
+      ../../pkgs/default.nix
     ];
 
     # Create users

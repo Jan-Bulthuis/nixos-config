@@ -6,6 +6,7 @@
   recommendedSize = 9;
   fallbackFonts = [
     "Cozette"
+    "wenquanyi bitmap song"
     "Symbols Nerd Font Mono"
   ];
 }

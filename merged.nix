@@ -15,69 +15,69 @@ let
   #   sha256 = "0dz8h1ga8lnfvvmvsf6iqvnbvxrvx3qxi0y8s8b72066mqgvy8y5";
   # });
 
-  fontInstallPhase = ''
-    runHook preInstall
+  # fontInstallPhase = ''
+  #   runHook preInstall
 
-    install -Dm644 *.ttc -t $out/share/fonts/
+  #   install -Dm644 *.ttc -t $out/share/fonts/
 
-    runHook postInstall
-  '';
+  #   runHook postInstall
+  # '';
 
-  my-wqy-zenhei = pkgs.stdenv.mkDerivation rec {
-    pname = "wqy-zenhei";
-    version = "0.9.45";
+  # my-wqy-zenhei = pkgs.stdenv.mkDerivation rec {
+  #   pname = "wqy-zenhei";
+  #   version = "0.9.45";
 
-    src = pkgs.fetchurl {
-      url = "mirror://sourceforge/wqy/${pname}-${version}.tar.gz";
-      hash = "sha256-5LfjBkdb+UJ9F1dXjw5FKJMMhMROqj8WfUxC8RDuddY=";
-    };
+  #   src = pkgs.fetchurl {
+  #     url = "mirror://sourceforge/wqy/${pname}-${version}.tar.gz";
+  #     hash = "sha256-5LfjBkdb+UJ9F1dXjw5FKJMMhMROqj8WfUxC8RDuddY=";
+  #   };
 
-    installPhase = fontInstallPhase;
-  };
+  #   installPhase = fontInstallPhase;
+  # };
 
-  my-wqy-microhei = pkgs.stdenv.mkDerivation rec {
-    pname = "wqy-microhei";
-    version = "0.2.0-beta";
+  # my-wqy-microhei = pkgs.stdenv.mkDerivation rec {
+  #   pname = "wqy-microhei";
+  #   version = "0.2.0-beta";
 
-    src = pkgs.fetchurl {
-      url = "mirror://sourceforge/wqy/${pname}-${version}.tar.gz";
-      hash = "sha256-KAKsgCOqNqZupudEWFTjoHjTd///QhaTQb0jeHH3IT4=";
-    };
+  #   src = pkgs.fetchurl {
+  #     url = "mirror://sourceforge/wqy/${pname}-${version}.tar.gz";
+  #     hash = "sha256-KAKsgCOqNqZupudEWFTjoHjTd///QhaTQb0jeHH3IT4=";
+  #   };
 
-    installPhase = fontInstallPhase;
-  };
+  #   installPhase = fontInstallPhase;
+  # };
 
-  my-wqy-bitmapsong = pkgs.stdenv.mkDerivation rec {
-    pname = "wqy-bitmapsong-pcf";
-    version = "1.0.0-RC1";
+  # my-wqy-bitmapsong = pkgs.stdenv.mkDerivation rec {
+  #   pname = "wqy-bitmapsong-pcf";
+  #   version = "1.0.0-RC1";
 
-    src = pkgs.fetchurl {
-      url = "mirror://sourceforge/wqy/${pname}-${version}.tar.gz";
-      #hash = "sha256-r2Vf7ftJCqu7jOc2AqCKaoR/r8eNw2P/OQGqbDOEyl0=";
-      hash = "sha256-0uvwkRUbvJ0remTnlP8dElRjaBVd6iukNYBTE/CTO7s=";
-    };
+  #   src = pkgs.fetchurl {
+  #     url = "mirror://sourceforge/wqy/${pname}-${version}.tar.gz";
+  #     #hash = "sha256-r2Vf7ftJCqu7jOc2AqCKaoR/r8eNw2P/OQGqbDOEyl0=";
+  #     hash = "sha256-0uvwkRUbvJ0remTnlP8dElRjaBVd6iukNYBTE/CTO7s=";
+  #   };
 
-    buildInputs = [ pkgs.fontforge ];
-    buildPhase = ''
-      newName() {
-        test "''${1:5:1}" = i && _it=Italic || _it=
-        case ''${1:6:3} in
-          400) test -z $it && _weight=Medium ;;
-          700) _weight=Bold ;;
-        esac
-        _pt=''${1%.pcf}
-        _pt=''${_pt#*-}
-        echo "WenQuanYi_Bitmap_Song$_weight$_it$_pt"
-      }
+  #   buildInputs = [ pkgs.fontforge ];
+  #   buildPhase = ''
+  #     newName() {
+  #       test "''${1:5:1}" = i && _it=Italic || _it=
+  #       case ''${1:6:3} in
+  #         400) test -z $it && _weight=Medium ;;
+  #         700) _weight=Bold ;;
+  #       esac
+  #       _pt=''${1%.pcf}
+  #       _pt=''${_pt#*-}
+  #       echo "WenQuanYi_Bitmap_Song$_weight$_it$_pt"
+  #     }
 
-      for i in *.pcf; do
-        fontforge -lang=ff -c "Open(\"$i\"); Generate(\"$(newName $i).otb\")"
-      done
-    '';
-    installPhase = ''
-      install -Dm644 *.otb -t $out/share/fonts/
-    '';
-  };
+  #     for i in *.pcf; do
+  #       fontforge -lang=ff -c "Open(\"$i\"); Generate(\"$(newName $i).otb\")"
+  #     done
+  #   '';
+  #   installPhase = ''
+  #     install -Dm644 *.otb -t $out/share/fonts/
+  #   '';
+  # };
 in {
   # imports =
   #   [
@@ -229,9 +229,9 @@ in {
 
   # Fonts
   fonts.packages = with pkgs; [
-    my-wqy-zenhei
-    my-wqy-microhei
-    my-wqy-bitmapsong
+    # my-wqy-zenhei
+    # my-wqy-microhei
+    # my-wqy-bitmapsong
     # cozette
     #uw-ttyp0
     #ucs-fonts
@@ -275,10 +275,8 @@ in {
   environment.systemPackages = with pkgs; [
     git
     vim
-    neovim
     wget
     curl
-    brightnessctl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
