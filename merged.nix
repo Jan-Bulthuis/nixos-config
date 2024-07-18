@@ -5,9 +5,9 @@
 { config, lib, pkgs, ... }:
 
 let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-  });
+  # nixvim = import (builtins.fetchGit {
+  #   url = "https://github.com/nix-community/nixvim";
+  # });
   # stylix = import (pkgs.fetchFromGitHub {
   #   owner = "danth";
   #   repo = "stylix";
@@ -131,10 +131,12 @@ in {
   # };
 
   # Set up networking
-  networking.wireless.userControlled.enable = true;
-  networking.hostName = "20212060"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.wireless.allowAuxiliaryImperativeNetworks = true;  
+  # networking.wireless.userControlled.enable = true;
+  # networking.hostName = "20212060"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.allowAuxiliaryImperativeNetworks = true;  
+
+  nixpkgs.config.allowUnfree = true;
 
   # Set up graphics
   hardware.graphics.enable32Bit = true;
@@ -158,10 +160,10 @@ in {
   };
 
   # Set up tailscale
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";
-  };
+  # services.tailscale = {
+  #   enable = true;
+  #   useRoutingFeatures = "client";
+  # };
 
   # Set time zone.
   # time.timeZone = "Europe/Amsterdam";
@@ -173,11 +175,11 @@ in {
   # nixpkgs.config.allowUnfree = true;
 
   # Enable sound
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   pulse.enable = true;
+  # };
 
   # Set up input
   services.libinput.enable = true;
@@ -197,7 +199,7 @@ in {
   # security.pam.services.waylock = {};
 
   # Enable programs
-  programs.river.enable = true;
+  # programs.river.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -209,7 +211,7 @@ in {
   };
 
   # Gamer moment
-  programs.steam.enable = true;
+  # programs.steam.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.users.jan = {
@@ -220,10 +222,7 @@ in {
   # home-manager.backupFileExtension = "bak";
 
   # Global neovim
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
+  # pr` 
 
   # dconf
   programs.dconf.enable = true;

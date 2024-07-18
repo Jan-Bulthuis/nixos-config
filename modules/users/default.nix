@@ -42,7 +42,7 @@ in {
     <home-manager/nixos>
 
     # Import system wide configuration required for user modules
-    ./systemwide/waylock.nix
+    ./modules/systemwide/default.nix
   ];
 
   options = {

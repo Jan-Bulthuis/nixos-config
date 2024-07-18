@@ -11,9 +11,6 @@
     # State version
     home.stateVersion = "24.05";
 
-    # Allow unfree software such as vscode
-    nixpkgs.config.allowUnfree = true;
-
     modules = {
       # Window manager
       river.enable = true;
@@ -25,6 +22,11 @@
       vscode.enable = true;
       zathura.enable = true;
       fish.enable = true;
+      winbox.enable = true;
+      discord.enable = true;
+
+      # Enable unfree
+      unfree.enable = true;
     };
 
     theming.themes.gruvbox = {

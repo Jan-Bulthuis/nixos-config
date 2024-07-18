@@ -18,11 +18,11 @@ in {
   # Packages
   home.packages = with pkgs; [
     # Programs
-    vscode
-    feishin
-    discord
-    obsidian
-    winbox
+    # vscode
+    # feishin
+    # discord
+    # obsidian
+    # winbox
 
     # Utilities
     pulsemixer
