@@ -8,6 +8,7 @@
     ./feishin/default.nix
     ./firefox/default.nix
     ./fontconfig/default.nix
+    ./foot/default.nix
     ./obsidian/default.nix
     ./shell/bash.nix
     ./shell/fish.nix

@@ -485,20 +485,20 @@ in {
   programs.neovim.defaultEditor = true;
 
   # Foot setup
-  programs.foot = {
-    enable = true;
-    settings = {
-      main = let
-        font = fonts.monospace.name;
-        size = toString fonts.sizes.terminal;
-      in {
-        font = lib.mkForce "${font}:style=Regular:size=${size}";
-        font-bold = "${font}:style=Bold:size=${size}";
-        font-italic = "${font}:style=Italic:size=${size}";
-        font-bold-italic = "${font}:style=Bold Italic:size=${size}";
-      };
-    };
-  };
+  # programs.foot = {
+  #   enable = true;
+  #   settings = {
+  #     main = let
+  #       font = fonts.monospace.name;
+  #       size = toString fonts.sizes.terminal;
+  #     in {
+  #       font = lib.mkForce "${font}:style=Regular:size=${size}";
+  #       font-bold = "${font}:style=Bold:size=${size}";
+  #       font-italic = "${font}:style=Italic:size=${size}";
+  #       font-bold-italic = "${font}:style=Bold Italic:size=${size}";
+  #     };
+  #   };
+  # };
 
   # Fuzzel setup
   #programs.fuzzel = {
