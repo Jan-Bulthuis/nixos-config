@@ -2,7 +2,7 @@
 
 {
   options = {
-    custom.laptop = lib.mkOption {
+    machine.laptop = lib.mkOption {
       type = lib.types.bool;
       default = false;
       example = true;

@@ -2,11 +2,11 @@
 
 {
   imports = [
-    # Temporary until it has been subdivided into modules.
+    # TODO: Temporary until it has been subdivided into modules.
     ./merged.nix
 
-    # Automation for user configuration
-    ./users.nix
+    # Modules
+    ./modules/default.nix
 
     # System configuration options
     ./system.nix
@@ -15,17 +15,19 @@
     ./test.nix
   ];
 
-  options = {
-    custom.laptop = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "Whether the current system is a laptop.";
-    };
-  };
-
   config = {
-    # Set the state version
-    system.stateVersion = "24.05"
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
+
+    # Enable default modules
+    modules = {
+      # Greeter
+      tuigreet.enable = true; 
+    };
+
+    # Localization settings
+    time.timeZone = "Europe/Amsterdam";
+    i18n.defaultLocale = "en_US.UTF-8";
+    console.keyMap = "us";
   };
 }
