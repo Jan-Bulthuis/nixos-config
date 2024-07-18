@@ -24,6 +24,8 @@
       # Programs
       feishin.enable = true;
       firefox.enable = true;
+      foot.enable = true;
+      mako.enable = true;
       vscode.enable = true;
       zathura.enable = true;
       fish.enable = true;

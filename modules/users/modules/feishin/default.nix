@@ -1,11 +1,12 @@
 {config, lib, pkgs, ... }:
 
+with lib;
 let
   cfg = config.modules.feishin;
 in {
-  options.modules.feishin.enable = lib.mkEnableOption "feishin";
+  options.modules.feishin.enable = mkEnableOption "feishin";
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       feishin
     ];

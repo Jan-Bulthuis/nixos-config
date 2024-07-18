@@ -529,18 +529,18 @@ in {
 #    };
 
   # Mako notifications setup
-  services.mako = {
-    enable = true;
-    anchor = "top-right";
-    defaultTimeout = 5000;
-    backgroundColor = "#${colors.base00}ff";
-    textColor = "#${colors.base05}ff";
-    borderColor = "#${colors.base05}ff";
-    progressColor = "#${colors.base09}ff";
-    borderRadius = 0;
-    borderSize = borderSize;
-    font = "${fonts.monospace.name} ${toString fonts.sizes.terminal}";
-  };
+  # services.mako = {
+  #   enable = true;
+  #   anchor = "top-right";
+  #   defaultTimeout = 5000;
+  #   backgroundColor = "#${colors.base00}ff";
+  #   textColor = "#${colors.base05}ff";
+  #   borderColor = "#${colors.base05}ff";
+  #   progressColor = "#${colors.base09}ff";
+  #   borderRadius = 0;
+  #   borderSize = borderSize;
+  #   font = "${fonts.monospace.name} ${toString fonts.sizes.terminal}";
+  # };
 
   # Waybar setup
   programs.waybar = {

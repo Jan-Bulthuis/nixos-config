@@ -119,6 +119,10 @@ in {
         type = types.str;
         default = colors.base05;
       };
+      accent = mkOption {
+        type = types.str;
+        default = colors.base09;
+      };
       focused = mkOption {
         type = types.str;
         default = cfg.colors.fg;
