@@ -3,6 +3,7 @@
 with lib; {
   imports = [
     # Import modules
+    ./fontconfig/default.nix
     ./greeter/greetd/default.nix
     ./greeter/greetd/tuigreet.nix
     ./locale/default.nix
@@ -16,6 +17,7 @@ with lib; {
 
   config.modules = {
     # Enable default modules
+    fontconfig.enable = mkDefault true;
     neovim.enable = mkDefault true;
     tuigreet.enable = mkDefault true;
     tailscale.enable = mkDefault true;

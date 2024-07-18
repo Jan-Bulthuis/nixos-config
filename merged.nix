@@ -255,6 +255,7 @@ in {
   #     # "Noto Color Emoji"
   #   ];
   # };
+
   fonts.fontconfig.localConf = ''
     <alias>
       <family>Dina</family>

@@ -73,7 +73,7 @@ let
   }) enabledFonts));
 
   # Convert set of fonts to list of packages
-  fontPackageList = map (font: cfg.fonts.pkgs.${font.name}.package) (attrsToList (traceVal fontPackages));
+  fontPackageList = map (font: cfg.fonts.pkgs.${font.name}.package) (attrsToList fontPackages);
 in {
   imports = [
     # Import all themes
@@ -117,6 +117,18 @@ in {
       fg = mkOption {
         type = types.str;
         default = colors.base05;
+      };
+      focused = mkOption {
+        type = types.str;
+        default = cfg.colors.fg;
+      };
+      unfocused = mkOption {
+        type = types.str;
+        default = colors.base02;
+      };
+      alert = mkOption {
+        type = types.str;
+        default = "ffffff"; # TODO: Derive color from theme
       };
     };
 
@@ -191,6 +203,10 @@ in {
       enable = true;
       autoEnable = false;
 
+      targets = {
+        vscode.enable = config.modules.vscode.enable;
+      };
+
       base16Scheme = cfg.colorScheme;
       polarity = if cfg.darkMode then "dark" else "light";
 
@@ -199,6 +215,13 @@ in {
         sansSerif = getAttrs [ "name" "package" ] cfg.fonts.sansSerif;
         monospace = getAttrs [ "name" "package" ] cfg.fonts.monospace;
         emoji = getAttrs [ "name" "package" ] cfg.fonts.emoji;
+
+        sizes = {
+          applications = mkDefault cfg.fonts.serif.recommendedSize;
+          desktop = mkDefault cfg.fonts.monospace.recommendedSize; # TODO: See below
+          popups = mkDefault cfg.fonts.monospace.recommendedSize; # TODO: Add dedicated UI font
+          terminal = mkDefault cfg.fonts.monospace.recommendedSize;
+        };
       };
     };
   };

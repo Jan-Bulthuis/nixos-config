@@ -24,8 +24,7 @@ in {
         layoutOptions = "-outer-padding ${toString config.theming.layout.windowPadding} -view-padding ${toString config.theming.layout.windowPadding}";
         modes = ["normal" "locked"];
         tags = [1 2 3 4 5 6 7 8 9];
-        # TODO: Replace the base02 color with a named color
-        waylockOptions = "-init-color 0x${colors.bg} -input-color 0x${config.theming.schemeColors.base02} -fail-color 0x${colors.bg}";
+        waylockOptions = "-init-color 0x${colors.bg} -input-color 0x${colors.focused} -fail-color 0x${colors.bg}";
 
         colors = config.theming.colors;
 
@@ -52,7 +51,7 @@ in {
         border-width = toString config.theming.layout.borderSize;
         background-color = "0x${colors.bg}";
         border-color-focused = "0x${colors.fg}";
-        border-color-unfocused = "0x${config.theming.schemeColors.base01}"; # TODO: Change to use named color;
+        border-color-unfocused = "0x${colors.unfocused}"; # TODO: Change to use named color;
         border-color-urgent = "0x${colors.fg}";
 
         spawn = [
