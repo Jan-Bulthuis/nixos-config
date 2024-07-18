@@ -6,5 +6,6 @@
   recommendedSize = 9;
   fallbackFonts = [
     "Cozette"
+    "Symbols Nerd Font Mono"
   ];
 }

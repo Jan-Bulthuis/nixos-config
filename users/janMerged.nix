@@ -289,10 +289,10 @@ in {
     enable = true;
 
     # Dark mode
-    #theme = {
-    #  name = "Adwaita-dark";
-    #  package = pkgs.gnome-themes-extra;
-    #};
+    theme = {
+     name = "Adwaita-dark";
+     package = pkgs.gnome-themes-extra;
+    };
 
     # Disable CSD
     gtk3.extraCss = css;

@@ -256,19 +256,19 @@ in {
   #   ];
   # };
 
-  fonts.fontconfig.localConf = ''
-    <alias>
-      <family>Dina</family>
-      <prefer>
-        <family>Dina</family>
-        <family>Cozette</family>
-        <family>CozetteVector</family>
-        <family>Fixed</family>
-        <family>Symbols Nerd Font Mono</family>
-        <family>WenQuanYi Bitmap Song</family>
-      </prefer>
-    </alias>
-  '';
+  # fonts.fontconfig.localConf = ''
+  #   <alias>
+  #     <family>Dina</family>
+  #     <prefer>
+  #       <family>Dina</family>
+  #       <family>Cozette</family>
+  #       <family>Cozette Vector</family>
+  #       <family>Fixed</family>
+  #       <family>Symbols Nerd Font Mono</family>
+  #       <family>WenQuanYi Bitmap Song</family>
+  #     </prefer>
+  #   </alias>
+  # '';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

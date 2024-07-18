@@ -2,8 +2,8 @@
 
 {
   imports = [
-    # Import modules
-    ../modules/default.nix
+    # Import environment
+    ../default.nix
 
     # TODO: Remove later
     ../merged.nix

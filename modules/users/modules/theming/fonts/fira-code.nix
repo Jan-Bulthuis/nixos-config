@@ -4,5 +4,7 @@
   name = "Fira Code";
   package = pkgs.fira-code;
   recommendedSize = 12;
-  fallbackFonts = [];
+  fallbackFonts = [
+    "Symbols Nerd Font Mono"
+  ];
 }

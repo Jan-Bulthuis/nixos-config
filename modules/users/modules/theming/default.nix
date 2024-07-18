@@ -73,19 +73,14 @@ let
   }) enabledFonts));
 
   # Convert set of fonts to list of packages
-  fontPackageList = map (font: cfg.fonts.pkgs.${font.name}.package) (attrsToList fontPackages);
+  fontNameList = map (font: font.name) (attrsToList fontPackages);
+  fontPackageList = map (font: cfg.fonts.pkgs.${font}.package) fontNameList;
 in {
   imports = [
     # Import all themes
     ./themes/gruvbox.nix
     ./themes/catppuccin.nix
   ];
-
-  options.testing.test = mkOption {
-    type = types.anything;
-    default = traced;
-    description = "Wowzah";
-  };
 
   options.modules.theming.enable = mkEnableOption "theming";
 
@@ -160,6 +155,12 @@ in {
           value = module;
         }) (map (module: (import module) { inherit lib config pkgs; }) fontModules));
         description = "All available font modules.";
+      };
+
+      installed = mkOption {
+        type = types.listOf types.str;
+        default = fontNameList;
+        description = "List of installed fonts.";
       };
 
       serif = mkOption {
