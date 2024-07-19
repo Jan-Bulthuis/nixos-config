@@ -11,6 +11,7 @@
     ./foot/default.nix
     ./mako/default.nix
     ./obsidian/default.nix
+    ./qutebrowser/default.nix
     ./rofi/default.nix
     ./rofi/rofi-rbw.nix
     ./shell/bash.nix

@@ -47,6 +47,9 @@ in {
         
         # Autoformatting
         "editor.formatOnSave" = true;
+
+        # Layout
+        "window.menuBarVisibility" = "hidden";
       };
     };
   };

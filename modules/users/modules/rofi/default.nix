@@ -45,7 +45,7 @@ in {
           padding = mkLiteral "0px 2px";
         };
         "element selected" = {
-          background-color = mkLiteral "#${colors.focused}";
+          background-color = mkLiteral "#${colors.unfocused}";
         };
       };
     };

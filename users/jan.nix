@@ -17,6 +17,7 @@
       # Window manager
       river.enable = true;
       waylock.enable = true;
+      waybar.enable = true;
 
       # Theming
       theming.enable = true;
@@ -31,6 +32,9 @@
       fish.enable = true;
       winbox.enable = true;
       discord.enable = true;
+      qutebrowser.enable = true;
+      neovim.enable = true;
+      rofi.enable = true; # TODO: Remove this, should be enabled by other modules that require rofi.
 
       # Enable unfree
       unfree.enable = true;
@@ -43,13 +47,12 @@
       fonts.sansSerif = fontpkgs."DejaVu Sans";
       fonts.monospace = fontpkgs."Dina";
       fonts.emoji = fontpkgs."Dina";
-      fonts.extraFonts = [
-      ];
-
+      fonts.extraFonts = [];
+      
       # Color scheme
       themes.catppuccin = {
         enable = true;
-        flavor = "latte";
+        flavor = "mocha";
       };
     };
   };

@@ -25,9 +25,9 @@ in {
     # winbox
 
     # Utilities
-    pulsemixer
+    # pulsemixer
     # waylock
-    playerctl
+    # playerctl
 
     # Fish plugin dependencies
     # grc
@@ -114,22 +114,22 @@ in {
   # };
 
   # Direnv setup
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
+  # programs.direnv = {
+  #   enable = true;
+  #   nix-direnv.enable = true;
+  # };
 
   # Qutebrowser
-  programs.qutebrowser = {
-    enable = true;
+  # programs.qutebrowser = {
+  #   enable = true;
 
-    extraConfig = ''
-    config.set("colors.webpage.darkmode.enabled", False)
-    config.set("colors.webpage.preferred_color_scheme", "dark")
-    config.set("fonts.default_family", "${fonts.monospace.name}")
-    config.set("fonts.default_size", "${toString fonts.sizes.terminal}pt")
-    '';
-  };
+  #   extraConfig = ''
+  #   config.set("colors.webpage.darkmode.enabled", False)
+  #   config.set("colors.webpage.preferred_color_scheme", "dark")
+  #   config.set("fonts.default_family", "${fonts.monospace.name}")
+  #   config.set("fonts.default_size", "${toString fonts.sizes.terminal}pt")
+  #   '';
+  # };
 
   # Bitwarden client
   # programs.rbw = {
@@ -256,16 +256,16 @@ in {
   # };
 
   # Dark mode
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
-  qt = {
-    enable = true;
-    platformTheme.name = "adwaita";
-    style.name = "adwaita-dark";
-  };
+  # dconf.settings = {
+  #   "org/gnome/desktop/interface" = {
+  #     color-scheme = "prefer-dark";
+  #   };
+  # };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "adwaita";
+  #   style.name = "adwaita-dark";
+  # };
   # systemd.user.sessionVariables = config.home.sessionVariables;
 
   # Configure GTK
@@ -296,189 +296,189 @@ in {
   # };
 
   # Cursors
-  home.pointerCursor = {
-    gtk.enable = true;
-    name = lib.mkForce "BreezeX-RosePine-Linux";
-    package = lib.mkForce pkgs.rose-pine-cursor;
-    size = lib.mkForce 24;
-    x11 = {
-      defaultCursor = lib.mkForce "BreezeX-RosePine-Linux";
-      enable = true;
-    };
-  };
+  # home.pointerCursor = {
+  #   gtk.enable = true;
+  #   name = lib.mkForce "BreezeX-RosePine-Linux";
+  #   package = lib.mkForce pkgs.rose-pine-cursor;
+  #   size = lib.mkForce 24;
+  #   x11 = {
+  #     defaultCursor = lib.mkForce "BreezeX-RosePine-Linux";
+  #     enable = true;
+  #   };
+  # };
 
   # Neovim setup
-  programs.nixvim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
+  # programs.nixvim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   viAlias = true;
+  #   vimAlias = true;
 
-    extraPackages = with pkgs; [
-    ];
+  #   extraPackages = with pkgs; [
+  #   ];
 
-    opts = {
-      number = true;
-      relativenumber = true;
+  #   opts = {
+  #     number = true;
+  #     relativenumber = true;
 
-      signcolumn = "yes";
+  #     signcolumn = "yes";
 
-      ignorecase = true;
-      smartcase = true;
+  #     ignorecase = true;
+  #     smartcase = true;
 
-      tabstop = 4;
-      shiftwidth = 4;
-      softtabstop = 0;
-      expandtab = true;
-      smarttab = true;
+  #     tabstop = 4;
+  #     shiftwidth = 4;
+  #     softtabstop = 0;
+  #     expandtab = true;
+  #     smarttab = true;
 
-      list = true;
-      listchars = "tab:»┈«,trail:·,extends:→,precedes:←,nbsp:␣";
-    };
+  #     list = true;
+  #     listchars = "tab:»┈«,trail:·,extends:→,precedes:←,nbsp:␣";
+  #   };
 
-    diagnostics = {
-      enable = true;
-      signs = true;
-      underline = true;
-      update_in_insert = true;
-    };
+  #   diagnostics = {
+  #     enable = true;
+  #     signs = true;
+  #     underline = true;
+  #     update_in_insert = true;
+  #   };
 
-    extraConfigLua = ''
-      vim.fn.sign_define("DiagnosticSignError",
-        {text = "", texthl = "DiagnosticSignError"})
-      vim.fn.sign_define("DiagnosticSignWarn",
-        {text = "", texthl = "DiagnosticSignWarn"})
-      vim.fn.sign_define("DiagnosticSignInfo",
-        {text = "", texthl = "DiagnosticSignInfo"})
-      vim.fn.sign_define("DiagnosticSignHint",
-        {text = "💡", texthl = "DiagnosticSignHint"})
-    '';
+  #   extraConfigLua = ''
+  #     vim.fn.sign_define("DiagnosticSignError",
+  #       {text = "", texthl = "DiagnosticSignError"})
+  #     vim.fn.sign_define("DiagnosticSignWarn",
+  #       {text = "", texthl = "DiagnosticSignWarn"})
+  #     vim.fn.sign_define("DiagnosticSignInfo",
+  #       {text = "", texthl = "DiagnosticSignInfo"})
+  #     vim.fn.sign_define("DiagnosticSignHint",
+  #       {text = "💡", texthl = "DiagnosticSignHint"})
+  #   '';
 
-    keymaps = [
-      # Save shortcut
-      {
-        action = ":update<CR>";
-        key = "<C-s>";
-        mode = "n";
-      }
-      {
-        action = "<C-o>:update<CR>";
-        key = "<C-s>";
-        mode = "i";
-      }
+  #   keymaps = [
+  #     # Save shortcut
+  #     {
+  #       action = ":update<CR>";
+  #       key = "<C-s>";
+  #       mode = "n";
+  #     }
+  #     {
+  #       action = "<C-o>:update<CR>";
+  #       key = "<C-s>";
+  #       mode = "i";
+  #     }
 
-      # Neo tree
-      {
-        action = ":Neotree action=focus reveal toggle<CR>";
-        key = "<leader>n";
-        mode = "n";
-        options.silent = true;
-      }
-    ];
+  #     # Neo tree
+  #     {
+  #       action = ":Neotree action=focus reveal toggle<CR>";
+  #       key = "<leader>n";
+  #       mode = "n";
+  #       options.silent = true;
+  #     }
+  #   ];
 
-    autoCmd = [
-      {
-        desc = "Automatic formatting";
-        event = "BufWritePre";
-        callback = {
-          __raw = ''
-            function()
-              vim.lsp.buf.format {
-                async = false,
-              }
-            end
-          '';
-        };
-      }
-    ];
+  #   autoCmd = [
+  #     {
+  #       desc = "Automatic formatting";
+  #       event = "BufWritePre";
+  #       callback = {
+  #         __raw = ''
+  #           function()
+  #             vim.lsp.buf.format {
+  #               async = false,
+  #             }
+  #           end
+  #         '';
+  #       };
+  #     }
+  #   ];
 
-    highlight = {
-      Comment = {
-        italic = true;
-        fg = colors.withHashtag.base03;
-      };
+  #   highlight = {
+  #     Comment = {
+  #       italic = true;
+  #       fg = colors.withHashtag.base03;
+  #     };
 
-    };
+  #   };
 
-    plugins.lsp = {
-      enable = true;
-    };
+  #   plugins.lsp = {
+  #     enable = true;
+  #   };
 
-    #plugins.treesitter = {
-    #  enable = true;
-    #};
+  #   #plugins.treesitter = {
+  #   #  enable = true;
+  #   #};
 
-    plugins.cmp = {
-      enable = true;
+  #   plugins.cmp = {
+  #     enable = true;
 
-      settings = {
-        mapping = {
-          "<C-Space>" = "cmp.mapping.complete()";
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-e>" = "cmp.mapping.close()";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
-          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-          "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-        };
-        sources = [
-          { name = "path"; }
-          { name = "nvim_lsp"; }
-        ];
-      };
-    };
+  #     settings = {
+  #       mapping = {
+  #         "<C-Space>" = "cmp.mapping.complete()";
+  #         "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+  #         "<C-e>" = "cmp.mapping.close()";
+  #         "<C-f>" = "cmp.mapping.scroll_docs(4)";
+  #         "<CR>" = "cmp.mapping.confirm({ select = true })";
+  #         "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+  #         "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+  #       };
+  #       sources = [
+  #         { name = "path"; }
+  #         { name = "nvim_lsp"; }
+  #       ];
+  #     };
+  #   };
 
-    plugins.neo-tree = {
-      enable = true;
+  #   plugins.neo-tree = {
+  #     enable = true;
 
-      closeIfLastWindow = true;
-      window = {
-        width = 30;
-        autoExpandWidth = true;
-      };
+  #     closeIfLastWindow = true;
+  #     window = {
+  #       width = 30;
+  #       autoExpandWidth = true;
+  #     };
 
-      extraOptions = {
-        default_component_configs.git_status.symbols = {
-          # Change type
-          added = "+";
-          deleted = "✕";
-          modified = "✦";
-          renamed = "→";
+  #     extraOptions = {
+  #       default_component_configs.git_status.symbols = {
+  #         # Change type
+  #         added = "+";
+  #         deleted = "✕";
+  #         modified = "✦";
+  #         renamed = "→";
 
-          # Status type
-          untracked = "?";
-          ignored = "▫";
-          unstaged = "□";
-          staged = "■";
-          conflict = "‼";
-        };
-      };
-    };
+  #         # Status type
+  #         untracked = "?";
+  #         ignored = "▫";
+  #         unstaged = "□";
+  #         staged = "■";
+  #         conflict = "‼";
+  #       };
+  #     };
+  #   };
 
-    #plugins.cmp-nvim-lsp.enable = true;
+  #   #plugins.cmp-nvim-lsp.enable = true;
 
-    plugins.gitsigns = {
-      enable = true;
-      settings.current_line_blame = true;
-    };
+  #   plugins.gitsigns = {
+  #     enable = true;
+  #     settings.current_line_blame = true;
+  #   };
 
-    #plugins.copilot-vim = {
-    #  enable = true;
-    #};
+  #   #plugins.copilot-vim = {
+  #   #  enable = true;
+  #   #};
 
-    plugins.rust-tools = {
-      enable = true;
-    };
+  #   plugins.rust-tools = {
+  #     enable = true;
+  #   };
 
-    plugins.vimtex = {
-      enable = true;
-      texlivePackage = null;
-      settings = {
-        view_method = "zathura";
-      };
-    };
-  };
-  programs.neovim.defaultEditor = true;
+  #   plugins.vimtex = {
+  #     enable = true;
+  #     texlivePackage = null;
+  #     settings = {
+  #       view_method = "zathura";
+  #     };
+  #   };
+  # };
+  # programs.neovim.defaultEditor = true;
 
   # Foot setup
   # programs.foot = {
@@ -539,109 +539,109 @@ in {
   # };
 
   # Waybar setup
-  programs.waybar = {
-    enable = true;
-    settings = {
-      mainBar = {
-        layer = "top";
-        spacing = 16;
-        modules-left = [
-          "river/tags"
-        ];
-        modules-center = [
-          #"river/window"
-          "mpris"
-        ];
-        modules-right = [
-          "pulseaudio"
-          "battery"
-          "clock"
-        ];
-        "river/window" = {
-          max-length = 50;
-        };
-        "river/tags" = {
-          tag-labels = [
-            "一"
-            "二"
-            "三"
-            "四"
-            "五"
-            "六"
-            "七"
-            "八"
-            "九"
-          ];
-          disable-click = false;
-        };
-        pulseaudio = {
-          tooltip = false;
-          format = "{icon}   {volume}%"; # Spacing achieved using "Thin Space"
-          #format-muted = "";
-          format-muted = "{icon}  --%"; # Spacing achieved using "Thin Space"
-          format-icons = {
-            #headphone = "";
-            #default = [ "" "" ];
-            headphone = "";
-            headphone-muted = "";
-            default = [ "" "" "" ];
-          };
-        };
-        battery = {
-          format = "{icon} {capacity}%"; # Spacing achieved using "Thin Space"
-          format-charging = " {capacity}%"; # Spacing achieved using "Thin Space"
-          #format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-          format-icons = [ "" "" "" "" "" "" "" "" "" "" "" ];
-          interval = 1;
-        };
-        clock = {
-          #format = "󰅐 {:%H:%M}";
-          #format = "   {:%H:%M}"; # Spacing achieved using "Thin Space"
-          format = "{:%H:%M}";
-        };
-        mpris = {
-          format = "{dynamic}";
-          tooltip-format = "";
-          interval = 1;
-        };
-      };
-    };
-    style = ''
-      window#waybar {
-        color: #${colors.base05};
-        background-color: #${colors.base00};
-        border-style: none none solid none;
-        border-width: ${toString borderSize}px;
-        border-color: #${colors.base01};
-        font-size: 12px;
-        font-family: "${fonts.monospace.name}";
-      }
+  # programs.waybar = {
+  #   enable = true;
+  #   settings = {
+  #     mainBar = {
+  #       layer = "top";
+  #       spacing = 16;
+  #       modules-left = [
+  #         "river/tags"
+  #       ];
+  #       modules-center = [
+  #         #"river/window"
+  #         "mpris"
+  #       ];
+  #       modules-right = [
+  #         "pulseaudio"
+  #         "battery"
+  #         "clock"
+  #       ];
+  #       "river/window" = {
+  #         max-length = 50;
+  #       };
+  #       "river/tags" = {
+  #         tag-labels = [
+  #           "一"
+  #           "二"
+  #           "三"
+  #           "四"
+  #           "五"
+  #           "六"
+  #           "七"
+  #           "八"
+  #           "九"
+  #         ];
+  #         disable-click = false;
+  #       };
+  #       pulseaudio = {
+  #         tooltip = false;
+  #         format = "{icon}   {volume}%"; # Spacing achieved using "Thin Space"
+  #         #format-muted = "";
+  #         format-muted = "{icon}  --%"; # Spacing achieved using "Thin Space"
+  #         format-icons = {
+  #           #headphone = "";
+  #           #default = [ "" "" ];
+  #           headphone = "";
+  #           headphone-muted = "";
+  #           default = [ "" "" "" ];
+  #         };
+  #       };
+  #       battery = {
+  #         format = "{icon} {capacity}%"; # Spacing achieved using "Thin Space"
+  #         format-charging = " {capacity}%"; # Spacing achieved using "Thin Space"
+  #         #format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+  #         format-icons = [ "" "" "" "" "" "" "" "" "" "" "" ];
+  #         interval = 1;
+  #       };
+  #       clock = {
+  #         #format = "󰅐 {:%H:%M}";
+  #         #format = "   {:%H:%M}"; # Spacing achieved using "Thin Space"
+  #         format = "{:%H:%M}";
+  #       };
+  #       mpris = {
+  #         format = "{dynamic}";
+  #         tooltip-format = "";
+  #         interval = 1;
+  #       };
+  #     };
+  #   };
+  #   style = ''
+  #     window#waybar {
+  #       color: #${colors.base05};
+  #       background-color: #${colors.base00};
+  #       border-style: none none solid none;
+  #       border-width: ${toString borderSize}px;
+  #       border-color: #${colors.base01};
+  #       font-size: 12px;
+  #       font-family: "${fonts.monospace.name}";
+  #     }
 
-      .modules-right {
-        margin: 0 8px 0 0;
-      }
+  #     .modules-right {
+  #       margin: 0 8px 0 0;
+  #     }
 
-      #tags button {
-        color: #${colors.base03};
-        padding: 0 5px 1px 5px;
-        border-radius: 0;
-        font-size: 16px;
-        font-family: "Unifont";
-      }
+  #     #tags button {
+  #       color: #${colors.base03};
+  #       padding: 0 5px 1px 5px;
+  #       border-radius: 0;
+  #       font-size: 16px;
+  #       font-family: "Unifont";
+  #     }
 
-      #tags button.occupied {
-        color: #${colors.base05};
-      }
+  #     #tags button.occupied {
+  #       color: #${colors.base05};
+  #     }
 
-      #tags button.focused {
-        color: #${colors.base09};
-      }
+  #     #tags button.focused {
+  #       color: #${colors.base09};
+  #     }
 
-      #tags.button.bell {
-        color: #${colors.base0A};
-      }
-    '';
-  };
+  #     #tags.button.bell {
+  #       color: #${colors.base0A};
+  #     }
+  #   '';
+  # };
 
   # home.stateVersion = "24.05";
 }

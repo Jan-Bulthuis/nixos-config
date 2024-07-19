@@ -16,6 +16,7 @@ in {
       curl
       dig
       nix-tree
+      procps
     ];
 
     modules = {

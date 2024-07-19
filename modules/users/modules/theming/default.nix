@@ -249,9 +249,27 @@ in {
         package = pkgs.gnome-themes-extra;
       };
 
-      gtk3.extraCss = mkIf !cfg.clientSideDecorations disableCSD;
-      gtk4.extraCss = mkIf !cfg.clientSideDecorations disableCSD;
-    }
+      gtk3.extraCss = mkIf (! cfg.clientSideDecorations) disableCSD;
+      gtk4.extraCss = mkIf (! cfg.clientSideDecorations) disableCSD;
+    };
+
+    # TODO: This should just straight up not be here
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
+    # TODO: Make cursors configurable using modules.
+    home.pointerCursor = {
+      gtk.enable = true;
+      name = lib.mkForce "BreezeX-RosePine-Linux";
+      package = lib.mkForce pkgs.rose-pine-cursor;
+      size = lib.mkForce 24;
+      x11 = {
+        defaultCursor = lib.mkForce "BreezeX-RosePine-Linux";
+        enable = true;
+      };
+    };
 
     # Enable stylix
     # TODO: Move to own module
@@ -260,7 +278,11 @@ in {
       autoEnable = false;
 
       targets = {
-        vscode.enable = config.modules.vscode.enable;
+        foot.enable = true;
+        nixvim.enable = true;
+        qutebrowser.enable = true;
+        vscode.enable = true;
+        zathura.enable = true;
       };
 
       base16Scheme = cfg.colorScheme;

@@ -6,6 +6,7 @@ let
 in {
   imports = [
     # Import desktop environment modules
+    ./bar/waybar.nix
     ./lock-screen/waylock.nix
     ./window-manager/river.nix
   ];

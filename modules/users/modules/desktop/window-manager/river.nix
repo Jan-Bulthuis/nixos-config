@@ -18,9 +18,21 @@ in {
       river
     '';
 
+    # Update background after rebuild
+    home.activation = {
+      river = lib.hm.dag.entryAfter [ "installPackages" ] ''
+        # Close waybar
+        PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill waybar
+
+        # Restart river
+        PATH="${pkgs.river}/bin:$PATH" $DRY_RUN_CMD ~/.config/river/init
+      '';
+    };
+
     # River setup
     wayland.windowManager.river = {
       enable = true;
+      systemd.enable = false;
       xwayland.enable = true;
       settings = let
         layout = "rivertile";
