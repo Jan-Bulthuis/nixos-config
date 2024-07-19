@@ -1,13 +1,8 @@
 # How Jan likes his linux to be configured
 
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
-  # TODO: Remove later
-  imports = [
-    ./janMerged.nix
-  ];
-
   config = {
     # State version
     home.stateVersion = "24.05";
