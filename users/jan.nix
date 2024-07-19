@@ -29,7 +29,10 @@
       discord.enable = true;
       qutebrowser.enable = true;
       neovim.enable = true;
-      rofi.enable = true; # TODO: Remove this, should be enabled by other modules that require rofi.
+
+      # Programming languages
+      nix.enable = true;
+      rust.enable = true;
 
       # Enable unfree
       unfree.enable = true;

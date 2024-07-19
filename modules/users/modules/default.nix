@@ -9,6 +9,8 @@
     ./firefox/default.nix
     ./fontconfig/default.nix
     ./foot/default.nix
+    ./language/nix.nix
+    ./language/rust.nix
     ./mako/default.nix
     ./neovim/default.nix
     ./obsidian/default.nix

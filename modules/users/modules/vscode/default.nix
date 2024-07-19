@@ -27,13 +27,9 @@ in {
     programs.vscode = {
       enable = true;
 
+      mutableExtensionsDir = false;
       extensions = with pkgs.vscode-extensions; [
         eamodio.gitlens
-
-        # Language support
-        # TODO: Move to separate language modules
-        bbenoist.nix
-        rust-lang.rust-analyzer
       ];
 
       userSettings = {
@@ -45,8 +41,9 @@ in {
         "terminal.integrated.fontFamily" = mkForce "'${cfg.codeFont.name}', '${cfg.fallbackFont.name}'";
         "terminal.integrated.fontSize" = mkForce (cfg.codeFont.recommendedSize); # Convert pt to px
         
-        # Autoformatting
+        # Formatting
         "editor.formatOnSave" = true;
+        "editor.tabSize" = 4;
 
         # Layout
         "window.menuBarVisibility" = "hidden";

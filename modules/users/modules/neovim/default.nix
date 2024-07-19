@@ -169,10 +169,6 @@ in {
       #  enable = true;
       #};
 
-      plugins.rust-tools = {
-        enable = true;
-      };
-
       plugins.vimtex = {
         enable = true;
         texlivePackage = null;

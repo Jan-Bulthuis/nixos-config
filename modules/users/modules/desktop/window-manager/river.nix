@@ -12,6 +12,9 @@ in {
   config = lib.mkIf cfg.enable {
     # Set desktop type to wayland
     modules.desktop.wayland = true;
+    
+    # TODO: Move elsewhere and make keybindings more configurable
+    modules.rofi.enable = true;
 
     # Change desktop to execute river
     modules.desktop.initScript = ''

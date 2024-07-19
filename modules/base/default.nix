@@ -15,7 +15,6 @@ in {
       wget
       curl
       dig
-      nix-tree
       procps
     ];
 
