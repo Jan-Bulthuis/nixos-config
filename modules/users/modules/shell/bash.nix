@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
-let 
+let
   cfg = config.modules.bash;
-in {
+in
+{
   options.modules.bash = {
     enable = mkEnableOption "bash";
   };

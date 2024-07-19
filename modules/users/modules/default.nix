@@ -1,6 +1,11 @@
-{ input, pkgs, config, ... }:
+{
+  input,
+  pkgs,
+  config,
+  ...
+}:
 
-{ 
+{
   imports = [
     # Import all modules
     ./desktop/default.nix

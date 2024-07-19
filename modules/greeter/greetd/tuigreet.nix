@@ -1,16 +1,22 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.tuigreet;
-in {
-  options.modules.tuigreet = { 
-    enable = mkEnableOption "tuigreet"; 
+in
+{
+  options.modules.tuigreet = {
+    enable = mkEnableOption "tuigreet";
     greeting = mkOption {
       type = types.str;
       default = "Hewwo! >_< :3";
       description = "Greeting message to show.";
-    }; 
+    };
     command = mkOption {
       type = types.str;
       default = "~/.initrc";

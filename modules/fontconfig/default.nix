@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.fontconfig;
-in {
+in
+{
   options.modules.fontconfig = {
     enable = mkEnableOption "fontconfig";
   };
@@ -12,10 +18,10 @@ in {
     fonts.fontconfig.enable = cfg.enable;
     fonts.enableDefaultPackages = false;
     fonts.fontconfig.defaultFonts = {
-        serif = mkDefault [];
-        sansSerif = mkDefault [];
-        monospace = mkDefault [];
-        emoji = mkDefault [];
+      serif = mkDefault [ ];
+      sansSerif = mkDefault [ ];
+      monospace = mkDefault [ ];
+      emoji = mkDefault [ ];
     };
   };
 }

@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.neovim;
-in {
+in
+{
   options.modules.neovim = {
     enable = mkEnableOption "neovim";
   };

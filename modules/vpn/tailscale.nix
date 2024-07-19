@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.tailscale;
-in {
+in
+{
   options.modules.tailscale = {
     enable = mkEnableOption "tailscale";
   };

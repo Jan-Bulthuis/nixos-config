@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
 let
@@ -30,7 +35,7 @@ let
       };
       fallbackFonts = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ ];
         description = "Fallback fonts for specified font.";
       };
     };
@@ -63,25 +68,35 @@ let
   ] ++ map (font: font.name) cfg.fonts.extraFonts;
 
   # Flatten dependencies of fonts
-  fontPackages = converge (fonts:
-    listToAttrs (map (font: {
-      name = font;
-      value = true;
-    }) (
-      flatten (map (font: 
-        [ font.name ]
-        ++ cfg.fonts.pkgs.${font.name}.fallbackFonts
-      ) (attrsToList fonts))
-    ))
-  ) (listToAttrs (map (font: {
-    name = font;
-    value = true;
-  }) enabledFonts));
+  fontPackages =
+    converge
+      (
+        fonts:
+        listToAttrs (
+          map
+            (font: {
+              name = font;
+              value = true;
+            })
+            (
+              flatten (map (font: [ font.name ] ++ cfg.fonts.pkgs.${font.name}.fallbackFonts) (attrsToList fonts))
+            )
+        )
+      )
+      (
+        listToAttrs (
+          map (font: {
+            name = font;
+            value = true;
+          }) enabledFonts
+        )
+      );
 
   # Convert set of fonts to list of packages
   fontNameList = map (font: font.name) (attrsToList fontPackages);
   fontPackageList = map (font: cfg.fonts.pkgs.${font}.package) fontNameList;
-in {
+in
+{
   imports = [
     # Import all themes
     ./themes/gruvbox.nix
@@ -90,122 +105,128 @@ in {
 
   options.modules.theming.enable = mkEnableOption "theming";
 
-  options.theming = let colors = config.theming.schemeColors; in {
-    darkMode = mkOption {
-      type = types.bool;
-      default = false;
-      example = true;
-      description = "Whether the app should use dark mode.";
+  options.theming =
+    let
+      colors = config.theming.schemeColors;
+    in
+    {
+      darkMode = mkOption {
+        type = types.bool;
+        default = false;
+        example = true;
+        description = "Whether the app should use dark mode.";
+      };
+
+      colorScheme = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Base 16 color scheme to use for styling. See stylix documentation for more information.";
+      };
+
+      clientSideDecorations = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to enable client side decorations for windows.";
+      };
+
+      schemeColors = mkOption {
+        type = types.attrsOf types.anything;
+        default = config.lib.stylix.colors;
+        description = "Generated colors from scheme";
+      };
+
+      colors = {
+        bg = mkOption {
+          type = types.str;
+          default = colors.base00;
+        };
+        fg = mkOption {
+          type = types.str;
+          default = colors.base05;
+        };
+        accent = mkOption {
+          type = types.str;
+          default = colors.base09;
+        };
+        focused = mkOption {
+          type = types.str;
+          default = cfg.colors.fg;
+        };
+        unfocused = mkOption {
+          type = types.str;
+          default = colors.base02;
+        };
+        alert = mkOption {
+          type = types.str;
+          default = "ffffff"; # TODO: Derive color from theme
+        };
+      };
+
+      layout = {
+        borderRadius = mkOption {
+          type = types.int;
+          default = 0;
+          description = "Border radius of windows.";
+        };
+
+        borderSize = mkOption {
+          type = types.int;
+          default = 1;
+          description = "Size of borders used throughout UI.";
+        };
+
+        windowPadding = mkOption {
+          type = types.int;
+          default = 2;
+          description = "Margin of each window, actual space between windows will be twice this number.";
+        };
+      };
+
+      fonts = {
+        pkgs = mkOption {
+          type = types.attrsOf fontModule;
+          default = builtins.listToAttrs (
+            map (module: {
+              name = module.name;
+              value = module;
+            }) (map (module: (import module) { inherit lib config pkgs; }) fontModules)
+          );
+          description = "All available font modules.";
+        };
+
+        installed = mkOption {
+          type = types.listOf types.str;
+          default = fontNameList;
+          description = "List of installed fonts.";
+        };
+
+        serif = mkOption {
+          type = fontModule;
+          description = "Default serif font";
+        };
+
+        sansSerif = mkOption {
+          type = fontModule;
+          description = "Default sansSerif font.";
+        };
+
+        monospace = mkOption {
+          type = fontModule;
+          description = "Default monospace font.";
+        };
+
+        emoji = mkOption {
+          type = fontModule;
+          description = "Default emoji font.";
+        };
+
+        extraFonts = mkOption {
+          type = types.listOf fontModule;
+          default = [ ];
+          description = "Additional fonts to install.";
+        };
+      };
     };
-
-    colorScheme = mkOption {
-      type = types.nullOr types.str;
-      default = null;
-      description = "Base 16 color scheme to use for styling. See stylix documentation for more information.";
-    };
-
-    clientSideDecorations = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Whether to enable client side decorations for windows.";
-    };
-
-    schemeColors = mkOption {
-      type = types.attrsOf types.anything;
-      default = config.lib.stylix.colors;
-      description = "Generated colors from scheme";
-    };
-
-    colors = {
-      bg = mkOption {
-        type = types.str;
-        default = colors.base00;
-      };
-      fg = mkOption {
-        type = types.str;
-        default = colors.base05;
-      };
-      accent = mkOption {
-        type = types.str;
-        default = colors.base09;
-      };
-      focused = mkOption {
-        type = types.str;
-        default = cfg.colors.fg;
-      };
-      unfocused = mkOption {
-        type = types.str;
-        default = colors.base02;
-      };
-      alert = mkOption {
-        type = types.str;
-        default = "ffffff"; # TODO: Derive color from theme
-      };
-    };
-
-    layout = {
-      borderRadius = mkOption {
-        type = types.int;
-        default = 0;
-        description = "Border radius of windows.";
-      };
-
-      borderSize = mkOption {
-        type = types.int;
-        default = 1;
-        description = "Size of borders used throughout UI.";
-      };
-
-      windowPadding = mkOption {
-        type = types.int;
-        default = 2;
-        description = "Margin of each window, actual space between windows will be twice this number.";
-      };
-    };
-
-    fonts = {
-      pkgs = mkOption {
-        type = types.attrsOf fontModule;
-        default = builtins.listToAttrs (map (module: {
-          name = module.name;
-          value = module;
-        }) (map (module: (import module) { inherit lib config pkgs; }) fontModules));
-        description = "All available font modules.";
-      };
-
-      installed = mkOption {
-        type = types.listOf types.str;
-        default = fontNameList;
-        description = "List of installed fonts.";
-      };
-
-      serif = mkOption {
-        type = fontModule;
-        description = "Default serif font";
-      };
-      
-      sansSerif = mkOption {
-        type = fontModule;
-        description = "Default sansSerif font.";
-      };
-      
-      monospace = mkOption {
-        type = fontModule;
-        description = "Default monospace font.";
-      };
-      
-      emoji = mkOption {
-        type = fontModule;
-        description = "Default emoji font.";
-      };
-
-      extraFonts = mkOption {
-        type = types.listOf fontModule;
-        default = [];
-        description = "Additional fonts to install.";
-      };
-    };
-  };
 
   config = mkIf config.modules.theming.enable {
     # Enable fontconfig
@@ -229,29 +250,31 @@ in {
     };
 
     # Configure gtk theme
-    gtk = let
-      disableCSD = ''
-        headerbar.default-decoration {
-          margin-bottom: 50px;
-          margin-top: -100px;
-        }
+    gtk =
+      let
+        disableCSD = ''
+          headerbar.default-decoration {
+            margin-bottom: 50px;
+            margin-top: -100px;
+          }
 
-        window.csd,
-        window.csd decoration {
-          box-shadow: none;
-        }
-      '';
-    in {
-      enable = true;
+          window.csd,
+          window.csd decoration {
+            box-shadow: none;
+          }
+        '';
+      in
+      {
+        enable = true;
 
-      theme = {
-        name = if cfg.darkMode then "Adwaita-dark" else "Adwaita-light";
-        package = pkgs.gnome-themes-extra;
+        theme = {
+          name = if cfg.darkMode then "Adwaita-dark" else "Adwaita-light";
+          package = pkgs.gnome-themes-extra;
+        };
+
+        gtk3.extraCss = mkIf (!cfg.clientSideDecorations) disableCSD;
+        gtk4.extraCss = mkIf (!cfg.clientSideDecorations) disableCSD;
       };
-
-      gtk3.extraCss = mkIf (! cfg.clientSideDecorations) disableCSD;
-      gtk4.extraCss = mkIf (! cfg.clientSideDecorations) disableCSD;
-    };
 
     # TODO: This should just straight up not be here
     programs.direnv = {
@@ -289,10 +312,22 @@ in {
       polarity = if cfg.darkMode then "dark" else "light";
 
       fonts = {
-        serif = getAttrs [ "name" "package" ] cfg.fonts.serif;
-        sansSerif = getAttrs [ "name" "package" ] cfg.fonts.sansSerif;
-        monospace = getAttrs [ "name" "package" ] cfg.fonts.monospace;
-        emoji = getAttrs [ "name" "package" ] cfg.fonts.emoji;
+        serif = getAttrs [
+          "name"
+          "package"
+        ] cfg.fonts.serif;
+        sansSerif = getAttrs [
+          "name"
+          "package"
+        ] cfg.fonts.sansSerif;
+        monospace = getAttrs [
+          "name"
+          "package"
+        ] cfg.fonts.monospace;
+        emoji = getAttrs [
+          "name"
+          "package"
+        ] cfg.fonts.emoji;
 
         sizes = {
           applications = mkDefault cfg.fonts.serif.recommendedSize;

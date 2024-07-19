@@ -1,11 +1,17 @@
-{ lib, config, pkgs, ... }: 
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.waybar;
   theme = config.theming;
   colors = theme.colors;
-in {
+in
+{
   options.modules.waybar = {
     enable = mkEnableOption "waybar";
   };
@@ -22,9 +28,7 @@ in {
         mainBar = {
           layer = "top";
           spacing = 16;
-          modules-left = [
-            "river/tags"
-          ];
+          modules-left = [ "river/tags" ];
           modules-center = [
             #"river/window"
             "mpris"
@@ -61,14 +65,30 @@ in {
               #default = [ "" "" ];
               headphone = "";
               headphone-muted = "";
-              default = [ "" "" "" ];
+              default = [
+                ""
+                ""
+                ""
+              ];
             };
           };
           battery = {
             format = "{icon} {capacity}%"; # Spacing achieved using "Thin Space"
             format-charging = " {capacity}%"; # Spacing achieved using "Thin Space"
             #format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-            format-icons = [ "" "" "" "" "" "" "" "" "" "" "" ];
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
             interval = 1;
           };
           clock = {

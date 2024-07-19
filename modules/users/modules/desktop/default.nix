@@ -1,9 +1,15 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.desktop;
-in {
+in
+{
   imports = [
     # Import desktop environment modules
     ./bar/waybar.nix
@@ -21,18 +27,23 @@ in {
   };
 
   config = {
-    home.packages = optionals cfg.wayland (with pkgs; [
-      pkgs.wl-clipboard
-      pkgs.wtype
-    ]);
+    home.packages = optionals cfg.wayland (
+      with pkgs;
+      [
+        pkgs.wl-clipboard
+        pkgs.wtype
+      ]
+    );
 
     home.file.".initrc" = {
       enable = true;
       executable = true;
-      text = ''
-        #!${pkgs.bash}/bin/bash
+      text =
+        ''
+          #!${pkgs.bash}/bin/bash
 
-      '' + cfg.initScript;
+        ''
+        + cfg.initScript;
     };
   };
 }

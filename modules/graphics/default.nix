@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   config = {
@@ -6,7 +11,7 @@
     # Set up graphics
     hardware.graphics.enable32Bit = true;
     hardware.graphics.enable = true;
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;

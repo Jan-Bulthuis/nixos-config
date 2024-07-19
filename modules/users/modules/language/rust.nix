@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.rust;
-in {
+in
+{
   options.modules.rust = {
     enable = mkEnableOption "rust";
   };
@@ -11,21 +17,18 @@ in {
   config = mkIf cfg.enable {
     # Development packages
     home.packages = with pkgs; [
-        rustc
-        cargo
-        rust-analyzer
-        rustfmt
+      rustc
+      cargo
+      rust-analyzer
+      rustfmt
     ];
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        rust-lang.rust-analyzer
-      ];
+      extensions = with pkgs.vscode-extensions; [ rust-lang.rust-analyzer ];
 
       userSettings = {
-        "[rust]" = {
-        };
+        "[rust]" = { };
       };
     };
 

@@ -1,6 +1,12 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
-with lib; {
+with lib;
+{
   imports = [
     # Import modules
     ./base/default.nix

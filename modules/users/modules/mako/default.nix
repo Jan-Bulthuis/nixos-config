@@ -1,11 +1,17 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.mako;
   theme = config.theming;
   colors = theme.colors;
-in {
+in
+{
   options.modules.mako.enable = mkEnableOption "mako";
 
   config = mkIf cfg.enable {

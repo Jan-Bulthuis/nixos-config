@@ -1,8 +1,14 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.zathura;
-in {
+in
+{
   options.modules.zathura.enable = lib.mkEnableOption "zathura";
 
   config = lib.mkIf cfg.enable {

@@ -1,17 +1,21 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.rofi-rbw;
-in {
+in
+{
   options.modules.rofi-rbw.enable = mkEnableOption "rofi-rbw";
 
   config = mkIf cfg.enable {
     modules.rofi.enable = true;
 
-    home.packages = [
-      pkgs.rofi-rbw
-    ];
+    home.packages = [ pkgs.rofi-rbw ];
 
     # TODO: Move to separate module and make configurable
     programs.rbw = {

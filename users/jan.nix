@@ -39,19 +39,23 @@
     };
 
     # Theme configuration
-    theming = let fontpkgs = config.theming.fonts.pkgs; in {
-      # Fonts
-      fonts.serif = fontpkgs."DejaVu Serif";
-      fonts.sansSerif = fontpkgs."DejaVu Sans";
-      fonts.monospace = fontpkgs."Dina";
-      fonts.emoji = fontpkgs."Dina";
-      fonts.extraFonts = [];
-      
-      # Color scheme
-      themes.catppuccin = {
-        enable = true;
-        flavor = "frappe";
+    theming =
+      let
+        fontpkgs = config.theming.fonts.pkgs;
+      in
+      {
+        # Fonts
+        fonts.serif = fontpkgs."DejaVu Serif";
+        fonts.sansSerif = fontpkgs."DejaVu Sans";
+        fonts.monospace = fontpkgs."Dina";
+        fonts.emoji = fontpkgs."Dina";
+        fonts.extraFonts = [ ];
+
+        # Color scheme
+        themes.catppuccin = {
+          enable = true;
+          flavor = "frappe";
+        };
       };
-    };
   };
 }

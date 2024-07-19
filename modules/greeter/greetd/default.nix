@@ -1,9 +1,15 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.greetd;
-in {
+in
+{
   options.modules.greetd = {
     enable = mkEnableOption "greetd";
     command = mkOption {

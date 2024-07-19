@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.silent-boot;
-in {
+in
+{
   options.modules.silent-boot = {
     enable = mkEnableOption "silent-boot";
   };
@@ -11,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     boot = {
       loader.timeout = 0;
-      
+
       consoleLogLevel = 0;
       initrd.verbose = false;
       initrd.checkJournalingFS = false;

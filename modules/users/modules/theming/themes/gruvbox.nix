@@ -1,16 +1,26 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.theming.themes.gruvbox;
   mode = if cfg.darkMode then "dark" else "light";
-in {
+in
+{
   options = {
     theming.themes.gruvbox = {
       enable = mkEnableOption "gruvbox-hard";
       darkMode = mkEnableOption "dark mode";
       contrast = mkOption {
-        type = types.enum [ "hard" "medium" "soft" ];
+        type = types.enum [
+          "hard"
+          "medium"
+          "soft"
+        ];
         default = "hard";
         description = "The contrast level of the theme.";
       };

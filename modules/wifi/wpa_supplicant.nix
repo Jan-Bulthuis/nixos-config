@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.wpa_supplicant;
-in {
+in
+{
   options.modules.wpa_supplicant = {
     enable = mkEnableOption "wpa_supplicant";
   };

@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.systemd-boot;
-in {
+in
+{
   options.modules.systemd-boot = {
     enable = mkEnableOption "systemd-boot";
   };

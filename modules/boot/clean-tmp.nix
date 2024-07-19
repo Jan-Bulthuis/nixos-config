@@ -1,14 +1,18 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.clean-tmp;
-in {
+in
+{
   options.modules.clean-tmp = {
     enable = mkEnableOption "clean-tmp";
   };
 
-  config = mkIf cfg.enable {
-    boot.tmp.cleanOnBoot = true;
-  };
+  config = mkIf cfg.enable { boot.tmp.cleanOnBoot = true; };
 }

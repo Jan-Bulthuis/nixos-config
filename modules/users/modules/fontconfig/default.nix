@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
@@ -15,8 +20,11 @@ let
     </alias>
   '';
 
-  configContent = concatStrings (map (font: aliasConfig config.theming.fonts.pkgs.${font}) config.theming.fonts.installed);
-in {
+  configContent = concatStrings (
+    map (font: aliasConfig config.theming.fonts.pkgs.${font}) config.theming.fonts.installed
+  );
+in
+{
   options.modules.fontconfig = {
     enable = mkEnableOption "fontconfig";
   };
@@ -26,18 +34,10 @@ in {
       enable = true;
 
       defaultFonts = {
-        serif = [
-          config.theming.fonts.serif.name
-        ];
-        sansSerif = [
-          config.theming.fonts.sansSerif.name
-        ];
-        monospace = [
-          config.theming.fonts.monospace.name
-        ];
-        emoji = [
-          config.theming.fonts.emoji.name
-        ];
+        serif = [ config.theming.fonts.serif.name ];
+        sansSerif = [ config.theming.fonts.sansSerif.name ];
+        monospace = [ config.theming.fonts.monospace.name ];
+        emoji = [ config.theming.fonts.emoji.name ];
       };
     };
 
@@ -48,10 +48,10 @@ in {
         <?xml version="1.0"?>
         <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
         <fontconfig>
-        
+
         ${configContent}
         </fontconfig>
-      ''; 
+      '';
     };
   };
 }

@@ -1,6 +1,12 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-with lib; {
+with lib;
+{
   options.modules.steam = {
     enable = mkEnableOption "steam";
   };

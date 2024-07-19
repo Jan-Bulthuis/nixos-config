@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.base;
-in {
+in
+{
   options.modules.base = {
     enable = mkEnableOption "base";
   };
@@ -32,7 +38,7 @@ in {
     programs.dconf.enable = true;
     xdg.portal = {
       enable = true;
-    
+
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
         xdg-desktop-portal-wlr

@@ -1,16 +1,18 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.obsidian;
-in {
+in
+{
   options.modules.obsidian = {
     enable = mkEnableOption "obsidian";
   };
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      obsidian
-    ];
-  };
+  config = mkIf cfg.enable { home.packages = with pkgs; [ obsidian ]; };
 }

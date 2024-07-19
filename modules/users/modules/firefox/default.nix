@@ -1,8 +1,14 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.firefox;
-in {
+in
+{
   options.modules.firefox.enable = lib.mkEnableOption "firefox";
 
   config = lib.mkIf cfg.enable {
@@ -32,19 +38,19 @@ in {
         DisableTelemetry = true;
         DisplayBookmarksToolbar = "never";
         DisplayMenuBar = "never";
-        DNSOverHTTPS = { Enabled = false; };
+        DNSOverHTTPS = {
+          Enabled = false;
+        };
         DontCheckDefaultBrowser = true;
         PasswordManagerEnabled = false;
         TranslateEnabled = true;
         UseSystemPrintDialog = true;
       };
-      
+
       profiles.nixos = {
         search.default = "DuckDuckGo";
 
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-        ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [ ublock-origin ];
 
         settings = {
           "browser.tabs.inTitlebar" = 0;

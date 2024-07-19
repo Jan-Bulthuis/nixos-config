@@ -1,10 +1,16 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.qutebrowser;
   theme = config.theming;
-in {
+in
+{
   options.modules.qutebrowser.enable = mkEnableOption "qutebrowser";
 
   config = mkIf cfg.enable {

@@ -1,9 +1,15 @@
-{config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.discord;
-in {
+in
+{
   options.modules.discord = {
     enable = mkEnableOption "discord";
   };
@@ -11,8 +17,6 @@ in {
   config = mkIf cfg.enable {
     modules.unfree.allowedPackages = [ "discord" ];
 
-    home.packages = with pkgs; [
-      discord
-    ];
+    home.packages = with pkgs; [ discord ];
   };
 }

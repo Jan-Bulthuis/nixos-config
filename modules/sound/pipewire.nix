@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.pipewire;
-in {
+in
+{
   options.modules.pipewire = {
     enable = mkEnableOption "pipewire";
   };

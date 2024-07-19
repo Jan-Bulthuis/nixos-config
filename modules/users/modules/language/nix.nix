@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.nix;
-in {
+in
+{
   options.modules.nix = {
     enable = mkEnableOption "nix";
   };
@@ -18,9 +24,7 @@ in {
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-      ];
+      extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
 
       userSettings = {
         "[nix]" = {

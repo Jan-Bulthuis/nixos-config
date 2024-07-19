@@ -1,9 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
-let 
+let
   cfg = config.modules.fish;
-in {
+in
+{
   options.modules.fish = {
     enable = mkEnableOption "fish";
 
@@ -31,9 +37,18 @@ in {
       enable = true;
 
       plugins = [
-        (mkIf cfg.plugins.done { name = "done"; src = pkgs.fishPlugins.done.src; })
-        (mkIf cfg.plugins.fzf { name = "fzf"; src = pkgs.fishPlugins.fzf-fish.src; })
-        (mkIf cfg.plugins.grc { name = "grc"; src = pkgs.fishPlugins.grc.src; })
+        (mkIf cfg.plugins.done {
+          name = "done";
+          src = pkgs.fishPlugins.done.src;
+        })
+        (mkIf cfg.plugins.fzf {
+          name = "fzf";
+          src = pkgs.fishPlugins.fzf-fish.src;
+        })
+        (mkIf cfg.plugins.grc {
+          name = "grc";
+          src = pkgs.fishPlugins.grc.src;
+        })
       ];
     };
 

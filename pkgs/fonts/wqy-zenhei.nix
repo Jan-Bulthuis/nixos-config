@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 pkgs.stdenv.mkDerivation rec {
   pname = "wqy-zenhei";

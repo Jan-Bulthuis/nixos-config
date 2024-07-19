@@ -1,19 +1,24 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
   # Nixvim
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-  });
+  nixvim = import (builtins.fetchGit { url = "https://github.com/nix-community/nixvim"; });
 
   # Stylix
-  stylix = import (pkgs.fetchFromGitHub {
-    owner = "danth";
-    repo = "stylix";
-    rev = "1ff9d37d27377bfe8994c24a8d6c6c1734ffa116";
-    sha256 = "0dz8h1ga8lnfvvmvsf6iqvnbvxrvx3qxi0y8s8b72066mqgvy8y5";
-  });
+  stylix = import (
+    pkgs.fetchFromGitHub {
+      owner = "danth";
+      repo = "stylix";
+      rev = "1ff9d37d27377bfe8994c24a8d6c6c1734ffa116";
+      sha256 = "0dz8h1ga8lnfvvmvsf6iqvnbvxrvx3qxi0y8s8b72066mqgvy8y5";
+    }
+  );
 
   # User configuration
   userModule = types.submodule {
@@ -36,7 +41,8 @@ let
       };
     };
   };
-in {
+in
+{
   imports = [
     # Import home manager
     <home-manager/nixos>
@@ -48,7 +54,7 @@ in {
   options = {
     machine.users = mkOption {
       type = types.attrsOf userModule;
-      default = {};
+      default = { };
       description = "Users configured on this system.";
     };
   };

@@ -1,14 +1,20 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 with lib;
-let 
+let
   cfg = config.modules.unfree;
-in {
+in
+{
   options.modules.unfree = {
     enable = mkEnableOption "unfree";
     allowedPackages = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
   };
 
