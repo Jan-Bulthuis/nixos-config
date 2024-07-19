@@ -144,22 +144,49 @@ in
           type = types.str;
           default = colors.base05;
         };
-        accent = mkOption {
+        bg-status = mkOption {
           type = types.str;
-          default = colors.base09;
+          default = colors.base01;
         };
-        focused = mkOption {
+        fg-status = mkOption {
           type = types.str;
-          default = cfg.colors.fg;
+          default = colors.base04;
         };
-        unfocused = mkOption {
+        bg-selection = mkOption {
           type = types.str;
           default = colors.base02;
         };
-        alert = mkOption {
+        bg-highlight = mkOption {
           type = types.str;
-          default = "ffffff"; # TODO: Derive color from theme
+          default = colors.base03;
         };
+        fg-search = mkOption {
+          type = types.str;
+          default = colors.base0A;
+        };
+        accent = mkOption {
+          type = types.str;
+          default = colors.base0D;
+        };
+        border-focused = mkOption {
+          type = types.str;
+          default = cfg.colors.fg;
+        };
+        border-unfocused = mkOption {
+          type = types.str;
+          default = cfg.colors.bg-selection;
+        };
+      };
+
+      colorsCSS = mkOption {
+        type = types.lines;
+        default =
+          ":root {\n"
+          + concatStrings (
+            map (color: "  --nix-color-${color.name}: #${color.value};\n") (attrsToList cfg.colors)
+          )
+          + "}\n\n";
+        description = "Colors as css variables";
       };
 
       layout = {

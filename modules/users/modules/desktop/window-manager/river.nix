@@ -29,7 +29,7 @@ in
 
     # Update background after rebuild
     home.activation = {
-      river = lib.hm.dag.entryAfter [ "installPackages" ] ''
+      river = lib.hm.dag.entryBetween [ "reloadSystemd" ] [ "installPackages" ] ''
         # Close waybar
         PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill waybar
 
@@ -65,7 +65,7 @@ in
             8
             9
           ];
-          waylockOptions = "-init-color 0x${colors.bg} -input-color 0x${colors.focused} -fail-color 0x${colors.bg}";
+          waylockOptions = "-init-color 0x${colors.bg} -input-color 0x${colors.border-focused} -fail-color 0x${colors.bg}";
 
           colors = config.theming.colors;
 
@@ -90,7 +90,7 @@ in
           border-width = toString config.theming.layout.borderSize;
           background-color = "0x${colors.bg}";
           border-color-focused = "0x${colors.fg}";
-          border-color-unfocused = "0x${colors.unfocused}"; # TODO: Change to use named color;
+          border-color-unfocused = "0x${colors.border-unfocused}"; # TODO: Change to use named color;
           border-color-urgent = "0x${colors.fg}";
 
           spawn = [

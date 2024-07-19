@@ -20,6 +20,7 @@ with lib;
     ./greeter/greetd/tuigreet.nix
     ./locale/default.nix
     ./neovim/default.nix
+    ./power-saving/default.nix
     ./sound/pipewire.nix
     ./users/default.nix
     ./unfree/default.nix

@@ -110,7 +110,7 @@ in
           background-color: #${colors.bg};
           border-style: none none solid none;
           border-width: ${toString theme.layout.borderSize}px;
-          border-color: #${colors.unfocused};
+          border-color: #${colors.border-unfocused};
           font-size: 12px;
           font-family: "${theme.fonts.monospace.name}";
         }

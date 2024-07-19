@@ -1,6 +1,6 @@
 # How Jan likes his linux to be configured
 
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   config = {
@@ -29,6 +29,7 @@
       discord.enable = true;
       qutebrowser.enable = true;
       neovim.enable = true;
+      rofi-rbw.enable = true;
 
       # Programming languages
       nix.enable = true;
@@ -57,5 +58,20 @@
           flavor = "frappe";
         };
       };
+
+    # TODO: Remove everything below, it is here out of convenience and should be elsewhere
+    xdg.portal = {
+      enable = true;
+
+      config.common.default = [
+        "wlr"
+        "gtk"
+      ];
+
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
+      ];
+    };
   };
 }

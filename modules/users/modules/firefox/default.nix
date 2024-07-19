@@ -5,6 +5,7 @@
   ...
 }:
 
+with lib;
 let
   cfg = config.modules.firefox;
 in
@@ -25,9 +26,9 @@ in
 
       policies = {
         AppAutoUpdate = false;
-        BlockAboutAddons = true;
-        BlockAboutConfig = true;
-        BlockAboutProfiles = true;
+        # BlockAboutAddons = true;
+        # BlockAboutConfig = true;
+        # BlockAboutProfiles = true;
         DisableAppUpdate = true;
         DisableFeedbackCommands = true;
         DisableMasterPasswordCreation = true;
@@ -50,11 +51,26 @@ in
       profiles.nixos = {
         search.default = "DuckDuckGo";
 
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [ ublock-origin ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          # firefox-color
+          ublock-origin
+        ];
+
+        # Theming
+        userChrome = readFile (
+          pkgs.substituteAll {
+            src = ./userChrome.css;
+            colors = config.theming.colorsCSS;
+          }
+        );
+        # userContent = builtins.readFile ./userContent.css;
 
         settings = {
           "browser.tabs.inTitlebar" = 0;
           "extensions.autoDisableScopes" = 0;
+          "devtools.chrome.enabled" = true;
+          "devtools.debugger.remote-enabled" = true;
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
 
         # Force overwriting configuration file

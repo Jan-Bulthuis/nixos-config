@@ -36,14 +36,6 @@ in
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
     programs.dconf.enable = true;
-    xdg.portal = {
-      enable = true;
-
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-wlr
-      ];
-    };
     services.libinput.enable = true;
     modules.unfree.enable = true;
     modules.unfree.allowedPackages = [

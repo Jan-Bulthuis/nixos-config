@@ -27,6 +27,9 @@ in
   };
 
   config = {
+    # Ensure desktop related systemd services (xdg) have access to session variables.
+    systemd.user.sessionVariables = config.home.sessionVariables;
+
     home.packages = optionals cfg.wayland (
       with pkgs;
       [

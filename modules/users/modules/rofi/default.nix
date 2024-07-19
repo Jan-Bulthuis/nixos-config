@@ -34,7 +34,7 @@ in
             border = mkLiteral "${toString theme.layout.borderSize}px";
           };
           element-text = {
-            highlight = mkLiteral "#${colors.accent}";
+            highlight = mkLiteral "#${colors.fg-search}";
           };
           inputbar = {
             children = mkLiteral "[textbox-search, entry]";
@@ -53,7 +53,7 @@ in
             padding = mkLiteral "0px 2px";
           };
           "element selected" = {
-            background-color = mkLiteral "#${colors.unfocused}";
+            background-color = mkLiteral "#${colors.border-unfocused}";
           };
         };
     };
