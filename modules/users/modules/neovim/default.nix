@@ -3,6 +3,8 @@
 with lib;
 let
   cfg = config.modules.neovim;
+  theme = config.theming;
+  colors = theme.colors;
 in {
   options.modules.neovim = {
     enable = mkEnableOption "neovim";
@@ -96,7 +98,7 @@ in {
       highlight = {
         Comment = {
           italic = true;
-          fg = colors.withHashtag.base03;
+          fg = theme.schemeColors.withHashtag.base03; # TODO: Come up with a good name colors.muted maybe?
         };
 
       };

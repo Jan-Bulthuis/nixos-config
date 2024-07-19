@@ -47,7 +47,7 @@
       # Color scheme
       themes.catppuccin = {
         enable = true;
-        flavor = "mocha";
+        flavor = "frappe";
       };
     };
   };

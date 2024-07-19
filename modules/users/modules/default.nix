@@ -10,6 +10,7 @@
     ./fontconfig/default.nix
     ./foot/default.nix
     ./mako/default.nix
+    ./neovim/default.nix
     ./obsidian/default.nix
     ./qutebrowser/default.nix
     ./rofi/default.nix

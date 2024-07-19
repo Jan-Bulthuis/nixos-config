@@ -3,6 +3,8 @@
 with lib;
 let
   cfg = config.modules.waybar;
+  theme = config.theming;
+  colors = theme.colors;
 in {
   options.modules.waybar = {
     enable = mkEnableOption "waybar";
@@ -81,15 +83,16 @@ in {
           };
         };
       };
+      # TODO: Replace base03 color with named color
       style = ''
         window#waybar {
-          color: #${colors.base05};
-          background-color: #${colors.base00};
+          color: #${colors.fg};
+          background-color: #${colors.bg};
           border-style: none none solid none;
-          border-width: ${toString borderSize}px;
-          border-color: #${colors.base01};
+          border-width: ${toString theme.layout.borderSize}px;
+          border-color: #${colors.unfocused};
           font-size: 12px;
-          font-family: "${fonts.monospace.name}";
+          font-family: "${theme.fonts.monospace.name}";
         }
 
         .modules-right {
@@ -97,7 +100,7 @@ in {
         }
 
         #tags button {
-          color: #${colors.base03};
+          color: #${theme.schemeColors.base03};
           padding: 0 5px 1px 5px;
           border-radius: 0;
           font-size: 16px;
@@ -105,15 +108,11 @@ in {
         }
 
         #tags button.occupied {
-          color: #${colors.base05};
+          color: #${colors.fg};
         }
 
         #tags button.focused {
-          color: #${colors.base09};
-        }
-
-        #tags.button.bell {
-          color: #${colors.base0A};
+          color: #${colors.accent};
         }
       '';
     };

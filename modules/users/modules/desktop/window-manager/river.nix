@@ -24,6 +24,9 @@ in {
         # Close waybar
         PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill waybar
 
+        # Kill rivertile
+        PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill rivertile
+
         # Restart river
         PATH="${pkgs.river}/bin:$PATH" $DRY_RUN_CMD ~/.config/river/init
       '';
