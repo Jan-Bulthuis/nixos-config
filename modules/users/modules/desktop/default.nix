@@ -12,6 +12,7 @@ in
 {
   imports = [
     # Import desktop environment modules
+    ./background/glpaper/default.nix
     ./bar/waybar.nix
     ./lock-screen/waylock.nix
     ./window-manager/river.nix

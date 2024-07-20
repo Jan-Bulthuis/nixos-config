@@ -13,6 +13,8 @@ in
   options.modules.foot.enable = mkEnableOption "foot";
 
   config = mkIf cfg.enable {
+    default.terminal = mkDefault "${pkgs.foot}/bin/foot";
+
     programs.foot = {
       enable = true;
       settings = {

@@ -10,9 +10,14 @@ let
   cfg = config.modules.firefox;
 in
 {
-  options.modules.firefox.enable = lib.mkEnableOption "firefox";
+  options.modules.firefox = {
+    enable = lib.mkEnableOption "firefox";
+    default = lib.mkEnableOption "default";
+  };
 
   config = lib.mkIf cfg.enable {
+    default.browser = mkIf cfg.default "firefox.desktop";
+
     # Enable NUR
     nixpkgs.config.packageOverrides = pkgs: {
       # TODO: Pin the version
@@ -63,7 +68,6 @@ in
             colors = config.theming.colorsCSS;
           }
         );
-        # userContent = builtins.readFile ./userContent.css;
 
         settings = {
           "browser.tabs.inTitlebar" = 0;

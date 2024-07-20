@@ -22,6 +22,14 @@ in
       nixd
     ];
 
+    # Add nix tree
+    xdg.desktopEntries.nix-tree = {
+      exec = "${pkgs.nix-tree}/bin/nix-tree";
+      name = "Nix Tree";
+      terminal = true;
+      type = "Application";
+    };
+
     # VSCode configuration
     programs.vscode = {
       extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];

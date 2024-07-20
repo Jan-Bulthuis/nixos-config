@@ -11,9 +11,14 @@ let
   theme = config.theming;
 in
 {
-  options.modules.qutebrowser.enable = mkEnableOption "qutebrowser";
+  options.modules.qutebrowser = {
+    enable = mkEnableOption "qutebrowser";
+    default = mkEnableOption "default";
+  };
 
   config = mkIf cfg.enable {
+    default.browser = mkIf cfg.default "org.qutebrowser.qutebrowser.desktop";
+
     programs.qutebrowser = {
       enable = true;
 

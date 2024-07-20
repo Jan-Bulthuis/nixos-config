@@ -13,6 +13,7 @@
       river.enable = true;
       waylock.enable = true;
       waybar.enable = true;
+      glpaper.enable = true;
 
       # Theming
       theming.enable = true;
@@ -27,7 +28,10 @@
       fish.enable = true;
       winbox.enable = true;
       discord.enable = true;
-      qutebrowser.enable = true;
+      qutebrowser = {
+        enable = true;
+        default = true;
+      };
       neovim.enable = true;
       rofi-rbw.enable = true;
 
@@ -54,9 +58,10 @@
 
         # Color scheme
         themes.catppuccin = {
-          enable = true;
-          flavor = "frappe";
+          enable = false;
+          flavor = "latte";
         };
+        themes.sakura.enable = true;
       };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere

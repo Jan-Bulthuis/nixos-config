@@ -36,15 +36,17 @@ in
         # Kill rivertile
         PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill rivertile
 
+        # Kill glpaper
+        PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill glpaper
+
         # Restart river
-        PATH="${pkgs.river}/bin:$PATH" $DRY_RUN_CMD ~/.config/river/init
+        PATH="${pkgs.river}/bin:${pkgs.systemd}/bin:$PATH" $DRY_RUN_CMD ~/.config/river/init
       '';
     };
 
     # River setup
     wayland.windowManager.river = {
       enable = true;
-      systemd.enable = false;
       xwayland.enable = true;
       settings =
         let
@@ -96,6 +98,7 @@ in
           spawn = [
             "\"${layout} ${layoutOptions}\""
             "waybar"
+            "\"glpaper eDP-1 ${toString config.modules.glpaper.shader}\""
           ];
           map = (
             lib.attrsets.recursiveUpdate

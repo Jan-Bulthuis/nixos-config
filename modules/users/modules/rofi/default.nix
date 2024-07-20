@@ -17,6 +17,7 @@ in
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
+      terminal = config.default.terminal;
       package = pkgs.rofi-wayland;
       font = "${theme.fonts.monospace.name} ${toString theme.fonts.monospace.recommendedSize}";
       theme =

@@ -99,8 +99,9 @@ in
 {
   imports = [
     # Import all themes
-    ./themes/gruvbox.nix
     ./themes/catppuccin.nix
+    ./themes/gruvbox.nix
+    ./themes/sakura.nix
   ];
 
   options.modules.theming.enable = mkEnableOption "theming";
@@ -166,7 +167,7 @@ in
         };
         accent = mkOption {
           type = types.str;
-          default = colors.base0D;
+          default = colors.base0E;
         };
         border-focused = mkOption {
           type = types.str;
