@@ -34,6 +34,7 @@
       };
       neovim.enable = true;
       rofi-rbw.enable = true;
+      obsidian.enable = true;
 
       # Programming languages
       nix.enable = true;
@@ -58,10 +59,10 @@
 
         # Color scheme
         themes.catppuccin = {
-          enable = false;
+          enable = true;
           flavor = "latte";
         };
-        themes.sakura.enable = true;
+        themes.sakura.enable = false;
       };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere

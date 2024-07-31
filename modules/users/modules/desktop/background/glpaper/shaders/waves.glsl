@@ -5,7 +5,7 @@ precision mediump float;
 uniform float time;
 uniform vec2 resolution;
 
-#define iTime time * 0.01 + 10.0
+#define iTime time * 0.05 + 50.0
 #define iResolution resolution
 #define fragCoord gl_FragCoord
 #define fragColor gl_FragColor

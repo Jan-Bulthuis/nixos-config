@@ -14,5 +14,9 @@ in
     enable = mkEnableOption "obsidian";
   };
 
-  config = mkIf cfg.enable { home.packages = with pkgs; [ obsidian ]; };
+  config = mkIf cfg.enable {
+    modules.unfree.allowedPackages = [ "obsidian" ];
+
+    home.packages = with pkgs; [ obsidian ];
+  };
 }

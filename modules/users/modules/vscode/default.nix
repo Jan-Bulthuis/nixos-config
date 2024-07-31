@@ -32,7 +32,10 @@ in
       enable = true;
 
       mutableExtensionsDir = false;
-      extensions = with pkgs.vscode-extensions; [ eamodio.gitlens ];
+      extensions = with pkgs.vscode-extensions; [
+        eamodio.gitlens
+        ms-vscode.hexeditor
+      ];
 
       userSettings = {
         # Font setup

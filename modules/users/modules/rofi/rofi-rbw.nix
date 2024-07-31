@@ -22,7 +22,6 @@ in
       enable = true;
       settings = {
         base_url = "https://keys.bulthuis.dev";
-        identity_url = "https://keys.bulthuis.dev";
         email = "jan@bulthuis.dev";
         pinentry = pkgs.pinentry;
       };

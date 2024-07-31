@@ -22,27 +22,33 @@ in
     # TODO: Move elsewhere and make keybindings more configurable
     modules.rofi.enable = true;
 
+    # TODO: Move elsewhere
+    home.packages = with pkgs; [
+      brightnessctl
+      # owm
+    ];
+
     # Change desktop to execute river
     modules.desktop.initScript = ''
       river
     '';
 
     # Update background after rebuild
-    home.activation = {
-      river = lib.hm.dag.entryBetween [ "reloadSystemd" ] [ "installPackages" ] ''
-        # Close waybar
-        PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill waybar
+    # home.activation = {
+    #   river = lib.hm.dag.entryBetween [ "reloadSystemd" ] [ "installPackages" ] ''
+    #     # Close waybar
+    #     PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill waybar
 
-        # Kill rivertile
-        PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill rivertile
+    #     # Kill rivertile
+    #     PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill rivertile
 
-        # Kill glpaper
-        PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill glpaper
+    #     # Kill glpaper
+    #     PATH="${pkgs.procps}/bin:$PATH" $DRY_RUN_CMD pkill glpaper
 
-        # Restart river
-        PATH="${pkgs.river}/bin:${pkgs.systemd}/bin:$PATH" $DRY_RUN_CMD ~/.config/river/init
-      '';
-    };
+    #     # Restart river
+    #     PATH="${pkgs.river}/bin:${pkgs.systemd}/bin:${pkgs.waybar}/bin:$PATH" $DRY_RUN_CMD ~/.config/river/init
+    #   '';
+    # };
 
     # River setup
     wayland.windowManager.river = {
@@ -230,6 +236,7 @@ in
             "-app-id" = {
               "'bar'" = "csd";
               "'*'" = "ssd";
+              "'wpa_gui'" = "float";
             };
           };
         };

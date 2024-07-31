@@ -20,6 +20,7 @@ in
     home.packages = with pkgs; [
       pulsemixer
       playerctl
+      wpa_supplicant_gui # TODO: Move
     ];
 
     programs.waybar = {
@@ -34,6 +35,7 @@ in
             "mpris"
           ];
           modules-right = [
+            "network"
             "pulseaudio"
             "battery"
             "clock"
@@ -54,6 +56,13 @@ in
               "九"
             ];
             disable-click = false;
+          };
+          network = {
+            tooltip = false;
+            on-click = "wpa_gui";
+            format-wifi = "直 {essid}"; # Spacing achieved using "Thin Space"
+            format-ethernet = "TODO";
+            format-disconnected = "睊";
           };
           pulseaudio = {
             tooltip = false;
