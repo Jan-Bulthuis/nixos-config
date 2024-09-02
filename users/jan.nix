@@ -7,6 +7,9 @@
     # State version
     home.stateVersion = "24.05";
 
+    # TODO: Move into modules
+    home.packages = with pkgs; [ libreoffice-fresh ];
+
     # Enabled modules
     modules = {
       # Window manager
@@ -26,6 +29,7 @@
       vscode.enable = true;
       zathura.enable = true;
       fish.enable = true;
+      whatsapp.enable = true;
       winbox.enable = true;
       discord.enable = true;
       qutebrowser = {
@@ -35,8 +39,10 @@
       neovim.enable = true;
       rofi-rbw.enable = true;
       obsidian.enable = true;
+      bluetuith.enable = true;
 
       # Programming languages
+      haskell.enable = true;
       nix.enable = true;
       rust.enable = true;
 
@@ -58,11 +64,25 @@
         fonts.extraFonts = [ ];
 
         # Color scheme
+        themes.oxocarbon = {
+          enable = false;
+          darkMode = false;
+        };
         themes.catppuccin = {
           enable = true;
-          flavor = "latte";
+          flavor = "mocha";
         };
         themes.sakura.enable = false;
+
+        # TODO: Remove
+        # Nice themes:
+        # - rose-pine-dawn: Decent, bit too yellow though.
+        # - sagelight: Barely readable
+        # - danqing-light: Too minty
+        # - fruit-soda: Colors too bright, background too dark.
+        # - solarflare-light: Nice
+        # darkMode = false;
+        # colorScheme = "${pkgs.base16-schemes}/share/themes/solarflare-light.yaml";
       };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere

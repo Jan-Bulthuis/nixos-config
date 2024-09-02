@@ -17,28 +17,31 @@ in
   config = mkIf cfg.enable {
     # Development packages
     home.packages = with pkgs; [
-      # rustup
-      rustc
-      cargo
+      rustup
+      # rustc
+      # cargo
       gcc
-      # lldb
-      gdb
-      rust-analyzer
-      rustfmt
+      lldb
+      # rust-analyzer
+      # rustfmt
+      # clippy
     ];
 
     # VSCode configuration
     programs.vscode = {
       extensions = with pkgs.vscode-extensions; [
         rust-lang.rust-analyzer
-        # ms-vscode.cpp-tools
         vadimcn.vscode-lldb
+        tamasfe.even-better-toml
+        serayuzgur.crates
       ];
 
       userSettings = {
         "[rust]" = {
           "editor.inlayHints.enabled" = "off";
         };
+        "rust-analyzer.check.command" = "clippy";
+        "rust-analyzer.showUnlinkedFileNotification" = false;
       };
     };
 

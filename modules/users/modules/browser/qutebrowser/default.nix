@@ -19,6 +19,23 @@ in
   config = mkIf cfg.enable {
     default.browser = mkIf cfg.default "org.qutebrowser.qutebrowser.desktop";
 
+    # TODO: Remove once nixpkgs updates
+    nixpkgs.config.packageOverrides = pkgs: {
+      python3 = pkgs.python3.override {
+        packageOverrides = self: super: {
+          pykeepass = super.pykeepass.overrideAttrs (attrs: {
+            version = "4.1.0.post1";
+            src = pkgs.fetchFromGitHub {
+              owner = "libkeepass";
+              repo = "pykeepass";
+              rev = "refs/tags/v4.1.0.post1";
+              hash = "sha256-64is/XoRF/kojqd4jQIAQi1od8TRhiv9uR+WNIGvP2A=";
+            };
+          });
+        };
+      };
+    };
+
     programs.qutebrowser = {
       enable = true;
 

@@ -10,6 +10,7 @@ with lib;
   imports = [
     # Import modules
     ./base/default.nix
+    ./bluetooth/default.nix
     ./boot/clean-tmp.nix
     ./boot/silent-boot.nix
     ./boot/systemd-boot.nix

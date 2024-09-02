@@ -101,6 +101,8 @@ in
     # Import all themes
     ./themes/catppuccin.nix
     ./themes/gruvbox.nix
+    ./themes/oxocarbon.nix
+    ./themes/papercolor.nix
     ./themes/sakura.nix
   ];
 

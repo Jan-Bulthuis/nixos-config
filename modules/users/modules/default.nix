@@ -8,11 +8,13 @@
 {
   imports = [
     # Import all modules
+    ./bluetuith/default.nix
     ./browser/default.nix
     ./desktop/default.nix
     ./discord/default.nix
     ./feishin/default.nix
     ./fontconfig/default.nix
+    ./language/haskell.nix
     ./language/nix.nix
     ./language/rust.nix
     ./mako/default.nix
@@ -27,6 +29,7 @@
     ./terminal/foot/default.nix
     ./theming/default.nix
     ./vscode/default.nix
+    ./whatsapp/default.nix
     ./winbox/default.nix
     ./zathura/default.nix
 

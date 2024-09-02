@@ -8,7 +8,12 @@
 with lib;
 let
   # Nixvim
-  nixvim = import (builtins.fetchGit { url = "https://github.com/nix-community/nixvim"; });
+  nixvim = import (
+    builtins.fetchGit {
+      url = "https://github.com/nix-community/nixvim";
+      # ref = "nixos-24.05";
+    }
+  );
 
   # Stylix
   stylix = import (

@@ -35,6 +35,9 @@ in
       extensions = with pkgs.vscode-extensions; [
         eamodio.gitlens
         ms-vscode.hexeditor
+        mkhl.direnv
+        usernamehw.errorlens
+        gruntfuggly.todo-tree
       ];
 
       userSettings = {

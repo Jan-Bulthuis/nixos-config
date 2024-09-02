@@ -35,6 +35,7 @@ in
             "mpris"
           ];
           modules-right = [
+            "bluetooth"
             "network"
             "pulseaudio"
             "battery"
@@ -110,6 +111,11 @@ in
             tooltip-format = "";
             interval = 1;
           };
+          bluetooth = {
+            tooltip = false;
+            format = "  {status}"; # Spacing achieved using "Thin Space"
+            format-connected = "  {device_alias}"; # Spacing achieved using "Thin Space"
+          };
         };
       };
       # TODO: Replace base03 color with named color
@@ -133,7 +139,7 @@ in
           padding: 0 5px 1px 5px;
           border-radius: 0;
           font-size: 16px;
-          font-family: "Unifont";
+          font-family: "wenquanyi bitmap song";
         }
 
         #tags button.occupied {

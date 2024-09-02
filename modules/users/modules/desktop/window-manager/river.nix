@@ -25,6 +25,7 @@ in
     # TODO: Move elsewhere
     home.packages = with pkgs; [
       brightnessctl
+      river-filtile
       # owm
     ];
 
@@ -56,7 +57,7 @@ in
       xwayland.enable = true;
       settings =
         let
-          layout = "rivertile";
+          layout = "filtile";
           layoutOptions = "-outer-padding ${toString config.theming.layout.windowPadding} -view-padding ${toString config.theming.layout.windowPadding}";
           modes = [
             "normal"
@@ -108,7 +109,7 @@ in
           ];
           map = (
             lib.attrsets.recursiveUpdate
-              ({
+              {
                 normal =
                   {
                     "${main} Q" = "close";
@@ -119,6 +120,7 @@ in
                     "${ssm} Return" = "spawn foot";
                     "${main} P" = "spawn \"rofi -show drun\"";
                     "${ssm} P" = "spawn rofi-rbw";
+                    "${main} S" = "spawn \"grim -g \\\"\\\$(slurp)\\\" ~/Images/Screenshots/\\\$(date +'%s_grim.png')\"";
 
                     # Window focus
                     "${main} J" = "focus-view next";
@@ -130,22 +132,22 @@ in
                     "${main} Return" = "zoom";
 
                     # Main ratio
-                    "${main} H" = "send-layout-cmd rivertile 'main-ratio -0.05'";
-                    "${main} L" = "send-layout-cmd rivertile 'main-ratio +0.05'";
+                    "${main} H" = "send-layout-cmd ${layout} 'main-ratio -0.05'";
+                    "${main} L" = "send-layout-cmd ${layout} 'main-ratio +0.05'";
 
                     # Main count
-                    "${ssm} H" = "send-layout-cmd rivertile 'main-count +1'";
-                    "${ssm} L" = "send-layout-cmd rivertile 'main-count -1'";
+                    "${ssm} H" = "send-layout-cmd ${layout} 'main-count +1'";
+                    "${ssm} L" = "send-layout-cmd ${layout} 'main-count -1'";
 
                     # Tags
                     "${main} 0" = "set-focused-tags ${toString (pow2 32 - 1)}";
                     "${ssm} 0" = "set-view-tags ${toString (pow2 32 - 1)}";
 
                     # Orientation
-                    "${main} Up" = "send-layout-cmd rivertile \"main-location top\"";
-                    "${main} Right" = "send-layout-cmd rivertile \"main-location right\"";
-                    "${main} Down" = "send-layout-cmd rivertile \"main-location bottom\"";
-                    "${main} Left" = "send-layout-cmd rivertile \"main-location left\"";
+                    "${main} Up" = "send-layout-cmd ${layout} \"main-location top\"";
+                    "${main} Right" = "send-layout-cmd ${layout} \"main-location right\"";
+                    "${main} Down" = "send-layout-cmd ${layout} \"main-location bottom\"";
+                    "${main} Left" = "send-layout-cmd ${layout} \"main-location left\"";
 
                     # Move floating windows
                     "${sam} H" = "move left 100";
@@ -191,7 +193,7 @@ in
                       ]) tags
                     )
                   );
-              })
+              }
               (
                 builtins.listToAttrs (
                   map (mode: {

@@ -16,6 +16,7 @@
     # Enabled modules
     modules = {
       base.enable = true;
+      bluetooth.enable = true;
       power-saving.enable = false;
       pipewire.enable = true;
       wpa_supplicant.enable = true;

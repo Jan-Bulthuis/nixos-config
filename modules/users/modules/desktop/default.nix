@@ -36,6 +36,8 @@ in
       [
         pkgs.wl-clipboard
         pkgs.wtype
+        pkgs.grim
+        pkgs.slurp
       ]
     );
 
