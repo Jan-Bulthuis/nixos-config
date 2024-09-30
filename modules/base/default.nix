@@ -35,6 +35,10 @@ in
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
+    networking.nameservers = [
+      "9.9.9.9"
+      "149.112.112.112"
+    ];
     programs.dconf.enable = true;
     services.libinput.enable = true;
     modules.unfree.enable = true;

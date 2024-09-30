@@ -24,7 +24,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    modules.unfree.allowedPackages = [ "vscode" ];
+    modules.unfree.allowedPackages = [
+      "vscode"
+      "vscode-extension-github-copilot"
+      "vscode-extension-github-copilot-chat"
+    ];
 
     theming.fonts.extraFonts = [ cfg.codeFont ];
 
@@ -38,6 +42,8 @@ in
         mkhl.direnv
         usernamehw.errorlens
         gruntfuggly.todo-tree
+        github.copilot
+        github.copilot-chat
       ];
 
       userSettings = {

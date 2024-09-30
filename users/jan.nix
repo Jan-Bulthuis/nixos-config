@@ -69,10 +69,10 @@
           darkMode = false;
         };
         themes.catppuccin = {
-          enable = true;
+          enable = false;
           flavor = "mocha";
         };
-        themes.sakura.enable = false;
+        themes.sakura.enable = true;
 
         # TODO: Remove
         # Nice themes:
