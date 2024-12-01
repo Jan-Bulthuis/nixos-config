@@ -136,6 +136,10 @@ in
         };
       };
 
+      plugins.web-devicons = {
+        enable = true;
+      };
+
       plugins.neo-tree = {
         enable = true;
 
@@ -174,13 +178,13 @@ in
       #  enable = true;
       #};
 
-      plugins.vimtex = {
-        enable = true;
-        texlivePackage = null;
-        settings = {
-          view_method = "zathura";
-        };
-      };
+      # plugins.vimtex = {
+      #   enable = true;
+      #   texlivePackage = null;
+      #   settings = {
+      #     view_method = "zathura";
+      #   };
+      # };
     };
     programs.neovim.defaultEditor = true;
   };
