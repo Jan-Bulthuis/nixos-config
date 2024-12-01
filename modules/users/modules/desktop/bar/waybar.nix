@@ -23,6 +23,13 @@ in
       wpa_supplicant_gui # TODO: Move
     ];
 
+    modules.desktop.reloadScript = ''
+      if ${pkgs.procps}/bin/pgrep waybar; then
+        ${pkgs.procps}/bin/pkill waybar
+      fi
+      ${pkgs.waybar}/bin/waybar &
+    '';
+
     programs.waybar = {
       enable = true;
       settings = {
