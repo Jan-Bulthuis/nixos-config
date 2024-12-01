@@ -25,6 +25,11 @@ in
       default = "${pkgs.bash}/bin/bash";
       description = "Bash script to execute after logging in.";
     };
+    reloadScript = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Shell script to execute after reload/rebuild.";
+    };
   };
 
   config = {
@@ -34,12 +39,21 @@ in
     home.packages = optionals cfg.wayland (
       with pkgs;
       [
-        pkgs.wl-clipboard
-        pkgs.wtype
-        pkgs.grim
-        pkgs.slurp
+        wl-clipboard
+        wtype
+        grim
+        slurp
       ]
     );
+
+    home.activation = {
+      customReloadScript = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+        ''
+          #!${pkgs.bash}/bin/bash
+        ''
+        + cfg.reloadScript
+      );
+    };
 
     home.file.".initrc" = {
       enable = true;
