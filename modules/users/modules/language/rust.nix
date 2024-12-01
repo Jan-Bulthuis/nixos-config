@@ -22,6 +22,7 @@ in
       # cargo
       gcc
       lldb
+      bacon
       # rust-analyzer
       # rustfmt
       # clippy
@@ -47,7 +48,7 @@ in
 
     # Neovim configuration
     programs.nixvim = {
-      plugins.rust-tools = {
+      plugins.rustaceanvim = {
         enable = true;
       };
     };
