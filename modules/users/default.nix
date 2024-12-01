@@ -9,9 +9,15 @@ with lib;
 let
   # Nixvim
   nixvim = import (
-    builtins.fetchGit {
-      url = "https://github.com/nix-community/nixvim";
-      # ref = "nixos-24.05";
+    # builtins.fetchGit {
+    #   url = "https://github.com/nix-community/nixvim";
+    #   # ref = "nixos-24.05";
+    # }
+    pkgs.fetchFromGitHub {
+      owner = "nix-community";
+      repo = "nixvim";
+      rev = "master";
+      sha256 = "sha256-xPf3jjDBDA9oMVnWU5DJ8gINCq2EPiupvF/4rD/0eEI=";
     }
   );
 
@@ -20,8 +26,8 @@ let
     pkgs.fetchFromGitHub {
       owner = "danth";
       repo = "stylix";
-      rev = "1ff9d37d27377bfe8994c24a8d6c6c1734ffa116";
-      sha256 = "0dz8h1ga8lnfvvmvsf6iqvnbvxrvx3qxi0y8s8b72066mqgvy8y5";
+      rev = "master";
+      sha256 = "sha256-8uTKUHkaU980J5kRnLYrdwmjZYB88eBGUk1oVgIUHFE=";
     }
   );
 
@@ -84,7 +90,10 @@ in
     users.users = attrsets.concatMapAttrs (name: value: {
       ${name} = {
         isNormalUser = true;
-        extraGroups = mkIf value.sudo [ "wheel" ];
+        extraGroups = mkIf value.sudo [
+          "wheel"
+          "docker"
+        ];
       };
     }) config.machine.users;
 
