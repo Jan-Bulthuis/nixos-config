@@ -22,7 +22,18 @@ in
       curl
       dig
       procps
+      wireguard-tools
+      usbutils
+      pciutils
+      zip
+      unzip
+
+      # TODO: MOVE
+      quickemu
+      pdftk
     ];
+
+    virtualisation.docker.enable = true;
 
     modules = {
       # Enable base modules
@@ -35,10 +46,11 @@ in
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
-    networking.nameservers = [
-      "9.9.9.9"
-      "149.112.112.112"
-    ];
+    # networking.nameservers = [
+    #   "9.9.9.9"
+    #   "149.112.112.112"
+    # ];
+    networking.firewall.enable = true;
     programs.dconf.enable = true;
     services.libinput.enable = true;
     modules.unfree.enable = true;
