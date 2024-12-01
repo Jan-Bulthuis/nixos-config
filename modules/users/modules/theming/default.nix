@@ -9,14 +9,6 @@ with lib;
 let
   cfg = config.theming;
 
-  # Stylix
-  stylix = pkgs.fetchFromGitHub {
-    owner = "danth";
-    repo = "stylix";
-    rev = "1ff9d37d27377bfe8994c24a8d6c6c1734ffa116";
-    sha256 = "0dz8h1ga8lnfvvmvsf6iqvnbvxrvx3qxi0y8s8b72066mqgvy8y5";
-  };
-
   # Font module type
   fontModule = types.submodule {
     options = {
@@ -311,6 +303,9 @@ in
       enable = true;
       nix-direnv.enable = true;
     };
+    modules.git.ignores = [
+      ".direnv"
+    ];
 
     # TODO: Make cursors configurable using modules.
     home.pointerCursor = {
