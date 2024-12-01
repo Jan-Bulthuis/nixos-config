@@ -34,6 +34,10 @@ in
       river
     '';
 
+    modules.desktop.reloadScript = ''
+      ${pkgs.river}/bin/riverctl background-color 0x${config.theming.colors.bg}
+    '';
+
     # Update background after rebuild
     # home.activation = {
     #   river = lib.hm.dag.entryBetween [ "reloadSystemd" ] [ "installPackages" ] ''
@@ -104,7 +108,7 @@ in
 
           spawn = [
             "\"${layout} ${layoutOptions}\""
-            "waybar"
+            "waybar" # TODO: Decouple
             "\"glpaper eDP-1 ${toString config.modules.glpaper.shader}\""
           ];
           map = (
