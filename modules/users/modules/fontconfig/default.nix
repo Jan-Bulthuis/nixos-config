@@ -44,9 +44,16 @@ in
     home.file.".config/fontconfig/conf.d/20-family-fallbacks.conf" = {
       enable = true;
 
+      # text = ''
+      #   <?xml version="1.0"?>
+      #   <fontconfig>
+
+      #   ${configContent}
+      #   </fontconfig>
+      # '';
       text = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+        <?xml version='1.0'?>
+        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
         <fontconfig>
 
         ${configContent}
