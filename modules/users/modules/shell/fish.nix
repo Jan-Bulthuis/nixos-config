@@ -36,6 +36,8 @@ in
     programs.fish = {
       enable = true;
 
+      shellAliases = config.modules.shell.aliases;
+
       plugins = [
         (mkIf cfg.plugins.done {
           name = "done";

@@ -14,5 +14,9 @@ in
     enable = mkEnableOption "bash";
   };
 
-  config.programs.bash.enable = cfg.enable;
+  config.programs.bash = {
+    enable = cfg.enable;
+
+    shellAliases = config.modules.shell.aliases;
+  };
 }
