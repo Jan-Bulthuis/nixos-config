@@ -21,9 +21,10 @@ in
     # Enable NUR
     nixpkgs.config.packageOverrides = pkgs: {
       # TODO: Pin the version
-      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-        inherit pkgs;
-      };
+      nur = import (builtins.fetchTarball {
+        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+        sha256 = "0jjfvr325imrwg9ic8xha5y38jcp1s0z4pzwhvi0570aigzibbz4";
+      }) { inherit pkgs; };
     };
 
     programs.firefox = {
