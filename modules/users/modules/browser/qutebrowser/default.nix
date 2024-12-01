@@ -20,26 +20,27 @@ in
     default.browser = mkIf cfg.default "org.qutebrowser.qutebrowser.desktop";
 
     # TODO: Remove once nixpkgs updates
-    nixpkgs.config.packageOverrides = pkgs: {
-      python3 = pkgs.python3.override {
-        packageOverrides = self: super: {
-          pykeepass = super.pykeepass.overrideAttrs (attrs: {
-            version = "4.1.0.post1";
-            src = pkgs.fetchFromGitHub {
-              owner = "libkeepass";
-              repo = "pykeepass";
-              rev = "refs/tags/v4.1.0.post1";
-              hash = "sha256-64is/XoRF/kojqd4jQIAQi1od8TRhiv9uR+WNIGvP2A=";
-            };
-          });
-        };
-      };
-    };
+    # nixpkgs.config.packageOverrides = pkgs: {
+    #   python3 = pkgs.python3.override {
+    #     packageOverrides = self: super: {
+    #       pykeepass = super.pykeepass.overrideAttrs (attrs: {
+    #         version = "4.1.0.post1";
+    #         src = pkgs.fetchFromGitHub {
+    #           owner = "libkeepass";
+    #           repo = "pykeepass";
+    #           rev = "refs/tags/v4.1.0.post1";
+    #           hash = "sha256-64is/XoRF/kojqd4jQIAQi1od8TRhiv9uR+WNIGvP2A=";
+    #         };
+    #       });
+    #     };
+    #   };
+    # };
 
     programs.qutebrowser = {
       enable = true;
 
       extraConfig = ''
+        config.set("completion.web_history.max_items", 100)
         config.set("colors.webpage.darkmode.enabled", False)
         config.set("colors.webpage.preferred_color_scheme", "${if theme.darkMode then "dark" else "light"}")
         config.set("fonts.default_family", "${theme.fonts.monospace.name}")
