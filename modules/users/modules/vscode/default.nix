@@ -28,6 +28,7 @@ in
       "vscode"
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
+      "vscode-extension-ms-vsliveshare-vsliveshare"
     ];
 
     theming.fonts.extraFonts = [ cfg.codeFont ];
@@ -44,6 +45,9 @@ in
         gruntfuggly.todo-tree
         github.copilot
         github.copilot-chat
+        tomoki1207.pdf
+        ms-vsliveshare.vsliveshare
+        ms-azuretools.vscode-docker
       ];
 
       userSettings = {
@@ -61,6 +65,10 @@ in
 
         # Layout
         "window.menuBarVisibility" = "hidden";
+
+        # Git settings
+        "git.autofetch" = true;
+        "git.enableSmartCommit" = false;
       };
     };
   };
