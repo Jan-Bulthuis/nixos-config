@@ -7,6 +7,7 @@
 
 let
   cfg = config.modules.zathura;
+  colors = config.theming.colors;
 in
 {
   options.modules.zathura.enable = lib.mkEnableOption "zathura";
@@ -17,6 +18,18 @@ in
 
       options = {
         guioptions = "none";
+        recolor = true;
+        recolor-keephue = false;
+        recolor-darkcolor = lib.mkForce "#${colors.accent}";
+        recolor-lightcolor = lib.mkForce "#${colors.bg}";
+      };
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+
+      defaultApplications = {
+        "application/pdf" = "zathura";
       };
     };
   };
