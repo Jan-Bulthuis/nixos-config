@@ -16,8 +16,8 @@ let
     pkgs.fetchFromGitHub {
       owner = "nix-community";
       repo = "nixvim";
-      rev = "master";
-      sha256 = "sha256-xPf3jjDBDA9oMVnWU5DJ8gINCq2EPiupvF/4rD/0eEI=";
+      rev = "e680b367c726e2ae37d541328fe81f8daaf49a6c";
+      sha256 = "sha256-fYEf0IgsNJp/hcb+C3FKtJvVabPDQs64hdL0izNBwXc=";
     }
   );
 
@@ -26,8 +26,8 @@ let
     pkgs.fetchFromGitHub {
       owner = "danth";
       repo = "stylix";
-      rev = "master";
-      sha256 = "sha256-8uTKUHkaU980J5kRnLYrdwmjZYB88eBGUk1oVgIUHFE=";
+      rev = "5f912cecb4e1c5c794316c4b79b9b5d57d43e100";
+      sha256 = "sha256-SX1R/WlHEIf9BPT4YBnlVyXRyWNlzYMtKpwXnT9+DPM=";
     }
   );
 

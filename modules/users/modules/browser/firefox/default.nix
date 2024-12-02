@@ -22,8 +22,8 @@ in
     nixpkgs.config.packageOverrides = pkgs: {
       # TODO: Pin the version
       nur = import (builtins.fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-        sha256 = "0jjfvr325imrwg9ic8xha5y38jcp1s0z4pzwhvi0570aigzibbz4";
+        url = "https://github.com/nix-community/NUR/archive/f6b1d11161a18420ae699f3202f6cf113f509e8a.tar.gz";
+        sha256 = "1yj78q8dgvx94mdhd9dy9p7iwxmfl6rx8h0sypfp2x5wzb1sr2g6";
       }) { inherit pkgs; };
     };
 
