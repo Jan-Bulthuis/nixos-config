@@ -24,9 +24,9 @@ in
     ];
 
     modules.desktop.reloadScript = ''
-      if ${pkgs.procps}/bin/pgrep waybar; then
-        ${pkgs.procps}/bin/pkill waybar
-      fi
+      # if ${pkgs.procps}/bin/pgrep waybar; then
+      #   ${pkgs.procps}/bin/pkill waybar
+      # fi
       ${pkgs.waybar}/bin/waybar &
     '';
 
