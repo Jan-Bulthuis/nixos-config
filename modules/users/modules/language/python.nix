@@ -41,11 +41,12 @@ in
         ms-python.python
         ms-python.debugpy
         ms-python.vscode-pylance
+        ms-python.black-formatter
       ];
 
       userSettings = {
         "[python]" = {
-          "editor.defaultFormatter" = "ms-python.vscode-pylance";
+          "editor.defaultFormatter" = "ms-python.black-formatter";
         };
       };
     };
