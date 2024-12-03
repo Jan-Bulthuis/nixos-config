@@ -94,11 +94,6 @@
       cpp.enable = true;
       tex.enable = true;
       jupyter.enable = true;
-      python.extraPythonPackages = p: [
-        p.scikit-learn
-        p.numpy
-        p.matplotlib
-      ];
 
       # Enable unfree
       unfree.enable = true;
@@ -123,10 +118,14 @@
           darkMode = false;
         };
         themes.catppuccin = {
-          enable = true;
-          flavor = "mocha";
+          enable = false;
+          flavor = "latte";
         };
         themes.sakura.enable = false;
+        themes.nord = {
+          enable = true;
+          darkMode = true;
+        };
 
         # TODO: Remove
         # Nice themes:

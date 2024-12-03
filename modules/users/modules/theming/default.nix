@@ -96,6 +96,7 @@ in
     ./themes/oxocarbon.nix
     ./themes/papercolor.nix
     ./themes/sakura.nix
+    ./themes/nord.nix
   ];
 
   options.modules.theming.enable = mkEnableOption "theming";
