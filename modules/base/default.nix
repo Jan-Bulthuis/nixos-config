@@ -82,6 +82,8 @@ in
       "nvidia-settings"
     ];
     nix.settings.experimental-features = "nix-command flakes";
+    networking.useDHCP = true;
+    nixpkgs.hostPlatform = "x86_64-linux";
 
     # TODO: Move to USB module
     # services.gvfs.enable = true;

@@ -56,10 +56,10 @@ in
 {
   imports = [
     # Import home manager
-    <home-manager/nixos>
+    # <home-manager/nixos>
 
     # Import system wide configuration required for user modules
-    ./modules/systemwide/default.nix
+    ../../user-modules/systemwide/default.nix
   ];
 
   options = {
@@ -85,7 +85,7 @@ in
       nixvim.homeManagerModules.nixvim
 
       # Modules
-      ./modules/default.nix
+      ../../user-modules/default.nix
 
       # Custom packages
       ../../pkgs/default.nix
