@@ -12,15 +12,17 @@
       libreoffice-still
       remmina
       # dina-vector
-      android-studio
-      docker
-      docker-compose
-      jellyfin-tui
+      # android-studio
+      # jellyfin-tui
       pinentry
       thunderbird
       signal-desktop
+      prusa-slicer
+      freecad-wayland
+      # appflowy
     ];
 
+    # TODO: Move to gpg module
     programs.gpg = {
       enable = true;
       mutableKeys = true;
@@ -62,10 +64,11 @@
 
       # Gaming
       steam.enable = true;
+      modrinth.enable = true;
 
       # Media
       spotify.enable = true;
-      feishin.enable = true;
+      feishin.enable = false;
 
       # Tools
       rofi-rbw.enable = true;
@@ -84,6 +87,7 @@
       # Development
       neovim.enable = true;
       vscode.enable = true;
+      docker.enable = true;
 
       # Languages
       haskell.enable = false;
@@ -118,24 +122,14 @@
           darkMode = false;
         };
         themes.catppuccin = {
-          enable = false;
-          flavor = "latte";
+          enable = true;
+          flavor = "mocha";
         };
         themes.sakura.enable = false;
         themes.nord = {
-          enable = true;
+          enable = false;
           darkMode = true;
         };
-
-        # TODO: Remove
-        # Nice themes:
-        # - rose-pine-dawn: Decent, bit too yellow though.
-        # - sagelight: Barely readable
-        # - danqing-light: Too minty
-        # - fruit-soda: Colors too bright, background too dark.
-        # - solarflare-light: Nice
-        # darkMode = false;
-        # colorScheme = "${pkgs.base16-schemes}/share/themes/solarflare-light.yaml";
       };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere

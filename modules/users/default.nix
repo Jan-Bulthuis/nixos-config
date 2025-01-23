@@ -63,6 +63,11 @@ in
   ];
 
   options = {
+    machine.sudo-groups = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Groups assigned to sudo users.";
+    };
     machine.users = mkOption {
       type = types.attrsOf userModule;
       default = { };
@@ -90,10 +95,12 @@ in
     users.users = attrsets.concatMapAttrs (name: value: {
       ${name} = {
         isNormalUser = true;
-        extraGroups = mkIf value.sudo [
-          "wheel"
-          "docker"
-        ];
+        extraGroups = mkIf value.sudo (
+          [
+            "wheel"
+          ]
+          ++ config.machine.sudo-groups
+        );
       };
     }) config.machine.users;
 

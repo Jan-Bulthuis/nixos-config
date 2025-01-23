@@ -29,11 +29,30 @@ in
       unzip
 
       # TODO: MOVE
-      quickemu
+      quickemu # TODO: Reenable once building this is fixed
       pdftk
+
+      # TODO: Move to USB module
+      # usbutils
+      # udiskie
+      # udisks
     ];
 
-    virtualisation.docker.enable = true;
+    security.krb5 = {
+      enable = true;
+      settings = {
+        libdefaults = {
+          rdns = false;
+        };
+        realms = {
+          "GEWISWG.GEWIS.NL" = {
+            kdc = [
+              "https://gewisvdesktop.gewis.nl/KdcProxy"
+            ];
+          };
+        };
+      };
+    };
 
     modules = {
       # Enable base modules
@@ -42,7 +61,7 @@ in
       neovim.enable = true;
       systemd-boot.enable = true;
       tuigreet.enable = true;
-      tailscale.enable = true;
+      # tailscale.enable = true;
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
@@ -50,6 +69,10 @@ in
     #   "9.9.9.9"
     #   "149.112.112.112"
     # ];
+    # programs.captive-browser.enable = true;
+    services.resolved = {
+      enable = true;
+    };
     networking.firewall.enable = true;
     programs.dconf.enable = true;
     services.libinput.enable = true;
@@ -58,5 +81,10 @@ in
       "nvidia-x11"
       "nvidia-settings"
     ];
+    nix.settings.experimental-features = "nix-command flakes";
+
+    # TODO: Move to USB module
+    # services.gvfs.enable = true;
+    services.udisks2.enable = true;
   };
 }

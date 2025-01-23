@@ -5,35 +5,34 @@
   ...
 }:
 
-# TODO: Move to a module for notebooks in general
 with lib;
 let
-  cfg = config.modules.jupyter;
+  cfg = config.modules.docker;
 in
 {
-  options.modules.jupyter = {
-    enable = mkEnableOption "jupyter";
+  options.modules.docker = {
+    enable = mkEnableOption "docker";
   };
 
   config = mkIf cfg.enable {
     # Development packages
     home.packages = with pkgs; [
-      evcxr
+      docker
+      docker-compose
     ];
 
-    modules.python.extraPythonPackages = p: [
-      p.jupyter
-      p.notebook
+    # Allow unfree
+    modules.unfree.allowedPackages = [
     ];
 
     # VSCode configuration
     programs.vscode = {
       extensions = with pkgs.vscode-extensions; [
-        ms-toolsai.jupyter
-        ms-toolsai.jupyter-renderers
+        ms-azuretools.vscode-docker
       ];
 
-      userSettings = { };
+      userSettings = {
+      };
     };
 
     # Neovim configuration

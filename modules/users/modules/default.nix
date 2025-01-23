@@ -9,9 +9,11 @@
     ./browser/default.nix
     ./btop/default.nix
     ./desktop/default.nix
+    ./development/default.nix
     ./discord/default.nix
     ./feishin/default.nix
     ./fontconfig/default.nix
+    ./games/modrinth.nix
     ./git/default.nix
     ./language/cpp.nix
     ./language/haskell.nix

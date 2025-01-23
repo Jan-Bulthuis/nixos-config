@@ -40,7 +40,7 @@ in
       enable = true;
 
       extraConfig = ''
-        config.set("completion.web_history.max_items", 100)
+        # config.set("completion.web_history.max_items", 30)
         config.set("colors.webpage.darkmode.enabled", False)
         config.set("colors.webpage.preferred_color_scheme", "${if theme.darkMode then "dark" else "light"}")
         config.set("fonts.default_family", "${theme.fonts.monospace.name}")

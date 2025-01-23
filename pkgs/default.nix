@@ -4,7 +4,7 @@
 
 {
   nixpkgs.config = {
-    android_sdk.accept_license = true;
+    # android_sdk.accept_license = true; # TODO: Move to android module
     packageOverrides = pkgs: {
       dina-vector = pkgs.callPackage ./fonts/dina-vector.nix { };
       wqy-zenhei = pkgs.callPackage ./fonts/wqy-zenhei.nix { };

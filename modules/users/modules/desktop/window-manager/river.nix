@@ -27,6 +27,8 @@ in
       brightnessctl
       river-filtile
       # owm
+
+      udiskie # TODO: Move to USB module
     ];
 
     # Change desktop to execute river
@@ -106,10 +108,12 @@ in
           border-color-unfocused = "0x${colors.border-unfocused}"; # TODO: Change to use named color;
           border-color-urgent = "0x${colors.fg}";
 
+          # TODO: Make a desktop options for DE applications
           spawn = [
             "\"${layout} ${layoutOptions}\""
             "waybar" # TODO: Decouple
             "\"glpaper eDP-1 ${toString config.modules.glpaper.shader}\""
+            "udiskie"
           ];
           map = (
             lib.attrsets.recursiveUpdate
@@ -124,7 +128,8 @@ in
                     "${ssm} Return" = "spawn foot";
                     "${main} P" = "spawn \"rofi -show drun\"";
                     "${ssm} P" = "spawn rofi-rbw";
-                    "${main} S" = "spawn \"grim -g \\\"\\\$(slurp)\\\" ~/Images/Screenshots/\\\$(date +'%s_grim.png')\"";
+                    "${main} S" =
+                      "spawn \"grim -g \\\"\\\$(slurp)\\\" ~/Images/Screenshots/\\\$(date +'%s_grim.png')\"";
 
                     # Window focus
                     "${main} J" = "focus-view next";

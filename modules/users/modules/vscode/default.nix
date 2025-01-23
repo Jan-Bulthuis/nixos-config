@@ -47,7 +47,6 @@ in
         github.copilot-chat
         tomoki1207.pdf
         ms-vsliveshare.vsliveshare
-        ms-azuretools.vscode-docker
       ];
 
       userSettings = {

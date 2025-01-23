@@ -19,9 +19,9 @@ in
     modules.unfree.allowedPackages = [
       "vscode-extension-ms-vscode-cpptools"
       # TODO: Remove, it should not be here
-      "android-studio-stable"
-      "android-sdk-cmdline-tools"
-      "android-sdk-tools"
+      # "android-studio-stable"
+      # "android-sdk-cmdline-tools"
+      # "android-sdk-tools"
     ];
 
     # Gitignore additions
