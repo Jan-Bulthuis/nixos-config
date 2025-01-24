@@ -243,6 +243,11 @@ in
           description = "Default emoji font.";
         };
 
+        interface = mkOption {
+          type = fontModule;
+          description = "Default emoji font.";
+        };
+
         extraFonts = mkOption {
           type = types.listOf fontModule;
           default = [ ];

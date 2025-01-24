@@ -114,6 +114,7 @@
         fonts.sansSerif = fontpkgs."DejaVu Sans";
         fonts.monospace = fontpkgs."Dina";
         fonts.emoji = fontpkgs."Noto Color Emoji";
+        fonts.interface = fontpkgs."Dina";
         fonts.extraFonts = [ ];
 
         # Color scheme

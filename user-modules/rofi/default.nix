@@ -19,7 +19,7 @@ in
       enable = true;
       terminal = config.default.terminal;
       package = pkgs.rofi-wayland;
-      font = "${theme.fonts.monospace.name} ${toString theme.fonts.monospace.recommendedSize}";
+      font = "${theme.fonts.interface.name} ${toString (theme.fonts.interface.recommendedSize)}";
       theme =
         let
           inherit (config.lib.formats.rasi) mkLiteral;
