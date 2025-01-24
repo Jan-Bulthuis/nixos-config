@@ -7,30 +7,6 @@
 
 with lib;
 let
-  # Nixvim
-  nixvim = import (
-    # builtins.fetchGit {
-    #   url = "https://github.com/nix-community/nixvim";
-    #   # ref = "nixos-24.05";
-    # }
-    pkgs.fetchFromGitHub {
-      owner = "nix-community";
-      repo = "nixvim";
-      rev = "e680b367c726e2ae37d541328fe81f8daaf49a6c";
-      sha256 = "sha256-fYEf0IgsNJp/hcb+C3FKtJvVabPDQs64hdL0izNBwXc=";
-    }
-  );
-
-  # Stylix
-  stylix = import (
-    pkgs.fetchFromGitHub {
-      owner = "danth";
-      repo = "stylix";
-      rev = "5f912cecb4e1c5c794316c4b79b9b5d57d43e100";
-      sha256 = "sha256-SX1R/WlHEIf9BPT4YBnlVyXRyWNlzYMtKpwXnT9+DPM=";
-    }
-  );
-
   # User configuration
   userModule = types.submodule {
     options = {
@@ -78,12 +54,6 @@ in
   config = {
     # Add required home manager modules
     home-manager.sharedModules = [
-      # Stylix for theming
-      stylix.homeManagerModules.stylix
-
-      # Nixvim for neovim
-      nixvim.homeManagerModules.nixvim
-
       # Modules
       ../../user-modules/default.nix
 

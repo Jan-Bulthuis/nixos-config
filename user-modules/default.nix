@@ -42,6 +42,6 @@
     ./zathura/default.nix
 
     # Import unfree helper
-    ../../unfree/default.nix
+    ../modules/unfree/default.nix
   ];
 }

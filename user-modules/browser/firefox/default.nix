@@ -18,23 +18,14 @@ in
   config = lib.mkIf cfg.enable {
     default.browser = mkIf cfg.default "firefox.desktop";
 
-    # Enable NUR
-    nixpkgs.config.packageOverrides = pkgs: {
-      # TODO: Pin the version
-      nur = import (builtins.fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/f6b1d11161a18420ae699f3202f6cf113f509e8a.tar.gz";
-        sha256 = "1yj78q8dgvx94mdhd9dy9p7iwxmfl6rx8h0sypfp2x5wzb1sr2g6";
-      }) { inherit pkgs; };
-    };
-
     programs.firefox = {
       enable = true;
 
       policies = {
         AppAutoUpdate = false;
-        # BlockAboutAddons = true;
-        # BlockAboutConfig = true;
-        # BlockAboutProfiles = true;
+        BlockAboutAddons = true;
+        BlockAboutConfig = true;
+        BlockAboutProfiles = true;
         DisableAppUpdate = true;
         DisableFeedbackCommands = true;
         DisableMasterPasswordCreation = true;
@@ -58,7 +49,6 @@ in
         search.default = "DuckDuckGo";
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          # firefox-color
           ublock-origin
         ];
 
