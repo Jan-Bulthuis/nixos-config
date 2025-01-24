@@ -22,12 +22,6 @@
       wpa_supplicant.enable = true;
     };
 
-    # User accounts
-    machine.users.jan = {
-      sudo = true;
-      configuration = ../users/jan.nix;
-    };
-
     # Hardware configuration
     hardware.enableRedistributableFirmware = true;
     boot.initrd.availableKernelModules = [

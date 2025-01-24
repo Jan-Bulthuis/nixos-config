@@ -25,24 +25,31 @@
       ...
     }:
     let
-      baseModules = [
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.sharedModules = [
-            stylix.homeManagerModules.stylix
-            nixvim.homeManagerModules.nixvim
-            nur.modules.homeManager.default
+      makeConfig =
+        machineConfig: userConfig:
+        (nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            machineConfig
+            home-manager.nixosModules.home-manager
+            {
+              machine.users = userConfig;
+              home-manager.sharedModules = [
+                stylix.homeManagerModules.stylix
+                nixvim.homeManagerModules.nixvim
+                nur.modules.homeManager.default
+              ];
+            }
           ];
-        }
-      ];
+        });
     in
     {
       nixosConfigurations = {
-        "20212060" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/laptop.nix
-          ] ++ baseModules;
+        "20212060" = makeConfig ./machines/laptop.nix {
+          jan = {
+            sudo = true;
+            configuration = ./users/jan.nix;
+          };
         };
       };
     };
