@@ -68,7 +68,7 @@
 
       # Media
       spotify.enable = true;
-      feishin.enable = false;
+      feishin.enable = true;
 
       # Tools
       rofi-rbw.enable = true;
