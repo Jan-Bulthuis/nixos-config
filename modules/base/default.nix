@@ -85,6 +85,19 @@ in
     networking.useDHCP = true;
     nixpkgs.hostPlatform = "x86_64-linux";
 
+    networking.firewall.allowedTCPPortRanges = [
+      {
+        from = 10000;
+        to = 11000;
+      }
+    ];
+    networking.firewall.allowedUDPPortRanges = [
+      {
+        from = 10000;
+        to = 11000;
+      }
+    ];
+
     # TODO: Move to USB module
     # services.gvfs.enable = true;
     services.udisks2.enable = true;
