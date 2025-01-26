@@ -18,5 +18,9 @@ in
     home.packages = with pkgs; [
       matlab
     ];
+
+    home.sessionVariables = {
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+    };
   };
 }
