@@ -84,7 +84,6 @@ in
     nix.settings.experimental-features = "nix-command flakes";
     networking.useDHCP = true;
     nixpkgs.hostPlatform = "x86_64-linux";
-
     networking.firewall.allowedTCPPortRanges = [
       {
         from = 10000;

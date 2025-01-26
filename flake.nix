@@ -13,6 +13,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-matlab = {
+      url = "gitlab:doronbehar/nix-matlab";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -22,6 +26,7 @@
       stylix,
       nixvim,
       nur,
+      nix-matlab,
       ...
     }:
     let
@@ -38,6 +43,11 @@
                 stylix.homeManagerModules.stylix
                 nixvim.homeManagerModules.nixvim
                 nur.modules.homeManager.default
+                {
+                  nixpkgs.overlays = [
+                    nix-matlab.overlay
+                  ];
+                }
               ];
             }
           ];

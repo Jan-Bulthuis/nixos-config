@@ -2,7 +2,7 @@
 
 {
   imports = [
-    # Import systemwide configuration files.
+    ./ide/matlab.nix
     ./utilities/docker.nix
   ];
 }

@@ -88,6 +88,7 @@
       neovim.enable = true;
       vscode.enable = true;
       docker.enable = true;
+      matlab.enable = true;
 
       # Languages
       haskell.enable = false;
