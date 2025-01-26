@@ -15,6 +15,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    # TODO: Remove insecure package
+    nixpkgs.config.permittedInsecurePackages = [
+      "freeimage-unstable-2021-11-01"
+    ];
+
     home.packages = with pkgs; [
       emulationstation-de
     ];
