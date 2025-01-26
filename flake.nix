@@ -44,6 +44,11 @@
                 nixvim.homeManagerModules.nixvim
                 nur.modules.homeManager.default
                 {
+                  # TODO: Remove insecure package exception
+                  nixpkgs.config.permittedInsecurePackages = [
+                    "freeimage-unstable-2021-11-01" # For emulation station
+                    "electron-31.7.7" # For feishin
+                  ];
                   nixpkgs.overlays = [
                     nix-matlab.overlay
                   ];

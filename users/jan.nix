@@ -65,7 +65,7 @@
       # Gaming
       steam.enable = true;
       modrinth.enable = true;
-      pegasus.enable = true;
+      es-de.enable = true;
       ryujinx.enable = true;
 
       # Media
