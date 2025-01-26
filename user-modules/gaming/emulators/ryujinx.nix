@@ -10,7 +10,7 @@ let
   cfg = config.modules.ryujinx;
 in
 {
-  options.modules.modrinth = {
+  options.modules.ryujinx = {
     enable = mkEnableOption "ryujinx";
   };
 

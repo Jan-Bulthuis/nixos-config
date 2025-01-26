@@ -65,6 +65,8 @@
       # Gaming
       steam.enable = true;
       modrinth.enable = true;
+      es-de.enable = true;
+      ryujinx.enable = true;
 
       # Media
       spotify.enable = true;
