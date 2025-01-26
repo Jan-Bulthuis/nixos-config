@@ -13,16 +13,8 @@
     ./discord/default.nix
     ./feishin/default.nix
     ./fontconfig/default.nix
-    ./games/modrinth.nix
+    ./gaming/default.nix
     ./git/default.nix
-    ./language/cpp.nix
-    ./language/haskell.nix
-    ./language/js.nix
-    ./language/jupyter.nix
-    ./language/nix.nix
-    ./language/python.nix
-    ./language/rust.nix
-    ./language/tex.nix
     ./mako/default.nix
     ./neovim/default.nix
     ./obsidian/default.nix
@@ -32,7 +24,6 @@
     ./shell/bash.nix
     ./shell/fish.nix
     ./spotify/default.nix
-    ./steam/default.nix
     ./terminal/default.nix
     ./terminal/foot/default.nix
     ./theming/default.nix
