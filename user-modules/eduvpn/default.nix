@@ -17,7 +17,7 @@ in
   config = mkIf cfg.enable {
     # Development packages
     home.packages = with pkgs; [
-      eduvpn
+      eduvpn-client
     ];
   };
 }
