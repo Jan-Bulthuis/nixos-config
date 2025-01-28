@@ -67,6 +67,7 @@
       modrinth.enable = true;
       es-de.enable = true;
       pcsx2.enable = true;
+      retroarch.enable = true;
       ryujinx.enable = true;
 
       # Media

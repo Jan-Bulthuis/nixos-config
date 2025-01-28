@@ -16,7 +16,10 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      ryujinx
+      ryubing
     ];
+
+    # TODO: Make more general
+    wayland.windowManager.river.settings.rule-add."-app-id"."'Ryujinx'" = "fullscreen";
   };
 }
