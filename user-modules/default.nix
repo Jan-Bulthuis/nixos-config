@@ -11,6 +11,7 @@
     ./desktop/default.nix
     ./development/default.nix
     ./discord/default.nix
+    ./eduvpn/default.nix
     ./feishin/default.nix
     ./fontconfig/default.nix
     ./gaming/default.nix

@@ -85,6 +85,7 @@
       winbox.enable = true;
       obsidian.enable = true;
       zathura.enable = true;
+      eduvpn.enable = true;
 
       # Development
       neovim.enable = true;
