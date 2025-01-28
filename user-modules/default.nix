@@ -16,6 +16,7 @@
     ./fontconfig/default.nix
     ./gaming/default.nix
     ./git/default.nix
+    ./keyring/default.nix
     ./mako/default.nix
     ./neovim/default.nix
     ./obsidian/default.nix

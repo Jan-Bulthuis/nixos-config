@@ -23,15 +23,15 @@
     ];
 
     # TODO: Move to gpg module
-    programs.gpg = {
-      enable = true;
-      mutableKeys = true;
-      mutableTrust = true;
-    };
-    services.gpg-agent = {
-      enable = true;
-      enableSshSupport = true;
-    };
+    # programs.gpg = {
+    #   enable = true;
+    #   mutableKeys = true;
+    #   mutableTrust = true;
+    # };
+    # services.gpg-agent = {
+    #   enable = true;
+    #   enableSshSupport = true;
+    # };
 
     # Enabled modules
     modules = {
@@ -66,6 +66,7 @@
       steam.enable = true;
       modrinth.enable = true;
       es-de.enable = true;
+      pcsx2.enable = true;
       ryujinx.enable = true;
 
       # Media
@@ -86,6 +87,7 @@
       obsidian.enable = true;
       zathura.enable = true;
       eduvpn.enable = true;
+      keyring.enable = true;
 
       # Development
       neovim.enable = true;
@@ -122,18 +124,9 @@
         fonts.extraFonts = [ ];
 
         # Color scheme
-        themes.oxocarbon = {
-          enable = false;
-          darkMode = false;
-        };
         themes.catppuccin = {
           enable = true;
           flavor = "mocha";
-        };
-        themes.sakura.enable = false;
-        themes.nord = {
-          enable = false;
-          darkMode = true;
         };
       };
 

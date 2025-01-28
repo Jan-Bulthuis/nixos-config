@@ -61,7 +61,6 @@ in
       neovim.enable = true;
       systemd-boot.enable = true;
       tuigreet.enable = true;
-      networkmanager.enable = true;
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
@@ -82,7 +81,7 @@ in
       "nvidia-settings"
     ];
     nix.settings.experimental-features = "nix-command flakes";
-    networking.useDHCP = true;
+    # networking.useDHCP = true;
     nixpkgs.hostPlatform = "x86_64-linux";
     networking.firewall.allowedTCPPortRanges = [
       {

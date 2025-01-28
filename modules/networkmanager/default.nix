@@ -6,7 +6,7 @@
 
 with lib;
 let
-  cfg = config.modules.power-saving;
+  cfg = config.modules.networkmanager;
 in
 {
   options.modules.networkmanager = {
