@@ -61,7 +61,7 @@ in
       neovim.enable = true;
       systemd-boot.enable = true;
       tuigreet.enable = true;
-      # tailscale.enable = true;
+      networkmanager.enable = true;
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
