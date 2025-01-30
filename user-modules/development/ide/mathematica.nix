@@ -15,6 +15,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    modules.unfree.allowedPackages = [
+      "mathematica"
+    ];
+
     home.packages = with pkgs; [
       mathematica
     ];
