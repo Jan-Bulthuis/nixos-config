@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./ide/mathematica.nix
     ./ide/matlab.nix
     ./language/cpp.nix
     ./language/haskell.nix

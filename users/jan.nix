@@ -95,6 +95,7 @@
       vscode.enable = true;
       docker.enable = true;
       matlab.enable = true;
+      mathematica.enable = true;
 
       # Languages
       haskell.enable = false;
