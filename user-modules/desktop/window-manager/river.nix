@@ -36,9 +36,10 @@ in
       river
     '';
 
-    modules.desktop.reloadScript = ''
-      ${pkgs.river}/bin/riverctl background-color 0x${config.theming.colors.bg}
-    '';
+    # TODO: Fix this
+    # modules.desktop.reloadScript = ''
+    #   ${pkgs.river}/bin/riverctl background-color 0x${config.theming.colors.bg}
+    # '';
 
     # Update background after rebuild
     # home.activation = {
@@ -60,7 +61,7 @@ in
     # River setup
     wayland.windowManager.river = {
       enable = true;
-      xwayland.enable = true;
+      xwayland.enable = false;
       settings =
         let
           layout = "filtile";

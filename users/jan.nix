@@ -19,6 +19,7 @@
       signal-desktop
       prusa-slicer
       freecad-wayland
+      inkscape
       # appflowy
     ];
 
@@ -39,10 +40,11 @@
       theming.enable = true;
 
       # Window manager
-      river.enable = true;
-      waylock.enable = true;
-      waybar.enable = true;
-      glpaper.enable = false;
+      i3.enable = true;
+      # river.enable = true;
+      # waylock.enable = true;
+      # waybar.enable = true;
+      # glpaper.enable = false;
 
       # Desktop environment
       mako.enable = true;
@@ -106,6 +108,16 @@
       cpp.enable = true;
       tex.enable = true;
       jupyter.enable = true;
+
+      python.extraPythonPackages = p: [
+        p.numpy
+        p.scikit-learn
+        p.scipy
+        p.pandas
+        p.matplotlib
+        p.torch
+        p.torchvision
+      ];
 
       # Enable unfree
       unfree.enable = true;

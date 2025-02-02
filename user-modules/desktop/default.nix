@@ -15,6 +15,7 @@ in
     ./background/glpaper/default.nix
     ./bar/waybar.nix
     ./lock-screen/waylock.nix
+    ./window-manager/i3.nix
     ./window-manager/river.nix
   ];
 
