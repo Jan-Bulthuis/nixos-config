@@ -41,10 +41,10 @@
 
       # Window manager
       i3.enable = true;
-      # river.enable = true;
-      # waylock.enable = true;
-      # waybar.enable = true;
-      # glpaper.enable = false;
+      river.enable = true;
+      waylock.enable = true;
+      waybar.enable = true;
+      glpaper.enable = false;
 
       # Desktop environment
       mako.enable = true;

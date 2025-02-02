@@ -13,7 +13,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Set desktop type to x11
-    modules.desktop.x11 = true;
+    # modules.desktop.x11 = true;
     modules.rofi.enable = true;
 
     modules.desktop.initScript = ''
