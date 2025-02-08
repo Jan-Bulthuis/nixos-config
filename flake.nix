@@ -67,5 +67,6 @@
           };
         };
       };
+      devenv = ./shell-modules/default.nix;
     };
 }
