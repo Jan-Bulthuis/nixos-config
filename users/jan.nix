@@ -21,6 +21,7 @@
       freecad-wayland
       inkscape
       # appflowy
+      ente-auth
     ];
 
     # TODO: Move to gpg module
@@ -68,7 +69,6 @@
       steam.enable = true;
       modrinth.enable = true;
       es-de.enable = true;
-      pcsx2.enable = true;
       retroarch.enable = true;
       ryujinx.enable = true;
 
@@ -109,15 +109,15 @@
       tex.enable = true;
       jupyter.enable = true;
 
-      python.extraPythonPackages = p: [
-        p.numpy
-        p.scikit-learn
-        p.scipy
-        p.pandas
-        p.matplotlib
-        p.torch
-        p.torchvision
-      ];
+      # python.extraPythonPackages = p: [
+      #   p.numpy
+      #   p.scikit-learn
+      #   p.scipy
+      #   p.pandas
+      #   p.matplotlib
+      #   p.torch
+      #   p.torchvision
+      # ];
 
       # Enable unfree
       unfree.enable = true;
