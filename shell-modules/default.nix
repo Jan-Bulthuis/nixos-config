@@ -2,7 +2,7 @@
 
 let
   imports = [
-    ./languags/python.nix
+    ./languages/python.nix
   ];
 in
 {
