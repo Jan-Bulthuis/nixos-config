@@ -17,10 +17,12 @@
       url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       stylix,
@@ -67,6 +69,6 @@
           };
         };
       };
-      devenv = ./shell-modules/default.nix;
+      lib = import ./shell-modules/default.nix self.inputs;
     };
 }

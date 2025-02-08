@@ -1,35 +1,30 @@
-{ pkgs, ... }:
+{ nixpkgs, flake-utils, ... }:
 
-pkgs.mkShell {
-  packages = with pkgs; [
-    (python312.withPackages (p: [
-      p.numpy
-      p.scikit-learn
-      p.scipy
-      p.pandas
-      p.matplotlib
-      p.torch-bin
-      # p.torchvision
-    ]))
-    libffi
-    openssl
-    stdenv.cc.cc
-    linuxPackages.nvidia_x11
-    binutils
-    cudatoolkit
-    libGLU
-    libGL
+let
+  imports = [
+    ./languags/python.nix
   ];
-  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (
-    with pkgs;
-    [
-      stdenv.cc.cc
-      linuxPackages.nvidia_x11
-      binutils
-      cudatoolkit
-      libGLU
-      libGL
-    ]
-  );
-  CUDA_PATH = pkgs.cudatoolkit;
+in
+{
+
+  mkShell =
+    attrs:
+    (flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        modules = [
+          attrs
+        ] ++ imports;
+        evaluated = nixpkgs.lib.evalModules { inherit modules; };
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          TEST_ENV = builtins.trace evaluated.config "HELLO";
+        };
+      }
+    ));
 }
