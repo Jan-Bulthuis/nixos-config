@@ -11,6 +11,7 @@ let
 in
 {
   config = mkIf enabled {
+    modules.tuigreet.enable = mkForce false;
     services.xserver = {
       layout = "us";
       xkbVariant = "";
@@ -18,8 +19,11 @@ in
       windowManager.i3.enable = true;
       desktopManager = {
         xterm.enable = true;
-        noDesktop = true;
-        enableXfwm = false;
+        xfce = {
+          enable = true;
+          # noDesktop = false;
+          # enableXfwm = false;
+        };
       };
     };
   };
