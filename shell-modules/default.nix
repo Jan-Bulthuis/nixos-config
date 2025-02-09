@@ -8,6 +8,7 @@ let
   imports = [
     ./shell.nix
     ./languages/python.nix
+    ./languages/rust.nix
     ./utilities/cuda.nix
     ./utilities/jupyter.nix
   ];
