@@ -34,9 +34,16 @@ in
         recUpdate = nixpkgs.lib.recursiveUpdate;
         libPackages = evaluated.libPackages pkgs;
         shell = recUpdate {
-          env = evaluated.env // {
-            LD_LIBRARY_PATH = (nixpkgs.lib.mkIf (libPackages != [ ]) (nixpkgs.lib.makeLibraryPath libPackages));
-          };
+          env =
+            evaluated.env
+            // (
+              if (libPackages != [ ]) then
+                {
+                  LD_LIBRARY_PATH = nixpkgs.lib.makeLibraryPath libPackages;
+                }
+              else
+                { }
+            );
           packages = evaluated.packages ++ (evaluated.extraPackages pkgs) ++ libPackages;
         } evaluated.override;
       in
