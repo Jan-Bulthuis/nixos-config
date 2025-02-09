@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf config.rust.enable {
-    packages = [
+    packages = with pkgs; [
       bacon
       evcxr
       cargo
