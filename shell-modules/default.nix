@@ -32,9 +32,12 @@ in
             };
           }).config;
         recUpdate = nixpkgs.lib.recursiveUpdate;
+        libPackages = evaluated.libPackages pkgs;
         shell = recUpdate {
-          env = evaluated.env;
-          packages = evaluated.packages ++ (evaluated.extraPackages pkgs);
+          env = evaluated.env // {
+            LD_LIBRARY_PATH = (nixpkgs.lib.mkIf (libPackages != [ ]) (nixpkgs.lib.makeLibraryPath libPackages));
+          };
+          packages = evaluated.packages ++ (evaluated.extraPackages pkgs) ++ libPackages;
         } evaluated.override;
       in
       {
