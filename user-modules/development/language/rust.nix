@@ -26,6 +26,7 @@ in
       # rust-analyzer
       # rustfmt
       # clippy
+      evcxr
     ];
 
     # VSCode configuration

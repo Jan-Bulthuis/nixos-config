@@ -9,6 +9,7 @@ let
     ./shell.nix
     ./languages/python.nix
     ./utilities/cuda.nix
+    ./utilities/jupyter.nix
   ];
 in
 {

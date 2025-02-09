@@ -17,14 +17,14 @@ in
 
   config = mkIf cfg.enable {
     # Development packages
-    home.packages = with pkgs; [
-      evcxr
-    ];
+    # home.packages = with pkgs; [
+    #   evcxr
+    # ];
 
-    modules.python.extraPythonPackages = p: [
-      p.jupyter
-      p.notebook
-    ];
+    # modules.python.extraPythonPackages = p: [
+    #   p.jupyter
+    #   p.notebook
+    # ];
 
     # VSCode configuration
     programs.vscode = {
