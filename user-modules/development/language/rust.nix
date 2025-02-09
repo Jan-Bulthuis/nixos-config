@@ -17,16 +17,16 @@ in
   config = mkIf cfg.enable {
     # Development packages
     home.packages = with pkgs; [
-      rustup
+      # rustup
       # rustc
       # cargo
-      gcc
-      lldb
-      bacon
+      # gcc
+      # lldb
+      # bacon
       # rust-analyzer
       # rustfmt
       # clippy
-      evcxr
+      # evcxr
     ];
 
     # VSCode configuration
