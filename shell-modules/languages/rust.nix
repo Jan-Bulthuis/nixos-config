@@ -18,11 +18,14 @@ in
 
   config = mkIf config.rust.enable {
     packages = with pkgs; [
+      rustPackage
+      cargo
+      clippy
+      rustfmt
+      cargo-audit
+
       bacon
       evcxr
-      cargo
-
-      rustPackage
 
       # TODO: Might be needed for bindgen
       # rustPlatform.bindgenHook
