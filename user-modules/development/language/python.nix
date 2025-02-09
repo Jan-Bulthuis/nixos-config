@@ -8,7 +8,6 @@
 with lib;
 let
   cfg = config.modules.python;
-  package = pkgs.python3.withPackages cfg.extraPythonPackages;
 in
 {
   options.modules.python = {
@@ -26,9 +25,7 @@ in
 
   config = mkIf cfg.enable {
     # Development packages
-    home.packages = [
-      package
-    ];
+    home.packages = [ ];
 
     # Allow unfree
     modules.unfree.allowedPackages = [

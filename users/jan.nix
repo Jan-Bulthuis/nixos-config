@@ -109,16 +109,6 @@
       tex.enable = true;
       jupyter.enable = true;
 
-      # python.extraPythonPackages = p: [
-      #   p.numpy
-      #   p.scikit-learn
-      #   p.scipy
-      #   p.pandas
-      #   p.matplotlib
-      #   p.torch
-      #   p.torchvision
-      # ];
-
       # Enable unfree
       unfree.enable = true;
     };

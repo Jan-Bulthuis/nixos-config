@@ -1,8 +1,14 @@
-{ nixpkgs, flake-utils, ... }:
+{
+  nixpkgs,
+  flake-utils,
+  ...
+}:
 
 let
   imports = [
+    ./shell.nix
     ./languages/python.nix
+    ./utilities/cuda.nix
   ];
 in
 {
@@ -16,15 +22,21 @@ in
           inherit system;
           config.allowUnfree = true;
         };
-        modules = [
-          attrs
-        ] ++ imports;
-        evaluated = nixpkgs.lib.evalModules { inherit modules; };
+        evaluated =
+          (nixpkgs.lib.evalModules {
+            modules = [ attrs ] ++ imports;
+            specialArgs = {
+              pkgs = pkgs;
+            };
+          }).config;
+        recUpdate = nixpkgs.lib.recursiveUpdate;
+        shell = recUpdate {
+          env = evaluated.env;
+          packages = evaluated.packages ++ (evaluated.extraPackages pkgs);
+        } evaluated.override;
       in
       {
-        devShells.default = pkgs.mkShell {
-          TEST_ENV = builtins.trace evaluated.config "HELLO";
-        };
+        devShells.default = pkgs.mkShell shell;
       }
     ));
 }
