@@ -6,6 +6,10 @@
 }:
 
 with lib;
+let
+  packages = config.python.packages;
+  pythonPackage = pkgs.python3.withPackages packages;
+in
 {
   options.python = {
     enable = mkEnableOption "Python";
@@ -22,14 +26,10 @@ with lib;
   };
 
   config = mkIf config.python.enable {
-    packages =
-      with pkgs;
-      let
-        packages = config.python.packages;
-        pythonPackage = python3.withPackages packages;
-      in
-      [
-        pythonPackage
-      ];
+    packages = [
+      pythonPackage
+    ];
+
+    env.PYTHONINTERPRETER = "${pythonPackage}/bin/python";
   };
 }

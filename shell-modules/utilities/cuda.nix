@@ -11,6 +11,5 @@ with lib;
   };
 
   config = mkIf config.cuda.enable {
-
   };
 }

@@ -42,6 +42,7 @@ in
       ];
 
       userSettings = {
+        "python.defaultInterpreterPath" = "\${env:PYTHONINTERPRETER}";
         "[python]" = {
           "editor.defaultFormatter" = "ms-python.black-formatter";
         };
