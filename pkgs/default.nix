@@ -9,6 +9,8 @@ let
     wqy-zenhei = prev.callPackage ./fonts/wqy-zenhei.nix { };
     wqy-microhei = prev.callPackage ./fonts/wqy-microhei.nix { };
     wqy-bitmapsong = prev.callPackage ./fonts/wqy-bitmapsong.nix { };
+
+    ly = prev.callPackage ./programs/ly.nix { };
   };
 in
 {
