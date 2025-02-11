@@ -15,6 +15,7 @@ with lib;
     ./boot/silent-boot.nix
     ./boot/systemd-boot.nix
     ./brightnessctl/default.nix
+    ./console/default.nix
     ./fontconfig/default.nix
     ./graphics/default.nix
     ./greeter/gdm/default.nix
