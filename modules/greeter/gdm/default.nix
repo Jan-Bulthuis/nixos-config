@@ -15,11 +15,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.xserver = {
+    # services.xserver = {
+    #   enable = true;
+    #   displayManager.gdm.enable = true;
+    #   displayManager.gdm.wayland = true;
+    #   libinput.enable = true;
+    # };
+    services.displayManager.ly = {
       enable = true;
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = true;
-      libinput.enable = true;
+      settings = {
+        animation = "matrix";
+        box_title = "Hewwo! >_< :3";
+        clear_password = true;
+        load = true;
+        save = true;
+      };
     };
   };
 }
