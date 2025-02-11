@@ -36,7 +36,6 @@ in
       # usbutils
       # udiskie
       # udisks
-      dina-psf
     ];
 
     security.krb5 = {
@@ -102,6 +101,11 @@ in
     # services.gvfs.enable = true;
     services.udisks2.enable = true;
 
-    console.font = "${pkgs.dina-psf}/share/consolefonts/dina.psf";
+    console.packages = [
+      pkgs.dina-psf
+    ];
+    console.font = "dina";
+    console.earlySetup = true;
+    boot.loader.timeout = 0;
   };
 }
