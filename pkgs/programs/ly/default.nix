@@ -15,9 +15,9 @@ stdenv.mkDerivation {
   version = "1.0.2";
 
   src = fetchFromGitHub {
-    owner = "fairyglade";
+    owner = "peterc-s";
     repo = "ly";
-    rev = "v1.0.2";
+    rev = "e6d8bea236dd0097adb1c22e9a23d95102ebe9d9";
     hash = "sha256-VUtNEL7Te/ba+wvL0SsUHlyv2NPmkYKs76TnW8r3ysw=";
   };
 
