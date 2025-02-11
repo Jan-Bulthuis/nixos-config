@@ -17,9 +17,9 @@ with lib;
     ./brightnessctl/default.nix
     ./fontconfig/default.nix
     ./graphics/default.nix
-    ./greeter/gdm/default.nix
     ./greeter/greetd/default.nix
     ./greeter/greetd/tuigreet.nix
+    ./greeter/ly/default.nix
     ./locale/default.nix
     ./neovim/default.nix
     ./networkmanager/default.nix

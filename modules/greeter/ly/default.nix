@@ -7,11 +7,11 @@
 
 with lib;
 let
-  cfg = config.modules.gdm;
+  cfg = config.modules.ly;
 in
 {
-  options.modules.gdm = {
-    enable = mkEnableOption "gdm";
+  options.modules.ly = {
+    enable = mkEnableOption "ly";
   };
 
   config = mkIf cfg.enable {
