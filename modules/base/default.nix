@@ -60,7 +60,8 @@ in
       fontconfig.enable = true;
       neovim.enable = true;
       systemd-boot.enable = true;
-      tuigreet.enable = true; # TODO: Re-enable
+      gdm.enable = true;
+      tuigreet.enable = false; # TODO: Re-enable
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere

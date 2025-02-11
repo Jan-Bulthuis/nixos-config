@@ -23,7 +23,7 @@ in
 
       policies = {
         AppAutoUpdate = false;
-        BlockAboutAddons = true;
+        BlockAboutAddons = false;
         BlockAboutConfig = true;
         BlockAboutProfiles = true;
         DisableAppUpdate = true;
@@ -50,6 +50,7 @@ in
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
+          tridactyl # TODO: Add toggle for this extension?
         ];
 
         # Theming

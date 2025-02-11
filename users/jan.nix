@@ -41,7 +41,7 @@
       theming.enable = true;
 
       # Window manager
-      i3.enable = true;
+      i3.enable = false;
       river.enable = true;
       waylock.enable = true;
       waybar.enable = true;
