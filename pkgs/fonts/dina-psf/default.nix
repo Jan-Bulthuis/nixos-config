@@ -27,17 +27,43 @@ pkgs.stdenv.mkDerivation {
 
     # Set the AVERAGE_WIDTH property on the font
     sed 's/STARTPROPERTIES 16/STARTPROPERTIES 17\
-    AVERAGE_WIDTH 70/' ./dina.bdf > ./dina-enc.bdf
+    AVERAGE_WIDTH 70/' ./dina.bdf > ./dina-mod.bdf
 
-    # # Reencode the font from code page CP1252 (Windows) to unicode
-    # fontforge -lang=ff -c "Open(\"dina-mod.bdf\"); Reencode(\"win\", 1); Reencode(\"iso10646-1\"); Generate(\"dina-enc.bdf\")"
-    # mv dina-enc-*.bdf dina-enc.bdf
+    # Reencode the font from code page CP1252 (Windows) to unicode
+    fontforge -lang=ff -c "Open(\"dina-mod.bdf\"); Reencode(\"win\", 1); Reencode(\"iso10646-1\"); Generate(\"dina-enc.bdf\")"
+    mv dina-enc-*.bdf dina-enc.bdf
 
-    # Create the fontset
-    head -n 256 ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni1.512 > Uni1.256
+    # Move the artsy characters around
+    sed -i 's/STARTCHAR uni000E$/STARTCHAR uni2518/' ./dina-enc.bdf
+    sed -i 's/ENCODING 14$/ENCODING 9496/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni000F$/STARTCHAR uni2514/' ./dina-enc.bdf
+    sed -i 's/ENCODING 15$/ENCODING 9492/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0010$/STARTCHAR uni250C/' ./dina-enc.bdf
+    sed -i 's/ENCODING 16$/ENCODING 9484/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0011$/STARTCHAR uni2510/' ./dina-enc.bdf
+    sed -i 's/ENCODING 17$/ENCODING 9488/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0012$/STARTCHAR uni2500/' ./dina-enc.bdf
+    sed -i 's/ENCODING 18$/ENCODING 9472/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0013$/STARTCHAR uni2502/' ./dina-enc.bdf
+    sed -i 's/ENCODING 19$/ENCODING 9474/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0014$/STARTCHAR uni2524/' ./dina-enc.bdf
+    sed -i 's/ENCODING 20$/ENCODING 9508/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0015$/STARTCHAR uni2534/' ./dina-enc.bdf
+    sed -i 's/ENCODING 21$/ENCODING 9524/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0016$/STARTCHAR uni251C/' ./dina-enc.bdf
+    sed -i 's/ENCODING 22$/ENCODING 9500/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0017$/STARTCHAR uni252C/' ./dina-enc.bdf
+    sed -i 's/ENCODING 23$/ENCODING 9516/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0018$/STARTCHAR uni253C/' ./dina-enc.bdf
+    sed -i 's/ENCODING 24$/ENCODING 9532/' ./dina-enc.bdf
+    sed -i 's/STARTCHAR uni0019$/STARTCHAR uni2592/' ./dina-enc.bdf
+    sed -i 's/ENCODING 25$/ENCODING 9618/' ./dina-enc.bdf
 
-    # Create the fontset
-    cp ${./PC437.256} PC437.256
+    # # Create the fontset
+    # head -n 256 ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni1.512 > Uni1.256
+
+    # # Create the fontset
+    # cp ${./PC437.256} PC437.256
 
     # Create the equivalents file
     touch empty.equivalents
@@ -45,17 +71,20 @@ pkgs.stdenv.mkDerivation {
     # # Convert the bdf to psf
     # bdf2psf --fb ./dina-enc.bdf \
     #   ${pkgs.bdf2psf}/share/bdf2psf/standard.equivalents \
-    #   ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Lat2.256 \
-    #   256 ./dina-enc.psfu ./dina.sfm
+    #   ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni2.512 \
+    #   512 ./dina-enc.psfu ./dina.sfm
 
     # Convert the bdf to psf
     bdf2psf --fb ./dina-enc.bdf \
       ./empty.equivalents \
-      ./Uni1.256 \
-      256 ./dina-enc.psfu ./dina.sfm
+      ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni2.512 \
+      512 ./dina-enc.psfu ./dina.sfm
 
     # Get the font table
     psfgettable ./dina-enc.psfu ./dina.table
+
+    # # Create the font table
+    # cp ${./PC437.table} PC437.table
 
     # Add some entries to the font table
     # echo "0x0e U+2518" >> ./dina.table
