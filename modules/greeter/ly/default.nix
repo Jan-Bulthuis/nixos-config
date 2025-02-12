@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -19,7 +18,8 @@ in
       enable = true;
       settings = {
         animation = "matrix";
-        box_title = " Hewwo! >_< :3 ";
+        animation_refresh_ms = 32;
+        box_title = "Hewwo! >_< :3";
         clear_password = true;
         load = true;
         save = true;

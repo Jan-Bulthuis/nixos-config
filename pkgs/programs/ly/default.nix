@@ -18,7 +18,7 @@ stdenv.mkDerivation {
     owner = "peterc-s";
     repo = "ly";
     rev = "e6d8bea236dd0097adb1c22e9a23d95102ebe9d9";
-    hash = "sha256-VUtNEL7Te/ba+wvL0SsUHlyv2NPmkYKs76TnW8r3ysw=";
+    sha256 = "w9YdNVD+8UhrEbPJ7xqsd/WoxU2rlo2GXFtc9JpWHxo=";
   };
 
   nativeBuildInputs = [

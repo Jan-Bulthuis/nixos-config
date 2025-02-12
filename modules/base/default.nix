@@ -36,6 +36,7 @@ in
       # usbutils
       # udiskie
       # udisks
+      brightnessctl
     ];
 
     security.krb5 = {
@@ -60,8 +61,7 @@ in
       fontconfig.enable = true;
       neovim.enable = true;
       systemd-boot.enable = true;
-      gdm.enable = true;
-      tuigreet.enable = false; # TODO: Re-enable
+      ly.enable = true;
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere

@@ -84,11 +84,11 @@ let
 in
 linkFarm name [
   {
-    name = "122014e73fd712190e109950837b97f6143f02d7e2b6986e1db70b6f4aadb5ba6a0d";
+    name = "122062d301a203d003547b414237229b09a7980095061697349f8bef41be9c30266b";
     path = fetchZigArtifact {
       name = "clap";
-      url = "https://github.com/Hejsil/zig-clap/archive/8c98e6404b22aafc0184e999d8f068b81cc22fa1.tar.gz";
-      hash = "sha256-3P9LyIlq4eNMOe+/jdVJgECfzveSUuRzTf9yhT4t8Zo=";
+      url = "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.9.1.tar.gz";
+      hash = "sha256-7qxm/4xb+58MGG+iUzssUtR97OG2dRjAqyS0BAet4HY=";
     };
   }
   {
