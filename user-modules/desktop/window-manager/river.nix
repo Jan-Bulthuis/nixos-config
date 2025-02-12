@@ -121,6 +121,7 @@ in
               {
                 "-repeat".normal = {
                   # Basic utilities
+                  "${main} Q" = "close";
                   "${ssm} Return" = "spawn foot";
 
                   # Window focus
@@ -158,10 +159,8 @@ in
                 };
                 normal =
                   {
-                    "${main} Q" = "close";
-                    "${ssm} E" = "exit";
-
                     # Basic utilities
+                    "${ssm} E" = "exit";
                     "${main} X " = "spawn \"waylock -fork-on-lock ${waylockOptions}\"";
                     "${main} P" = "spawn \"rofi -show drun\"";
                     "${ssm} P" = "spawn rofi-rbw";
