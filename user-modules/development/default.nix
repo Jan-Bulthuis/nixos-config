@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./ide/mathematica.nix
+    ./ide/mathematica/default.nix
     ./ide/matlab.nix
     # TODO: Move languages to make clear it is just IDE configuration
     # Languages should be installed with devShells, however the IDE must be configured globally
