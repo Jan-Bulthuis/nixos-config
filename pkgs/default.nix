@@ -4,7 +4,7 @@
 
 let
   overlay = final: prev: {
-    dina-psf = prev.callPackage ./fonts/dina-psf/default.nix { };
+    dina-psf = prev.callPackage ./fonts/dina-psf.nix { };
     ttf2psf = prev.callPackage ./fonts/ttf2psf.nix { };
     wqy-zenhei = prev.callPackage ./fonts/wqy-zenhei.nix { };
     wqy-microhei = prev.callPackage ./fonts/wqy-microhei.nix { };

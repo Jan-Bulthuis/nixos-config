@@ -17,12 +17,10 @@ pkgs.stdenv.mkDerivation {
   buildInputs = with pkgs; [
     bdf2psf
     fontforge
-    kbd
   ];
 
   buildPhase = ''
     # Get the base Dina font
-    # cp ${pkgs.dina-font.bdf}/share/fonts/misc/Dina_r400-9.bdf ./dina.bdf
     cp BDF/Dina_r400-9.bdf ./dina.bdf
 
     # Set the AVERAGE_WIDTH property on the font
@@ -59,54 +57,14 @@ pkgs.stdenv.mkDerivation {
     sed -i 's/STARTCHAR uni0019$/STARTCHAR uni2592/' ./dina-enc.bdf
     sed -i 's/ENCODING 25$/ENCODING 9618/' ./dina-enc.bdf
 
-    # # Create the fontset
-    # head -n 256 ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni1.512 > Uni1.256
-
-    # # Create the fontset
-    # cp ${./PC437.256} PC437.256
-
     # Create the equivalents file
     touch empty.equivalents
-
-    # # Convert the bdf to psf
-    # bdf2psf --fb ./dina-enc.bdf \
-    #   ${pkgs.bdf2psf}/share/bdf2psf/standard.equivalents \
-    #   ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni2.512 \
-    #   512 ./dina-enc.psfu ./dina.sfm
 
     # Convert the bdf to psf
     bdf2psf --fb ./dina-enc.bdf \
       ./empty.equivalents \
       ${pkgs.bdf2psf}/share/bdf2psf/fontsets/Uni2.512 \
-      512 ./dina-enc.psfu ./dina.sfm
-
-    # Get the font table
-    psfgettable ./dina-enc.psfu ./dina.table
-
-    # # Create the font table
-    # cp ${./PC437.table} PC437.table
-
-    # Add some entries to the font table
-    # echo "0x0e U+2518" >> ./dina.table
-    # echo "0x0f U+2514" >> ./dina.table
-    # echo "0x10 U+250c" >> ./dina.table
-    # echo "0x11 U+2510" >> ./dina.table
-    # echo "0x12 U+2500" >> ./dina.table
-    # echo "0x13 U+2502" >> ./dina.table
-    # echo "0x14 U+2524" >> ./dina.table
-    # echo "0x15 U+2534" >> ./dina.table
-    # echo "0x16 U+251c" >> ./dina.table
-    # echo "0x17 U+252c" >> ./dina.table
-    # echo "0x18 U+253c" >> ./dina.table
-    # echo "0x19 U+2592" >> ./dina.table
-
-    # Rebuild the font
-    psfstriptable ./dina-enc.psfu ./dina-stripped.psfu
-    psfaddtable ./dina-stripped.psfu ./dina.table ./dina.psfu
-
-    # For debugging, get the table again
-    psfgettable ./dina.psfu ./dina-final.table
-    ${pkgs.psftools}/bin/psf2bdf ./dina.psfu ./dina-final.bdf
+      512 ./dina.psfu ./dina.sfm
   '';
 
   installPhase = ''
