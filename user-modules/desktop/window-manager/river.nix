@@ -65,7 +65,7 @@ in
       settings =
         let
           layout = "filtile";
-          layoutOptions = "-outer-padding ${toString config.theming.layout.windowPadding} -view-padding ${toString config.theming.layout.windowPadding}";
+          layoutOptions = "-outer-padding ${toString config.theming.layout.windowPadding} -view-padding ${toString config.theming.layout.windowPadding} -main-ratio 0.5";
           modes = [
             "normal"
             "locked"
@@ -119,6 +119,43 @@ in
           map = (
             lib.attrsets.recursiveUpdate
               {
+                "-repeat".normal = {
+                  # Basic utilities
+                  "${ssm} Return" = "spawn foot";
+
+                  # Window focus
+                  "${main} J" = "focus-view next";
+                  "${main} K" = "focus-view previous";
+
+                  # Swap windows
+                  "${ssm} J" = "swap next";
+                  "${ssm} K" = "swap previous";
+                  "${main} Return" = "zoom";
+
+                  # Main ratio
+                  "${main} H" = "send-layout-cmd ${layout} 'main-ratio -0.05'";
+                  "${main} L" = "send-layout-cmd ${layout} 'main-ratio +0.05'";
+
+                  # Main count
+                  "${ssm} H" = "send-layout-cmd ${layout} 'main-count +1'";
+                  "${ssm} L" = "send-layout-cmd ${layout} 'main-count -1'";
+
+                  # Move floating windows
+                  "${sam} H" = "move left 100";
+                  "${sam} J" = "move down 100";
+                  "${sam} K" = "move up 100";
+                  "${sam} L" = "move right 100";
+
+                  # Resize floating windows
+                  "${sas} H" = "resize horizontal -100";
+                  "${sas} J" = "resize vertical 100";
+                  "${sas} K" = "resize vertical -100";
+                  "${sas} L" = "resize horizontal 100";
+
+                  # Toggle modes
+                  "${main} Space" = "toggle-float";
+                  "${main} F" = "toggle-fullscreen";
+                };
                 normal =
                   {
                     "${main} Q" = "close";
@@ -126,28 +163,10 @@ in
 
                     # Basic utilities
                     "${main} X " = "spawn \"waylock -fork-on-lock ${waylockOptions}\"";
-                    "${ssm} Return" = "spawn foot";
                     "${main} P" = "spawn \"rofi -show drun\"";
                     "${ssm} P" = "spawn rofi-rbw";
                     "${main} S" =
                       "spawn \"grim -g \\\"\\\$(slurp)\\\" ~/Images/Screenshots/\\\$(date +'%s_grim.png')\"";
-
-                    # Window focus
-                    "${main} J" = "focus-view next";
-                    "${main} K" = "focus-view previous";
-
-                    # Swap windows
-                    "${ssm} J" = "swap next";
-                    "${ssm} K" = "swap previous";
-                    "${main} Return" = "zoom";
-
-                    # Main ratio
-                    "${main} H" = "send-layout-cmd ${layout} 'main-ratio -0.05'";
-                    "${main} L" = "send-layout-cmd ${layout} 'main-ratio +0.05'";
-
-                    # Main count
-                    "${ssm} H" = "send-layout-cmd ${layout} 'main-count +1'";
-                    "${ssm} L" = "send-layout-cmd ${layout} 'main-count -1'";
 
                     # Tags
                     "${main} 0" = "set-focused-tags ${toString (pow2 32 - 1)}";
@@ -159,27 +178,11 @@ in
                     "${main} Down" = "send-layout-cmd ${layout} \"main-location bottom\"";
                     "${main} Left" = "send-layout-cmd ${layout} \"main-location left\"";
 
-                    # Move floating windows
-                    "${sam} H" = "move left 100";
-                    "${sam} J" = "move down 100";
-                    "${sam} K" = "move up 100";
-                    "${sam} L" = "move right 100";
-
                     # Snap floating windows
                     "${scam} H" = "snap left";
                     "${scam} J" = "snap down";
                     "${scam} K" = "snap up";
                     "${scam} L" = "snap right";
-
-                    # Resize floating windows
-                    "${sas} H" = "resize horizontal -100";
-                    "${sas} J" = "resize vertical 100";
-                    "${sas} K" = "resize vertical -100";
-                    "${sas} L" = "resize horizontal 100";
-
-                    # Toggle modes
-                    "${main} Space" = "toggle-float";
-                    "${main} F" = "toggle-fullscreen";
                   }
                   // builtins.listToAttrs (
                     builtins.concatLists (
