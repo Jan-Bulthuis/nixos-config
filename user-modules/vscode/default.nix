@@ -83,6 +83,16 @@ in
           # Git settings
           "git.autofetch" = true;
           "git.enableSmartCommit" = false;
+          "git.suggestSmartCommit" = false;
+
+          # Disable update notifications
+          "update.mode" = "none";
+
+          # TODO: Move to direnv module
+          # Ignore direnv folder
+          "files.exclude" = {
+            ".direnv" = true;
+          };
         };
     };
   };
