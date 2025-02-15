@@ -68,7 +68,7 @@
       # Gaming
       steam.enable = true;
       modrinth.enable = true;
-      es-de.enable = true;
+      es-de.enable = false;
       retroarch.enable = true;
       ryujinx.enable = true;
 
@@ -82,6 +82,13 @@
         enable = true;
         user = "Jan-Bulthuis";
         email = "git@bulthuis.dev";
+        # TODO: Move
+        ignores = [
+          ".envrc"
+          ".direnv"
+          "flake.nix"
+          "flake.lock"
+        ];
       };
       btop.enable = true;
       fish.enable = true;
@@ -91,6 +98,7 @@
       zathura.enable = true;
       eduvpn.enable = true;
       keyring.enable = true;
+      scripts.enable = true;
 
       # Development
       neovim.enable = true;

@@ -22,6 +22,7 @@
     ./obsidian/default.nix
     ./rofi/default.nix
     ./rofi/rofi-rbw.nix
+    ./scripts/default.nix
     ./shell/default.nix
     ./shell/bash.nix
     ./shell/fish.nix
