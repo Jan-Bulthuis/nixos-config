@@ -7,7 +7,7 @@
 
 with lib;
 let
-  cfg = config.modules.rust;
+  cfg = config.modules.cpp;
 in
 {
   options.modules.cpp = {
@@ -18,10 +18,6 @@ in
     # Allow unfree
     modules.unfree.allowedPackages = [
       "vscode-extension-ms-vscode-cpptools"
-      # TODO: Remove, it should not be here
-      # "android-studio-stable"
-      # "android-sdk-cmdline-tools"
-      # "android-sdk-tools"
     ];
 
     # Gitignore additions
@@ -32,6 +28,7 @@ in
     # Development packages
     home.packages = with pkgs; [
       gnumake
+      gcc
     ];
 
     # VSCode configuration
@@ -39,6 +36,7 @@ in
       extensions = with pkgs.vscode-extensions; [
         ms-vscode.cpptools
         ms-vscode.cmake-tools
+        ms-vscode.cpptools-extension-pack
       ];
 
       userSettings = {
