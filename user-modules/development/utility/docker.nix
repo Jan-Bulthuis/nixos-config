@@ -37,5 +37,11 @@ in
 
     # Neovim configuration
     programs.nixvim = { };
+
+    # Systemwide configuration
+    systemwide = {
+      virtualisation.docker.enable = true;
+      machine.sudo-groups = [ "docker" ];
+    };
   };
 }

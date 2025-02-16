@@ -19,5 +19,12 @@ in
     home.packages = with pkgs; [
       seahorse
     ];
+
+    # Systemwide configuration
+    systemwide = {
+      services.gnome.gnome-keyring = {
+        enable = true;
+      };
+    };
   };
 }

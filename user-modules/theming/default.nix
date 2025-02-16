@@ -119,12 +119,6 @@ in
         description = "Base 16 color scheme to use for styling. See stylix documentation for more information.";
       };
 
-      clientSideDecorations = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to enable client side decorations for windows.";
-      };
-
       schemeColors = mkOption {
         type = types.attrsOf types.anything;
         default = config.lib.stylix.colors;
@@ -279,19 +273,16 @@ in
 
     # Configure gtk theme
     gtk =
-      let
-        disableCSD = ''
-          headerbar.default-decoration {
-            margin-bottom: 50px;
-            margin-top: -100px;
-          }
-
-          window.csd,
-          window.csd decoration {
-            box-shadow: none;
-          }
-        '';
-      in
+      # disableCSD = ''
+      #   headerbar.default-decoration {
+      #     margin-bottom: 50px;
+      #     margin-top: -100px;
+      #   }
+      #   window.csd,
+      #   window.csd decoration {
+      #     box-shadow: none;
+      #   }
+      # '';
       {
         enable = true;
 
@@ -300,8 +291,6 @@ in
           package = pkgs.gnome-themes-extra;
         };
 
-        gtk3.extraCss = mkIf (!cfg.clientSideDecorations) disableCSD;
-        gtk4.extraCss = mkIf (!cfg.clientSideDecorations) disableCSD;
       };
 
     # TODO: This should just straight up not be here

@@ -1,13 +1,10 @@
-{ ... }:
+{ lib, ... }:
 
+with lib;
 {
-  imports = [
-    # Import systemwide configuration files.
-    ./docker.nix
-    ./i3.nix
-    ./keyring.nix
-    ./river.nix
-    ./steam.nix
-    ./waylock.nix
-  ];
+  options.systemwide = mkOption {
+    type = types.attrsOf types.anything;
+    default = { };
+    description = "Systemwide configuration required for user-specific settings.";
+  };
 }

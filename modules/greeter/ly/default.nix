@@ -23,6 +23,7 @@ in
         clear_password = true;
         load = true;
         save = true;
+        xinitrc = "null";
       };
     };
   };

@@ -31,11 +31,11 @@ let
 in
 {
   imports = [
-    # Import home manager
-    # <home-manager/nixos>
-
     # Import system wide configuration required for user modules
     ../../user-modules/systemwide/default.nix
+
+    # Import systemwide configuration
+    ./systemwide.nix
   ];
 
   options = {
