@@ -12,7 +12,6 @@ in
 {
   imports = [
     # Import desktop environment modules
-    ./background/glpaper/default.nix
     ./bar/waybar.nix
     ./lock-screen/waylock.nix
     ./window-manager/i3.nix
@@ -83,13 +82,14 @@ in
       }
       (
         # TODO: Move to dedicated module within desktop or maybe theming?
-        if cfg.decorations == null then
-          { }
-        else
-          {
-            csd = { };
-            ssd = { };
-          }
-          ."${cfg.decorations}"
+        # if cfg.decorations == null then
+        #   { }
+        # else
+        #   {
+        #     csd = { };
+        #     ssd = { };
+        #   }
+        #   ."${cfg.decorations}"
+        { }
       );
 }

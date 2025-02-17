@@ -36,11 +36,6 @@ in
       river
     '';
 
-    # Systemwide configuration
-    systemwide = {
-      programs.river.enable = true;
-    };
-
     # TODO: Fix this
     # modules.desktop.reloadScript = ''
     #   ${pkgs.river}/bin/riverctl background-color 0x${config.theming.colors.bg}
@@ -118,7 +113,8 @@ in
           spawn = [
             "\"${layout} ${layoutOptions}\""
             "waybar" # TODO: Decouple
-            "\"glpaper eDP-1 ${toString config.modules.glpaper.shader}\""
+            # TODO: Generic background options
+            # "\"glpaper eDP-1 ${toString config.modules.glpaper.shader}\""
             "udiskie"
           ];
           map = (

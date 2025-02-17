@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -12,22 +11,6 @@ with lib;
   };
 
   config = mkIf config.modules.steam.enable {
-    # Systemwide configuration
-    systemwide = {
-      modules.unfree.allowedPackages = [
-        "steam"
-        "steam-original"
-        "steam-unwrapped"
-      ];
-
-      programs.steam.enable = true;
-
-      # Make steam create desktop entries in a subfolder
-      programs.steam.package = pkgs.steam.override {
-        extraBwrapArgs = [
-          "--bind $HOME/.local/share/applications/Steam $HOME/.local/share/applications"
-        ];
-      };
-    };
+    # Steam must be installed systemwide as of time of writing
   };
 }

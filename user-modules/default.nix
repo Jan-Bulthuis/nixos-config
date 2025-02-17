@@ -27,7 +27,6 @@
     ./shell/bash.nix
     ./shell/fish.nix
     ./spotify/default.nix
-    ./systemwide/default.nix
     ./terminal/default.nix
     ./terminal/foot/default.nix
     ./theming/default.nix

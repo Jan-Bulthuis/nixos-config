@@ -31,9 +31,6 @@ let
 in
 {
   imports = [
-    # Import system wide configuration required for user modules
-    ../../user-modules/systemwide/default.nix
-
     # Import systemwide configuration
     ./systemwide.nix
   ];

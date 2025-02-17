@@ -16,10 +16,5 @@ in
 
   config = mkIf cfg.enable {
     home.packages = (with pkgs; [ waylock ]);
-
-    # Systemwide configuration
-    systemwide = {
-      security.pam.services.waylock = { };
-    };
   };
 }

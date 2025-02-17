@@ -23,23 +23,5 @@ in
     xsession.windowManager.i3 = {
       enable = true;
     };
-
-    # Systemwide configuration
-    systemwide = {
-      services.xserver = {
-        layout = "us";
-        xkbVariant = "";
-        enable = true;
-        windowManager.i3.enable = true;
-        desktopManager = {
-          xterm.enable = true;
-          xfce = {
-            enable = true;
-            # noDesktop = false;
-            # enableXfwm = false;
-          };
-        };
-      };
-    };
   };
 }
