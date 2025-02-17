@@ -66,7 +66,7 @@
       # Gaming
       steam.enable = true;
       modrinth.enable = true;
-      es-de.enable = false;
+      es-de.enable = true;
       retroarch.enable = true;
       ryujinx.enable = true;
 

@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  system,
   ...
 }:
 
@@ -22,5 +23,24 @@ in
     home.sessionVariables = {
       ESDE_APPDATA_DIR = "$HOME/.config/ES-DE";
     };
+
+    # TODO: Remove exception once no longer required by es-de
+    nixpkgs.config.permittedInsecurePackages = [
+      "freeimage-unstable-2021-11-01"
+    ];
+
+    # TODO: Remove once emulationstation-de fixes the issue
+    nixpkgs.overlays =
+      let
+        pkgs-stable = import (fetchTarball {
+          url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
+          sha256 = "0pbvwix9vjkdan1nxxzqfg2yap28afqf8m2nlw1xkqp5c832bkkz";
+        }) { inherit system; };
+      in
+      [
+        (final: prev: {
+          libgit2 = pkgs-stable.libgit2;
+        })
+      ];
   };
 }
