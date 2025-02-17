@@ -102,7 +102,7 @@ in
     services.udisks2.enable = true;
 
     console.packages = [
-      pkgs.dina-psf
+      pkgs.dina-psfu
     ];
     console.font = "dina";
     console.earlySetup = true;
