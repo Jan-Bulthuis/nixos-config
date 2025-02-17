@@ -99,13 +99,13 @@ in
     ./themes/nord.nix
   ];
 
-  options.modules.theming.enable = mkEnableOption "theming";
-
-  options.theming =
+  options.desktop.theming =
     let
       colors = config.theming.schemeColors;
     in
     {
+      enable = mkEnableOption "theming";
+
       darkMode = mkOption {
         type = types.bool;
         default = false;

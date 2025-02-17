@@ -24,22 +24,21 @@
       ente-auth
     ];
 
-    # TODO: Move to gpg module
-    # programs.gpg = {
-    #   enable = true;
-    #   mutableKeys = true;
-    #   mutableTrust = true;
-    # };
-    # services.gpg-agent = {
-    #   enable = true;
-    #   enableSshSupport = true;
-    # };
+    # Desktop environments
+    desktops =
+      let
+      in
+      {
+        "River Dark" = {
+          type = "custom";
+          theming = { };
+          config = { };
+          extraConfig = { };
+        };
+      };
 
     # Enabled modules
     modules = {
-      # Theming
-      theming.enable = true;
-
       # Window manager
       river.enable = true;
       waylock.enable = true;
@@ -120,11 +119,13 @@
     };
 
     # Theme configuration
-    theming =
+    desktop.theming =
       let
         fontpkgs = config.theming.fonts.pkgs;
       in
       {
+        enable = true;
+
         # Fonts
         fonts.serif = fontpkgs."DejaVu Serif";
         fonts.sansSerif = fontpkgs."DejaVu Sans";

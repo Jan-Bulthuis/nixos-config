@@ -1,5 +1,8 @@
 { ... }:
 
 {
-  imports = [ ./custom/default.nix ];
+  imports = [
+    ./custom/default.nix
+    ./theming/default.nix
+  ];
 }
