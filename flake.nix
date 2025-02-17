@@ -32,7 +32,7 @@
       ...
     }:
     let
-      makeConfig =
+      mkConfig =
         machineConfig: userConfig:
         (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -46,11 +46,6 @@
                 nixvim.homeManagerModules.nixvim
                 nur.modules.homeManager.default
                 {
-                  # TODO: Remove insecure package exception
-                  nixpkgs.config.permittedInsecurePackages = [
-                    "freeimage-unstable-2021-11-01" # For emulation station
-                    "electron-31.7.7" # For feishin
-                  ];
                   nixpkgs.overlays = [
                     nix-matlab.overlay
                   ];
@@ -62,7 +57,7 @@
     in
     {
       nixosConfigurations = {
-        "20212060" = makeConfig ./machines/laptop.nix {
+        "20212060" = mkConfig ./machines/laptop.nix {
           jan = {
             sudo = true;
             configuration = ./users/jan.nix;
