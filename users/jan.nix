@@ -41,11 +41,9 @@
       theming.enable = true;
 
       # Window manager
-      i3.enable = false;
       river.enable = true;
       waylock.enable = true;
       waybar.enable = true;
-      glpaper.enable = false;
 
       # Desktop environment
       mako.enable = true;
