@@ -65,7 +65,7 @@ in
       settings =
         let
           layout = "filtile";
-          layoutOptions = "-outer-padding ${toString config.theming.layout.windowPadding} -view-padding ${toString config.theming.layout.windowPadding} -main-ratio 0.5";
+          layoutOptions = "-outer-padding ${toString config.desktop.theming.layout.windowPadding} -view-padding ${toString config.desktop.theming.layout.windowPadding} -main-ratio 0.5";
           modes = [
             "normal"
             "locked"
@@ -83,7 +83,7 @@ in
           ];
           waylockOptions = "-init-color 0x${colors.bg} -input-color 0x${colors.border-focused} -fail-color 0x${colors.bg}";
 
-          colors = config.theming.colors;
+          colors = config.desktop.theming.colors;
 
           # Quick pow function
           pow2 = power: if power != 0 then 2 * (pow2 (power - 1)) else 1;
@@ -103,7 +103,7 @@ in
           xcursor-theme = "BreezeX-RosePine-Linux 24";
           keyboard-layout = "-options \"caps:escape\" us";
 
-          border-width = toString config.theming.layout.borderSize;
+          border-width = toString config.desktop.theming.layout.borderSize;
           background-color = "0x${colors.bg}";
           border-color-focused = "0x${colors.fg}";
           border-color-unfocused = "0x${colors.border-unfocused}"; # TODO: Change to use named color;

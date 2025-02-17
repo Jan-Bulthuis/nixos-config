@@ -7,18 +7,18 @@
 
 with lib;
 let
-  cfg = config.theming.themes.oxocarbon;
+  cfg = config.desktop.theming.themes.oxocarbon;
   mode = if cfg.darkMode then "dark" else "light";
 in
 {
   options = {
-    theming.themes.oxocarbon = {
+    desktop.theming.themes.oxocarbon = {
       enable = mkEnableOption "oxocarbon";
       darkMode = mkEnableOption "dark mode";
     };
   };
 
-  config.theming = mkIf cfg.enable {
+  config.desktop.theming = mkIf cfg.enable {
     darkMode = cfg.darkMode;
     colorScheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-${mode}.yaml";
   };

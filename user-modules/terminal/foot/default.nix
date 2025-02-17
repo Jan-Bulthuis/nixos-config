@@ -20,8 +20,8 @@ in
       settings = {
         main =
           let
-            font = config.theming.fonts.monospace.name;
-            size = toString config.theming.fonts.monospace.recommendedSize;
+            font = config.desktop.theming.fonts.monospace.name;
+            size = toString config.desktop.theming.fonts.monospace.recommendedSize;
           in
           {
             font = mkForce "${font}:style=Regular:size=${size}";

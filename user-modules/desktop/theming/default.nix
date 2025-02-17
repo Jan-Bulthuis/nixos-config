@@ -7,7 +7,7 @@
 
 with lib;
 let
-  cfg = config.theming;
+  cfg = config.desktop.theming;
 
   # Font module type
   fontModule = types.submodule {
@@ -101,11 +101,9 @@ in
 
   options.desktop.theming =
     let
-      colors = config.theming.schemeColors;
+      colors = config.desktop.theming.schemeColors;
     in
     {
-      enable = mkEnableOption "theming";
-
       darkMode = mkOption {
         type = types.bool;
         default = false;
@@ -250,7 +248,7 @@ in
       };
     };
 
-  config = mkIf config.modules.theming.enable {
+  config = {
     # Enable fontconfig
     modules.fontconfig.enable = true;
 

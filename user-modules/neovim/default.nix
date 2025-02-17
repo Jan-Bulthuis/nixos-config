@@ -8,7 +8,7 @@
 with lib;
 let
   cfg = config.modules.neovim;
-  theme = config.theming;
+  theme = config.desktop.theming;
   colors = theme.colors;
 in
 {

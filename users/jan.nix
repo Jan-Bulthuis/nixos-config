@@ -25,17 +25,17 @@
     ];
 
     # Desktop environments
-    desktops =
-      let
-      in
-      {
-        "River Dark" = {
-          type = "custom";
-          theming = { };
-          config = { };
-          extraConfig = { };
-        };
-      };
+    # desktops =
+    #   let
+    #   in
+    #   {
+    #     "River Dark" = {
+    #       type = "custom";
+    #       theming = { };
+    #       config = { };
+    #       extraConfig = { };
+    #     };
+    #   };
 
     # Enabled modules
     modules = {
@@ -121,11 +121,9 @@
     # Theme configuration
     desktop.theming =
       let
-        fontpkgs = config.theming.fonts.pkgs;
+        fontpkgs = config.desktop.theming.fonts.pkgs;
       in
       {
-        enable = true;
-
         # Fonts
         fonts.serif = fontpkgs."DejaVu Serif";
         fonts.sansSerif = fontpkgs."DejaVu Sans";

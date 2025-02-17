@@ -8,7 +8,7 @@
 with lib;
 let
   cfg = config.modules.btop;
-  colors = config.theming.schemeColors;
+  colors = config.desktop.theming.schemeColors;
 in
 {
   options.modules.btop = {

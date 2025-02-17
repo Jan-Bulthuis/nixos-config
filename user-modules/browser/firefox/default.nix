@@ -50,14 +50,14 @@ in
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
-          tridactyl # TODO: Add toggle for this extension?
+          # tridactyl # TODO: Add toggle for this extension?
         ];
 
         # Theming
         userChrome = readFile (
           pkgs.substituteAll {
             src = ./userChrome.css;
-            colors = config.theming.colorsCSS;
+            colors = config.desktop.theming.colorsCSS;
           }
         );
 

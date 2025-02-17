@@ -7,12 +7,12 @@
 
 with lib;
 let
-  cfg = config.theming.themes.gruvbox;
+  cfg = config.desktop.theming.themes.gruvbox;
   mode = if cfg.darkMode then "dark" else "light";
 in
 {
   options = {
-    theming.themes.gruvbox = {
+    desktop.theming.themes.gruvbox = {
       enable = mkEnableOption "gruvbox-hard";
       darkMode = mkEnableOption "dark mode";
       contrast = mkOption {
@@ -27,7 +27,7 @@ in
     };
   };
 
-  config.theming = mkIf cfg.enable {
+  config.desktop.theming = mkIf cfg.enable {
     darkMode = cfg.darkMode;
     colorScheme = "${pkgs.base16-schemes}/share/themes/gruvbox-${mode}-${cfg.contrast}.yaml";
   };

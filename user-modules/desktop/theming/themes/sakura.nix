@@ -7,16 +7,16 @@
 
 with lib;
 let
-  cfg = config.theming.themes.sakura;
+  cfg = config.desktop.theming.themes.sakura;
 in
 {
   options = {
-    theming.themes.sakura = {
+    desktop.theming.themes.sakura = {
       enable = mkEnableOption "sakura";
     };
   };
 
-  config.theming = mkIf cfg.enable {
+  config.desktop.theming = mkIf cfg.enable {
     darkMode = false;
     colorScheme = "${pkgs.base16-schemes}/share/themes/sakura.yaml";
   };

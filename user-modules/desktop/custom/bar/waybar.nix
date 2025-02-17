@@ -8,7 +8,7 @@
 with lib;
 let
   cfg = config.modules.waybar;
-  theme = config.theming;
+  theme = config.desktop.theming;
   colors = theme.colors;
 in
 {

@@ -21,7 +21,9 @@ let
   '';
 
   configContent = concatStrings (
-    map (font: aliasConfig config.theming.fonts.pkgs.${font}) config.theming.fonts.installed
+    map (
+      font: aliasConfig config.desktop.theming.fonts.pkgs.${font}
+    ) config.desktop.theming.fonts.installed
   );
 in
 {
@@ -34,10 +36,10 @@ in
       enable = true;
 
       defaultFonts = {
-        serif = [ config.theming.fonts.serif.name ];
-        sansSerif = [ config.theming.fonts.sansSerif.name ];
-        monospace = [ config.theming.fonts.monospace.name ];
-        emoji = [ config.theming.fonts.emoji.name ];
+        serif = [ config.desktop.theming.fonts.serif.name ];
+        sansSerif = [ config.desktop.theming.fonts.sansSerif.name ];
+        monospace = [ config.desktop.theming.fonts.monospace.name ];
+        emoji = [ config.desktop.theming.fonts.emoji.name ];
       };
     };
 

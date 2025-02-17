@@ -29,7 +29,6 @@
     ./spotify/default.nix
     ./terminal/default.nix
     ./terminal/foot/default.nix
-    ./theming/default.nix
     ./vscode/default.nix
     ./whatsapp/default.nix
     ./winbox/default.nix

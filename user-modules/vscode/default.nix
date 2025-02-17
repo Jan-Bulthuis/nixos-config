@@ -8,7 +8,7 @@
 with lib;
 let
   cfg = config.modules.vscode;
-  theme = config.theming;
+  theme = config.desktop.theming;
 in
 {
   options.modules.vscode = {
@@ -31,7 +31,7 @@ in
       "vscode-extension-ms-vsliveshare-vsliveshare"
     ];
 
-    theming.fonts.extraFonts = [ cfg.codeFont ];
+    desktop.theming.fonts.extraFonts = [ cfg.codeFont ];
 
     programs.vscode = {
       enable = true;

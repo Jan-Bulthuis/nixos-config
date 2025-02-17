@@ -8,7 +8,7 @@
 with lib;
 let
   cfg = config.modules.qutebrowser;
-  theme = config.theming;
+  theme = config.desktop.theming;
 in
 {
   options.modules.qutebrowser = {

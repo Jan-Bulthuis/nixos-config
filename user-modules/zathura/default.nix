@@ -7,7 +7,7 @@
 
 let
   cfg = config.modules.zathura;
-  colors = config.theming.colors;
+  colors = config.desktop.theming.colors;
 in
 {
   options.modules.zathura.enable = lib.mkEnableOption "zathura";
