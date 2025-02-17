@@ -33,14 +33,16 @@
     }:
     let
       mkConfig =
-        machineConfig: userConfig:
+        system: machineConfig: userConfig:
         (nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
+          specialArgs = { inherit system; };
           modules = [
             machineConfig
             home-manager.nixosModules.home-manager
             {
               machine.users = userConfig;
+              home-manager.extraSpecialArgs = { inherit system; };
               home-manager.sharedModules = [
                 stylix.homeManagerModules.stylix
                 nixvim.homeManagerModules.nixvim
@@ -57,7 +59,7 @@
     in
     {
       nixosConfigurations = {
-        "20212060" = mkConfig ./machines/laptop.nix {
+        "20212060" = mkConfig "x86_64-linux" ./machines/laptop.nix {
           jan = {
             sudo = true;
             configuration = ./users/jan.nix;
