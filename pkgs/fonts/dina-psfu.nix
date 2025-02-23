@@ -68,8 +68,6 @@ pkgs.stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    install -Dm644 -t $out/debug ./*.*
-    install -Dm644 -t $out/debug/BDF ./BDF/*.*
     install -Dm644 -t $out/share/consolefonts dina.psfu
   '';
 }
