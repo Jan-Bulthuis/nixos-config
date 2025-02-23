@@ -18,6 +18,7 @@ with lib;
     ./fontconfig/default.nix
     ./graphics/default.nix
     ./greeter/greetd/default.nix
+    ./greeter/greetd/nixgreety.nix
     ./greeter/greetd/tuigreet.nix
     ./greeter/ly/default.nix
     ./locale/default.nix

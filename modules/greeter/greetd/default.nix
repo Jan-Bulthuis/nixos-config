@@ -24,7 +24,7 @@ in
       enable = true;
       settings.default_session = {
         command = cfg.command;
-        user = "greeter";
+        user = mkDefault "greeter";
       };
     };
   };
