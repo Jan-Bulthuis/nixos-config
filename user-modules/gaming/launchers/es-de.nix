@@ -30,11 +30,12 @@ in
     ];
 
     # TODO: Remove once emulationstation-de fixes the issue
+    # TODO: If not fixed, at least pin the specific commit properly
     nixpkgs.overlays =
       let
         pkgs-stable = import (fetchTarball {
           url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
-          sha256 = "0pbvwix9vjkdan1nxxzqfg2yap28afqf8m2nlw1xkqp5c832bkkz";
+          sha256 = "1wr1xzkw7v8biqqjcr867gbpqf3kibkgly36lcnhw0glvkr1i986";
         }) { inherit system; };
       in
       [
