@@ -18,7 +18,6 @@
       base.enable = true;
       bluetooth.enable = true;
       power-saving.enable = false;
-      pipewire.enable = true;
       networkmanager.enable = true;
       # wpa_supplicant.enable = true;
     };

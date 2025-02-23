@@ -62,6 +62,7 @@ in
       neovim.enable = true;
       systemd-boot.enable = true;
       ly.enable = true;
+pipewire.enable = true;
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
