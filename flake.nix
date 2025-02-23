@@ -18,6 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 
   outputs =
@@ -29,6 +30,7 @@
       nixvim,
       nur,
       nix-matlab,
+      nixos-cosmic,
       ...
     }:
     let
@@ -41,6 +43,10 @@
             machineConfig
             home-manager.nixosModules.home-manager
             {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
               machine.users = userConfig;
               home-manager.extraSpecialArgs = { inherit system; };
               home-manager.sharedModules = [
@@ -50,6 +56,7 @@
                 {
                   nixpkgs.overlays = [
                     nix-matlab.overlay
+                    nixos-cosmic.overlays.default
                   ];
                 }
               ];
