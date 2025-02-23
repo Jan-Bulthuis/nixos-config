@@ -21,9 +21,17 @@ let
     name: moduleConfig:
     { pkgs, ... }:
     {
-      config = mkIf (any (user: user.modules.${name}.enable) (attrValues config.home-manager.users)) (
-        if (isAttrs moduleConfig) then moduleConfig else (moduleConfig { inherit config pkgs; })
-      );
+      config =
+        mkIf
+          (any (
+            user:
+            (user.modules.${name}.enable
+              or (any (specialisation: specialisation.configuration.modules.${name}.enable) (
+                attrValues user.modules.${name}.specialisations
+              ))
+            )
+          ) (attrValues config.home-manager.users))
+          (if (isAttrs moduleConfig) then moduleConfig else (moduleConfig { inherit config pkgs; }));
     };
 
   imports = map (name: mkModule name moduleConfig."${name}") moduleNames;
