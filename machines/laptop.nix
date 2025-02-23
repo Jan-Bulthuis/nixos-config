@@ -35,7 +35,6 @@
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
-    swapDevices = [ ];
     hardware.cpu.intel.updateMicrocode = true;
 
     # Filesystems
@@ -52,5 +51,13 @@
         "dmask=0077"
       ];
     };
+
+    # Swapfile
+    swapDevices = [
+      {
+        device = "/var/lib/swapfile";
+        size = 16 * 1024;
+      }
+    ];
   };
 }
