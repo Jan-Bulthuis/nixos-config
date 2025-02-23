@@ -32,9 +32,12 @@ in
     ];
 
     # Change desktop to execute river
-    modules.desktop.initScript = ''
-      river
+    desktop.initScript = ''
+      ${pkgs.dbus}/bin/dbus-run-session ${pkgs.river}/bin/river
     '';
+
+    desktop.session.type = "wayland";
+    desktop.session.desktop = "river";
 
     # TODO: Fix this
     # modules.desktop.reloadScript = ''
@@ -62,6 +65,7 @@ in
     wayland.windowManager.river = {
       enable = true;
       xwayland.enable = false;
+      systemd.enable = false;
       settings =
         let
           layout = "filtile";

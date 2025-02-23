@@ -16,7 +16,7 @@ in
     # modules.desktop.x11 = true;
     modules.rofi.enable = true;
 
-    modules.desktop.initScript = ''
+    desktop.initScript = ''
       i3
     '';
 

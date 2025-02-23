@@ -10,7 +10,6 @@
       layout = "us";
       xkbVariant = "";
       enable = true;
-      windowManager.i3.enable = true;
       desktopManager = {
         xterm.enable = true;
         xfce = {

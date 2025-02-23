@@ -20,12 +20,6 @@ in
 
   options.modules.desktop = {
     wayland = mkEnableOption "wayland";
-    # TODO: Remove, not needed with session/display manager
-    initScript = mkOption {
-      type = types.lines;
-      default = "${pkgs.bash}/bin/bash";
-      description = "Bash script to execute after logging in.";
-    };
     # TODO: Find a nicer way to do this as this is also executed on startup
     reloadScript = mkOption {
       type = types.lines;
@@ -69,16 +63,16 @@ in
           );
         };
 
-        home.file.".initrc" = {
-          enable = true;
-          executable = true;
-          text =
-            ''
-              #!${pkgs.bash}/bin/bash
+        # home.file.".initrc" = {
+        #   enable = true;
+        #   executable = true;
+        #   text =
+        #     ''
+        #       #!${pkgs.bash}/bin/bash
 
-            ''
-            + cfg.initScript;
-        };
+        #     ''
+        #     + cfg.initScript;
+        # };
       }
       (
         # TODO: Move to dedicated module within desktop or maybe theming?
