@@ -90,6 +90,8 @@ let
 in
 {
   imports = [
+    ./background.nix
+
     # Import all themes
     ./themes/catppuccin.nix
     ./themes/gruvbox.nix
