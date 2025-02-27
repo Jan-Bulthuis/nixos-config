@@ -33,7 +33,7 @@ in
 
     # Change desktop to execute river
     desktop.initScript = ''
-      ${pkgs.dbus}/bin/dbus-run-session ${pkgs.river}/bin/river
+      ${pkgs.river}/bin/river
     '';
 
     desktop.session.type = "wayland";
@@ -65,7 +65,7 @@ in
     wayland.windowManager.river = {
       enable = true;
       xwayland.enable = false;
-      systemd.enable = false;
+      systemd.enable = true;
       settings =
         let
           layout = "filtile";
@@ -120,6 +120,9 @@ in
             # TODO: Generic background options
             # "\"glpaper eDP-1 ${toString config.modules.glpaper.shader}\""
             "udiskie"
+            # TODO: Should this be part of the keyring configuration directly?
+            # "\"gnome-keyring-daemon --replace --components=pkcs11,secrets,ssh\""
+            "wpaperd"
           ];
           map = (
             lib.attrsets.recursiveUpdate
