@@ -13,7 +13,6 @@ in
   options.desktop.theming.background = {
     path = mkOption {
       type = types.str;
-      # default = "minimal/a_cat_in_a_cup.png";
       default = "minimal/a_flower_on_a_dark_background.png";
       description = "Path to the background image.";
     };
