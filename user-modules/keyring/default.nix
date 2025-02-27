@@ -15,9 +15,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Development packages
     home.packages = with pkgs; [
       seahorse
     ];
+    services.gnome-keyring.enable = true;
   };
 }
