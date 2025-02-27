@@ -97,6 +97,7 @@ in
         to = 11000;
       }
     ];
+    security.rtkit.enable = true;
 
     # TODO: Move to USB module
     # services.gvfs.enable = true;
