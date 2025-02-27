@@ -34,9 +34,11 @@ let
     };
   };
 
-  customBuilder = config: {
-    configuration = recursiveUpdate { desktop.name = config.name; } config.extraConfig;
-  };
+  customBuilder =
+    config:
+    recursiveUpdate {
+      desktop.name = config.name;
+    } config.extraConfig;
 
   # Environment builders
   environmentBuilders = {
@@ -89,9 +91,9 @@ in
   };
 
   config = {
-    specialisation = mapAttrs (
-      name: value: (environmentBuilders."${value.type}" value)
-    ) cfg.environments;
+    specialisation = mapAttrs (name: value: {
+      configuration = (environmentBuilders."${value.type}" value);
+    }) cfg.environments;
 
     # Create session files
     home.extraBuilderCommands = ''
