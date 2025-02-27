@@ -25,12 +25,13 @@ let
         mkIf
           (any (
             user:
-            (user.modules.${name}.enable
-              or (any (specialisation: specialisation.configuration.modules.${name}.enable) (
-                attrValues user.modules.${name}.specialisations
+            (
+              config.home-manager.users.${user}.modules.${name}.enable
+              || (any (specialisation: specialisation.configuration.modules.${name}.enable) (
+                attrValues config.home-manager.users.${user}.specialisation
               ))
             )
-          ) (attrValues config.home-manager.users))
+          ) (attrNames config.home-manager.users))
           (if (isAttrs moduleConfig) then moduleConfig else (moduleConfig { inherit config pkgs; }));
     };
 
