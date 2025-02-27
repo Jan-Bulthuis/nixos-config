@@ -19,7 +19,6 @@
       bluetooth.enable = true;
       power-saving.enable = false;
       networkmanager.enable = true;
-      # wpa_supplicant.enable = true;
     };
 
     # Hardware configuration
