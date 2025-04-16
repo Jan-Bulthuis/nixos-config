@@ -26,22 +26,22 @@ in
 
     # TODO: Remove exception once no longer required by es-de
     nixpkgs.config.permittedInsecurePackages = [
-      "freeimage-unstable-2021-11-01"
+      "freeimage-3.18.0-unstable-2024-04-18"
     ];
 
     # TODO: Remove once emulationstation-de fixes the issue
     # TODO: If not fixed, at least pin the specific commit properly
-    nixpkgs.overlays =
-      let
-        pkgs-stable = import (fetchTarball {
-          url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
-          sha256 = "1wr1xzkw7v8biqqjcr867gbpqf3kibkgly36lcnhw0glvkr1i986";
-        }) { inherit system; };
-      in
-      [
-        (final: prev: {
-          libgit2 = pkgs-stable.libgit2;
-        })
-      ];
+    # nixpkgs.overlays =
+    #   let
+    #     pkgs-stable = import (fetchTarball {
+    #       url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
+    #       sha256 = "1wr1xzkw7v8biqqjcr867gbpqf3kibkgly36lcnhw0glvkr1i986";
+    #     }) { inherit system; };
+    #   in
+    #   [
+    #     (final: prev: {
+    #       libgit2 = pkgs-stable.libgit2;
+    #     })
+    #   ];
   };
 }

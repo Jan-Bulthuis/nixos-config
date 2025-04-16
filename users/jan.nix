@@ -186,112 +186,112 @@
       #     ];
       #   };
       # };
-      # gnome = {
-      #   name = "Gnome";
-      #   type = "custom";
-      #   config = { };
-      #   extraConfig = {
-      #     programs = {
-      #       gnome-shell.enable = true;
-      #     };
-      #     desktop = {
-      #       initScript = ''
-      #         ${pkgs.gnome-session}/bin/gnome-session
-      #       '';
-      #       session = {
-      #         type = "wayland";
-      #         desktop = "GNOME";
-      #       };
-      #     };
+      gnome = {
+        name = "Gnome";
+        type = "custom";
+        config = { };
+        extraConfig = {
+          programs = {
+            gnome-shell.enable = true;
+          };
+          desktop = {
+            initScript = ''
+              ${pkgs.gnome-session}/bin/gnome-session
+            '';
+            session = {
+              type = "wayland";
+              desktop = "GNOME";
+            };
+          };
 
-      #     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
-      #     xdg.portal = {
-      #       enable = true;
+          # TODO: Remove everything below, it is here out of convenience and should be elsewhere
+          xdg.portal = {
+            enable = true;
 
-      #       config.common.default = [
-      #         "gnome"
-      #         "gtk"
-      #       ];
+            config.common.default = [
+              "gnome"
+              "gtk"
+            ];
 
-      #       extraPortals = with pkgs; [
-      #         xdg-desktop-portal-gnome
-      #         xdg-desktop-portal-gtk
-      #       ];
-      #     };
-      #     home.packages = [
-      #       # Core utilities
-      #       pkgs.baobab
-      #       pkgs.epiphany
-      #       pkgs.gnome-text-editor
-      #       pkgs.gnome-calculator
-      #       pkgs.gnome-calendar
-      #       pkgs.gnome-characters
-      #       pkgs.gnome-clocks
-      #       pkgs.gnome-console
-      #       pkgs.gnome-contacts
-      #       pkgs.gnome-font-viewer
-      #       pkgs.gnome-logs
-      #       pkgs.gnome-maps
-      #       pkgs.gnome-music
-      #       pkgs.gnome-system-monitor
-      #       pkgs.gnome-weather
-      #       pkgs.loupe
-      #       pkgs.nautilus
-      #       pkgs.gnome-connections
-      #       pkgs.simple-scan
-      #       pkgs.snapshot
-      #       pkgs.totem
-      #       pkgs.yelp
+            extraPortals = with pkgs; [
+              xdg-desktop-portal-gnome
+              xdg-desktop-portal-gtk
+            ];
+          };
+          home.packages = [
+            # Core utilities
+            pkgs.baobab
+            pkgs.epiphany
+            pkgs.gnome-text-editor
+            pkgs.gnome-calculator
+            pkgs.gnome-calendar
+            pkgs.gnome-characters
+            pkgs.gnome-clocks
+            pkgs.gnome-console
+            pkgs.gnome-contacts
+            pkgs.gnome-font-viewer
+            pkgs.gnome-logs
+            pkgs.gnome-maps
+            pkgs.gnome-music
+            pkgs.gnome-system-monitor
+            pkgs.gnome-weather
+            pkgs.loupe
+            pkgs.nautilus
+            pkgs.gnome-connections
+            pkgs.simple-scan
+            pkgs.snapshot
+            pkgs.totem
+            pkgs.yelp
 
-      #       # Optional packages
-      #       pkgs.adwaita-icon-theme
-      #       pkgs.gnome-backgrounds
-      #       pkgs.gnome-bluetooth
-      #       pkgs.gnome-color-manager
-      #       pkgs.gnome-control-center
-      #       pkgs.gnome-shell-extensions
-      #       pkgs.gnome-tour # GNOME Shell detects the .desktop file on first log-in.
-      #       pkgs.gnome-user-docs
-      #       pkgs.glib # for gsettings program
-      #       pkgs.gnome-menus
-      #       pkgs.gtk3.out # for gtk-launch program
-      #       pkgs.xdg-user-dirs # Update user dirs as described in https://freedesktop.org/wiki/Software/xdg-user-dirs/
-      #       pkgs.xdg-user-dirs-gtk # Used to create the default bookmarks
+            # Optional packages
+            pkgs.adwaita-icon-theme
+            pkgs.gnome-backgrounds
+            pkgs.gnome-bluetooth
+            pkgs.gnome-color-manager
+            pkgs.gnome-control-center
+            pkgs.gnome-shell-extensions
+            pkgs.gnome-tour # GNOME Shell detects the .desktop file on first log-in.
+            pkgs.gnome-user-docs
+            pkgs.glib # for gsettings program
+            pkgs.gnome-menus
+            pkgs.gtk3.out # for gtk-launch program
+            pkgs.xdg-user-dirs # Update user dirs as described in https://freedesktop.org/wiki/Software/xdg-user-dirs/
+            pkgs.xdg-user-dirs-gtk # Used to create the default bookmarks
 
-      #       # Games
-      #       pkgs.aisleriot
-      #       pkgs.atomix
-      #       pkgs.five-or-more
-      #       pkgs.four-in-a-row
-      #       pkgs.gnome-2048
-      #       pkgs.gnome-chess
-      #       pkgs.gnome-klotski
-      #       pkgs.gnome-mahjongg
-      #       pkgs.gnome-mines
-      #       pkgs.gnome-nibbles
-      #       pkgs.gnome-robots
-      #       pkgs.gnome-sudoku
-      #       pkgs.gnome-taquin
-      #       pkgs.gnome-tetravex
-      #       pkgs.hitori
-      #       pkgs.iagno
-      #       pkgs.lightsoff
-      #       pkgs.quadrapassel
-      #       pkgs.swell-foop
-      #       pkgs.tali
+            # Games
+            pkgs.aisleriot
+            pkgs.atomix
+            pkgs.five-or-more
+            pkgs.four-in-a-row
+            pkgs.gnome-2048
+            pkgs.gnome-chess
+            pkgs.gnome-klotski
+            pkgs.gnome-mahjongg
+            pkgs.gnome-mines
+            pkgs.gnome-nibbles
+            pkgs.gnome-robots
+            pkgs.gnome-sudoku
+            pkgs.gnome-taquin
+            pkgs.gnome-tetravex
+            pkgs.hitori
+            pkgs.iagno
+            pkgs.lightsoff
+            pkgs.quadrapassel
+            pkgs.swell-foop
+            pkgs.tali
 
-      #       # Fonts
-      #       pkgs.cantarell-fonts
-      #       pkgs.dejavu_fonts
-      #       pkgs.source-code-pro # Default monospace font in 3.32
-      #       pkgs.source-sans
+            # Fonts
+            pkgs.cantarell-fonts
+            pkgs.dejavu_fonts
+            pkgs.source-code-pro # Default monospace font in 3.32
+            pkgs.source-sans
 
-      #       # Other stuff
-      #       pkgs.gnome-session
-      #       # pkgs.gnome-session.sessions
-      #     ];
-      #   };
-      # };
+            # Other stuff
+            pkgs.gnome-session
+            # pkgs.gnome-session.sessions
+          ];
+        };
+      };
     };
 
     # Enabled modules
@@ -313,7 +313,7 @@
       # Gaming
       steam.enable = true;
       modrinth.enable = true;
-      es-de.enable = true;
+      # es-de.enable = true; # TODO: Fix, again
       retroarch.enable = true;
       ryujinx.enable = true;
 
