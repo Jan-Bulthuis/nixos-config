@@ -19,6 +19,9 @@
       ssh.enable = true;
     };
 
+    # Enable qemu guest agent
+    services.qemuGuest.enable = true;
+
     # Hardware configuration
     hardware.enableRedistributableFirmware = true;
     boot.initrd.availableKernelModules = [
