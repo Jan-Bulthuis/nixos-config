@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   imports = [
@@ -60,13 +65,13 @@
     users.groups.mixer = { };
 
     # wprsd service
-    systemd.services.mixer = {
-      description = "Carla Service";
+    systemd.services.wprsd = {
+      description = "wprsd Service";
       wantedBy = [ "default.target" ];
       after = [ "network.target" ];
       serviceConfig = {
         ExecStart = "${pkgs.wprs}/bin/wprsd";
-        Environment = "RUST_BACKTRACE=1";
+        Environment = "\"RUST_BACKTRACE=1\" \"XDG_RUNTIME_DIR=/run/user/${config.users.users.mixer.uid}\"";
         Restart = "always";
         RestartSec = 5;
         User = "mixer";
