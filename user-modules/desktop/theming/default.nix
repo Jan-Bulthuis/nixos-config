@@ -273,16 +273,18 @@ in
 
     # Configure gtk theme
     gtk =
-      # disableCSD = ''
-      #   headerbar.default-decoration {
-      #     margin-bottom: 50px;
-      #     margin-top: -100px;
-      #   }
-      #   window.csd,
-      #   window.csd decoration {
-      #     box-shadow: none;
-      #   }
-      # '';
+      let
+        disableCSD = ''
+          headerbar.default-decoration {
+            margin-bottom: 50px;
+            margin-top: -100px;
+          }
+          window.csd,
+          window.csd decoration {
+            box-shadow: none;
+          }
+        '';
+      in
       {
         enable = true;
 
@@ -291,6 +293,9 @@ in
           package = pkgs.gnome-themes-extra;
         };
 
+        # TODO: Toggles
+        gtk3.extraCss = disableCSD;
+        gtk4.extraCss = disableCSD;
       };
 
     # TODO: This should just straight up not be here
@@ -324,7 +329,10 @@ in
         foot.enable = true;
         nixvim.enable = true;
         qutebrowser.enable = true;
-        vscode.enable = true;
+        vscode = {
+          enable = true;
+          profileNames = [ "NixOS" ];
+        };
         zathura.enable = true;
       };
 
