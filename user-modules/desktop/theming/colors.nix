@@ -101,21 +101,21 @@ in
 
   config = {
     # Configure gnome theme
-    dconf.settings = {
+    dconf.settings = mkIf config.desktop.enable {
       "org/gnome/desktop/interface" = {
         color-scheme = if cfg.darkMode then "prefer-dark" else "prefer-light";
       };
     };
 
     # Configure qt theme
-    qt = {
+    qt = mkIf config.desktop.enable {
       enable = true;
       platformTheme.name = "adwaita";
       style.name = if cfg.darkMode then "adwaita-dark" else "adwaita-light";
     };
 
     # Configure gtk theme
-    gtk = {
+    gtk = mkIf config.desktop.enable {
       enable = true;
       theme = {
         name = if cfg.darkMode then "Adwaita-dark" else "Adwaita-light";
