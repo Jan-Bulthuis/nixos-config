@@ -52,7 +52,7 @@
       ];
       serviceConfig = {
         # ExecStart = "${pkgs.wprs}/bin/wprsd --enable-xwayland=true --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
-        ExecStart = "wprsd --enable-xwayland=true";
+        ExecStart = "echo $PATH && wprsd --enable-xwayland=true";
         Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
         RestartSec = 5;
