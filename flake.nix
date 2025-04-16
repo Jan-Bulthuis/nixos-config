@@ -73,7 +73,7 @@
           };
         };
         "vm-audio" = mkConfig "x86_64-linux" ./machines/vm-audio.nix {
-          jan = {
+          local = {
             sudo = true;
             configuration = ./users/server.nix;
           };

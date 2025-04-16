@@ -12,16 +12,6 @@
 
     # TODO: Move into modules
     home.packages = with pkgs; [
-      libreoffice-still
-      remmina
-      pinentry
-      thunderbird
-      signal-desktop
-      prusa-slicer
-      freecad-wayland
-      inkscape
-      ente-auth
-      bitwarden
     ];
 
     # Enabled modules
