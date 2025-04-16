@@ -20,7 +20,7 @@ in
     home.packages = with pkgs; [
       pulsemixer
       playerctl
-      wpa_supplicant_gui # TODO: Move
+      networkmanagerapplet # TODO: Move
     ];
 
     modules.desktop.reloadScript = ''
@@ -43,6 +43,7 @@ in
             "mpris"
           ];
           modules-right = [
+            "tray"
             "bluetooth"
             "network"
             "pulseaudio"
