@@ -80,7 +80,7 @@
       };
       serviceConfig = {
         ExecStart = "${pkgs.wprs}/bin/wprsd";
-        Environment = "\"RUST_BACKTRACE=1\"";
+        Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
         RestartSec = 5;
       };
