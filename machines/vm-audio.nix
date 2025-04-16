@@ -20,47 +20,10 @@
       pipewire.enable = true;
     };
 
-    # Hardware configuration
-    hardware.enableRedistributableFirmware = true;
-    boot.initrd.availableKernelModules = [
-      "ata_piix"
-      "uhci_hcd"
-      "virtio_pci"
-      "virtio_scsi"
-      "sd_mod"
-      "sr_mod"
-    ];
-    boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-intel" ];
-    boot.extraModulePackages = [ ];
-    hardware.cpu.intel.updateMicrocode = true;
-
-    # Filesystems
-    fileSystems."/" = {
-      device = "/dev/disk/by-partlabel/root";
-      fsType = "ext4";
-    };
-
-    fileSystems."/boot" = {
-      device = "/dev/disk/by-partlabel/EFI";
-      fsType = "vfat";
-      options = [
-        "fmask=0077"
-        "dmask=0077"
-      ];
-    };
-
-    # Swapfile
-    swapDevices = [
-      {
-        device = "/var/lib/swapfile";
-        size = 6 * 1024;
-      }
-    ];
-
     # Install system packages
     environment.systemPackages = with pkgs; [
       carla
+      xwayland
     ];
 
     # User for audio mixing
@@ -83,7 +46,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.wprs}/bin/wprsd --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
+        ExecStart = "${pkgs.wprs}/bin/wprsd --enable-xwayland=true --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
         Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
         RestartSec = 5;
