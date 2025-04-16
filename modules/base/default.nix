@@ -77,6 +77,7 @@ in
     networking.firewall.enable = true;
     programs.dconf.enable = true;
     services.libinput.enable = true;
+    services.upower.enable = true; # For battery percentage in gnome
     modules.unfree.enable = true;
     modules.unfree.allowedPackages = [
       "nvidia-x11"
