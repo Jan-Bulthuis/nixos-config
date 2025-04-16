@@ -46,13 +46,9 @@
       unitConfig = {
         ConditionUser = "mixer";
       };
-      path = with pkgs; [
-        wprs
-        xwayland
-      ];
       serviceConfig = {
         # ExecStart = "${pkgs.wprs}/bin/wprsd --enable-xwayland=true --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
-        ExecStart = "echo $PATH && wprsd --enable-xwayland=true";
+        ExecStart = "${pkgs.bash}/bin/bash -l -c wprsd --enable-xwayland=true"; # Use login shell to inherit environment
         Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
         RestartSec = 5;
