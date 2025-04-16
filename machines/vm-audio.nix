@@ -68,6 +68,7 @@
     # Extra packages
     environment.systemPackages = with pkgs; [
       wprs
+      xwayland
     ];
 
     # wprsd service
