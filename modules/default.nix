@@ -17,6 +17,7 @@ with lib;
     ./brightnessctl/default.nix
     ./fontconfig/default.nix
     ./graphics/default.nix
+    ./grdp/default.nix
     ./greeter/greetd/default.nix
     ./greeter/greetd/nixgreety.nix
     ./greeter/greetd/tuigreet.nix
@@ -25,6 +26,7 @@ with lib;
     ./neovim/default.nix
     ./networkmanager/default.nix
     ./power-saving/default.nix
+    ./printing/default.nix
     ./sound/pipewire.nix
     ./users/default.nix
     ./unfree/default.nix
