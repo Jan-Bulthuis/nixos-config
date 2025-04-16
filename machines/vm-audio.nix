@@ -23,6 +23,7 @@
     # Install system packages
     environment.systemPackages = with pkgs; [
       carla
+      wprs
       xwayland
     ];
 
@@ -45,8 +46,13 @@
       unitConfig = {
         ConditionUser = "mixer";
       };
+      path = with pkgs; [
+        wprs
+        xwayland
+      ];
       serviceConfig = {
-        ExecStart = "${pkgs.wprs}/bin/wprsd --enable-xwayland=true --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
+        # ExecStart = "${pkgs.wprs}/bin/wprsd --enable-xwayland=true --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
+        ExecStart = "wprsd --enable-xwayland=true";
         Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
         RestartSec = 5;
