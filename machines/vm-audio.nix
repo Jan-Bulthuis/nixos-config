@@ -59,6 +59,7 @@
 
     # User for audio mixing
     users.users.mixer = {
+      uid = 1001;
       isSystemUser = true;
       group = "mixer";
     };
@@ -71,7 +72,7 @@
       after = [ "network.target" ];
       serviceConfig = {
         ExecStart = "${pkgs.wprs}/bin/wprsd";
-        Environment = "\"RUST_BACKTRACE=1\" \"XDG_RUNTIME_DIR=/run/user/${config.users.users.mixer.uid}\"";
+        Environment = "\"RUST_BACKTRACE=1\" \"XDG_RUNTIME_DIR=/run/user/1001\"";
         Restart = "always";
         RestartSec = 5;
         User = "mixer";
