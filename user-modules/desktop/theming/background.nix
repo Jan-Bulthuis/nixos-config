@@ -107,7 +107,7 @@ in
       };
     in
     {
-      programs.wpaperd = {
+      services.wpaperd = {
         enable = true;
         settings.default = {
           path = "${background-themed}/";
