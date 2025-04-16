@@ -62,6 +62,9 @@
       isNormalUser = true;
       group = "mixer";
       extraGroups = [ "systemd-journal" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq jan@bulthuis.dev"
+      ];
     };
     users.groups.mixer = { };
 
