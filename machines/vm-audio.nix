@@ -65,12 +65,6 @@
     };
     users.groups.mixer = { };
 
-    # Extra packages
-    environment.systemPackages = with pkgs; [
-      wprs
-      xwayland
-    ];
-
     # wprsd service
     systemd.user.services.wprsd = {
       description = "wprsd Service";
@@ -80,7 +74,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.wprs}/bin/wprsd";
+        ExecStart = "${pkgs.wprs}/bin/wprsd --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
         Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
         RestartSec = 5;
