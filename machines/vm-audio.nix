@@ -17,6 +17,7 @@
 
     # Enabled modules
     modules = {
+      pipewire.enable = true;
     };
 
     # Hardware configuration
@@ -55,6 +56,11 @@
         device = "/var/lib/swapfile";
         size = 6 * 1024;
       }
+    ];
+
+    # Install system packages
+    environment.systemPackages = with pkgs; [
+      carla
     ];
 
     # User for audio mixing
