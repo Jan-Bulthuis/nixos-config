@@ -77,8 +77,6 @@
         Environment = "\"RUST_BACKTRACE=1\"";
         Restart = "always";
         RestartSec = 5;
-        User = "mixer";
-        Group = "mixer";
       };
     };
   };
