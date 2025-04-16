@@ -57,6 +57,7 @@
       isSystemUser = true;
       group = "mixer";
     };
+    users.groups.mixer = { };
 
     # wprsd service
     systemd.services.mixer = {
