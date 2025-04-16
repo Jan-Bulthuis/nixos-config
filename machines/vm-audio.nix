@@ -59,20 +59,22 @@
 
     # User for audio mixing
     users.users.mixer = {
-      uid = 1001;
-      isSystemUser = true;
+      isNormalUser = true;
       group = "mixer";
     };
     users.groups.mixer = { };
 
     # wprsd service
-    systemd.services.wprsd = {
+    systemd.user.services.wprsd = {
       description = "wprsd Service";
       wantedBy = [ "default.target" ];
       after = [ "network.target" ];
+      unitConfig = {
+        ConditionUser = "mixer";
+      };
       serviceConfig = {
         ExecStart = "${pkgs.wprs}/bin/wprsd";
-        Environment = "\"RUST_BACKTRACE=1\" \"XDG_RUNTIME_DIR=/run/user/1001\"";
+        Environment = "\"RUST_BACKTRACE=1\"";
         Restart = "always";
         RestartSec = 5;
         User = "mixer";
