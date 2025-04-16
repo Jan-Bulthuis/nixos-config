@@ -20,6 +20,10 @@ in
         enable = true;
         wifi.powersave = true;
       };
+      firewall = {
+        # Fix for wireguard
+        checkReversePath = false;
+      };
     };
   };
 }
