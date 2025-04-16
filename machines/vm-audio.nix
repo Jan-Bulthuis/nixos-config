@@ -65,6 +65,11 @@
     };
     users.groups.mixer = { };
 
+    # Extra packages
+    environment.systemPackages = with pkgs; [
+      wprs
+    ];
+
     # wprsd service
     systemd.user.services.wprsd = {
       description = "wprsd Service";
