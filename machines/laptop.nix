@@ -19,6 +19,8 @@
       bluetooth.enable = true;
       power-saving.enable = false;
       networkmanager.enable = true;
+      grdp.enable = true;
+      printing.enable = true;
     };
 
     # Hardware configuration
