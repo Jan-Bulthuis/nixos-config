@@ -37,6 +37,12 @@
       ];
     };
     users.groups.mixer = { };
+    users.groups.audio = {
+      members = [
+        "mixer"
+        "local"
+      ];
+    };
 
     # wprsd service
     systemd.user.services.wprsd = {
