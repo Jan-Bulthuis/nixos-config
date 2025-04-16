@@ -5,8 +5,15 @@
   ...
 }:
 
+with lib;
+let
+  cfg = config.modules.fontconfig;
+in
 {
-  config = {
+  options.modules.graphics = {
+    enable = mkEnableOption "graphics";
+  };
+  config = mkIf cfg.enable {
     # TODO: Modularize further, especially modesetting should be its own module.
     # Set up graphics
     hardware.graphics.enable32Bit = true;

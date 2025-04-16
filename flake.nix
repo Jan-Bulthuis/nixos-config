@@ -72,6 +72,12 @@
             configuration = ./users/jan.nix;
           };
         };
+        "vm-audio" = mkConfig "x86_64-linux" ./machines/vm-audio.nix {
+          jan = {
+            sudo = true;
+            configuration = ./users/server.nix;
+          };
+        };
       };
       lib = import ./shell-modules/default.nix self.inputs;
     };

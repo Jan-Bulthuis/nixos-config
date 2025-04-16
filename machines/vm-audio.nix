@@ -3,34 +3,26 @@
 {
   imports = [
     # Import environment
-    ../default.nix
+    ./vm-base.nix
   ];
 
   config = {
-    # State version
-    system.stateVersion = "24.05";
-
     # Machine hostname
-    networking.hostName = "20212060";
+    networking.hostName = "vm-audio";
 
     # Enabled modules
     modules = {
-      base.desktop.enable = true;
-      bluetooth.enable = true;
-      power-saving.enable = false;
-      networkmanager.enable = true;
-      grdp.enable = true;
-      printing.enable = true;
     };
 
     # Hardware configuration
     hardware.enableRedistributableFirmware = true;
     boot.initrd.availableKernelModules = [
-      "xhci_pci"
-      "nvme"
-      "usb_storage"
+      "ata_piix"
+      "uhci_hcd"
+      "virtio_pci"
+      "virtio_scsi"
       "sd_mod"
-      "rtsx_pci_sdmmc"
+      "sr_mod"
     ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-intel" ];
@@ -39,12 +31,12 @@
 
     # Filesystems
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/3b91eaeb-ea95-4bea-8dc1-f55af7502d23";
+      device = "/dev/disk/by-partlabel/root";
       fsType = "ext4";
     };
 
     fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/46BF-DE2C";
+      device = "/dev/disk/by-partlabel/EFI";
       fsType = "vfat";
       options = [
         "fmask=0077"
@@ -56,7 +48,7 @@
     swapDevices = [
       {
         device = "/var/lib/swapfile";
-        size = 16 * 1024;
+        size = 6 * 1024;
       }
     ];
   };

@@ -37,7 +37,7 @@ in
     };
   };
 
-  config =
+  config = mkIf config.desktop.enable (
     lib.recursiveUpdate
       {
         # Ensure desktop related systemd services (xdg) have access to session variables.
@@ -84,5 +84,6 @@ in
         #   }
         #   ."${cfg.decorations}"
         { }
-      );
+      )
+  );
 }

@@ -27,42 +27,13 @@ in
       pciutils
       zip
       unzip
-
-      # TODO: MOVE
-      quickemu # TODO: Reenable once building this is fixed
-      pdftk
-
-      # TODO: Move to USB module
-      # usbutils
-      # udiskie
-      # udisks
-      brightnessctl
     ];
-
-    security.krb5 = {
-      enable = true;
-      settings = {
-        libdefaults = {
-          rdns = false;
-        };
-        realms = {
-          "GEWISWG.GEWIS.NL" = {
-            kdc = [
-              "https://gewisvdesktop.gewis.nl/KdcProxy"
-            ];
-          };
-        };
-      };
-    };
 
     modules = {
       # Enable base modules
       clean-tmp.enable = true;
-      fontconfig.enable = true;
       neovim.enable = true;
       systemd-boot.enable = true;
-      nixgreety.enable = true;
-      pipewire.enable = true;
     };
 
     # TODO: Remove everything below, it is here out of convenience and should be elsewhere
@@ -75,34 +46,9 @@ in
       enable = true;
     };
     networking.firewall.enable = true;
-    programs.dconf.enable = true;
-    services.libinput.enable = true;
-    services.upower.enable = true; # For battery percentage in gnome
     modules.unfree.enable = true;
-    modules.unfree.allowedPackages = [
-      "nvidia-x11"
-      "nvidia-settings"
-    ];
     nix.settings.experimental-features = "nix-command flakes";
-    # networking.useDHCP = true;
     nixpkgs.hostPlatform = "x86_64-linux";
-    networking.firewall.allowedTCPPortRanges = [
-      {
-        from = 10000;
-        to = 11000;
-      }
-    ];
-    networking.firewall.allowedUDPPortRanges = [
-      {
-        from = 10000;
-        to = 11000;
-      }
-    ];
-    security.rtkit.enable = true;
-
-    # TODO: Move to USB module
-    # services.gvfs.enable = true;
-    services.udisks2.enable = true;
 
     console.packages = [
       pkgs.dina-psfu

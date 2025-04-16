@@ -10,6 +10,7 @@ with lib;
   imports = [
     # Import modules
     ./base/default.nix
+    ./base/desktop.nix
     ./bluetooth/default.nix
     ./boot/clean-tmp.nix
     ./boot/silent-boot.nix
@@ -28,6 +29,7 @@ with lib;
     ./power-saving/default.nix
     ./printing/default.nix
     ./sound/pipewire.nix
+    ./ssh/default.nix
     ./users/default.nix
     ./unfree/default.nix
     ./vpn/tailscale.nix

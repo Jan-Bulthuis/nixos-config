@@ -27,6 +27,7 @@
     ];
 
     # desktop.development = "river-light";
+    desktop.enable = true;
     desktop.environments = {
       river-dark = {
         name = "River Dark";

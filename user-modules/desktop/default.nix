@@ -54,6 +54,7 @@ in
   ];
 
   options.desktop = {
+    enable = mkEnableOption "desktop";
     name = mkOption {
       type = types.str;
       default = "Shell";
@@ -90,7 +91,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     specialisation = mapAttrs (name: value: {
       configuration = (environmentBuilders."${value.type}" value);
     }) cfg.environments;
