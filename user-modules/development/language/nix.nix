@@ -32,18 +32,20 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
 
-      userSettings = {
-        "[nix]" = {
-          "editor.tabSize" = 2;
-        };
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nixd";
-        "nix.serverSettings" = {
-          nixd = {
-            formatting = {
-              command = [ "nixfmt" ];
+        userSettings = {
+          "[nix]" = {
+            "editor.tabSize" = 2;
+          };
+          "nix.enableLanguageServer" = true;
+          "nix.serverPath" = "nixd";
+          "nix.serverSettings" = {
+            nixd = {
+              formatting = {
+                command = [ "nixfmt" ];
+              };
             };
           };
         };

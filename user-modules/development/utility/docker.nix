@@ -27,11 +27,13 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-azuretools.vscode-docker
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          ms-azuretools.vscode-docker
+        ];
 
-      userSettings = {
+        userSettings = {
+        };
       };
     };
 

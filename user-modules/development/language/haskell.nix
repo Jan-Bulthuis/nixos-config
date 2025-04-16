@@ -23,14 +23,16 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        haskell.haskell
-        justusadam.language-haskell
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          haskell.haskell
+          justusadam.language-haskell
+        ];
 
-      userSettings = {
-        "[haskell]" = { };
-        # "haskell.formattingProvider" = "fourmolu";
+        userSettings = {
+          "[haskell]" = { };
+          # "haskell.formattingProvider" = "fourmolu";
+        };
       };
     };
 

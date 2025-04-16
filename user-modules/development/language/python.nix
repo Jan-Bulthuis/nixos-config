@@ -34,17 +34,19 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-python.python
-        ms-python.debugpy
-        ms-python.vscode-pylance
-        ms-python.black-formatter
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          ms-python.python
+          ms-python.debugpy
+          ms-python.vscode-pylance
+          ms-python.black-formatter
+        ];
 
-      userSettings = {
-        "python.defaultInterpreterPath" = "\${env:PYTHONINTERPRETER}";
-        "[python]" = {
-          "editor.defaultFormatter" = "ms-python.black-formatter";
+        userSettings = {
+          "python.defaultInterpreterPath" = "\${env:PYTHONINTERPRETER}";
+          "[python]" = {
+            "editor.defaultFormatter" = "ms-python.black-formatter";
+          };
         };
       };
     };

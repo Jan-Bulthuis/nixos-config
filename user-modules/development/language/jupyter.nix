@@ -28,12 +28,14 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-toolsai.jupyter
-        ms-toolsai.jupyter-renderers
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          ms-toolsai.jupyter
+          ms-toolsai.jupyter-renderers
+        ];
 
-      userSettings = { };
+        userSettings = { };
+      };
     };
 
     # Neovim configuration

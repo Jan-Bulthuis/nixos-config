@@ -23,11 +23,13 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        bradlc.vscode-tailwindcss
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          bradlc.vscode-tailwindcss
+        ];
 
-      userSettings = { };
+        userSettings = { };
+      };
     };
 
     # Neovim configuration

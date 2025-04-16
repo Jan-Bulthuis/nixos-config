@@ -33,14 +33,17 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-vscode.cpptools
-        ms-vscode.cmake-tools
-        ms-vscode.cpptools-extension-pack
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          ms-vscode.cpptools
+          ms-vscode.cmake-tools
+          ms-vscode.cpptools-extension-pack
+        ];
 
-      userSettings = {
-        # "C_Cpp.clang_format_fallbackStyle" = "{ BasedOnStyle: Google, IndentWidth: 4 }";
+        userSettings = {
+          # TODO: Add setting to set the compiler, it currently needs to be set for each workspace individually
+          # "C_Cpp.clang_format_fallbackStyle" = "{ BasedOnStyle: Google, IndentWidth: 4 }";
+        };
       };
     };
 

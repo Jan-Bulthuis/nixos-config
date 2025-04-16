@@ -31,19 +31,21 @@ in
 
     # VSCode configuration
     programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
-        rust-lang.rust-analyzer
-        vadimcn.vscode-lldb
-        tamasfe.even-better-toml
-        serayuzgur.crates
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          rust-lang.rust-analyzer
+          vadimcn.vscode-lldb
+          tamasfe.even-better-toml
+          serayuzgur.crates
+        ];
 
-      userSettings = {
-        "[rust]" = {
-          "editor.inlayHints.enabled" = "off";
+        userSettings = {
+          "[rust]" = {
+            "editor.inlayHints.enabled" = "off";
+          };
+          "rust-analyzer.check.command" = "clippy";
+          "rust-analyzer.showUnlinkedFileNotification" = false;
         };
-        "rust-analyzer.check.command" = "clippy";
-        "rust-analyzer.showUnlinkedFileNotification" = false;
       };
     };
 
