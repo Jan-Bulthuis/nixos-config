@@ -54,5 +54,9 @@
         RestartSec = 5;
       };
     };
+
+    # Boot option for soundcard
+    # boot.kernelParams = [ "snd-intel-dspcfg.dsp_driver=1" ];
+    boot.kernelPackages = pkgs.linuxPackages_6_9;
   };
 }
