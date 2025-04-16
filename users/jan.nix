@@ -24,6 +24,7 @@
       inkscape
       ente-auth
       bitwarden
+      wprs
     ];
 
     # desktop.development = "river-light";
