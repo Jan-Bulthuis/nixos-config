@@ -46,11 +46,10 @@ in
       };
 
       profiles.nixos = {
-        search.default = "DuckDuckGo";
+        search.default = "ddg";
 
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
-          # tridactyl # TODO: Add toggle for this extension?
         ];
 
         # Theming
