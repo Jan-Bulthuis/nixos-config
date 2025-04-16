@@ -29,6 +29,7 @@ in
       "vscode-extension-github-copilot"
       "vscode-extension-github-copilot-chat"
       "vscode-extension-ms-vsliveshare-vsliveshare"
+      "vscode-extension-ms-vscode-remote-remote-ssh"
     ];
 
     desktop.theming.fonts.extraFonts = [ cfg.codeFont ];
@@ -48,6 +49,7 @@ in
           github.copilot-chat
           tomoki1207.pdf
           ms-vsliveshare.vsliveshare
+          ms-vscode-remote.remote-ssh
         ];
 
         userSettings =

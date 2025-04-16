@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -51,5 +51,26 @@
         size = 6 * 1024;
       }
     ];
+
+    # User for audio mixing
+    users.users.mixer = {
+      isSystemUser = true;
+      group = "mixer";
+    };
+
+    # wprsd service
+    systemd.services.mixer = {
+      description = "Carla Service";
+      wantedBy = [ "default.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.wprs}/bin/wprsd";
+        Environment = "RUST_BACKTRACE=1";
+        Restart = "always";
+        RestartSec = 5;
+        User = "mixer";
+        Group = "mixer";
+      };
+    };
   };
 }
