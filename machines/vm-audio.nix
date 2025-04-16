@@ -61,6 +61,7 @@
     users.users.mixer = {
       isNormalUser = true;
       group = "mixer";
+      extraGroups = [ "systemd-journal" ];
     };
     users.groups.mixer = { };
 
