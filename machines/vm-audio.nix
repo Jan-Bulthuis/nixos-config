@@ -28,10 +28,11 @@
     ];
 
     # Setup dependencies
-    environment.variables.LD_LIBRARY_PATH = "${lib.makeLibraryPath (
+    environment.variables.LD_LIBRARY_PATH = lib.mkForce "${lib.makeLibraryPath (
       with pkgs;
       [
         cairo
+        pipewire.jack
       ]
     )}";
 
