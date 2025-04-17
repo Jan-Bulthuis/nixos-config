@@ -29,6 +29,7 @@ with lib;
     ./power-saving/default.nix
     ./printing/default.nix
     ./sound/pipewire.nix
+    ./spotifyd/default.nix
     ./ssh/default.nix
     ./users/default.nix
     ./unfree/default.nix
