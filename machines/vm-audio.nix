@@ -41,6 +41,7 @@
         fontconfig
         xorg.libX11
         xorg.libX11.dev
+        pugl
       ]
     )}";
 
