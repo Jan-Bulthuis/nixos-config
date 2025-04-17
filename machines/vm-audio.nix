@@ -36,6 +36,16 @@
       cardinal
     ];
 
+    # Set up firewall
+    networking.firewall = {
+      allowedTCPPorts = [
+        10000
+      ];
+      allowedUDPPorts = [
+        10000
+      ];
+    };
+
     # Setup dependencies
     environment.variables.LD_LIBRARY_PATH = lib.mkForce "${lib.makeLibraryPath (
       with pkgs;
@@ -60,6 +70,12 @@
         "mixer"
         "local"
       ];
+    };
+
+    # Set up Xpra
+    services.xserver.displayManager.xpra = {
+      enable = true;
+      bindTcp = "0.0.0.0:10000";
     };
 
     # wprsd service
