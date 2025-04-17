@@ -26,6 +26,8 @@
       carla
       wprs
       xwayland
+      alsa-utils
+      pulsemixer
 
       # Add LV2 plugins
       lsp-plugins
@@ -47,7 +49,6 @@
     users.users.mixer = {
       isNormalUser = true;
       group = "mixer";
-      linger = true;
       extraGroups = [ "systemd-journal" ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq jan@bulthuis.dev"
@@ -75,6 +76,32 @@
         Restart = "always";
         RestartSec = 5;
       };
+    };
+
+    # Create null sink for spotifyd
+    services.pipewire.extraConfig.pipewire."91-null-sinks" = {
+      "context.objects" = [
+        {
+          factory = "adapter";
+          args = {
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "SpotifyD-Proxy";
+            "node.description" = "Proxy for SpotifyD";
+            "media.class" = "Audio/Sink";
+            "audio.position" = "FL,FR";
+          };
+        }
+        {
+          factory = "adapter";
+          args = {
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "AnalogIn-Proxy";
+            "node.description" = "Proxy for the analog input";
+            "media.class" = "Audio/Source/Virtual";
+            "audio.position" = "FL,FR";
+          };
+        }
+      ];
     };
   };
 }
