@@ -10,7 +10,7 @@ let
     wqy-microhei = prev.callPackage ./fonts/wqy-microhei.nix { };
     wqy-bitmapsong = prev.callPackage ./fonts/wqy-bitmapsong.nix { };
 
-    wprs = prev.callPackage ./programs/wprs/default.nix { };
+    wprs-next = prev.callPackage ./programs/wprs/default.nix { };
     nixgreety = prev.callPackage ./programs/nixgreety.nix { };
     # ly = prev.callPackage ./programs/ly/default.nix { };
   };
