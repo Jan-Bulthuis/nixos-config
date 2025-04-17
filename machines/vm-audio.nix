@@ -25,6 +25,9 @@
       carla
       wprs
       xwayland
+
+      # Plugins for Carla
+      lsp-plugins
     ];
 
     # User for audio mixing
