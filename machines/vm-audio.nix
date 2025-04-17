@@ -73,9 +73,12 @@
     };
 
     # Set up Xpra
-    services.xserver.displayManager.xpra = {
+    services.xserver = {
       enable = true;
-      bindTcp = "0.0.0.0:10000";
+      displayManager.xpra = {
+        enable = true;
+        bindTcp = "0.0.0.0:10000";
+      };
     };
 
     # wprsd service
