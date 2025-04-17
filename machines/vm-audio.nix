@@ -29,7 +29,7 @@
       # Add LV2 plugins
       lsp-plugins
       airwindows-lv2
-      cardinal
+      # cardinal
     ];
 
     # Setup dependencies
@@ -38,10 +38,6 @@
       [
         cairo
         pipewire.jack
-        fontconfig
-        xorg.libX11
-        xorg.libX11.dev
-        pugl
       ]
     )}";
 
