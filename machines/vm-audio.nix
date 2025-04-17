@@ -43,7 +43,7 @@
     )}";
 
     # Disable JACK self connect
-    services.pipewire.extraConfig."60-disable-self-connect" = {
+    services.pipewire.extraConfig.jack."60-disable-self-connect" = {
       "jack.properties" = {
         "jack.self-connect-mode" = "ignore-all";
       };
