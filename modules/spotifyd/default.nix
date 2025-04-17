@@ -16,11 +16,10 @@ in
 
   config = mkIf cfg.enable {
     # User for spotifyd
-    users.users.spotifyd = {
-      isSystemUser = true;
-      group = "spotifyd";
+    users.users.mixer = {
+      group = "mixer";
     };
-    users.groups.spotifyd = { };
+    users.groups.mixer = { };
 
     # Spotifyd service
     systemd.services.spotifyd = {
@@ -34,8 +33,8 @@ in
         ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path /etc/spotifyd/spotifyd.conf";
         Restart = "always";
         RestartSec = 5;
-        User = "spotifyd";
-        Group = "spotifyd";
+        User = "mixer";
+        Group = "mixer";
       };
     };
 
@@ -44,8 +43,8 @@ in
       "spotifyd/spotifyd.conf" = {
         source = ./spotifyd.conf;
         mode = "0444";
-        user = "spotifyd";
-        group = "spotifyd";
+        user = "mixer"; # TODO: Make user configurable
+        group = "mixer";
       };
     };
 
