@@ -42,7 +42,7 @@
       ]
     )}";
 
-    # Pipewire roc source
+    # # Pipewire roc source
     # services.pipewire.extraConfig.pipewire."60-roc-source" = {
     #   "context.modules" = [
     #     {
@@ -61,18 +61,18 @@
     #   ];
     # };
 
-    # Set firewall ports
-    networking.firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        10001
-        10002
-      ];
-      allowedUDPPorts = [
-        10001
-        10002
-      ];
-    };
+    # # Set firewall ports
+    # networking.firewall = {
+    #   enable = true;
+    #   allowedTCPPorts = [
+    #     10001
+    #     10002
+    #   ];
+    #   allowedUDPPorts = [
+    #     10001
+    #     10002
+    #   ];
+    # };
 
     # User for audio mixing
     users.users.mixer = {
@@ -100,7 +100,6 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        # ExecStart = "${pkgs.wprs}/bin/wprsd --enable-xwayland=true --xwayland-xdg-shell-path=${pkgs.wprs}/bin/xwayland-xdg-shell";
         ExecStart = "${pkgs.bash}/bin/bash -l -c wprsd --enable-xwayland=true"; # Use login shell to inherit environment
         Environment = "\"RUST_BACKTRACE=full\"";
         Restart = "always";
