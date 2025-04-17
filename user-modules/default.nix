@@ -31,6 +31,7 @@
     ./terminal/foot/default.nix
     ./vscode/default.nix
     ./whatsapp/default.nix
+    ./wprs/default.nix
     ./winbox/default.nix
     ./zathura/default.nix
 

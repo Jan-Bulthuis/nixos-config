@@ -24,7 +24,6 @@
       inkscape
       ente-auth
       bitwarden
-      wprs
     ];
 
     # desktop.development = "river-light";
@@ -345,6 +344,17 @@
       eduvpn.enable = true;
       keyring.enable = true;
       scripts.enable = true;
+      wprs = {
+        enable = true;
+        hosts = {
+          "mixer@10.20.60.251" = [
+            {
+              name = "Carla";
+              command = "carla -platform wayland";
+            }
+          ];
+        };
+      };
 
       # Development
       neovim.enable = true;
