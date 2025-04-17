@@ -51,7 +51,7 @@
             "fec.code" = "rs8m";
             "local.ip" = "0.0.0.0";
             "resampler.profile" = "medium";
-            # sess.latency.msec = 10;
+            "sess.latency.msec" = 10;
             "local.source.port" = 10001;
             "local.repair.port" = 10002;
             "source.name" = "Roc Source";
