@@ -25,10 +25,15 @@
       carla
       wprs
       xwayland
-
-      # Plugins for Carla
-      lsp-plugins
     ];
+
+    # Setup dependencies
+    environment.variables.LD_LIBRARY_PATH = "${lib.makeLibraryPath (
+      with pkgs;
+      [
+        cairo
+      ]
+    )}";
 
     # User for audio mixing
     users.users.mixer = {
