@@ -29,8 +29,7 @@
       # Add LV2 plugins
       lsp-plugins
       airwindows-lv2
-      infamousPlugins
-      metersLv2
+      cardinal
     ];
 
     # Setup dependencies
