@@ -42,6 +42,40 @@
       ]
     )}";
 
+    # Pipewire roc source
+    services.pipewire.extraConfig.pipewire."60-roc-source" = {
+      context.modules = [
+        {
+          name = "libpipewire-module-roc-source";
+          args = {
+            local.ip = "0.0.0.0";
+            resampler.profile = "medium";
+            fec.code = "rs8m";
+            sess.latency.msec = 10;
+            local.source.port = 10001;
+            local.repair.port = 10002;
+            source.name = "Roc Source";
+            source.props = {
+              node.name = "roc-source";
+            };
+          };
+        }
+      ];
+    };
+
+    # Set firewall ports
+    networking.firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        10001
+        10002
+      ];
+      allowedUDPPorts = [
+        10001
+        10002
+      ];
+    };
+
     # User for audio mixing
     users.users.mixer = {
       isNormalUser = true;

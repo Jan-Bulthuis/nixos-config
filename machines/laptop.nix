@@ -23,6 +23,25 @@
       printing.enable = true;
     };
 
+    # Pipewire roc sink
+    services.pipewire.extraConfig.pipewire."60-roc-sink" = {
+      context.modules = [
+        {
+          name = "libpipewire-module-roc-source";
+          args = {
+            fec.code = "rs8m";
+            remote.ip = "10.20.60.251";
+            remote.source.port = 10001;
+            remote.repair.port = 10002;
+            source.name = "Roc Sink";
+            source.props = {
+              node.name = "roc-sink";
+            };
+          };
+        }
+      ];
+    };
+
     # Hardware configuration
     hardware.enableRedistributableFirmware = true;
     boot.initrd.availableKernelModules = [
