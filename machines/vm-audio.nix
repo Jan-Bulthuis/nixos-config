@@ -44,20 +44,18 @@
 
     # Pipewire roc source
     services.pipewire.extraConfig.pipewire."60-roc-source" = {
-      context.modules = [
+      "context.modules" = [
         {
-          name = "libpipewire-module-roc-source";
-          args = {
-            local.ip = "0.0.0.0";
-            resampler.profile = "medium";
-            fec.code = "rs8m";
-            sess.latency.msec = 10;
-            local.source.port = 10001;
-            local.repair.port = 10002;
-            source.name = "Roc Source";
-            source.props = {
-              node.name = "roc-source";
-            };
+          "name" = "libpipewire-module-roc-source";
+          "args" = {
+            "fec.code" = "rs8m";
+            "local.ip" = "0.0.0.0";
+            "resampler.profile" = "medium";
+            # sess.latency.msec = 10;
+            "local.source.port" = 10001;
+            "local.repair.port" = 10002;
+            "source.name" = "Roc Source";
+            "source.props.node.name" = "roc-source";
           };
         }
       ];

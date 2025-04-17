@@ -295,6 +295,25 @@
       };
     };
 
+    # Pipewire roc sink
+    xdg.configFile."pipewire/pipewire.conf.d/60-roc-sink.conf" = {
+      text = ''
+        context.modules = [
+          {
+            name = "libpipewire-module-roc-sink"
+            args = {
+              fec.code = "rs8m"
+              remote.ip = "10.20.60.251"
+              remote.source.port = 10001
+              remote.repair.port = 10002
+              sink.name = "Roc Sink"
+              sink.props.node.name = "roc-sink"
+            }
+          }
+        ]
+      '';
+    };
+
     # Enabled modules
     modules = {
       # Communication
