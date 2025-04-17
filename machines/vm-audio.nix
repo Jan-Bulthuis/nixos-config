@@ -25,7 +25,12 @@
       carla
       wprs
       xwayland
+
+      # Add LV2 plugins
       lsp-plugins
+      airwindows-lv2
+      infamousPlugins
+      metersLv2
     ];
 
     # Setup dependencies
@@ -37,7 +42,6 @@
         fontconfig
         xorg.libX11
         xorg.libX11.dev
-        lsp-plugins
       ]
     )}";
 
