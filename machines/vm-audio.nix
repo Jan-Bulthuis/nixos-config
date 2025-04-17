@@ -25,6 +25,7 @@
       carla
       wprs
       xwayland
+      lsp-plugins
     ];
 
     # Setup dependencies
