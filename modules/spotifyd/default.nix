@@ -22,19 +22,20 @@ in
     users.groups.mixer = { };
 
     # Spotifyd service
-    systemd.services.spotifyd = {
-      description = "Spotifyd Service";
-      wantedBy = [ "multi-user.target" ];
+    systemd.user.services.spotifyd = {
+      description = "SpotifyD Service";
+      wantedBy = [ "default.target" ];
       after = [
         "network.target"
         "sound.target"
       ];
+      unitConfig = {
+        ConditionUser = "mixer"; # TODO: Allow user configuration
+      };
       serviceConfig = {
         ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path /etc/spotifyd/spotifyd.conf";
         Restart = "always";
         RestartSec = 5;
-        User = "mixer";
-        Group = "mixer";
       };
     };
 
