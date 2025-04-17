@@ -29,7 +29,8 @@
       # Add LV2 plugins
       lsp-plugins
       airwindows-lv2
-      # cardinal
+      distrho-ports
+      cardinal
     ];
 
     # Setup dependencies
