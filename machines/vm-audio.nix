@@ -30,6 +30,7 @@
       alsa-utils
       pulsemixer
       adwaita-icon-theme
+      waypipe
 
       # Add LV2 plugins
       lsp-plugins
