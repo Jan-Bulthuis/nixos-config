@@ -41,8 +41,14 @@
 
     # Setup firewall
     networking.firewall = {
-      allowedTCPPorts = [ 22752 ];
-      allowedUDPPorts = [ 22752 ];
+      allowedTCPPorts = [
+        22752
+        15151
+      ];
+      allowedUDPPorts = [
+        22752
+        15151
+      ];
     };
 
     # Setup dependencies
@@ -95,6 +101,23 @@
       };
     };
 
+    # Xpra service
+    systemd.user.services.xpra = {
+      description = "Xpra Service";
+      wantedBy = [ "default.target" ];
+      after = [
+        "network.target"
+      ];
+      unitConfig = {
+        ConditionUser = "mixer";
+      };
+      serviceConfig = {
+        ExecStart = "${pkgs.xpra}/bin/xpra start :7 --bind-tcp=0.0.0.0:15151 --daemon=no";
+        Restart = "always";
+        RestartSec = 5;
+      };
+    };
+
     # Carla service
     systemd.user.services.carla = {
       description = "Carla Service";
@@ -103,11 +126,14 @@
         "network.target"
         "sound.target"
       ];
+      requires = [
+        "xpra.service"
+      ];
       unitConfig = {
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.carla}/bin/carla -n /home/mixer/Default.carxp";
+        ExecStart = "DISPLAY=:7 ${pkgs.carla}/bin/carla -platform xcb /home/mixer/Default.carxp";
         Restart = "always";
         RestartSec = 5;
       };
