@@ -29,6 +29,7 @@
       xwayland
       alsa-utils
       pulsemixer
+      adwaita-icon-theme
 
       # Add LV2 plugins
       lsp-plugins
@@ -49,6 +50,10 @@
     qt = {
       enable = true;
       style = "adwaita";
+    };
+    xdg.icons = {
+      enable = true;
+      fallbackCursorThemes = [ "Adwaita" ];
     };
 
     # User for audio mixing
