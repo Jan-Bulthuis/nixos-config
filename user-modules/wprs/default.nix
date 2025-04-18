@@ -58,18 +58,18 @@ in
                 commands = entry.value;
                 hostEntries = [
                   {
-                    name = "Attach";
+                    name = "Wprs - Attach";
                     comment = host;
                     exec = "wprs --pulseaudio-forwarding False ${host} attach";
                   }
                   {
-                    name = "Detach";
+                    name = "Wprs - Detach";
                     comment = host;
                     exec = "wprs ${host} detach";
                   }
                 ];
                 commandEntries = map (command: {
-                  name = "${command.name}";
+                  name = "Wprs - ${command.name}";
                   comment = host;
                   exec = "wprs --pulseaudio-forwarding False ${host} run \"${command.command}\"";
                 }) commands;

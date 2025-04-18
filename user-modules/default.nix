@@ -33,6 +33,7 @@
     ./whatsapp/default.nix
     ./wprs/default.nix
     ./winbox/default.nix
+    ./xpra/default.nix
     ./zathura/default.nix
 
     # Import unfree helper

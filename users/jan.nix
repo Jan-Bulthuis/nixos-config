@@ -24,6 +24,7 @@
       inkscape
       ente-auth
       bitwarden
+      carla
     ];
 
     # desktop.development = "river-light";
@@ -369,10 +370,16 @@
           "mixer@10.20.60.251" = [
             {
               name = "Carla";
-              command = "carla -platform wayland";
+              command = "carla -platform xcb";
             }
           ];
         };
+      };
+      xpra = {
+        enable = true;
+        hosts = [
+          "mixer@10.20.60.251"
+        ];
       };
 
       # Development
