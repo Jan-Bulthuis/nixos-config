@@ -106,7 +106,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.carla}/bin/carla -n";
+        ExecStart = "${pkgs.carla}/bin/carla -n /home/mixer/Default.carxp";
         Restart = "always";
         RestartSec = 5;
       };
