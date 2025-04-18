@@ -45,6 +45,7 @@
         pipewire.jack
       ]
     )}";
+    services.xserver.enable = true;
 
     # User for audio mixing
     users.users.mixer = {
