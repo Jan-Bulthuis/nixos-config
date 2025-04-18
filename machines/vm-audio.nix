@@ -46,6 +46,10 @@
       ]
     )}";
     services.xserver.enable = true;
+    qt = {
+      enable = true;
+      style = "adwaita";
+    };
 
     # User for audio mixing
     users.users.mixer = {
