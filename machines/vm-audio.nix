@@ -38,6 +38,12 @@
       cardinal
     ];
 
+    # Setup firewall
+    networking.firewall = {
+      allowedTCPPorts = [ 22752 ];
+      allowedUDPPorts = [ 22752 ];
+    };
+
     # Setup dependencies
     environment.variables.LD_LIBRARY_PATH = lib.mkForce "${lib.makeLibraryPath (
       with pkgs;
