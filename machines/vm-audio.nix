@@ -43,12 +43,14 @@
     # Setup firewall
     networking.firewall = {
       allowedTCPPorts = [
-        22752
+        8080
         15151
+        22752
       ];
       allowedUDPPorts = [
-        22752
+        8080
         15151
+        22752
       ];
     };
 
