@@ -46,7 +46,6 @@
         pipewire.jack
       ]
     )}";
-    services.xserver.enable = true;
     qt = {
       enable = true;
       style = "adwaita";
@@ -87,6 +86,27 @@
         Restart = "always";
         RestartSec = 5;
       };
+    };
+
+    # Dedicate more memory to network interfaces
+    boot.kernel.sysctl = {
+      "net.core.rmem_default" = 1048576;
+      "net.core.rmem_max" = 16777216;
+      "net.core.wmem_default" = 1048576;
+      "net.core.wmem_max" = 16777216;
+      "net.core.optmem_max" = 65536;
+      "net.ipv4.tcp_rmem" = [
+        4096
+        1048576
+        2097152
+      ];
+      "net.ipv4.tpc_wmem" = [
+        4096
+        65536
+        16777216
+      ];
+      "net.ipv4.udp_rmem_min" = 8192;
+      "net.ipv4.udp_wmem_min" = 8192;
     };
 
     # Create null sink for spotifyd
