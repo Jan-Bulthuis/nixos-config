@@ -11,8 +11,6 @@
 rustPlatform.buildRustPackage {
   pname = "wprs";
   version = "0-unstable-2025-04-16";
-  buildType = "debug";
-  dontStrip = true;
 
   src = fetchFromGitHub {
     owner = "wayland-transpositor";
