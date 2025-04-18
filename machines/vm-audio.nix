@@ -31,6 +31,7 @@
       pulsemixer
       adwaita-icon-theme
       waypipe
+      open-stage-control
 
       # Add LV2 plugins
       lsp-plugins
@@ -135,6 +136,27 @@
       serviceConfig = {
         ExecStart = "${pkgs.carla}/bin/carla -platform xcb /home/mixer/Default.carxp";
         Environment = "\"DISPLAY=:7\"";
+        Restart = "always";
+        RestartSec = 5;
+      };
+    };
+
+    # Open stage control service
+    systemd.user.services.osc = {
+      description = "OSC Service";
+      wantedBy = [ "default.target" ];
+      after = [
+        "network.target"
+      ];
+      requires = [
+        "carla.service"
+      ];
+      unitConfig = {
+        ConditionUser = "mixer";
+      };
+      serviceConfig = {
+        ExecStart = "${pkgs.open-stage-control}/bin/open-stage-control --no-gui --load /home/mixer/open-stage-control/session.json --theme /home/mixer/open-stage-control/theme.css";
+        Environment = "\"ELECTRON_RUN_AS_NODE=1\"";
         Restart = "always";
         RestartSec = 5;
       };
