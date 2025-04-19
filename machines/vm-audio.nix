@@ -157,7 +157,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.open-stage-control}/bin/open-stage-control --no-gui --load /home/mixer/open-stage-control/session.json --theme /home/mixer/open-stage-control/theme.css";
+        ExecStart = "${pkgs.open-stage-control}/bin/open-stage-control --no-gui --send 127.0.0.1:22752 --load /home/mixer/open-stage-control/session.json --theme /home/mixer/open-stage-control/theme.css";
         Environment = "\"ELECTRON_RUN_AS_NODE=1\"";
         Restart = "always";
         RestartSec = 5;
