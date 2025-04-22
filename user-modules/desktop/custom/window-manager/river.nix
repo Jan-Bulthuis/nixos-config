@@ -259,6 +259,7 @@ in
               "'bar'" = "csd";
               "'*'" = "ssd";
               "'wpa_gui'" = "float";
+              "'Xpra'" = "float";
             };
           };
         };
