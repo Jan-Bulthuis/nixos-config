@@ -25,6 +25,8 @@ in
       # udiskie
       # udisks
       brightnessctl
+
+      wireshark
     ];
 
     # Move to Realm module
@@ -55,6 +57,15 @@ in
 
     programs.dconf.enable = true;
     services.libinput.enable = true;
+    networking.firewall = {
+      enable = mkForce false;
+      logRefusedConnections = true;
+      logRefusedPackets = true;
+      logReversePathDrops = true;
+      logRefusedUnicastsOnly = false;
+    };
+    programs.wireshark.enable = true;
+    machine.sudo-groups = [ "wireshark" ];
     services.upower.enable = true; # For battery percentage in gnome
     modules.unfree.allowedPackages = [
       "nvidia-x11"
