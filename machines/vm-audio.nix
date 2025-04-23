@@ -24,13 +24,10 @@
     # Install system packages
     environment.systemPackages = with pkgs; [
       carla
-      wprs
       xpra
-      xwayland
       alsa-utils
       pulsemixer
       adwaita-icon-theme
-      waypipe
       open-stage-control
 
       # Add LV2 plugins
@@ -38,6 +35,7 @@
       airwindows-lv2
       distrho-ports
       cardinal
+      calf
     ];
 
     # Setup firewall
@@ -62,10 +60,10 @@
         pipewire.jack
       ]
     )}";
-    qt = {
-      enable = true;
-      style = "adwaita";
-    };
+    # qt = {
+    #   enable = true;
+    #   style = "adwaita";
+    # };
     xdg.icons = {
       enable = true;
       fallbackCursorThemes = [ "Adwaita" ];
@@ -84,7 +82,6 @@
     users.groups.audio = {
       members = [
         "mixer"
-        "local"
       ];
     };
 
@@ -155,10 +152,30 @@
           factory = "adapter";
           args = {
             "factory.name" = "support.null-audio-sink";
+            "node.name" = "Speaker-Proxy";
+            "node.description" = "Proxy for Speaker Output";
+            "media.class" = "Audio/Sink";
+            "audio.position" = "L,R";
+          };
+        }
+        {
+          factory = "adapter";
+          args = {
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "Headphone-Proxy";
+            "node.description" = "Proxy for Headphone Output";
+            "media.class" = "Audio/Sink";
+            "audio.position" = "L,R";
+          };
+        }
+        {
+          factory = "adapter";
+          args = {
+            "factory.name" = "support.null-audio-sink";
             "node.name" = "SpotifyD-Proxy";
             "node.description" = "Proxy for SpotifyD";
             "media.class" = "Audio/Sink";
-            "audio.position" = "FL,FR";
+            "audio.position" = "L,R";
           };
         }
         {
@@ -168,7 +185,7 @@
             "node.name" = "AnalogIn-Proxy";
             "node.description" = "Proxy for the analog input";
             "media.class" = "Audio/Source/Virtual";
-            "audio.position" = "FL,FR";
+            "audio.position" = "L,R";
           };
         }
       ];
