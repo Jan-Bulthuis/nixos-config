@@ -88,22 +88,6 @@
       ];
     };
 
-    # wprsd service
-    systemd.user.services.wprsd = {
-      description = "wprsd Service";
-      wantedBy = [ "default.target" ];
-      after = [ "network.target" ];
-      unitConfig = {
-        ConditionUser = "mixer";
-      };
-      serviceConfig = {
-        ExecStart = "${pkgs.bash}/bin/bash -l -c wprsd --enable-xwayland=true"; # Use login shell to inherit environment
-        Environment = "\"RUST_BACKTRACE=full\"";
-        Restart = "always";
-        RestartSec = 5;
-      };
-    };
-
     # Xpra service
     systemd.user.services.xpra = {
       description = "Xpra Service";
