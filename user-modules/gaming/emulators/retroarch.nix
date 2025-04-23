@@ -35,7 +35,8 @@ in
     ];
 
     home.packages = with pkgs; [
-      retroarch-full
+      # retroarch-full
+      retroarch-free
     ];
   };
 }
