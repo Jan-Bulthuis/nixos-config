@@ -144,7 +144,7 @@ in
         qutebrowser.enable = true;
         vscode = {
           enable = true;
-          profileNames = [ "Default" ];
+          profileNames = [ "default" ];
         };
         zathura.enable = true;
       };
