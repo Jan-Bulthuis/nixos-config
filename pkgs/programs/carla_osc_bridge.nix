@@ -9,8 +9,8 @@ rustPlatform.buildRustPackage {
     domain = "git.bulthuis.dev";
     owner = "Jan";
     repo = "carla_osc_bridge";
-    rev = "8966a25e8d56efa30a28fd320c6f657040a1f01c";
-    hash = "sha256-AJ+hb642V/aqizbM4URaZhFSIFwSvGa23HIkHqIru2o=";
+    rev = "c037e2d2a1b29b785d8acc10fa0cb761afdb3fcf";
+    hash = "sha256-Wvdfm+4dfygZwkvaUhO9w7DrrUl3ZYvtD7nYrPSD0eA=";
   };
 
   cargoHash = "sha256-s1ZKbhHudgPOy7613zbT8TkbM6B7oloLEuTYHoWjX5o=";
