@@ -120,7 +120,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.carla}/bin/carla -platform xcb /home/mixer/Default.carxp";
+        ExecStart = "${pkgs.carla}/bin/carla /home/mixer/Default.carxp -platform xcb";
         Environment = "\"DISPLAY=:7\"";
         Restart = "always";
         RestartSec = 5;
