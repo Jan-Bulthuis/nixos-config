@@ -12,6 +12,7 @@ let
 
     wprs = prev.callPackage ./programs/wprs/default.nix { };
     nixgreety = prev.callPackage ./programs/nixgreety.nix { };
+    carla_osc_bridge = prev.callPackage ./programs/carla_osc_bridge.nix { };
     # ly = prev.callPackage ./programs/ly/default.nix { };
   };
 in

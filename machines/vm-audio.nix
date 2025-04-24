@@ -29,6 +29,7 @@
       pulsemixer
       adwaita-icon-theme
       open-stage-control
+      carla_osc_bridge
 
       # Add LV2 plugins
       lsp-plugins
@@ -124,6 +125,27 @@
       };
     };
 
+    # Carla service
+    systemd.user.services.carla-bridge = {
+      description = "Carla OSC Bridge";
+      wantedBy = [ "default.target" ];
+      after = [
+        "network.target"
+        "sound.target"
+      ];
+      requires = [
+        "carla.service"
+      ];
+      unitConfig = {
+        ConditionUser = "mixer";
+      };
+      serviceConfig = {
+        ExecStart = "${pkgs.carla_osc_bridge}/bin/carla_osc_bridge --clients \"127.0.0.1:8080\"";
+        Restart = "always";
+        RestartSec = 5;
+      };
+    };
+
     # Open stage control service
     systemd.user.services.osc = {
       description = "OSC Service";
@@ -138,7 +160,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.open-stage-control}/bin/open-stage-control --no-gui --send 127.0.0.1:22752 --load /home/mixer/open-stage-control/session.json --theme /home/mixer/open-stage-control/theme.css";
+        ExecStart = "${pkgs.open-stage-control}/bin/open-stage-control --no-gui --send 127.0.0.1:10402 --load /home/mixer/open-stage-control/session.json --theme /home/mixer/open-stage-control/theme.css";
         Environment = "\"ELECTRON_RUN_AS_NODE=1\"";
         Restart = "always";
         RestartSec = 5;
