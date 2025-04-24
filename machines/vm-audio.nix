@@ -71,6 +71,7 @@
       enable = true;
       fallbackCursorThemes = [ "Adwaita" ];
     };
+    hardware.graphics.enable = true;
 
     # User for audio mixing
     users.users.mixer = {
