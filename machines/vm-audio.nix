@@ -44,14 +44,18 @@
       allowedTCPPorts = [
         8080
         10400
+        10401
         10402
+        10403
         15151
         22752
       ];
       allowedUDPPorts = [
         8080
         10400
+        10401
         10402
+        10403
         15151
         22752
       ];
@@ -144,7 +148,7 @@
         ConditionUser = "mixer";
       };
       serviceConfig = {
-        ExecStart = "${pkgs.carla_osc_bridge}/bin/carla_osc_bridge --clients \"127.0.0.1:8080\"";
+        ExecStart = "${pkgs.carla_osc_bridge}/bin/carla_osc_bridge --bridge-host \"10.20.60.251\" --carla-host \"10.20.60.251:22752\" --clients \"127.0.0.1:8080\"";
         Restart = "always";
         RestartSec = 5;
       };
