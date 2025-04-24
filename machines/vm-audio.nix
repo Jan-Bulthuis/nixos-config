@@ -43,11 +43,15 @@
     networking.firewall = {
       allowedTCPPorts = [
         8080
+        10400
+        10402
         15151
         22752
       ];
       allowedUDPPorts = [
         8080
+        10400
+        10402
         15151
         22752
       ];
