@@ -60,10 +60,10 @@
         pipewire.jack
       ]
     )}";
-    # qt = {
-    #   enable = true;
-    #   style = "adwaita";
-    # };
+    qt = {
+      enable = true;
+      style = "adwaita";
+    };
     xdg.icons = {
       enable = true;
       fallbackCursorThemes = [ "Adwaita" ];
