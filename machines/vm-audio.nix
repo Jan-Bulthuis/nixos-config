@@ -88,6 +88,11 @@
         "mixer"
       ];
     };
+    users.groups.bluetooth = {
+      members = [
+        "mixer"
+      ];
+    };
 
     # Xpra service
     systemd.user.services.xpra = {
@@ -173,11 +178,13 @@
     # Create bluetooth A2DP source
     hardware.bluetooth = {
       enable = true;
+      disabledPlugins = [ "hostname" ];
       settings.General = {
+        Class = "0x040414";
         Name = "Linox";
+        JustWorksRepairing = "always";
         DiscoverableTimeout = 0;
         AlwaysPairable = true;
-
       };
     };
 
