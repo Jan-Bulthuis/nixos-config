@@ -178,13 +178,13 @@
     # Create bluetooth A2DP source
     hardware.bluetooth = {
       enable = true;
-      disabledPlugins = [ "hostname" ];
+      # disabledPlugins = [ "hostname" ];
       settings.General = {
-        Class = "0x040414";
-        Name = "Linox";
-        JustWorksRepairing = "always";
-        DiscoverableTimeout = 0;
-        AlwaysPairable = true;
+        # Class = "0x040414";
+        # Name = "Linox";
+        # JustWorksRepairing = "always";
+        # DiscoverableTimeout = 0;
+        # AlwaysPairable = true;
       };
     };
 
