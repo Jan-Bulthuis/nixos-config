@@ -170,6 +170,17 @@
       };
     };
 
+    # Create bluetooth A2DP source
+    hardware.bluetooth = {
+      enable = true;
+      settings.General = {
+        Name = "Linox";
+        DiscoverableTimeout = 0;
+        AlwaysPairable = true;
+
+      };
+    };
+
     # Create null sinks
     services.pipewire.extraConfig.pipewire."91-null-sinks" = {
       "context.objects" = [
