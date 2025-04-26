@@ -186,6 +186,7 @@
         AlwaysPairable = true;
         PairableTimeout = 0;
         FastConnectable = true;
+        JustWorksRepairing = "always";
       };
     };
     services.pipewire.wireplumber.extraConfig."50-bluetooth-a2dp" = {
