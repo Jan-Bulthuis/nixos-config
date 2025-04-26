@@ -178,7 +178,7 @@
     # Create bluetooth A2DP source
     hardware.bluetooth = {
       enable = true;
-      # disabledPlugins = [ "hostname" ];
+      disabledPlugins = [ "hostname" ];
       settings.General = {
         Name = "Linox";
         Class = "0x240414";
@@ -186,6 +186,11 @@
         AlwaysPairable = true;
         PairableTimeout = 0;
         FastConnectable = true;
+      };
+    };
+    services.pipewire.wireplumber.extraConfig."50-bluetooth-a2dp" = {
+      "monitor.bluez.properties" = {
+        "bluez5.roles" = [ "a2dp_source" ];
       };
     };
 
