@@ -180,11 +180,12 @@
       enable = true;
       # disabledPlugins = [ "hostname" ];
       settings.General = {
-        # Class = "0x040414";
-        # Name = "Linox";
-        # JustWorksRepairing = "always";
-        # DiscoverableTimeout = 0;
-        # AlwaysPairable = true;
+        Name = "Linox";
+        Class = "0x240414";
+        DiscoverableTimeout = 0;
+        AlwaysPairable = true;
+        PairableTimeout = 0;
+        FastConnectable = true;
       };
     };
 
