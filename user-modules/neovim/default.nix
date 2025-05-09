@@ -44,7 +44,7 @@ in
         listchars = "tab:»┈«,trail:·,extends:→,precedes:←,nbsp:␣";
       };
 
-      diagnostics = {
+      diagnostic.settings = {
         enable = true;
         signs = true;
         underline = true;

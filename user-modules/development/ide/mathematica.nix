@@ -11,7 +11,7 @@ let
 
   my-mathematica = pkgs.mathematica.override {
     # TODO: Just use a generic name for the installer?
-    source = ./Wolfram_14.1.0_LIN_Bndl.sh;
+    # source = ./Wolfram_14.2.1_LIN_Bndl.sh;
   };
 in
 {
