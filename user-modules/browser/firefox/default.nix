@@ -54,8 +54,7 @@ in
 
         # Theming
         userChrome = readFile (
-          pkgs.substituteAll {
-            src = ./userChrome.css;
+          pkgs.replaceVars ./userChrome.css {
             colors = config.desktop.theming.colorsCSS;
           }
         );
