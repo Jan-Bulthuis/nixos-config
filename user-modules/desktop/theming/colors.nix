@@ -110,8 +110,11 @@ in
     # Configure qt theme
     qt = mkIf config.desktop.enable {
       enable = true;
-      platformTheme.name = "adwaita";
-      style.name = if cfg.darkMode then "adwaita-dark" else "adwaita-light";
+      platformTheme.name = "gtk";
+      style = {
+        name = if cfg.darkMode then "adwaita-dark" else "adwaita-light";
+        package = pkgs.adwaita-qt;
+      };
     };
 
     # Configure gtk theme

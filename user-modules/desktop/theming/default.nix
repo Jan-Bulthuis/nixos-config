@@ -35,6 +35,8 @@ let
 
   fontModules = [
     # Import all fonts
+    ./fonts/adwaita-mono.nix
+    ./fonts/adwaita-sans.nix
     ./fonts/cozette-vector.nix
     ./fonts/cozette.nix
     ./fonts/dejavu-sans.nix
@@ -190,8 +192,8 @@ in
       {
         enable = true;
         # TODO: Toggles
-        gtk3.extraCss = disableCSD;
-        gtk4.extraCss = disableCSD;
+        gtk3.extraCss = mkIf config.modules.river.enable disableCSD;
+        gtk4.extraCss = mkIf config.modules.river.enable disableCSD;
       };
 
     # TODO: Make cursors configurable using modules.

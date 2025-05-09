@@ -11,26 +11,30 @@ let
 in
 {
   options.desktop.theming.background = {
-    path = mkOption {
-      type = types.str;
-      default = "minimal/a_flower_on_a_dark_background.png";
-      description = "Path to the background image.";
-    };
-    themed = mkEnableOption "themed background";
-    invert = mkEnableOption "invert background";
-    src = mkOption {
-      default = pkgs.fetchFromGitHub {
-        owner = "dharmx";
-        repo = "walls";
-        rev = "6bf4d733ebf2b484a37c17d742eb47e5139e6a14";
-        sha256 = "sha256-M96jJy3L0a+VkJ+DcbtrRAquwDWaIG9hAUxenr/TcQU=";
+    image = {
+      url = mkOption {
+        type = types.str;
+        default = "https://raw.githubusercontent.com/dharmx/walls/refs/heads/main/digital/a_drawing_of_a_spider_on_a_white_surface.png";
+        description = "URL to the background image.";
+      };
+      hash = mkOption {
+        type = types.str;
+        default = "sha256-eCEjM7R9yeHNhZZtvHjrgkfwT25JA7FeMoVwnQ887CQ=";
+        description = "SHA256 hash of the background image.";
       };
     };
+    themed = mkEnableOption "themed background";
+    inverted = mkEnableOption "invert background";
   };
 
   config =
     with pkgs;
     let
+      src = pkgs.fetchurl {
+        url = cfg.image.url;
+        hash = cfg.image.hash;
+      };
+
       theme = writeTextFile {
         name = "gowall-theme";
         text = builtins.toJSON {
@@ -61,45 +65,56 @@ in
         executable = true;
       };
 
+      fileExtension =
+        name:
+        let
+          parts = splitString "." name;
+        in
+        if length parts > 1 then lists.last parts else "";
+
+      fileName =
+        name:
+        let
+          parts = splitString "/" name;
+        in
+        if length parts > 1 then lists.last parts else name;
+
+      image = fileName cfg.image.url;
+
       background-themed = stdenv.mkDerivation {
         name = "background-themed-1.0.0";
-        src = cfg.src;
+        src = src;
 
         buildInputs = [
           gowall
           imagemagick
           (writeShellScriptBin "xdg-open" "")
+          tree
         ];
 
-        buildPhase =
-          if cfg.themed then
-            if cfg.invert then
-              ''
-                cp ${theme} ./theme.json
+        unpackPhase = ''
+          cp ${src} ./${image}
+          chmod u+w ./${image}
+        '';
 
-                export HOME=$PWD
-                convert ./${cfg.path} -channel RGB -negate ./${cfg.path}
+        buildPhase = ''
+          ${optionalString cfg.inverted ''
+            convert ./${image} -channel RGB -negate ./${image}
+          ''}
+          ${optionalString cfg.themed ''
+            cp ${theme} ./theme.json
 
-                gowall convert ./${cfg.path} -o themed -t ./theme.json
-                mv Pictures/gowall/themed.* ./
-                mogrify -format png themed.*
-              ''
-            else
-              ''
-                cp ${theme} ./theme.json
+            export HOME=$PWD
 
-                export HOME=$PWD
-
-                gowall convert ./${cfg.path} -o themed -t ./theme.json
-                mv Pictures/gowall/themed.* ./
-                mogrify -format png themed.*
-              ''
-          else
-            ''
-              cp ${cfg.path} ./themed
-
-              mogrify -format png themed
-            '';
+            gowall convert ./${image} --output themed -t ./theme.json
+            tree
+            mv ./themed/*.* ./
+          ''}
+          mv ./${image} themed.${fileExtension image}
+          ${optionalString (fileExtension image != "png") ''
+            mogrify -format png themed.*
+          ''}
+        '';
 
         installPhase = ''
           install -Dm644 -t $out themed.png
