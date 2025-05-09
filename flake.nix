@@ -71,6 +71,10 @@
             sudo = true;
             configuration = ./users/jan.nix;
           };
+          berg-van-abstractie = {
+            sudo = false;
+            configuration = ./users/comp-prog.nix;
+          };
         };
         "vm-audio" = mkConfig "x86_64-linux" ./machines/vm-audio.nix {
           local = {
