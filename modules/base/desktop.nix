@@ -58,7 +58,7 @@ in
     programs.dconf.enable = true;
     services.libinput.enable = true;
     networking.firewall = {
-      enable = mkForce false;
+      enable = true;
       logRefusedConnections = true;
       logRefusedPackets = true;
       logReversePathDrops = true;
@@ -84,6 +84,7 @@ in
       }
     ];
     security.rtkit.enable = true;
+    security.polkit.enable = true;
 
     # TODO: Move to USB module
     # services.gvfs.enable = true;
