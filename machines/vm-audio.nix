@@ -185,7 +185,6 @@
         DiscoverableTimeout = 0;
         AlwaysPairable = true;
         PairableTimeout = 0;
-        ControllerMode = "bredr";
         FastConnectable = true;
         JustWorksRepairing = "always";
       };
