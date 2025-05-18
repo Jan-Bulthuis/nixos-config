@@ -40,22 +40,6 @@ in
       xdg-user-dirs-gtk
     ];
 
-    # Set up desktop entries for possible desktop environments
-    services.displayManager.sessionPackages = [
-      (pkgs.writeTextFile {
-        name = "river.desktop";
-        text = ''
-          [Desktop Entry]
-          Name=River
-          Comment=A dynamic tiling Wayland compositor
-          Exec=river
-          Type=Application
-        '';
-        destination = "/share/wayland-sessions/river.desktop";
-        passthru.providedSessions = [ "river" ];
-      })
-    ];
-
     # Enable Gnome Remote Desktop
     services.gnome.gnome-remote-desktop.enable = true;
     systemd.services."gnome-remote-desktop".wantedBy = [ "graphical.target" ];

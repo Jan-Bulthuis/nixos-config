@@ -84,6 +84,9 @@ in
             # Disable update notifications
             "update.mode" = "none";
 
+            # Set themes
+            "window.autoDetectColorScheme" = true;
+
             # TODO: Move to direnv module
             # Ignore direnv folder
             "files.exclude" = {
