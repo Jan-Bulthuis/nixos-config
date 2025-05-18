@@ -2,10 +2,7 @@
 
 let
   mkGlue =
-    {
-      inputs,
-      ...
-    }:
+    inputs:
     let
       flake = inputs.self;
       nixpkgs = inputs.nixpkgs;
@@ -50,12 +47,7 @@ let
         in
         fn (entries // recursedEntries);
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-
-      eachSystem = fn: lib.genAttrs systems fn;
+      eachSystem = fn: lib.genAttrs lib.systems.flakeExposed fn;
 
       systemArgs = eachSystem (system: {
         pkgs = (
@@ -103,16 +95,30 @@ let
         );
 
       nixosModules = collectModules "${flake}/modules/nixos";
+      inputNixosModules = lib.map (flake: flake.outputs.nixosModules.default) (
+        lib.filter (flake: lib.hasAttrByPath [ "outputs" "nixosModules" "default" ] flake) (
+          lib.attrValues inputs
+        )
+      );
 
       homeModules = collectModules "${flake}/modules/home";
+      inputHomeModules = lib.map (flake: flake.outputs.homeManagerModules.default) (
+        lib.filter (flake: lib.hasAttrByPath [ "outputs" "homeManagerModules" "default" ] flake) (
+          lib.attrValues inputs
+        )
+      );
+
+      inputOverlays = lib.map (flake: flake.outputs.overlays.default) (
+        lib.filter (flake: lib.hasAttrByPath [ "outputs" "overlays" "default" ] flake) (
+          lib.attrValues inputs
+        )
+      );
 
       overlayModule =
         { ... }:
         {
-          nixpkgs.overlays = [ overlay ];
+          nixpkgs.overlays = [ overlay ] ++ inputOverlays;
         };
-
-      homeManager = inputs.home-manager.nixosModules.home-manager;
 
       nixosConfigurations = importDir "${flake}/hosts" (
         attrs:
@@ -139,7 +145,7 @@ let
                 usersModule =
                   { ... }:
                   {
-                    home-manager.sharedModules = homeModules;
+                    home-manager.sharedModules = homeModules ++ inputHomeModules;
                     home-manager.useUserPackages = false; # TODO: See if this should be changed to true?
                     home-manager.useGlobalPkgs = true;
                     home-manager.users = homesConfiguration;
@@ -151,9 +157,9 @@ let
                 systemPath
                 overlayModule
                 usersModule
-                homeManager
               ]
-              ++ nixosModules;
+              ++ nixosModules
+              ++ inputNixosModules;
           }
         ) (lib.attrsets.filterAttrs (name: entry: entry.type == "directory") attrs)
       );
