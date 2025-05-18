@@ -17,9 +17,6 @@
     ente-auth
     bitwarden
     carla
-    baobab
-    gnome-calculator
-    nautilus
     winbox
     whatsapp-for-linux
     discord
@@ -30,6 +27,8 @@
     river # TODO: Move
     firefox # TODO: Move to dediated module
     ryubing
+    dconf-editor
+    bottles
   ];
 
   modules = {
@@ -88,7 +87,7 @@
 
     # Languages
     haskell.enable = false;
-    js.enable = false;
+    js.enable = true;
     nix.enable = true;
     rust.enable = true;
     python.enable = true;
