@@ -10,6 +10,8 @@
   # Admin users
   users.users.jan.extraGroups = [ "wheel" ];
 
+  virtualisation.libvirtd.enable = true;
+
   modules = {
     profiles.laptop.enable = true;
   };
