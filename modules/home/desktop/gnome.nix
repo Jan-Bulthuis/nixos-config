@@ -48,6 +48,8 @@ in
         gnome-text-editor
         showtime
         file-roller
+        mission-center
+        dconf-editor
 
         # For theming gtk3
         adw-gtk3
@@ -56,6 +58,7 @@ in
         gsconnect
         disable-workspace-animation
         wallpaper-slideshow
+        media-progress
       ]);
 
     # Enable and set the gtk themes
