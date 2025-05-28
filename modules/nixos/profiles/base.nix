@@ -56,6 +56,7 @@ in
       pciutils
       zip
       unzip
+      tmux
     ];
   };
 }
