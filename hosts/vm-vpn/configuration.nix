@@ -32,6 +32,8 @@
           port = 51820;
         }
       ];
+      tlsCertificate = "/var/lib/secrets/fullchain.pem";
+      tlsKey = "/var/lib/secrets/key.pem";
     };
   };
   networking.firewall = {
