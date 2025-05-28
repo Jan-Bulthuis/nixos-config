@@ -16,18 +16,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Machine hostname
-    networking.hostName = lib.mkDefault "vm-base";
-
     # Enabled modules
     modules = {
       profiles.base.enable = true;
-      base.enable = true;
       ssh.enable = true;
     };
 
     # Enable qemu guest agent
     services.qemuGuest.enable = true;
+
+    # Machine platform
+    nixpkgs.hostPlatform = "x86_64-linux";
 
     # Hardware configuration
     hardware.enableRedistributableFirmware = true;
