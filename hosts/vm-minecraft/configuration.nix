@@ -24,6 +24,7 @@
   };
 
   # Set up minecraft servers
+  users.users.local.extraGroups = [ "minecraft" ];
   services.minecraft-servers = {
     enable = true;
     eula = true;
