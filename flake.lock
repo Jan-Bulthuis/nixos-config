@@ -34,17 +34,6 @@
         "type": "github"
       }
     },
-    "glue": {
-      "locked": {
-        "path": "./glue",
-        "type": "path"
-      },
-      "original": {
-        "path": "./glue",
-        "type": "path"
-      },
-      "parent": []
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -125,7 +114,6 @@
     },
     "root": {
       "inputs": {
-        "glue": "glue",
         "home-manager": "home-manager",
         "nix-minecraft": "nix-minecraft",
         "nix-modpack": "nix-modpack",
