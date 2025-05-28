@@ -51,7 +51,7 @@
           }
         ];
         tlsCertificate = "${tlsFiles}/fullchain.pem";
-        tlsKey = "${tlsFiles}/key.pem";
+        tlsKey = "${tlsFiles}/privkey.pem";
       };
   };
   networking.firewall = {
