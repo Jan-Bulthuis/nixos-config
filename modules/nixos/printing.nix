@@ -18,5 +18,8 @@ in
       nssmdns4 = true;
       openFirewall = true;
     };
+
+    # For SMB network printers
+    services.samba.enable = true;
   };
 }
