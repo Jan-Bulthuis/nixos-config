@@ -30,7 +30,7 @@
           ];
           buildPhase = ''
             ${pkgs.openssl}/bin/openssl genrsa > privkey.pem
-            ${pkgs.openssl}/bin/openssl req -new -x509 -key privkey.pem > fullchain.pem
+            ${pkgs.openssl}/bin/openssl req -new -x509 -batch -key privkey.pem > fullchain.pem
           '';
           installPhase = ''
             mkdir -p $out
