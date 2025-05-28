@@ -38,7 +38,7 @@ in
         blackbox-terminal
         baobab
         gnome-disk-utility
-        evince
+        papers
         nautilus
         gnome-font-viewer
         loupe
@@ -59,6 +59,7 @@ in
         disable-workspace-animation
         wallpaper-slideshow
         media-progress
+        # luminus-desktop
       ]);
 
     # Enable and set the gtk themes
