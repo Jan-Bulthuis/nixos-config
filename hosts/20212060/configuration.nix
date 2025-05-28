@@ -17,7 +17,7 @@
   services.wstunnel = {
     enable = true;
     clients.wg-tunnel = {
-      connectTo = "wss://wstunnel.bulthuis.dev:443";
+      connectTo = "wss://tunnel.bulthuis.dev:443";
       localToRemote = [
         "udp://51820:10.10.40.100:51820"
       ];
