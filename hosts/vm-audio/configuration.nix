@@ -14,8 +14,9 @@
 
   # Enabled modules
   modules = {
-    pipewire.enable = true;
-    spotifyd.enable = true;
+    profiles.vm.enable = true;
+    sound.enable = true;
+    # spotifyd.enable = true; # TODO: Add this as a local module
   };
 
   # Install system packages
