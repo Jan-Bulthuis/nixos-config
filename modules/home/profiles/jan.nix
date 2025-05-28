@@ -38,6 +38,7 @@ in
       bottles
       prismlauncher
       foliate
+      wireshark
     ];
 
     modules = {
