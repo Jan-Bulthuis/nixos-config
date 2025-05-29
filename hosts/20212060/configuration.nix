@@ -29,7 +29,7 @@
     clients.wg-tunnel = {
       connectTo = "wss://tunnel.bulthuis.dev:443";
       localToRemote = [
-        "udp://51820:10.10.40.100:51820?timeout_sec=0"
+        "udp://51820:10.10.40.100:51820"
       ];
     };
   };
