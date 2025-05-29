@@ -34,6 +34,7 @@ in
     };
 
     # Local user
+    services.getty.autologinUser = "local";
     users.mutableUsers = false;
     users.users.local = {
       hashedPassword = "$y$j9T$f/uFTdcVyFUPJLn4VhRTx.$c9e2QPXYGKFNt3lUf8QD3KLJi4AKgPldfQTvc0WCe..";
