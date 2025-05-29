@@ -19,14 +19,26 @@ in
     # Enabled modules
     modules = {
       profiles.base.enable = true;
+      disko = {
+        enable = true;
+        profile = "vm";
+      };
+      impermanence = {
+        enable = true;
+        resetScript = ''
+          # Revert to the blank state for the root directory
+          zfs rollback -r tank/root@blank
+        '';
+      };
       ssh.enable = true;
     };
 
     # Admin users
     users.users.local = {
+      initialPassword = "local";
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq jan@bulthuis.dev"
+        "ssh-ed25519  jan@bulthuis.dev"
       ];
     };
 
@@ -35,6 +47,9 @@ in
 
     # Machine platform
     nixpkgs.hostPlatform = "x86_64-linux";
+
+    # Set hostid for ZFS
+    networking.hostId = "deadbeef";
 
     # Hardware configuration
     hardware.enableRedistributableFirmware = true;
@@ -50,21 +65,6 @@ in
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
     hardware.cpu.intel.updateMicrocode = true;
-
-    # Filesystems
-    fileSystems."/" = {
-      device = "/dev/disk/by-partlabel/root";
-      fsType = "ext4";
-    };
-
-    fileSystems."/boot" = {
-      device = "/dev/disk/by-partlabel/EFI";
-      fsType = "vfat";
-      options = [
-        "fmask=0077"
-        "dmask=0077"
-      ];
-    };
 
     # Swapfile
     swapDevices = [
