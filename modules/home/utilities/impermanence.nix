@@ -24,9 +24,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.persistence."/persist/home" = {
+    home.persistence."/persist/home/${config.home.username}" = {
       enable = true;
       hideMounts = true;
+      allowOther = true;
       directories = cfg.directories;
       files = cfg.files;
     };

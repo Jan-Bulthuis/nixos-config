@@ -30,7 +30,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    fileSystems."/persist".neededForBoot = true;
     boot.initrd.postResumeCommands = mkAfter cfg.resetScript;
+
+    # For home-manager persistence
+    programs.fuse.userAllowOther = true;
 
     environment.persistence."/persist/system" = {
       enable = true;
