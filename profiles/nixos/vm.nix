@@ -25,7 +25,6 @@ in
       };
       impermanence = {
         enable = true;
-        directories = [ "/var/lib/nixos" ];
         resetScript = ''
           # Revert to the blank state for the root directory
           zfs rollback -r tank/root@blank
@@ -39,7 +38,7 @@ in
       initialPassword = "local";
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq jan@bulthuis.dev"
+        "ssh-ed25519  jan@bulthuis.dev"
       ];
     };
 
