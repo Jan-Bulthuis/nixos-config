@@ -24,7 +24,6 @@ in
       freecad-wayland
       inkscape
       ente-auth
-      bitwarden
       carla
       winbox
       whatsapp-for-linux
@@ -61,6 +60,7 @@ in
           "flake.lock"
         ];
       };
+      bitwarden.enable = true;
       xpra = {
         enable = true;
         hosts = [
