@@ -34,7 +34,7 @@
           compression = "zstd";
         };
         mountpoint = null;
-        postCreateHook = "zfs snapshot -r tank@blank && zfs holds -r blank tank@blank";
+        postCreateHook = "zfs snapshot -r tank@blank && zfs hold -r blank tank@blank";
 
         datasets = {
           root = {
