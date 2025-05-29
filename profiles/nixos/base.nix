@@ -20,12 +20,8 @@ in
       bootloader.enable = mkDefault true;
       ssh.enable = mkDefault true;
 
-      # Setup sensible default persistent data
       impermanence.directories = [
         "/var/lib/nixos"
-      ];
-      impermanence.files = [
-        "/etc/shadow"
       ];
     };
 

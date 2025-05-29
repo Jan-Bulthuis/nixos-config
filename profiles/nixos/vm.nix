@@ -33,12 +33,13 @@ in
       ssh.enable = true;
     };
 
-    # Admin users
+    # Local user
+    users.mutableUsers = false;
     users.users.local = {
-      initialPassword = "local";
+      hashedPassword = "$y$j9T$f/uFTdcVyFUPJLn4VhRTx.$c9e2QPXYGKFNt3lUf8QD3KLJi4AKgPldfQTvc0WCe..";
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519  jan@bulthuis.dev"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq Laptop"
       ];
     };
 
