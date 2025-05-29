@@ -33,13 +33,21 @@
         rootFsOptions = {
           compression = "zstd";
         };
-        mountpoint = "none";
+        mountpoint = null;
         postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
 
         datasets = {
           root = {
             type = "zfs_fs";
             mountpoint = "/";
+          };
+          nix = {
+            type = "zfs_fs";
+            mountpoint = "/nix";
+          };
+          persist = {
+            type = "zfs_fs";
+            mountpoint = "/persist";
           };
         };
       };
