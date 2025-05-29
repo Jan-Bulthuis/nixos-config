@@ -34,7 +34,7 @@
           compression = "zstd";
         };
         mountpoint = null;
-        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
+        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^tank@blank$' || zfs snapshot tank@blank";
 
         datasets = {
           root = {
