@@ -23,6 +23,14 @@ in
         enable = true;
         profile = "vm";
       };
+      impermanence = {
+        enable = true;
+        directories = [ "/var/lib/nixos" ];
+        resetScript = ''
+          # Revert to the blank state for the root directory
+          zfs rollback -r tank/root@blank
+        '';
+      };
       ssh.enable = true;
     };
 
