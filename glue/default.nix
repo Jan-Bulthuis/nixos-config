@@ -91,6 +91,7 @@ let
     );
 
   nixosModules = collectModules "${flake}/modules/nixos";
+  nixosProfiles = collectModules "${flake}/profiles/nixos";
   inputNixosModules = lib.map (flake: flake.outputs.nixosModules.default) (
     lib.filter (flake: lib.hasAttrByPath [ "outputs" "nixosModules" "default" ] flake) (
       lib.attrValues inputs
@@ -98,6 +99,7 @@ let
   );
 
   homeModules = collectModules "${flake}/modules/home";
+  homeProfiles = collectModules "${flake}/profiles/home";
   inputHomeModules = lib.map (flake: flake.outputs.homeManagerModules.default) (
     lib.filter (flake: lib.hasAttrByPath [ "outputs" "homeManagerModules" "default" ] flake) (
       lib.attrValues inputs
@@ -141,7 +143,7 @@ let
             usersModule =
               { ... }:
               {
-                home-manager.sharedModules = homeModules ++ inputHomeModules;
+                home-manager.sharedModules = homeModules ++ homeProfiles ++ inputHomeModules;
                 home-manager.useUserPackages = false; # TODO: See if this should be changed to true?
                 home-manager.useGlobalPkgs = true;
                 home-manager.users = homesConfiguration;
@@ -155,6 +157,7 @@ let
             usersModule
           ]
           ++ nixosModules
+          ++ nixosProfiles
           ++ inputNixosModules;
       }
     ) (lib.attrsets.filterAttrs (name: entry: entry.type == "directory") attrs)
