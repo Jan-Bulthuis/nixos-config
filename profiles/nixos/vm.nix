@@ -28,6 +28,7 @@ in
 
     # Admin users
     users.users.local = {
+      initialPassword = "local";
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq jan@bulthuis.dev"
@@ -40,7 +41,7 @@ in
     # Machine platform
     nixpkgs.hostPlatform = "x86_64-linux";
 
-    # Set hostid
+    # Set hostid for ZFS
     networking.hostId = "deadbeef";
 
     # Hardware configuration
