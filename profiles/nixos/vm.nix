@@ -33,7 +33,6 @@ in
     };
 
     # Local user
-    modules.secrets.secrets."ssh-keys/admin-pub" = { };
     modules.secrets.secrets."passwords/local-hashed".neededForUsers = true;
     services.getty.autologinUser = "local";
     security.sudo.extraRules = [
@@ -46,8 +45,8 @@ in
     users.users.local = {
       hashedPasswordFile = config.sops.secrets."passwords/local-hashed".path;
       extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keyFiles = [
-        config.sops.secrets."ssh-keys/admin-pub".path
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq Admin"
       ];
     };
 
