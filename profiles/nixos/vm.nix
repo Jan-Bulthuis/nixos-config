@@ -53,7 +53,7 @@ in
     # System packages
     environment.systemPackages = with pkgs; [
       # TODO: Make module for utilities/scripts
-      (writeShellScriptBin "system-update" "nixos-rebuild switch --flake git+https://git.bulthuis.dev/Jan/dotfiles")
+      (writeShellScriptBin "system-update" "nixos-rebuild switch --flake git+https://git.bulthuis.dev/Jan/nixos-config")
     ];
 
     # Enable qemu guest agent
