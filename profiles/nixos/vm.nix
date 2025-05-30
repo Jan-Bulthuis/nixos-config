@@ -34,12 +34,17 @@ in
 
     # Local user
     services.getty.autologinUser = "local";
+    security.sudo.extraRules = [
+      {
+        users = [ "local" ];
+        options = [ "NOPASSWD" ];
+      }
+    ];
     users.mutableUsers = false;
     users.users.local = {
-      hashedPassword = "$y$j9T$f/uFTdcVyFUPJLn4VhRTx.$c9e2QPXYGKFNt3lUf8QD3KLJi4AKgPldfQTvc0WCe..";
       extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq Laptop"
+      openssh.authorizedKeys.keyFiles = [
+        config.sops.secrets."ssh-keys/admin-pub".path
       ];
     };
 
