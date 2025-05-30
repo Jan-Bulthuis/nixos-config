@@ -23,6 +23,7 @@ in
         "/var/lib/nixos"
       ];
 
+      # TODO: Remove the secrets module and use sops directly?
       secrets = {
         enable = true;
         secrets = {
