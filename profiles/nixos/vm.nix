@@ -33,6 +33,7 @@ in
     };
 
     # Local user
+    sops.secrets."ssh-keys/admin-pub" = { };
     services.getty.autologinUser = "local";
     security.sudo.extraRules = [
       {
