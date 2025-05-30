@@ -18,10 +18,17 @@
               };
             };
             zfs = {
-              size = "100%";
+              end = "-4G";
               content = {
                 type = "zfs";
                 pool = "tank";
+              };
+            };
+            swap = {
+              size = "100%";
+              content = {
+                type = "swap";
+                discardPolicy = "both";
               };
             };
           };
