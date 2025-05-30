@@ -32,10 +32,11 @@ in
       ssh.enable = true;
     };
 
+    # Autologin to root for access from hypervisor
+    services.getty.autologinUser = "root";
+
     # Local user
     modules.secrets.secrets."passwords/local-hashed".neededForUsers = true;
-    services.getty.autologinUser = "local";
-    security.sudo.wheelNeedsPassword = false;
     users.mutableUsers = false;
     users.users.local = {
       hashedPasswordFile = config.sops.secrets."passwords/local-hashed".path;
