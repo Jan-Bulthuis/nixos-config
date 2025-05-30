@@ -22,6 +22,15 @@ in
       impermanence.directories = [
         "/var/lib/nixos"
       ];
+
+      secrets = {
+        enable = true;
+        secrets = {
+          "ssh-keys/deploy-priv" = {
+            path = "/root/.ssh/id_ed25519";
+          };
+        };
+      };
     };
 
     # Localization

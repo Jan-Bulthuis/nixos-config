@@ -34,6 +34,6 @@ in
     sops.defaultSopsFile = cfg.defaultFile;
     sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.config/sops/sops_ed25519_key" ];
     sops.secrets = cfg.secrets;
-    modules.impermanence.directories = [ ".config/" ];
+    modules.impermanence.directories = [ ".config/sops" ];
   };
 }

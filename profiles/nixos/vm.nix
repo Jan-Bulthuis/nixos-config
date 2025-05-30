@@ -29,13 +29,6 @@ in
           zfs rollback -r tank/root@blank
         '';
       };
-      secrets = {
-        enable = true;
-        secrets = {
-          "ssh-keys/deploy/private-key" = { };
-          "ssh-keys/deploy/public-key" = { };
-        };
-      };
       ssh.enable = true;
     };
 
