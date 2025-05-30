@@ -1,5 +1,4 @@
 {
-  mkModule,
   pkgs,
   lib,
   config,
@@ -29,6 +28,13 @@ in
           # Revert to the blank state for the root directory
           zfs rollback -r tank/root@blank
         '';
+      };
+      secrets = {
+        enable = true;
+        secrets = {
+          "ssh-keys/deploy/private-key" = { };
+          "ssh-keys/deploy/public-key" = { };
+        };
       };
       ssh.enable = true;
     };

@@ -1,5 +1,4 @@
 {
-  mkModule,
   pkgs,
   lib,
   config,
