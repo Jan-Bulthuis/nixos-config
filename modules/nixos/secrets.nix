@@ -31,8 +31,12 @@ in
 
   config = mkIf cfg.enable {
     # Set up SOPS
+    # TODO: Fix the key not being present in /etc/sops before sops-nix runs
     sops.defaultSopsFile = cfg.defaultFile;
-    sops.age.sshKeyPaths = [ "/etc/sops/sops_ed25519_key" ];
+    sops.age.sshKeyPaths = [
+      "/etc/sops/sops_ed25519_key"
+      "/persist/system/etc/sops/sops_ed25519_key"
+    ];
     sops.secrets = cfg.secrets;
     modules.impermanence.directories = [ "/etc/sops" ];
   };
