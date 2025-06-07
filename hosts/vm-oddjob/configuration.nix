@@ -29,7 +29,11 @@
       realms = (inputs.secrets.lab.krb5Realm);
     };
   };
-  environment.systemPackages = with pkgs; [ cifs-utils ];
+  environment.systemPackages = with pkgs; [
+    cifs-utils
+    samba
+    keyutils
+  ];
   sops.secrets."smb-credentials" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
   };
