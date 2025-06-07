@@ -1,4 +1,4 @@
-{ flake, ... }:
+{ inputs, ... }:
 
 {
   # State version
@@ -12,6 +12,17 @@
     "wheel"
     "wireshark"
   ];
+
+  # Set up kerberos
+  security.krb5 = {
+    enable = true;
+    settings = {
+      libdefaults = {
+        rdns = false;
+      };
+      realms = (inputs.secrets.gewis.krb5Realm);
+    };
+  };
 
   # Enable virtualisation for VMs
   virtualisation.libvirtd.enable = true;
