@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   config,
@@ -17,6 +18,14 @@
     profiles.vm.enable = true;
   };
 
-  # Setup NAS Backup Job
-
+  # Setup NAS backups
+  environment.systemPackages = with pkgs; [ cifs-utils ];
+  sops.secrets."smb-credentials" = {
+    sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
+  };
+  fileSystems."/mnt/nas" = {
+    device = "//${inputs.secrets.lab.nas.host}/Backup";
+    fsType = "cifs";
+    options = [ "credentials=${config.sops.secrets."smb-credentials".path}" ];
+  };
 }
