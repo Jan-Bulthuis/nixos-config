@@ -26,6 +26,6 @@
   fileSystems."/mnt/nas" = {
     device = "//${inputs.secrets.lab.nas.host}/Backup";
     fsType = "cifs";
-    options = [ "credentials=${config.sops.secrets."smb-credentials".path}" ];
+    options = [ "sec=krb5,credentials=${config.sops.secrets."smb-credentials".path}" ];
   };
 }
