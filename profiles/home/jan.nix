@@ -38,6 +38,7 @@ in
       prismlauncher
       foliate
       wireshark
+      obsidian
     ];
 
     modules = {
