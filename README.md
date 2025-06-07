@@ -20,9 +20,9 @@ exit
 
 # Install NixOS
 nixos-install --no-channel-copy --no-root-password --flake git+https://git.bulthuis.dev/Jan/nixos-config#(system)
-cd /mnt/persist/system/etc/sops
 
 # Set up host credentials for access to the secrets
+cd /mnt/persist/system/etc/sops
 touch sops_ed25519_key 
 chmod 600 sops_ed25519_key
 nano sops_ed25519_key
