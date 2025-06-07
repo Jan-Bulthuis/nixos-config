@@ -11,7 +11,7 @@
   system.stateVersion = "24.11";
 
   # Machine hostname
-  networking.hostName = "vm-vpn";
+  networking.hostName = "vm-oddjob";
 
   # Enabled modules
   modules = {
