@@ -19,6 +19,16 @@
   };
 
   # Setup NAS backups
+  # TODO: Move kerberos setup to general module
+  security.krb5 = {
+    enable = true;
+    settings = {
+      libdefaults = {
+        rdns = false;
+      };
+      realms = (inputs.secrets.lab.krb5Realm);
+    };
+  };
   environment.systemPackages = with pkgs; [ cifs-utils ];
   sops.secrets."smb-credentials" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
