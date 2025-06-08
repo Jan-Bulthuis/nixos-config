@@ -41,7 +41,10 @@ in
       description = "Automatically join the domain";
       wantedBy = [ "default.target" ];
       after = [
-        "network.target"
+        "network-online.target"
+      ];
+      requires = [
+        "network-online.target"
       ];
       serviceConfig = {
         type = "oneshot";
@@ -54,6 +57,33 @@ in
           -O $ADCLI_JOIN_OU \
           --stdin-password < ${cfg.join.passwordFile}
       '';
+    };
+
+    # Set up SSSD
+    services.sssd = {
+      enable = true;
+      config = ''
+        [sssd]
+        domains = ${domain}
+        config_file_version = 2
+        services = nss, pam, ssh
+
+        [domain/${domain}]
+        enumerate = false
+        ad_domain = ${domain}
+        krb5_realm = ${domainUpper}
+        id_provider = ad
+        auth_provider = ad
+        access_provider = ad
+        chpass_provider = ad
+        use_fully_qualified_names = false
+        ldap_id_mapping = true
+        ad_gpo_access_control = permissive
+      '';
+    };
+    systemd.services.sssd = {
+      after = [ "adcli-join.service" ];
+      requires = [ "adcli-join.service" ];
     };
   };
 }
