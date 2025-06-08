@@ -59,6 +59,24 @@ in
       '';
     };
 
+    # Set up Kerberos
+    security.krb5 = {
+      enable = true;
+      settings = {
+        libdefaults = {
+          default_realm = domainUpper;
+          dns_lookup_realm = false;
+          dns_lookup_kdc = true;
+          rdns = false;
+        };
+        realms.${domainUpper} = { };
+        domain_realm = {
+          "${domain}" = domainUpper;
+          ".${domain}" = domainUpper;
+        };
+      };
+    };
+
     # Set up SSSD
     services.sssd = {
       enable = true;
