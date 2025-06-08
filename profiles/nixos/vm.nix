@@ -29,8 +29,21 @@ in
           zfs rollback -r tank/root@blank
         '';
       };
+      domain = {
+        enable = true;
+        join = {
+          userFile = config.sops.secrets."vm-join/user".path;
+          passwordFile = config.sops.secrets."vm-join/password".path;
+          domainOUFile = config.sops.secrets."vm-join/ou".path;
+        };
+      };
       ssh.enable = true;
     };
+
+    # Initialize domain join secrets
+    sops.secrets."vm-join/user" = { };
+    sops.secrets."vm-join/password" = { };
+    sops.secrets."vm-join/ou" = { };
 
     # Autologin to root for access from hypervisor
     services.getty.autologinUser = "root";
