@@ -77,8 +77,9 @@ in
         access_provider = ad
         chpass_provider = ad
         use_fully_qualified_names = false
+        ldap_schema = ad
         ldap_id_mapping = true
-        ad_gpo_access_control = permissive
+        ad_gpo_access_control = enforcing
         dyndns_update = true
         dyndns_refresh_interval = 3600
         dyndns_update_ptr = true
