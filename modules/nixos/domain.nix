@@ -79,6 +79,10 @@ in
         use_fully_qualified_names = false
         ldap_id_mapping = true
         ad_gpo_access_control = permissive
+        dyndns_update = true
+        dyndns_refresh_interval = 3600
+        dyndns_update_ptr = true
+        dyndns_ttl = 3600
       '';
     };
     systemd.services.sssd = {
