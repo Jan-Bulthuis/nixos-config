@@ -51,7 +51,8 @@ in
         ADCLI_JOIN_OU=$(cat ${cfg.join.domainOUFile})
         ${pkgs.adcli}/bin/adcli join -D ${domain} \
           -U $ADCLI_JOIN_USER \
-          -O $ADCLI_JOIN_OU < ${cfg.join.passwordFile}
+          -O $ADCLI_JOIN_OU \
+          --stdin-password < ${cfg.join.passwordFile}
       '';
     };
   };
