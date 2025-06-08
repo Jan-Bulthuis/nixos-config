@@ -65,11 +65,9 @@ in
       settings = {
         libdefaults = {
           default_realm = domainUpper;
-          dns_lookup_realm = false;
-          dns_lookup_kdc = true;
-          rdns = false;
         };
-        realms.${domainUpper} = { };
+        realms.${domainUpper} = {
+        };
         domain_realm = {
           "${domain}" = domainUpper;
           ".${domain}" = domainUpper;
