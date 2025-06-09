@@ -157,5 +157,19 @@ in
           . $HOME/.bashrc
         fi
       '';
+
+    # Mount home directory
+    services.autofs = {
+      enable = true;
+      autoMaster =
+        let
+          networkMap = pkgs.writeText "auto" ''
+            * -fstype=cifs,multiuser,cruid=''${UID},sec=krb5 ://${inputs.secrets.lab.nas.host}/&
+          '';
+        in
+        ''
+          /network file:${networkMap}
+        '';
+    };
   };
 }
