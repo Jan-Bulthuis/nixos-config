@@ -138,10 +138,7 @@ in
                 home.stateVersion = "24.11";
                 home.username = "$USER";
                 home.homeDirectory = "/.$HOME";
-                home.packages = with pkgs; [
-                  tree
-                  cowsay
-                ];
+                modules.profiles.base.enable = true;
               }
             )
           ] ++ config.home-manager.sharedModules;
@@ -151,8 +148,7 @@ in
         # Activate Home Manager configuration for domain users
         if id | egrep -o 'groups=.*' | sed 's/,/\n/g' | cut -d'(' -f2 | sed 's/)//' | egrep -o "^domain users$"; then
           echo "Setting up environment for domain user"
-          SKIP_SANITY_CHECKS=1
-          ${homeConfiguration.activationPackage}/activate
+          SKIP_SANITY_CHECKS=1 ${homeConfiguration.activationPackage}/activate
         fi
       '';
   };
