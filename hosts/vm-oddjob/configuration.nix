@@ -19,6 +19,11 @@
   };
 
   # Setup NAS backups
+  environment.systemPackages = with pkgs; [
+    cifs-utils
+    keyutils
+    samba
+  ];
   environment.etc."request-key.d/cifs.spnego.conf".text = ''
     create cifs.spnego * * ${pkgs.cifs-utils}/bin/cifs.upcall -t %k
   '';
