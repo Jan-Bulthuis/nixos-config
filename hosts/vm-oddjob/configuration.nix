@@ -31,6 +31,9 @@
   sops.secrets."smb-credentials" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
   };
+  sops.secrets."backup-script-env" = {
+    sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
+  };
   systemd.services.mnt-nas-krb5 = {
     description = "Set up Kerberos credentials for mnt-nas";
     before = [ "mnt-nas.mount" ];
@@ -40,6 +43,19 @@
       . ${config.sops.secrets."smb-credentials".path}
       echo $password | ${pkgs.krb5}/bin/kinit $username
     '';
+  };
+  services.cron = {
+    enable = true;
+    systemCronJobs =
+      let
+        script = pkgs.writeShellScript "backup-script" ''
+          . ${config.sops.secrets."backup-script-env".path}
+          ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/nas --change-detection-mode=metadata
+        '';
+      in
+      [
+        "0 0 * * * ${script} "
+      ];
   };
   fileSystems."/mnt/nas" = {
     device = "//${inputs.secrets.lab.nas.host}/Backup";
