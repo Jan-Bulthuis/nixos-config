@@ -110,6 +110,7 @@ in
       after = [ "adcli-join.service" ];
       requires = [ "adcli-join.service" ];
     };
+    security.pam.services.login.sssdStrictAccess = true;
     security.pam.services.sshd.sssdStrictAccess = true;
 
     # Set up Sudo
@@ -122,5 +123,9 @@ in
           %${admin_group} ALL=(ALL) SETENV: ALL
         '';
       };
+
+    # Set up home directory
+    pam.services.login.makeHomeDir = true;
+    pam.services.sshd.makeHomeDir = true;
   };
 }
