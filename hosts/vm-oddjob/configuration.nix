@@ -19,11 +19,6 @@
   };
 
   # Setup NAS backups
-  environment.systemPackages = with pkgs; [
-    cifs-utils
-    samba
-    keyutils
-  ];
   environment.etc."request-key.conf".text =
     let
       upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
@@ -46,6 +41,16 @@
     '';
   sops.secrets."smb-credentials" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
+  };
+  systemd.services.mnt-nas-krb5 = {
+    description = "Set up Kerberos credentials for mnt-nas";
+    before = [ "mnt-nas.mount" ];
+    requiredBy = [ "mnt-nas.mount" ];
+    serviceConfig.type = "oneshot";
+    script = ''
+      . ${config.sops.secrets."smb-credentials".path}
+      echo $password | kinit $username
+    '';
   };
   fileSystems."/mnt/nas" = {
     device = "//${inputs.secrets.lab.nas.host}/Backup";
