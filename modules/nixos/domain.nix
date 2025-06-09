@@ -97,6 +97,7 @@ in
         ldap_schema = ad
         ldap_id_mapping = true
         ad_gpo_access_control = enforcing
+        ad_gpo_implicit_deny = true
         dyndns_update = true
         dyndns_refresh_interval = 3600
         dyndns_update_ptr = true
