@@ -151,6 +151,7 @@ in
         # Activate Home Manager configuration for domain users
         if id | egrep -o 'groups=.*' | sed 's/,/\n/g' | cut -d'(' -f2 | sed 's/)//' | egrep -o "^domain users$"; then
           echo "Setting up environment for domain user"
+          SKIP_SANITY_CHECKS=1
           ${homeConfiguration.activationPackage}/activate
         fi
       '';
