@@ -41,6 +41,10 @@
     serviceConfig.type = "oneshot";
     script = ''
       . ${config.sops.secrets."smb-credentials".path}
+      export PBS_REPOSITORY=$PBS_REPOSITORY
+      export PBS_NAMESPACE=$PBS_NAMESPACE
+      export PBS_PASSWORD=$PBS_PASSWORD
+      export PBS_FINGERPRINT=$PBS_FINGERPRINT
       echo $password | ${pkgs.krb5}/bin/kinit $username
     '';
   };
