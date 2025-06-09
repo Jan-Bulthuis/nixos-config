@@ -106,5 +106,16 @@ in
       after = [ "adcli-join.service" ];
       requires = [ "adcli-join.service" ];
     };
+
+    # Set up Sudo
+    security.sudo =
+      let
+        admin_group = (lib.replaceStrings [ "-" ] [ "_" ] config.networking.hostName) + "_admin";
+      in
+      {
+        extraConfig = ''
+          %${admin_group} ALL=(ALL) SETENV: ALL
+        '';
+      };
   };
 }
