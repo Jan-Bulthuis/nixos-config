@@ -86,21 +86,21 @@ in
         services = nss, pam, ssh
 
         [domain/${domain}]
-        enumerate = false
+        enumerate = False
         ad_domain = ${domain}
         krb5_realm = ${domainUpper}
         id_provider = ad
         auth_provider = ad
         access_provider = ad
         chpass_provider = ad
-        use_fully_qualified_names = false
+        use_fully_qualified_names = False
         ldap_schema = ad
-        ldap_id_mapping = true
+        ldap_id_mapping = True
         ad_gpo_access_control = enforcing
-        ad_gpo_implicit_deny = true
+        ad_gpo_implicit_deny = True
         dyndns_update = true
         dyndns_refresh_interval = 3600
-        dyndns_update_ptr = true
+        dyndns_update_ptr = false
         dyndns_ttl = 3600
         ldap_user_extra_attrs = altSecurityIdentities:altSecurityIdentities
         ldap_user_ssh_public_key = altSecurityIdentities
