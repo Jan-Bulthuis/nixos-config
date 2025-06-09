@@ -56,7 +56,7 @@
           export PBS_NAMESPACE=$PBS_NAMESPACE
           export PBS_PASSWORD=$PBS_PASSWORD
           export PBS_FINGERPRINT=$PBS_FINGERPRINT
-          ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/nas --ns $PBS_NAMESPACE --backup-id "NAS Backup" --change-detection-mode=metadata --exclude "#recycle"
+          ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/nas --ns $PBS_NAMESPACE --backup-id nas-backup --change-detection-mode=metadata --exclude "#recycle"
         '';
       in
       [
