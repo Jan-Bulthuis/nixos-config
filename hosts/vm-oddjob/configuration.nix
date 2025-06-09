@@ -34,6 +34,10 @@
   sops.secrets."backup-script-env" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
   };
+  systemd.mounts.mnt-nas = {
+    requires = [ "mnt-nas-krb5.service" ];
+    after = [ "mnt-nas-krb5.service" ];
+  };
   systemd.services.mnt-nas-krb5 = {
     description = "Set up Kerberos credentials for mnt-nas";
     before = [ "mnt-nas.mount" ];
