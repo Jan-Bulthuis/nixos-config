@@ -125,7 +125,7 @@ in
       };
 
     # Set up home directory
-    pam.services.login.makeHomeDir = true;
-    pam.services.sshd.makeHomeDir = true;
+    security.pam.services.login.makeHomeDir = true;
+    security.pam.services.sshd.makeHomeDir = true;
   };
 }
