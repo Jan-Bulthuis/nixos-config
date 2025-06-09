@@ -49,7 +49,7 @@
     serviceConfig.type = "oneshot";
     script = ''
       . ${config.sops.secrets."smb-credentials".path}
-      echo $password | kinit $username
+      echo $password | ${pkgs.krb5}/bin/kinit $username
     '';
   };
   fileSystems."/mnt/nas" = {
