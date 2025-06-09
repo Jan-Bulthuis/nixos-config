@@ -31,16 +31,16 @@
   sops.secrets."smb-credentials" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
   };
-  # systemd.services.mnt-nas-krb5 = {
-  #   description = "Set up Kerberos credentials for mnt-nas";
-  #   before = [ "mnt-nas.mount" ];
-  #   requiredBy = [ "mnt-nas.mount" ];
-  #   serviceConfig.type = "oneshot";
-  #   script = ''
-  #     . ${config.sops.secrets."smb-credentials".path}
-  #     echo $password | ${pkgs.krb5}/bin/kinit $username
-  #   '';
-  # };
+  systemd.services.mnt-nas-krb5 = {
+    description = "Set up Kerberos credentials for mnt-nas";
+    before = [ "mnt-nas.mount" ];
+    requiredBy = [ "mnt-nas.mount" ];
+    serviceConfig.type = "oneshot";
+    script = ''
+      . ${config.sops.secrets."smb-credentials".path}
+      echo $password | ${pkgs.krb5}/bin/kinit $username
+    '';
+  };
   fileSystems."/mnt/nas" = {
     device = "//${inputs.secrets.lab.nas.host}/Backup";
     fsType = "cifs";
