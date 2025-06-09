@@ -41,10 +41,6 @@
     serviceConfig.type = "oneshot";
     script = ''
       . ${config.sops.secrets."smb-credentials".path}
-      export PBS_REPOSITORY=$PBS_REPOSITORY
-      export PBS_NAMESPACE=$PBS_NAMESPACE
-      export PBS_PASSWORD=$PBS_PASSWORD
-      export PBS_FINGERPRINT=$PBS_FINGERPRINT
       echo $password | ${pkgs.krb5}/bin/kinit $username
     '';
   };
@@ -54,6 +50,10 @@
       let
         script = pkgs.writeShellScript "backup-script" ''
           . ${config.sops.secrets."backup-script-env".path}
+          export PBS_REPOSITORY=$PBS_REPOSITORY
+          export PBS_NAMESPACE=$PBS_NAMESPACE
+          export PBS_PASSWORD=$PBS_PASSWORD
+          export PBS_FINGERPRINT=$PBS_FINGERPRINT
           ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/nas --change-detection-mode=metadata
         '';
       in
