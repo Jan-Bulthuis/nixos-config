@@ -125,7 +125,6 @@ in
       {
         extraConfig = ''
           %${admin_group} ALL=(ALL) SETENV: ALL
-          %${domainUpper}${admin_group} ALL=(ALL) SETENV: ALL
         '';
       };
 
