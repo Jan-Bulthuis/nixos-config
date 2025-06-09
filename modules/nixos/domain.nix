@@ -110,6 +110,7 @@ in
       after = [ "adcli-join.service" ];
       requires = [ "adcli-join.service" ];
     };
+    security.pam.services.login.sssdStrictAccess = true;
 
     # Set up Sudo
     security.sudo =
