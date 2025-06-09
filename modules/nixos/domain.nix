@@ -85,10 +85,14 @@ in
         config_file_version = 2
         services = nss, pam, ssh
 
+        [nss]
+        filter_users = ${concatStringsSep "," (lib.attrNames config.users.users)}
+        filter_groups = ${concatStringsSep "," (lib.attrNames config.users.groups)}
+
         [domain/${domain}]
         enumerate = False
         ad_domain = ${domain}
-        krb5_realm = ${domainUpper}
+        krb5_realm = ${domainUpper}H
         id_provider = ad
         auth_provider = ad
         access_provider = ad
@@ -121,6 +125,7 @@ in
       {
         extraConfig = ''
           %${admin_group} ALL=(ALL) SETENV: ALL
+          %${domainUpper}${admin_group} ALL=(ALL) SETENV: ALL
         '';
       };
 
@@ -129,6 +134,7 @@ in
     security.pam.services.sshd.makeHomeDir = true;
     environment.etc.profile.text =
       let
+        # TODO: Activate configuration based on AD group
         homeConfiguration = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
