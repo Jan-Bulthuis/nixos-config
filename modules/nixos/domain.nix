@@ -78,6 +78,7 @@ in
     # Set up SSSD
     services.sssd = {
       enable = true;
+      sshAuthorizedKeysIntegration = true;
       config = ''
         [sssd]
         domains = ${domain}
@@ -100,6 +101,8 @@ in
         dyndns_refresh_interval = 3600
         dyndns_update_ptr = true
         dyndns_ttl = 3600
+        ldap_user_extra_attrs = altSecurityIdentities:altSecurityIdentities
+        ldap_user_ssh_public_key = altSecurityIdentities
       '';
     };
     systemd.services.sssd = {
