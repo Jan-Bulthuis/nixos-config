@@ -138,7 +138,7 @@ in
           inherit pkgs;
           modules = [
             (
-              { ... }:
+              { lib, ... }:
               {
                 home.stateVersion = "24.11";
                 home.username = "$USER";
@@ -146,16 +146,17 @@ in
                 modules.profiles.base.enable = true;
 
                 # Mount the directories from the network share
-                home.persistence."/network/$USER" = {
-                  directories = [
-                    "Music"
-                    "Pictures"
-                    "Documents"
-                    "Videos"
-                  ];
-                  files = [ ];
-                  allowOther = true;
-                };
+                home.activation.dirMount = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                  if klist -s; then
+                    echo "Kerberos ticket found, mounting home directory"
+                    ln -s /network/$USER/Documents $HOME/Documents || true
+                    ln -s /network/$USER/Music $HOME/Music || true
+                    ln -s /network/$USER/Pictures $HOME/Pictures || true
+                    ln -s /network/$USER/Video $HOME/Video || true
+                  else
+                    echo "No kerberos ticket found"
+                  fi
+                '';
               }
             )
           ] ++ config.home-manager.sharedModules;
