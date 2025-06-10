@@ -144,6 +144,18 @@ in
                 home.username = "$USER";
                 home.homeDirectory = "/.$HOME";
                 modules.profiles.base.enable = true;
+
+                # Mount the directories from the network share
+                home.persistence."/network/$USER" = {
+                  directories = [
+                    "Music"
+                    "Pictures"
+                    "Documents"
+                    "Videos"
+                  ];
+                  files = [ ];
+                  allowOther = true;
+                };
               }
             )
           ] ++ config.home-manager.sharedModules;
@@ -158,7 +170,8 @@ in
         fi
       '';
 
-    # Mount home directory
+    # Automatically mount home share
+    # Can be accessed at /network/$USER
     services.autofs = {
       enable = true;
       autoMaster =
