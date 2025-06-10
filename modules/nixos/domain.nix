@@ -164,11 +164,11 @@ in
       autoMaster =
         let
           networkMap = pkgs.writeText "auto" ''
-            * -fstype=cifs,cruid=''${UID},sec=krb5 ://${inputs.secrets.lab.nas.host}/home
+            * -fstype=cifs,sec=krb5,user=&,uid=$UID,gid=$GID,cruid=$UID ://${inputs.secrets.lab.nas.host}/home
           '';
         in
         ''
-          /network ${networkMap}
+          /network ${networkMap} --timeout=30
         '';
     };
   };
