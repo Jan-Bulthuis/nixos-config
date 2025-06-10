@@ -150,6 +150,7 @@ in
                   let
                     bindScript = dir: ''
                       mkdir -p /network/$USER/${dir}
+                      mkdir -p $HOME/${dir}
                       ${pkgs.bindfs}/bin/bindfs /network/$USER/${dir} $HOME/${dir}
                     '';
                   in
