@@ -146,17 +146,29 @@ in
                 modules.profiles.base.enable = true;
 
                 # Mount the directories from the network share
-                home.activation.dirMount = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-                  if ${pkgs.krb5}/bin/klist -s; then
-                    echo "Kerberos ticket found, mounting home directory"
-                    ln -s /network/$USER/Documents $HOME/Documents || true
-                    ln -s /network/$USER/Music $HOME/Music || true
-                    ln -s /network/$USER/Pictures $HOME/Pictures || true
-                    ln -s /network/$USER/Video $HOME/Video || true
-                  else
-                    echo "No kerberos ticket found"
-                  fi
-                '';
+                home.activation.dirMount =
+                  let
+                    bindScript = dir: ''
+                      mkdir -p /network/$USER/${dir}
+                      ${pkgs.bindfs}/bin/bindfs /network/$USER/${dir} $HOME/${dir}
+                    '';
+                  in
+                  lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                    if ! ${pkgs.krb5}/bin/klist -s; then
+                      echo "No kerberos ticket found"
+                      ${pkgs.krb5}/bin/kinit
+                    fi
+
+                    if ${pkgs.krb5}/bin/klist -s; then
+                      echo "Kerberos ticket found, mounting home directory"
+                      ${bindScript "Documents"}
+                      ${bindScript "Music"}
+                      ${bindScript "Pictures"}
+                      ${bindScript "Video"}
+                    else
+                      echo "Still no kerberos ticket found, skipping home directory mount"
+                    fi
+                  '';
               }
             )
           ] ++ config.home-manager.sharedModules;
