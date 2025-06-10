@@ -147,7 +147,7 @@ in
 
                 # Mount the directories from the network share
                 home.activation.dirMount = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-                  if klist -s; then
+                  if ${pkgs.krb5}/bin/klist -s; then
                     echo "Kerberos ticket found, mounting home directory"
                     ln -s /network/$USER/Documents $HOME/Documents || true
                     ln -s /network/$USER/Music $HOME/Music || true
