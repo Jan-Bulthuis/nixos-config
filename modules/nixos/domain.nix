@@ -40,6 +40,8 @@ in
     systemd.services.adcli-join = {
       description = "Automatically join the domain";
       wantedBy = [ "default.target" ];
+      before = [ "sssd.service" ];
+      requiredBy = [ "sssd.service" ];
       after = [
         "network-online.target"
       ];
@@ -84,7 +86,7 @@ in
         [sssd]
         domains = ${domain}
         config_file_version = 2
-        services = nss, pam, ssh
+        services = nss, pam
 
         [nss]
         filter_users = ${concatStringsSep "," (lib.attrNames config.users.users)}
@@ -107,27 +109,29 @@ in
         dyndns_update_ptr = False
         dyndns_refresh_interval = 86400
         dyndns_ttl = 3600
-        ldap_user_extra_attrs = altSecurityIdentities:altSecurityIdentities
-        ldap_user_ssh_public_key = altSecurityIdentities
       '';
-    };
-    systemd.services.sssd = {
-      after = [ "adcli-join.service" ];
-      requires = [ "adcli-join.service" ];
     };
     security.pam.services.login.sssdStrictAccess = true;
     security.pam.services.sshd.sssdStrictAccess = true;
+    security.pam.services.su.sssdStrictAccess = true;
 
     # Set up Sudo
     security.sudo =
       let
-        admin_group = (lib.replaceStrings [ "-" ] [ "_" ] config.networking.hostName) + "_admin";
+        admin_group = "host_${lib.replaceStrings [ "-" ] [ "_" ] config.networking.hostName}_admin";
       in
       {
         extraConfig = ''
           %${admin_group} ALL=(ALL) SETENV: ALL
         '';
       };
+
+    # Set up SSH
+    services.openssh.settings = {
+      GSSAPIAuthentication = true;
+      GSSAPICleanupCredentials = true;
+      GSSAPIStrictAcceptorCheck = true;
+    };
 
     # Set up home directory
     security.pam.services.login.makeHomeDir = true;
@@ -181,7 +185,9 @@ in
         if id | egrep -o 'groups=.*' | sed 's/,/\n/g' | cut -d'(' -f2 | sed 's/)//' | egrep -o "^domain users$"; then
           echo "Setting up environment for domain user"
           SKIP_SANITY_CHECKS=1 ${homeConfiguration.activationPackage}/activate
-          . $HOME/.bashrc
+          if test -f "$HOME/.bashrc"; then
+            . $HOME/.bashrc
+          fi
         fi
       '';
 
