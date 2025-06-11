@@ -103,9 +103,9 @@ in
         ldap_id_mapping = True
         ad_gpo_access_control = enforcing
         ad_gpo_implicit_deny = True
-        dyndns_update = true
-        dyndns_refresh_interval = 3600
-        dyndns_update_ptr = false
+        dyndns_update = True
+        dyndns_update_ptr = False
+        dyndns_refresh_interval = 86400
         dyndns_ttl = 3600
         ldap_user_extra_attrs = altSecurityIdentities:altSecurityIdentities
         ldap_user_ssh_public_key = altSecurityIdentities
