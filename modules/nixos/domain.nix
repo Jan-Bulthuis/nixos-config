@@ -127,10 +127,13 @@ in
       };
 
     # Set up SSH
-    services.openssh.settings = {
-      GSSAPIAuthentication = true;
-      GSSAPICleanupCredentials = true;
-      GSSAPIStrictAcceptorCheck = true;
+    services.openssh = {
+      package = pkgs.opensshWithKerberos;
+      settings = {
+        GSSAPIAuthentication = true;
+        GSSAPICleanupCredentials = true;
+        GSSAPIStrictAcceptorCheck = true;
+      };
     };
 
     # Set up home directory
