@@ -52,12 +52,21 @@ in
     modules.secrets.secrets."passwords/local-hashed".neededForUsers = true;
     users.mutableUsers = false;
     users.users.local = {
+      isNormalUser = true;
+      group = "local";
       hashedPasswordFile = config.sops.secrets."passwords/local-hashed".path;
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq Admin"
       ];
     };
+    users.groups.local = { };
+    home-manager.users.local =
+      { ... }:
+      {
+        home.stateVersion = "24.11";
+        modules.profiles.base.enable = true;
+      };
 
     # System packages
     environment.systemPackages = with pkgs; [
