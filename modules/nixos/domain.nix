@@ -81,7 +81,6 @@ in
     # Set up SSSD
     services.sssd = {
       enable = true;
-      sshAuthorizedKeysIntegration = true;
       config = ''
         [sssd]
         domains = ${domain}
