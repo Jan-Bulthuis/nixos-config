@@ -138,6 +138,7 @@ in
     # Set up home directory
     security.pam.services.login.makeHomeDir = true;
     security.pam.services.sshd.makeHomeDir = true;
+    security.pam.services.su.makeHomeDir = true;
     environment.etc.profile.text =
       let
         # TODO: Activate configuration based on AD group
