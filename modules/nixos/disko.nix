@@ -20,5 +20,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable { disko.devices = profile.disko.devices; };
+  config = mkIf cfg.enable {
+    disko.devices = profile.disko.devices;
+  };
 }

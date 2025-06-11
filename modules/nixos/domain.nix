@@ -47,7 +47,7 @@ in
         "network-online.target"
       ];
       serviceConfig = {
-        type = "oneshot";
+        Type = "oneshot";
       };
       script = ''
         ADCLI_JOIN_USER=$(cat ${cfg.join.userFile})

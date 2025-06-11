@@ -16,5 +16,8 @@ in
       systemd-boot.editor = false;
       efi.canTouchEfiVariables = true;
     };
+
+    # Initrd
+    boot.initrd.systemd.enable = true;
   };
 }

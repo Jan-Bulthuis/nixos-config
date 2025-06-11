@@ -4,6 +4,7 @@
       main = {
         type = "disk";
         device = "/dev/sda";
+        imageSize = "32G"; # For test VMs
         content = {
           type = "gpt";
           partitions = {

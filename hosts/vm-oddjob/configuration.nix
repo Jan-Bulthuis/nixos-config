@@ -40,7 +40,7 @@
     requiredBy = [ "mnt-nas.mount" ];
     after = [ "network-online.target" ];
     requires = [ "network-online.target" ];
-    serviceConfig.type = "oneshot";
+    serviceConfig.Type = "oneshot";
     script = ''
       . ${config.sops.secrets."smb-credentials".path}
       echo $password | ${pkgs.krb5}/bin/kinit $username

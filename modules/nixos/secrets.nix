@@ -39,5 +39,6 @@ in
     ];
     sops.secrets = cfg.secrets;
     modules.impermanence.directories = [ "/etc/sops" ];
+    virtualisation.vmVariantWithDisko.sops.age.sshKeyPaths = [ "/tmp/shared/sops_ed25519_key" ];
   };
 }
