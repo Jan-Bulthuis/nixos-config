@@ -11,5 +11,7 @@ in
   config = mkIf cfg.enable {
     # TODO: Add sudo users to the networkmanager group?
     networking.networkmanager.enable = true;
+
+    networking.firewall.checkReversePath = false;
   };
 }
