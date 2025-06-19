@@ -62,7 +62,7 @@
               ''
             ]
             ++ lib.map (share: ''
-              ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/${share} --ns $PBS_NAMESPACE --backup-id share-${share} --change-detection-mode=metadata --exclude "#recycle"
+              ${pkgs.util-linux}/bin/prlimit --nofile=1024:1024 ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/${share} --ns $PBS_NAMESPACE --backup-id share-${share} --change-detection-mode=metadata --exclude "#recycle"
             '') inputs.secrets.lab.nas.backupShares
           )
         );
