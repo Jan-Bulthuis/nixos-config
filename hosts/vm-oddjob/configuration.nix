@@ -50,22 +50,39 @@
     enable = true;
     systemCronJobs =
       let
-        script = pkgs.writeShellScript "backup-script" ''
-          . ${config.sops.secrets."backup-script-env".path}
-          export PBS_REPOSITORY=$PBS_REPOSITORY
-          export PBS_NAMESPACE=$PBS_NAMESPACE
-          export PBS_PASSWORD=$PBS_PASSWORD
-          export PBS_FINGERPRINT=$PBS_FINGERPRINT
-          ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/nas --ns $PBS_NAMESPACE --backup-id nas-backup --change-detection-mode=metadata --exclude "#recycle"
-        '';
+        script = pkgs.writeShellScript "backup-script" (
+          lib.concatStrings (
+            [
+              ''
+                . ${config.sops.secrets."backup-script-env".path}
+                export PBS_REPOSITORY=$PBS_REPOSITORY
+                export PBS_NAMESPACE=$PBS_NAMESPACE
+                export PBS_PASSWORD=$PBS_PASSWORD
+                export PBS_FINGERPRINT=$PBS_FINGERPRINT
+              ''
+            ]
+            ++ lib.map (share: ''
+              ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/${share} --ns $PBS_NAMESPACE --backup-id share-${share} --change-detection-mode=metadata --exclude "#recycle"
+            '') inputs.secrets.lab.nas.backupShares
+          )
+        );
       in
       [
         "0 0 * * * ${script} "
       ];
   };
-  fileSystems."/mnt/nas" = {
-    device = "//${inputs.secrets.lab.nas.host}/Backup";
-    fsType = "cifs";
-    options = [ "sec=krb5,credentials=${config.sops.secrets."smb-credentials".path}" ];
-  };
+
+  # Mount filesystems
+  fileSystems = lib.listToAttrs (
+    lib.map (share: {
+      name = "/mnt/${share}";
+      value = {
+        device = "//${inputs.secrets.lab.nas.host}/${share}";
+        fsType = "cifs";
+        options = [
+          "sec=krb5,credentials=${config.sops.secrets."smb-credentials".path}"
+        ];
+      };
+    }) inputs.secrets.lab.nas.backupShares
+  );
 }
