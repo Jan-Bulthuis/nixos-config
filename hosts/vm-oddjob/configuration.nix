@@ -34,18 +34,6 @@
   sops.secrets."backup-script-env" = {
     sopsFile = "${inputs.secrets}/secrets/vm-oddjob.enc.yaml";
   };
-  systemd.services.mnt-nas-krb5 = {
-    description = "Set up Kerberos credentials for mnt-nas";
-    before = [ "mnt-nas.mount" ];
-    requiredBy = [ "mnt-nas.mount" ];
-    after = [ "network-online.target" ];
-    requires = [ "network-online.target" ];
-    serviceConfig.Type = "oneshot";
-    script = ''
-      . ${config.sops.secrets."smb-credentials".path}
-      echo $password | ${pkgs.krb5}/bin/kinit $username
-    '';
-  };
   services.cron = {
     enable = true;
     systemCronJobs =
@@ -62,9 +50,9 @@
               ''
             ]
             ++ lib.map (share: ''
-              mount /mnt/${share}
+              systemctl start mnt-${share}.mount
               ${pkgs.util-linux}/bin/prlimit --nofile=1024:1024 ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/${share} --ns $PBS_NAMESPACE --backup-id share-${share} --change-detection-mode=metadata --exclude "#recycle"
-              umount /mnt/${share}
+              systemctl stop mnt-${share}.mount
             '') inputs.secrets.lab.nas.backupShares
           )
         );
@@ -75,7 +63,18 @@
   };
 
   # Mount filesystems
-
+  systemd.services.krb5-mnt-credentials = {
+    description = "Set up Kerberos credentials for mounting shares";
+    before = map (share: "mnt-${share}.mount") inputs.secrets.lab.nas.backupShares;
+    requiredBy = map (share: "mnt-${share}.mount") inputs.secrets.lab.nas.backupShares;
+    after = [ "network-online.target" ];
+    requires = [ "network-online.target" ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      . ${config.sops.secrets."smb-credentials".path}
+      echo $password | ${pkgs.krb5}/bin/kinit $username
+    '';
+  };
   fileSystems = lib.listToAttrs (
     lib.map (share: {
       name = "/mnt/${share}";
