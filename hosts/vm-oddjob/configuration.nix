@@ -62,17 +62,20 @@
               ''
             ]
             ++ lib.map (share: ''
+              mount /mnt/${share}
               ${pkgs.util-linux}/bin/prlimit --nofile=1024:1024 ${pkgs.proxmox-backup-client}/bin/proxmox-backup-client backup nfs.pxar:/mnt/${share} --ns $PBS_NAMESPACE --backup-id share-${share} --change-detection-mode=metadata --exclude "#recycle"
+              umount /mnt/${share}
             '') inputs.secrets.lab.nas.backupShares
           )
         );
       in
       [
-        "0 0 * * * ${script} "
+        "0 0 * * * root ${script}"
       ];
   };
 
   # Mount filesystems
+
   fileSystems = lib.listToAttrs (
     lib.map (share: {
       name = "/mnt/${share}";
@@ -80,6 +83,7 @@
         device = "//${inputs.secrets.lab.nas.host}/${share}";
         fsType = "cifs";
         options = [
+          "noauto"
           "sec=krb5,credentials=${config.sops.secrets."smb-credentials".path}"
         ];
       };
