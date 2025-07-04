@@ -30,7 +30,7 @@ in
       discord
       steam
       spotify
-      # feishin # TODO: Fix or replace as insecure
+      feishin
       eduvpn-client
       river # TODO: Move
       ryubing
@@ -39,6 +39,8 @@ in
       foliate
       wireshark
       obsidian
+      devenv
+      kicad
     ];
 
     modules = {
