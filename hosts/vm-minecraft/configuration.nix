@@ -30,8 +30,14 @@
     eula = true;
     openFirewall = true;
     servers = {
-      modpack = {
+      vanilla = {
         enable = true;
+        autoStart = true;
+        serverProperties = { };
+        package = inputs.nix-minecraft.legacyPackages.${pkgs.system}.vanillaServers.vanilla-1_20_7;
+      };
+      modpack = {
+        enable = false;
         autoStart = true;
         serverProperties = { };
         package = inputs.nix-modpack.packages.${pkgs.system}.mkModpackServer {
