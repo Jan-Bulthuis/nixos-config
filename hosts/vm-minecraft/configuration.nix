@@ -25,6 +25,9 @@
 
   # Set up minecraft servers
   users.users.local.extraGroups = [ "minecraft" ];
+  modules.impermanence.directories = [
+    "/srv/minecraft"
+  ];
   services.minecraft-servers = {
     enable = true;
     eula = true;
@@ -33,8 +36,10 @@
       vanilla = {
         enable = true;
         autoStart = true;
-        serverProperties = { };
-        package = inputs.nix-minecraft.legacyPackages.${pkgs.system}.vanillaServers.vanilla-1_20_7;
+        serverProperties = {
+          white-list = true;
+        };
+        package = inputs.nix-minecraft.legacyPackages.${pkgs.system}.vanillaServers.vanilla-1_21_7;
       };
       modpack = {
         enable = false;
