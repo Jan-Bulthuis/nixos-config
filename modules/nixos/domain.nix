@@ -59,7 +59,6 @@ in
           -O $ADCLI_JOIN_OU \
           --dont-expire-password=true \
           --stdin-password < ${cfg.join.passwordFile}
-        sleep 3
       '';
     };
 
