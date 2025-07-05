@@ -126,8 +126,14 @@ in
       };
 
     # Set up SSH
+    programs.ssh = {
+      package = pkgs.openssh_gssapi;
+      extraConfig = ''
+        GSSAPIAuthentication yes
+      '';
+    };
     services.openssh = {
-      package = pkgs.opensshWithKerberos;
+      package = pkgs.openssh_gssapi;
       settings = {
         GSSAPIAuthentication = true;
         GSSAPICleanupCredentials = true;
@@ -154,30 +160,30 @@ in
                 modules.profiles.base.enable = true;
 
                 # Mount the directories from the network share
-                home.activation.dirMount =
-                  let
-                    bindScript = dir: ''
-                      mkdir -p /network/$USER/${dir}
-                      mkdir -p $HOME/${dir}
-                      ${pkgs.bindfs}/bin/bindfs /network/$USER/${dir} $HOME/${dir}
-                    '';
-                  in
-                  lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-                    if ! ${pkgs.krb5}/bin/klist -s; then
-                      echo "No kerberos ticket found"
-                      ${pkgs.krb5}/bin/kinit
-                    fi
+                # home.activation.dirMount =
+                #   let
+                #     bindScript = dir: ''
+                #       mkdir -p /network/$USER/${dir}
+                #       mkdir -p $HOME/${dir}
+                #       ${pkgs.bindfs}/bin/bindfs /network/$USER/${dir} $HOME/${dir}
+                #     '';
+                #   in
+                #   lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                #     if ! ${pkgs.krb5}/bin/klist -s; then
+                #       echo "No kerberos ticket found"
+                #       ${pkgs.krb5}/bin/kinit
+                #     fi
 
-                    if ${pkgs.krb5}/bin/klist -s; then
-                      echo "Kerberos ticket found, mounting home directory"
-                      ${bindScript "Documents"}
-                      ${bindScript "Music"}
-                      ${bindScript "Pictures"}
-                      ${bindScript "Video"}
-                    else
-                      echo "Still no kerberos ticket found, skipping home directory mount"
-                    fi
-                  '';
+                #     if ${pkgs.krb5}/bin/klist -s; then
+                #       echo "Kerberos ticket found, mounting home directory"
+                #       ${bindScript "Documents"}
+                #       ${bindScript "Music"}
+                #       ${bindScript "Pictures"}
+                #       ${bindScript "Video"}
+                #     else
+                #       echo "Still no kerberos ticket found, skipping home directory mount"
+                #     fi
+                #   '';
               }
             )
           ] ++ config.home-manager.sharedModules;
@@ -196,17 +202,17 @@ in
 
     # Automatically mount home share
     # Can be accessed at /network/$USER
-    services.autofs = {
-      enable = true;
-      autoMaster =
-        let
-          networkMap = pkgs.writeText "auto" ''
-            * -fstype=cifs,sec=krb5,user=&,uid=$UID,gid=$GID,cruid=$UID ://${inputs.secrets.lab.nas.host}/home
-          '';
-        in
-        ''
-          /network ${networkMap} --timeout=30
-        '';
-    };
+    # services.autofs = {
+    #   enable = true;
+    #   autoMaster =
+    #     let
+    #       networkMap = pkgs.writeText "auto" ''
+    #         * -fstype=cifs,sec=krb5,user=&,uid=$UID,gid=$GID,cruid=$UID ://${inputs.secrets.lab.nas.host}/home
+    #       '';
+    #     in
+    #     ''
+    #       /network ${networkMap} --timeout=30
+    #     '';
+    # };
   };
 }
