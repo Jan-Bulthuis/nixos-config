@@ -38,8 +38,10 @@
         autoStart = true;
         serverProperties = {
           white-list = true;
+          difficulty = "normal";
+          max-players = 5;
         };
-        package = inputs.nix-minecraft.legacyPackages.${pkgs.system}.vanillaServers.vanilla-1_21_7;
+        package = inputs.nix-minecraft.legacyPackages.${pkgs.system}.fabricServers.fabric-1_21_7;
       };
       modpack = {
         enable = false;
