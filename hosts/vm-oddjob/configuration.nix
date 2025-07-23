@@ -37,7 +37,8 @@
         };
         extraOptions = [
           "--network=host"
-          "--ulimit nofile=4096:8192"
+          "--ulimit"
+          "nofile=4096:8192"
         ];
         image = "mbentley/omada-controller:5.15";
       };
