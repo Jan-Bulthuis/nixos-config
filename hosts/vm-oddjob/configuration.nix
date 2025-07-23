@@ -53,6 +53,24 @@
     "/var/lib/omada"
     "/var/log/omada"
   ];
+  networking.firewall = {
+    allowedTCPPorts = [
+      8088
+      8043
+      8843
+    ];
+    allowedTCPPortRanges = [
+      {
+        from = 29811;
+        to = 29816;
+      }
+    ];
+    allowedUDPPorts = [
+      19810
+      27001
+      29810
+    ];
+  };
 
   # Setup NAS backups
   environment.systemPackages = with pkgs; [
