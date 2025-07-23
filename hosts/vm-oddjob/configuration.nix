@@ -19,6 +19,11 @@
   };
 
   # Omada Software Controller
+  users.users.omada = {
+    isSystemUser = true;
+    group = "omada";
+  };
+  users.groups.omada = { };
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
