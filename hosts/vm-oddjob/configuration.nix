@@ -46,6 +46,7 @@
   };
   modules.impermanence.directories = [
     "/var/lib/omada"
+    "/var/log/omada"
   ];
 
   # Setup NAS backups
