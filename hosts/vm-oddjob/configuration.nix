@@ -19,11 +19,6 @@
   };
 
   # Omada Software Controller
-  users.users.omada = {
-    isSystemUser = true;
-    group = "omada";
-  };
-  users.groups.omada = { };
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
@@ -33,8 +28,6 @@
     backend = "podman";
     containers = {
       omada-controller = {
-        user = "omada:omada";
-        podman.user = "omada";
         volumes = [
           "/var/lib/omada:/opt/tplink/EAPController/data"
           "/var/log/omada:/opt/tplink/EAPController/logs"
