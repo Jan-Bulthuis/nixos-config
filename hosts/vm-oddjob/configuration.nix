@@ -18,6 +18,42 @@
     profiles.vm.enable = true;
   };
 
+  # Omada Software Controller
+  users.users.omada = {
+    isSystemUser = true;
+    group = "omada";
+  };
+  users.groups.omada = { };
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers = {
+      omada-controller = {
+        user = "omada:omada";
+        podman.user = "omada";
+        volumes = [
+          "/var/lib/omada:/opt/tplink/EAPController/data"
+          "/var/log/omada:/opt/tplink/EAPController/logs"
+        ];
+        environment = {
+          TZ = "Europe/Amsterdam";
+        };
+        extraOptions = [
+          "--network=host"
+          "--ulimit nofile=4096:8192"
+        ];
+        image = "mbentley/omada-controller:5.15";
+      };
+    };
+  };
+  modules.impermanence.directories = [
+    "/var/lib/omada"
+  ];
+
   # Setup NAS backups
   environment.systemPackages = with pkgs; [
     keyutils

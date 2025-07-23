@@ -49,7 +49,7 @@ in
     services.getty.autologinUser = "root";
 
     # Local user
-    modules.secrets.secrets."passwords/local-hashed".neededForUsers = true;
+    sops.secrets."passwords/local-hashed".neededForUsers = true;
     users.mutableUsers = false;
     users.users.local = {
       isNormalUser = true;
@@ -80,7 +80,7 @@ in
     # Machine platform
     nixpkgs.hostPlatform = "x86_64-linux";
 
-    # Set hostid for ZFS
+    # Set hostid (required for ZFS)
     networking.hostId = "deadbeef";
 
     # Hardware configuration
@@ -88,11 +88,22 @@ in
     boot.initrd.availableKernelModules = [
       "ata_piix"
       "uhci_hcd"
+      "virtio_net"
       "virtio_pci"
+      "virtio_mmio"
+      "virtio_blk"
       "virtio_scsi"
+      "9p"
+      "9pnet_virtio"
       "sd_mod"
       "sr_mod"
     ];
-    boot.kernelModules = [ "kvm-intel" ];
+    boot.kernelModules = [
+      "kvm-intel"
+      "virtio_balloon"
+      "virtio_console"
+      "virtio_rng"
+      "virtio_gpu"
+    ];
   };
 }
