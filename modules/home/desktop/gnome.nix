@@ -15,7 +15,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    # TODO: Enable extensions with dconf
+    # TODO: Enable extensions (declaratively) with dconf
 
     home.pointerCursor = {
       name = "capitaine-cursors";
@@ -50,17 +50,29 @@ in
         file-roller
         mission-center
         dconf-editor
+        gnome-calendar
 
         # For theming gtk3
         adw-gtk3
+
+        # More icons
+        morewaita-icon-theme
       ]
       ++ (with pkgs.gnomeExtensions; [
         gsconnect
         disable-workspace-animation
         wallpaper-slideshow
         media-progress
-        # luminus-desktop
       ]);
+
+    # Set up gnome terminal as changing the default terminal is a pain
+    programs.gnome-terminal = {
+      enable = true;
+      profile."12d2da79-b36c-43d5-8e1f-cf70907b84b3" = {
+        visibleName = "Default";
+        default = true;
+      };
+    };
 
     # Enable and set the gtk themes
     gtk = {
