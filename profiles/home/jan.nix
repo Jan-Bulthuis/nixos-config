@@ -41,6 +41,7 @@ in
       obsidian
       devenv
       kicad
+      vlc
     ];
 
     modules = {
@@ -85,6 +86,7 @@ in
       cpp.enable = true;
       tex.enable = true;
       jupyter.enable = false;
+      go.enable = true;
     };
   };
 }
