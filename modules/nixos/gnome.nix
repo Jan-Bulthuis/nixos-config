@@ -28,7 +28,6 @@ in
       gnome-backgrounds
       gnome-bluetooth
       gnome-color-manager
-      gnome-control-center
       gnome-shell-extensions
       gnome-tour
       gnome-user-docs
