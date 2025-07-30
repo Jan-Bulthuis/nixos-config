@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   # State version
@@ -24,6 +24,14 @@
     };
   };
 
+  # TODO: Remove once laptop is properly integrated into domain
+  programs.ssh = {
+    package = pkgs.openssh_gssapi;
+    extraConfig = ''
+      GSSAPIAuthentication yes
+    '';
+  };
+
   # Enable virtualisation for VMs
   virtualisation.libvirtd.enable = true;
 
@@ -34,12 +42,17 @@
     usbmon.enable = true;
   };
 
+  # Enable Nix-LD
+  programs.nix-ld = {
+    enable = true;
+  };
+
   # Set up wstunnel client
   services.wstunnel = {
     enable = true;
     clients.wg-tunnel = {
       connectTo = "wss://tunnel.bulthuis.dev:443";
-      localToRemote = [
+      settings.local-to-remote = [
         "udp://51820:10.10.40.100:51820"
       ];
     };
