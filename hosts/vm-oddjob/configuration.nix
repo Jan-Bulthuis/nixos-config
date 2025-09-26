@@ -35,7 +35,6 @@
       omada-controller = {
         volumes = [
           "/var/lib/omada:/opt/tplink/EAPController/data"
-          "/var/log/omada:/opt/tplink/EAPController/logs"
         ];
         environment = {
           TZ = "Europe/Amsterdam";
@@ -51,7 +50,6 @@
   };
   modules.impermanence.directories = [
     "/var/lib/omada"
-    "/var/log/omada"
   ];
   networking.firewall = {
     allowedTCPPorts = [
