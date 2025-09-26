@@ -17,6 +17,10 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
 
+    # MADD
+    madd.url = "git+https://git.bulthuis.dev/Jan/madd";
+    madd.inputs.nixpkgs.follows = "nixpkgs";
+
     # For Minecraft VM
     nix-minecraft.url = "github:Jan-Bulthuis/nix-minecraft";
     nix-minecraft.inputs.nixpkgs.follows = "nixpkgs";
