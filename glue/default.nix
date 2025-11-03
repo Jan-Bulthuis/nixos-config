@@ -143,8 +143,11 @@ let
             usersModule =
               { ... }:
               {
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                };
                 home-manager.sharedModules = homeModules ++ homeProfiles ++ inputHomeModules;
-                home-manager.useUserPackages = false; # TODO: See if this should be changed to true?
+                home-manager.useUserPackages = true;
                 home-manager.useGlobalPkgs = true;
                 home-manager.users = homesConfiguration;
                 users.users = usersConfiguration;
