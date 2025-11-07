@@ -28,15 +28,20 @@
         prefixLength = 16;
       };
     };
-    ipv6 = {
-      address = "${inputs.secrets.lab.network.ula.prefixBase}::6464";
-      router = {
-        address = "64::ff9b::1";
+    ipv6 =
+      let
+        ula = inputs.secrets.lab.network.ula.prefixBase;
+        net = toString inputs.secrets.lab.network.vlan.lab;
+      in
+      {
+        address = "${ula}:${net}::6464";
+        router = {
+          address = "64::ff9b::1";
+        };
+        pool = {
+          address = "64:ff9b::";
+          prefixLength = 96;
+        };
       };
-      pool = {
-        address = "64:ff9b::";
-        prefixLength = 96;
-      };
-    };
   };
 }
