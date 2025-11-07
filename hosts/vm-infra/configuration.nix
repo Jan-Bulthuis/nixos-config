@@ -15,33 +15,9 @@
     profiles.vm.enable = true;
   };
 
-  # Setup Tayga NAT64
-  services.tayga = {
+  # Setup JOOL NAT64
+  networking.jool = {
     enable = true;
-    ipv4 = {
-      address = "10.64.0.0";
-      router = {
-        address = "10.64.0.1";
-      };
-      pool = {
-        address = "10.64.0.0";
-        prefixLength = 16;
-      };
-    };
-    ipv6 =
-      let
-        ula = inputs.secrets.lab.network.ula.prefixBase;
-        net = toString inputs.secrets.lab.network.vlan.lab;
-      in
-      {
-        address = "${ula}:${net}::6464";
-        router = {
-          address = "64::ff9b::1";
-        };
-        pool = {
-          address = "64:ff9b::";
-          prefixLength = 96;
-        };
-      };
+    nat64.default = { };
   };
 }
