@@ -23,16 +23,16 @@
         address = "10.64.0.1";
       };
       pool = {
-        address = "10.64.0.1";
+        address = "10.64.0.0";
         prefixLength = 16;
       };
     };
     ipv6 = {
       router = {
-        address = "fc00:6464::1";
+        address = "64::ff9b::1";
       };
       pool = {
-        address = "fc00:6464::";
+        address = "64:ff9b::";
         prefixLength = 96;
       };
     };
