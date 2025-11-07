@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }:
 
@@ -28,6 +29,7 @@
       };
     };
     ipv6 = {
+      address = "${inputs.secrets.lab.network.ula.prefixBase}::6464";
       router = {
         address = "64::ff9b::1";
       };
