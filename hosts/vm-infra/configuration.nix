@@ -18,6 +18,22 @@
   # Setup JOOL NAT64
   networking.jool = {
     enable = true;
-    nat64.default = { };
+    nat64.default = {
+      global.pool6 = "64:ff9b::/96";
+      pool4 = [
+        {
+          protocol = "TCP";
+          prefix = "10.64.0.1/32";
+        }
+        {
+          protocol = "UDP";
+          prefix = "10.64.0.1/32";
+        }
+        {
+          protocol = "ICMP";
+          prefix = "10.64.0.1/32";
+        }
+      ];
+    };
   };
 }
