@@ -18,11 +18,11 @@ in
     # TODO: Enable extensions (declaratively) with dconf
 
     home.pointerCursor = {
+      enable = true;
       name = "capitaine-cursors";
       size = 24;
       package = pkgs.capitaine-cursors;
       gtk.enable = true;
-      x11.enable = true;
     };
 
     home.packages =
@@ -53,16 +53,19 @@ in
         gnome-calendar
 
         # For theming gtk3
-        adw-gtk3
+        # adw-gtk3 # TODO: Do this better, same for morewaita, not sure if it even works
 
         # More icons
-        morewaita-icon-theme
+        # morewaita-icon-theme
       ]
       ++ (with pkgs.gnomeExtensions; [
         gsconnect
         disable-workspace-animation
         wallpaper-slideshow
         media-progress
+        mpris-label
+        pip-on-top
+        rounded-window-corners-reborn
       ]);
 
     # Set up gnome terminal as changing the default terminal is a pain
@@ -75,19 +78,19 @@ in
     };
 
     # Enable and set the gtk themes
-    gtk = {
-      enable = true;
-      gtk3.extraConfig = {
-        gtk-theme-name = "adw-gtk3";
-      };
-      gtk4.extraConfig = {
-        gtk-theme-name = "Adwaita";
-      };
-    };
+    # gtk = {
+    #   enable = true;
+    #   gtk3.extraConfig = {
+    #     gtk-theme-name = "adw-gtk3";
+    #   };
+    #   gtk4.extraConfig = {
+    #     gtk-theme-name = "Adwaita";
+    #   };
+    # };
 
     # Set the theme with dconf
-    dconf.settings."org/gnome/desktop/interface" = {
-      gtk-theme = "adw-gtk3";
-    };
+    # dconf.settings."org/gnome/desktop/interface" = {
+    #   gtk-theme = "adw-gtk3";
+    # };
   };
 }
