@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 
@@ -16,33 +17,140 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      libreoffice-still
+      firefox
+      # inputs.stable-nixpkgs.legacyPackages.${config.nixpkgs.hostPlatform}.libreoffice
+      libreoffice
       remmina
       thunderbird
       signal-desktop
       prusa-slicer
       freecad-wayland
       inkscape
-      ente-auth
+      # ente-auth
+      audacity
       carla
       winbox
-      whatsapp-for-linux
+      # whatsapp-for-linux
+      wasistlos
       discord
       steam
       spotify
       feishin
       eduvpn-client
-      river # TODO: Move
       ryubing
       bottles
       prismlauncher
       foliate
       wireshark
       obsidian
-      devenv
-      kicad
+      # devenv
+      # kicad
       vlc
+      authenticator
+
+      podman
+      podman-compose
+
+      gnome-network-displays
+      gnome-logs
     ];
+
+    programs.helix = {
+      enable = true;
+      defaultEditor = true;
+      # settings = {
+      #   theme = {
+      #     light = "adwaita-light";
+      #     dark = "adwaita-dark";
+      #     fallback = "default";
+      #   };
+      # };
+      extraPackages = with pkgs; [
+        bash-language-server # Bash
+        fish-lsp # Fish
+        systemd-lsp # Systemd
+        yaml-language-server # Yaml
+        taplo # Toml
+        nixd # Nix
+        protols # Protobuf
+        dockerfile-language-server # Dockerfile
+        docker-compose-language-service # Docker compose
+
+        clang-tools # C, C++
+        neocmakelsp # Cmake
+        rust-analyzer # Rust
+        lldb # C, C++, Rust
+        zls # Zig
+
+        texlab # Latex
+        tinymist # Typst
+        marksman # Markdown
+        markdown-oxide # Markdown
+        vscode-langservers-extracted # HTML, CSS, JSON, ESLint
+        typescript-language-server # Typescript, Javascript
+        intelephense # PHP
+        vue-language-server # Vue
+
+        ruff # Python
+        basedpyright # Python
+
+        helix-gpt # Copilot
+
+        # texlab # Latex, Bibtex
+        # bibtex-tidy # Bibtex
+        # docker-langserver # Dockerfile
+        # docker-compose-langserver # Docker compose
+        # elixir-ls # Elixir
+        # gopls # Go
+        # golangci-lint-langserver # Go
+        # dlv # Go
+        # haskell-language-server # Haskell
+        # julia # Julia
+        # kotlin-language-server # Kotlin
+        # lua-language-server # Lua
+        # slint-lsp # Slint
+        # tinymist # Typst
+      ];
+      languages = {
+        language-server = {
+          basedpyright = {
+            command = "basedpyright-langserver";
+            args = [ "--stdio" ];
+          };
+          tinymist = {
+            command = "tinymist";
+            config.preview.background = {
+              enabled = true;
+              args = [
+                "--data-plane-host=127.0.0.1:23635"
+                "--invert-colors=never"
+                "--open"
+              ];
+            };
+          };
+        };
+        language = [
+          {
+            name = "python";
+            language-servers = [
+              {
+                name = "basedpyright";
+                except-features = [ "diagnostics" ];
+              }
+              "ruff"
+            ];
+            auto-format = true;
+            formatter = {
+              command = "ruff";
+              args = [
+                "format"
+                "-"
+              ];
+            };
+          }
+        ];
+      };
+    };
 
     modules = {
       profiles.gnome.enable = true;
@@ -68,7 +176,7 @@ in
       xpra = {
         enable = true;
         hosts = [
-          "mixer@10.20.60.251"
+          "mixer@10.20.40.100"
         ];
       };
 
@@ -84,8 +192,8 @@ in
       rust.enable = true;
       python.enable = true;
       cpp.enable = true;
-      tex.enable = true;
-      jupyter.enable = false;
+      tex.enable = false;
+      jupyter.enable = true;
       go.enable = true;
     };
   };

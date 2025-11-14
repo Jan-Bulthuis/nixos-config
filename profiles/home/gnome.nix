@@ -16,7 +16,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      firefox # TODO: Move to dediated module
+      # firefox # TODO: Move to dediated module
     ];
 
     modules = {
