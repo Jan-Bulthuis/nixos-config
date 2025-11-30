@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   lib,
   config,
   inputs,
@@ -29,13 +30,13 @@ in
       # ente-auth
       audacity
       carla
-      winbox
+      pkgs-stable.winbox
       # whatsapp-for-linux
       wasistlos
       discord
       steam
       spotify
-      feishin
+      # feishin
       eduvpn-client
       ryubing
       bottles
@@ -183,7 +184,7 @@ in
       # Development
       # docker.enable = true;
       # matlab.enable = true;
-      mathematica.enable = true;
+      # mathematica.enable = true;
 
       # Languages
       haskell.enable = false;
