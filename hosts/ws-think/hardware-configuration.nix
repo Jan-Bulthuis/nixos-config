@@ -7,11 +7,6 @@
   # Set hostid (required for ZFS)
   networking.hostId = "deadbeef";
 
-  modules.disko = {
-    enable = true;
-    profile = "ws-think";
-  };
-
   # Hardware configuration
   hardware.enableRedistributableFirmware = true;
   boot.initrd.availableKernelModules = [
@@ -55,4 +50,12 @@
       ];
     };
   };
+
+  # Swap setup
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/9f6f2a47-e53a-45a0-8cb2-8c1082f54ccb";
+      discardPolicy = "both";
+    }
+  ];
 }
