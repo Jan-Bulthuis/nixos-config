@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  lib,
+  config,
   ...
 }:
 
@@ -12,13 +12,23 @@
   # Machine hostname
   networking.hostName = "ws-think";
 
-  # Admin users
-  users.users.jan.extraGroups = [
-    "wheel"
-    "wireshark"
-    "podman"
-    "libvirtd"
-  ];
+  # Set up users
+  sops.secrets."passwords/jan-hashed" = {
+    sopsFile = "${inputs.secrets}/secrets/ws-think.enc.yaml";
+    neededForUsers = true;
+  };
+  users.mutableUsers = false;
+  users.users.Jan = {
+    hashedPasswordFile = config.sops.secrets."passwords/jan-hashed".path;
+    # Extra admin groups
+    # TODO: Streamline setup of this
+    extraGroups = [
+      "wheel"
+      "wireshark"
+      "podman"
+      "libvirtd"
+    ];
+  };
 
   # Set up kerberos
   security.krb5 = {
