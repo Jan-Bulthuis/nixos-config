@@ -45,9 +45,6 @@ in
       defaultEditor = true;
     };
 
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
-
     # Enable the usage of flakes
     nix.settings.experimental-features = [
       "nix-command"
