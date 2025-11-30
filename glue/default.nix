@@ -4,6 +4,10 @@ let
   nixpkgs = inputs.nixpkgs;
   lib = nixpkgs.lib;
 
+  nixpkgs-config = {
+    allowUnfree = true;
+  };
+
   importDir =
     path: fn:
     let
@@ -49,6 +53,13 @@ let
     pkgs = (
       import inputs.nixpkgs {
         inherit system;
+        config = nixpkgs-config;
+      }
+    );
+    stable-pkgs = (
+      import inputs.nixpkgs-stable {
+        inherit system;
+        config = nixpkgs-config;
       }
     );
   });
@@ -118,13 +129,22 @@ let
       nixpkgs.overlays = [ overlay ] ++ inputOverlays;
     };
 
+  nixpkgsModule =
+    { ... }:
+    {
+      nixpkgs.config = nixpkgs-config;
+    };
+
   nixosConfigurations = importDir "${flake}/hosts" (
     attrs:
     lib.mapAttrs (
       name: entry:
+      let
+        pkgs-stable = systemArgs."x86_64-linux".stable-pkgs;
+      in
       lib.nixosSystem {
         specialArgs = {
-          inherit inputs;
+          inherit inputs pkgs-stable;
         };
         modules =
           let
@@ -144,7 +164,7 @@ let
               { ... }:
               {
                 home-manager.extraSpecialArgs = {
-                  inherit inputs;
+                  inherit inputs pkgs-stable;
                 };
                 home-manager.sharedModules = homeModules ++ homeProfiles ++ inputHomeModules;
                 home-manager.useUserPackages = true;
@@ -158,6 +178,7 @@ let
             systemPath
             overlayModule
             usersModule
+            nixpkgsModule
           ]
           ++ nixosModules
           ++ nixosProfiles
