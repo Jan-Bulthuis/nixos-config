@@ -19,6 +19,12 @@ in
       # firefox # TODO: Move to dediated module
     ];
 
+    dconf.settings = {
+      "org/gnome/shell" = {
+        disable-extension-version-validation = true;
+      };
+    };
+
     modules = {
       profiles.base.enable = true;
 
