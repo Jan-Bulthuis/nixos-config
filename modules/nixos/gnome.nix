@@ -34,23 +34,7 @@ in
       glib
       gnome-menus
       gtk3.out
-      xdg-user-dirs
-      xdg-user-dirs-gtk
     ];
-
-    # Enable Gnome Remote Desktop
-    services.gnome.gnome-remote-desktop.enable = true;
-    systemd.services."gnome-remote-desktop".wantedBy = [ "graphical.target" ];
-    networking.firewall = {
-      allowedTCPPorts = [
-        3389
-        3390
-      ];
-      allowedUDPPorts = [
-        3389
-        3390
-      ];
-    };
 
     # For GSConnect/KDE Connect
     # TODO: Move to host config?
@@ -70,8 +54,9 @@ in
     };
 
     # Enable dependencies
-    modules = {
-      networkmanager.enable = true;
-    };
+    modules.networkmanager.enable = true;
+
+    # Impermanence
+    modules.impermanence.directories = [ "/etc/NetworkManager/system-connections" ];
   };
 }
