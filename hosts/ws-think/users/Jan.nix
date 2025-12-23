@@ -28,4 +28,25 @@
       settings.StartupWMClass = "chrome-www.overleaf.com__-Default";
     };
   };
+
+  # TODO: Slowly remove
+  modules.impermanence = {
+    directories = [
+      ".cache"
+      ".config"
+      ".cargo"
+      ".dbus"
+      ".gnupg"
+      ".local"
+      ".MathWorks"
+      ".mozilla"
+      ".ssh"
+      ".steam"
+      ".SteamCloud"
+      ".thunderbird"
+      ".vscode"
+      ".wine"
+      ".Wolfram"
+    ];
+  };
 }
