@@ -20,6 +20,12 @@ in
     console.font = "dina";
     console.earlySetup = true;
 
+    fonts.packages = with pkgs; [
+      noto-fonts
+      fira
+      jetbrains-mono
+    ];
+
     # TODO: Disable default fonts, fonts should be managed per user
     # fonts.enableDefaultPackages = false;
     # fonts.fontconfig = {
