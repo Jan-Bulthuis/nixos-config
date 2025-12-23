@@ -50,11 +50,32 @@ in
     # For testing purposes with VM
     virtualisation.vmVariantWithDisko.virtualisation.fileSystems."/persist".neededForBoot = true;
 
-    environment.persistence."/persist/system" = {
-      enable = true;
-      hideMounts = true;
-      directories = cfg.directories;
-      files = cfg.files;
+    environment.persistence = {
+      "/persist/system" = {
+        enable = true;
+        hideMounts = true;
+        directories = cfg.directories;
+        files = cfg.files;
+      };
+      "/persist/home" = {
+        enable = true;
+        hideMounts = true;
+        users = (
+          lib.mapAttrs' (
+            name: value:
+            let
+              user = name;
+              homeDir = "/home/${user}";
+              impConfig = value.modules.impermanence;
+            in
+            lib.nameValuePair user {
+              home = homeDir;
+              directories = impConfig.directories;
+              files = impConfig.files;
+            }
+          ) config.home-manager.users
+        );
+      };
     };
   };
 }
