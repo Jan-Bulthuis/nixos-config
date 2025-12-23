@@ -45,9 +45,9 @@ in
         };
       };
 
-      userName = cfg.user;
-      userEmail = cfg.email;
-      ignores = cfg.ignores;
+      settings.user.name = cfg.user;
+      settings.user.email = cfg.email;
+      # ignores = cfg.ignores;
     };
   };
 }
