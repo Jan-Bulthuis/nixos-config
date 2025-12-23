@@ -30,6 +30,15 @@
     ];
   };
 
+  # Set up impermanence
+  modules.impermanence = {
+    enable = true;
+    resetScript = ''
+      # Revert to the blank state for the root directory
+      zfs rollback -r tank/root@blank
+    '';
+  };
+
   # Set up kerberos
   security.krb5 = {
     enable = true;
@@ -91,7 +100,7 @@
     clients.wg-tunnel = {
       connectTo = "wss://tunnel.bulthuis.dev:443";
       settings.local-to-remote = [
-        "udp://51820:10.10.40.100:51820"
+        "udp://51819:10.10.40.100:51820"
       ];
     };
   };
@@ -110,6 +119,56 @@
     dockerCompat = true;
     dockerSocket.enable = true;
     autoPrune.enable = true;
+  };
+
+  # Enable Gnome Remote Desktop
+  services.gnome.gnome-remote-desktop.enable = true;
+  systemd.services."gnome-remote-desktop".wantedBy = [ "graphical.target" ];
+  systemd.services."gnome-remote-desktop".preStart =
+    let
+      credDir = "/var/lib/gnome-remote-desktop/.local/share/gnome-remote-desktop";
+      credPath = "${credDir}/credentials.ini";
+      credFile = pkgs.writeText "gnome-remote-desktop-credentials" ''
+        [RDP]
+        credentials={'username': <'remote'>, 'password': <'remote'>}
+      '';
+      script = pkgs.writeScript "gnome-remote-desktop-setup" ''
+        mkdir -p ${credDir}
+        touch ${credPath}
+        chown gnome-remote-desktop:gnome-remote-desktop ${credPath}
+        chmod 600 ${credPath}
+        cat ${credFile} > ${credPath}
+      '';
+    in
+    "${script}";
+  environment.etc."gnome-remote-desktop/grd.conf" = {
+    text = ''
+      [RDP]
+      port=3389
+      tls-key=/run/secrets/gnome-remote-desktop/tls-key
+      tls-cert=/run/secrets/gnome-remote-desktop/tls-crt
+      enabled=true
+    '';
+  };
+  networking.firewall = {
+    allowedTCPPorts = [
+      3389
+      3390
+    ];
+    allowedUDPPorts = [
+      3389
+      3390
+    ];
+  };
+  sops.secrets."gnome-remote-desktop/tls-key" = {
+    sopsFile = "${inputs.secrets}/secrets/ws-think.enc.yaml";
+    owner = config.users.users.gnome-remote-desktop.name;
+    group = config.users.users.gnome-remote-desktop.group;
+  };
+  sops.secrets."gnome-remote-desktop/tls-crt" = {
+    sopsFile = "${inputs.secrets}/secrets/ws-think.enc.yaml";
+    owner = config.users.users.gnome-remote-desktop.name;
+    group = config.users.users.gnome-remote-desktop.group;
   };
 
   # Set up hardware
