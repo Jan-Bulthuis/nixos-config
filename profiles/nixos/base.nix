@@ -19,9 +19,17 @@ in
       bootloader.enable = mkDefault true;
       ssh.enable = mkDefault true;
 
-      impermanence.directories = [
-        "/var/lib/nixos"
-      ];
+      impermanence = {
+        files = [
+          "/etc/machine-id"
+          "/etc/zfs/zpool.cache" # TODO: Move to zfs module?
+        ];
+        directories = [
+          "/var/log/journal"
+          "/var/lib/nixos"
+          "/var/lib/systemd"
+        ];
+      };
 
       # TODO: Remove the secrets module and use sops directly?
       secrets = {
