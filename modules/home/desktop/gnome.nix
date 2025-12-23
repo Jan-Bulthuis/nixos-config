@@ -51,6 +51,10 @@ in
         mission-center
         dconf-editor
         gnome-calendar
+        gnome-backgrounds
+        gnome-bluetooth
+        gnome-color-manager
+        epiphany
 
         # For theming gtk3
         # adw-gtk3 # TODO: Do this better, same for morewaita, not sure if it even works
