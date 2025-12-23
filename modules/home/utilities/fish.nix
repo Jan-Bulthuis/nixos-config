@@ -53,5 +53,8 @@ in
       fzf
       grc
     ];
+
+    # Impermanence
+    modules.impermanence.files = [ ".local/share/fish/fish_history" ];
   };
 }
