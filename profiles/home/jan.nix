@@ -30,7 +30,8 @@ in
       # ente-auth
       audacity
       carla
-      pkgs-stable.winbox
+      # pkgs-stable.winbox
+      winbox4
       # whatsapp-for-linux
       wasistlos
       discord
@@ -155,6 +156,18 @@ in
 
     modules = {
       profiles.gnome.enable = true;
+
+      impermanence = {
+        directories = [
+          "Code"
+          "Documents"
+          "Games"
+          "Models"
+          "Music"
+          "Pictures"
+          "Videos"
+        ];
+      };
 
       # Gaming
       # retroarch.enable = true;
