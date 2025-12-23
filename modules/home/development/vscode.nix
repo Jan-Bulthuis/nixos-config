@@ -43,6 +43,7 @@ in
           tomoki1207.pdf
           ms-vsliveshare.vsliveshare
           ms-vscode-remote.remote-ssh
+          myriad-dreamin.tinymist
         ];
 
         userSettings =
