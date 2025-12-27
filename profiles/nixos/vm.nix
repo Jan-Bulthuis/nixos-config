@@ -20,7 +20,7 @@ in
       profiles.base.enable = true;
       disko = {
         enable = true;
-        profile = "vm";
+        profile = mkDefault "vm";
       };
       impermanence = {
         enable = true;
