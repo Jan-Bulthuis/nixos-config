@@ -75,6 +75,7 @@ in
       zip
       unzip
       tmux
+      unixtools.net-tools
     ];
   };
 }
