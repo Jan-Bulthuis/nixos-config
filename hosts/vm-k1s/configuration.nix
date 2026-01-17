@@ -33,10 +33,13 @@
     enable = true;
     extraFlags = [
       "--cluster-domain ${inputs.secrets.lab.k3s.clusterDomain}"
+      "--flannel-backend=none"
+      "--disable-network-policy"
+      "--disable-kube-proxy"
     ];
     disable = [
       # "coredns" # CoreDNS is required for Flux to be able to bootstrap the cluster (Flux needs to resolve the git repo)
-      # "servicelb" # Required for Traefik, can later be replaced with load balancer deployed through Flux
+      "servicelb"
       "traefik"
       "local-storage"
       "metrics-server"
@@ -49,14 +52,144 @@
       sops-decrypt-key = {
         source = config.sops.secrets."flux/sops-decrypt-key".path;
       };
-      "0-secrets-backup-namespaces" = {
-        source = "/opt/k3s-secrets-backup/namespaces.yaml";
+      # "0-secrets-backup-namespaces" = {
+      #   source = "/opt/k3s-secrets-backup/namespaces.yaml";
+      # };
+      # "1-secrets-backup" = {
+      #   source = "/opt/k3s-secrets-backup/secrets.yaml";
+      # };
+      # TODO: Move to flux config, once it is possible to easily install flux without CNI
+      cilium-secrets-namespace = {
+        content = {
+          apiVersion = "v1";
+          kind = "Namespace";
+          metadata.name = "cilium-secrets";
+        };
       };
-      "1-secrets-backup" = {
-        source = "/opt/k3s-secrets-backup/secrets.yaml";
+      # TODO: Move to flux config, once it is possible to easily install flux without CNI
+      gateway-api =
+        let
+          manifest = pkgs.fetchurl {
+            url = "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/experimental-install.yaml";
+            hash = "sha256-08IN1MBDGTZWemkXypMfbc7RMQJCvmK57KB72YkuICU=";
+          };
+        in
+        {
+          source = manifest;
+        };
+      # TODO: Move to flux config, once it is possible to easily install flux without CNI
+      netpol-system-allow-egress.content = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumClusterwideNetworkPolicy";
+        metadata.name = "allow-system-egress";
+        spec = {
+          description = "Allow all egress to system services.";
+          endpointSelector = {
+            matchExpressions = [
+              {
+                key = "io.kubernetes.pod.namespace";
+                operator = "NotIn";
+                values = [
+                  "bogus-namespace"
+                  # "kube-system"
+                  # "cilium-system"
+                  # "flux-system"
+                ];
+              }
+            ];
+          };
+          egress = [
+            {
+              toEntities = [
+                "all"
+              ];
+            }
+          ];
+          ingress = [
+            {
+              fromEntities = [
+                "all"
+              ];
+            }
+          ];
+        };
       };
+      netpol-cluster-allow-dns.content = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumClusterwideNetworkPolicy";
+        metadata.name = "allow-dns";
+        spec = {
+          description = "Allow DNS";
+          endpointSelector = { };
+          egress = [
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "kube-system";
+                    "k8s-app" = "kube-dns";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = 53;
+                      protocol = "ANY";
+                    }
+                  ];
+                  rules.dns = [
+                    {
+                      matchPattern = "*";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        };
+      };
+      netpol-flux-allow-egress.content = { };
     };
     autoDeployCharts = {
+      # TODO: Move to flux config, once it is possible to easily install flux without CNI
+      cilium = {
+        name = "cilium";
+        repo = "oci://quay.io/cilium/charts/cilium";
+        version = "1.18.6";
+        hash = "sha256-+yr38lc5X1+eXCFE/rq/K0m4g/IiNFJHuhB+Nu24eUs=";
+        createNamespace = true;
+        targetNamespace = "cilium-system";
+        values = {
+          operator.replicas = 1;
+          kubeProxyReplacement = true;
+          ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
+          cluster = {
+            id = 1;
+            name = "vm-k1s";
+          };
+          k8sServiceHost = "10.10.50.60";
+          k8sServicePort = 6443;
+          policyEnforcementMode = "always";
+          gatewayAPI = {
+            enabled = true;
+            gatewayClass.create = "true";
+            secretsNamespace.create = false;
+            enableAlpn = true;
+          };
+          bgpControlPlane.enabled = true;
+          tls.secretsNamespace.create = false;
+          hubble = {
+            relay.enabled = true;
+            ui.enabled = true;
+            peerService.clusterDomain = inputs.secrets.lab.k3s.clusterDomain;
+          };
+        };
+        extraFieldDefinitions = {
+          spec.bootstrap = true;
+        };
+      };
       flux-operator = {
         name = "flux-operator";
         repo = "oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator";
@@ -152,11 +285,14 @@
 
   environment.variables = {
     KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+    CILIUM_NAMESPACE = "cilium-system";
   };
 
   environment.systemPackages = with pkgs; [
     fluxcd
     k9s
+    cilium-cli
+    hubble
   ];
 
   # Use correct disko profile

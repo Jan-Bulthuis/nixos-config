@@ -76,6 +76,7 @@ in
       unzip
       tmux
       unixtools.net-tools
+      tcpdump
     ];
   };
 }
