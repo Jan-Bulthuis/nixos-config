@@ -29,5 +29,10 @@
     nix-modpack.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: import ./glue inputs;
+  outputs =
+    inputs:
+    import ./glue {
+      inherit inputs;
+      excludeHomeManagerModules = [ "impermanence" ];
+    };
 }

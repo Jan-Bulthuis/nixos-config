@@ -2,11 +2,11 @@
 
 with lib;
 let
-  # cfg = config.modules.impermanence;
+  cfg = config.modules.impermanence;
 in
 {
   options.modules.impermanence = {
-    # enable = mkEnableOption "Impermanence";
+    enable = mkEnableOption "Impermanence";
     directories = mkOption {
       type = types.listOf types.str;
       default = [ ];
@@ -23,12 +23,12 @@ in
     };
   };
 
-  # config = mkIf cfg.enable {
-  #   home.persistence."/persist/home/${config.home.username}" = {
-  #     enable = true;
-  #     allowOther = true;
-  #     directories = cfg.directories;
-  #     files = cfg.files;
-  #   };
-  # };
+  config = mkIf cfg.enable {
+    home.persistence."/persist/home" = {
+      enable = true;
+      hideMounts = true;
+      directories = cfg.directories;
+      files = cfg.files;
+    };
+  };
 }

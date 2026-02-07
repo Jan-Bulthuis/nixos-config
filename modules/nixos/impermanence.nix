@@ -57,25 +57,25 @@ in
         directories = cfg.directories;
         files = cfg.files;
       };
-      "/persist/home" = {
-        enable = true;
-        hideMounts = true;
-        users = (
-          lib.mapAttrs' (
-            name: value:
-            let
-              user = name;
-              homeDir = "/home/${user}";
-              impConfig = value.modules.impermanence;
-            in
-            lib.nameValuePair user {
-              home = homeDir;
-              directories = impConfig.directories;
-              files = impConfig.files;
-            }
-          ) config.home-manager.users
-        );
-      };
+      # "/persist/home" = {
+      #   enable = true;
+      #   hideMounts = true;
+      #   users = (
+      #     lib.mapAttrs' (
+      #       name: value:
+      #       let
+      #         user = name;
+      #         homeDir = "/home/${user}";
+      #         impConfig = value.modules.impermanence;
+      #       in
+      #       lib.nameValuePair user {
+      #         home = homeDir;
+      #         directories = impConfig.directories;
+      #         files = impConfig.files;
+      #       }
+      #     ) config.home-manager.users
+      #   );
+      # };
     };
   };
 }

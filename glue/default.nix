@@ -1,4 +1,7 @@
-inputs:
+{
+  inputs,
+  excludeHomeManagerModules ? [ ],
+}:
 let
   flake = inputs.self;
   nixpkgs = inputs.nixpkgs;
@@ -113,7 +116,9 @@ let
   homeProfiles = collectModules "${flake}/profiles/home";
   inputHomeModules = lib.map (flake: flake.outputs.homeManagerModules.default) (
     lib.filter (flake: lib.hasAttrByPath [ "outputs" "homeManagerModules" "default" ] flake) (
-      lib.attrValues inputs
+      lib.attrValues (
+        lib.attrsets.filterAttrs (name: entry: !(lib.elem name excludeHomeManagerModules)) inputs
+      )
     )
   );
 

@@ -16,6 +16,7 @@ in
 
   config = mkIf cfg.enable {
     modules = {
+      impermanence.enable = true;
       # btop.enable = true;
       direnv.enable = true;
       fish.enable = true;

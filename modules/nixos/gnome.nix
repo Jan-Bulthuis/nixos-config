@@ -57,6 +57,9 @@ in
     modules.networkmanager.enable = true;
 
     # Impermanence
-    modules.impermanence.directories = [ "/etc/NetworkManager/system-connections" ];
+    modules.impermanence.directories = [
+      "/etc/NetworkManager/system-connections"
+      "/var/lib/bluetooth"
+    ];
   };
 }
