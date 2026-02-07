@@ -44,7 +44,7 @@ in
         two-finger-scrolling-enabled = true;
       };
       "org/gnome/mutter" = {
-        workspaces-only-on-primary = false;
+        workspaces-only-on-primary = true;
       };
       "org/gnome/nautilus/icon-view" = {
         default-zoom-level = "small";

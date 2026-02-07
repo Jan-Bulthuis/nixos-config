@@ -25,7 +25,7 @@ in
       thunderbird
       signal-desktop
       prusa-slicer
-      freecad-wayland
+      pkgs-stable.freecad-wayland
       inkscape
       # ente-auth
       audacity
@@ -49,6 +49,7 @@ in
       # kicad
       vlc
       authenticator
+      hotspot
 
       podman
       podman-compose
@@ -153,6 +154,10 @@ in
         ];
       };
     };
+
+    systemd.user.tmpfiles.rules = [
+      "d ${config.home.homeDirectory}/Downloads - - - - -"
+    ];
 
     modules = {
       profiles.gnome.enable = true;
