@@ -28,7 +28,7 @@
   # Include NFS client module
   boot.supportedFilesystems = [ "nfs" ];
 
-  # Set up K3S cluster with CoreDNS and FluxCD
+  # Set up K3S cluster with CoreDNS, FluxCD and Cilium
   services.k3s = {
     enable = true;
     extraFlags = [
@@ -52,26 +52,12 @@
       sops-decrypt-key = {
         source = config.sops.secrets."flux/sops-decrypt-key".path;
       };
-      # "0-secrets-backup-namespaces" = {
-      #   source = "/opt/k3s-secrets-backup/namespaces.yaml";
-      # };
-      # "1-secrets-backup" = {
-      #   source = "/opt/k3s-secrets-backup/secrets.yaml";
-      # };
-      # TODO: Move to flux config, once it is possible to easily install flux without CNI
-      cilium-secrets-namespace = {
-        content = {
-          apiVersion = "v1";
-          kind = "Namespace";
-          metadata.name = "cilium-secrets";
-        };
-      };
       # TODO: Move to flux config, once it is possible to easily install flux without CNI
       gateway-api =
         let
           manifest = pkgs.fetchurl {
             url = "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/experimental-install.yaml";
-            hash = "sha256-08IN1MBDGTZWemkXypMfbc7RMQJCvmK57KB72YkuICU=";
+            hash = "sha256-VTMn4P8yoaK+RGv5OCPIQTz5JTrGptVAfuvR6NJp9p4=";
           };
         in
         {
@@ -157,8 +143,8 @@
       cilium = {
         name = "cilium";
         repo = "oci://quay.io/cilium/charts/cilium";
-        version = "1.18.6";
-        hash = "sha256-+yr38lc5X1+eXCFE/rq/K0m4g/IiNFJHuhB+Nu24eUs=";
+        version = "1.18.8";
+        hash = "sha256-z1aDpWttEfQ+Af/l0Lxdafasm75QysRc8h7sPhWXr94=";
         createNamespace = true;
         targetNamespace = "cilium-system";
         values = {
@@ -175,7 +161,6 @@
           gatewayAPI = {
             enabled = true;
             gatewayClass.create = "true";
-            secretsNamespace.create = false;
             enableAlpn = true;
           };
           bgpControlPlane.enabled = true;
@@ -244,44 +229,9 @@
     };
   };
 
-  # Backup secrets to avoid reissueing them
   modules.impermanence.directories = [
-    "/opt/k3s-secrets-backup"
+    "/var/lib/rancher/k3s"
   ];
-  systemd.timers.k3s-secrets-backup-timer = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "15m";
-      OnUnitActiveSec = "1h";
-      Unit = "k3s-secrets-backup.service";
-    };
-  };
-  systemd.services.k3s-secrets-backup = {
-    script = ''
-      mkdir -p /opt/k3s-secrets-backup
-      touch /opt/k3s-secrets-backup/secrets.yaml
-      touch /opt/k3s-secrets-backup/namespaces.yaml
-      chmod 600 /opt/k3s-secrets-backup/secrets.yaml
-      chmod 600 /opt/k3s-secrets-backup/namespaces.yaml
-
-      ${pkgs.k3s}/bin/kubectl get secrets -A -l controller.cert-manager\.io/fao=="true" -oyaml | ${pkgs.kubectl-neat}/bin/kubectl-neat > /opt/k3s-secrets-backup/secrets.yaml
-
-      echo "apiVersion: v1
-      kind: List
-      items:" > /opt/k3s-secrets-backup/namespaces.yaml
-
-      ${pkgs.gnugrep}/bin/grep -oP '\snamespace: \K.*' /opt/k3s-secrets-backup/secrets.yaml | sort -u | while read -r ns; do
-        echo "- apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: $ns"
-      done >> /opt/k3s-secrets-backup/namespaces.yaml
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-    };
-  };
 
   environment.variables = {
     KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
