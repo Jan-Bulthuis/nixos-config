@@ -70,6 +70,7 @@ in
         mpris-label
         pip-on-top
         rounded-window-corners-reborn
+        caffeine
       ]);
 
     # Set up gnome terminal as changing the default terminal is a pain

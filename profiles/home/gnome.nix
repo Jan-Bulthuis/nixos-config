@@ -67,6 +67,7 @@ in
           "rounded-window-corners@fxgn"
           "media-progress@krypion17"
           "mprisLabel@moon-0xff.github.com"
+          "caffeube@patapon.info"
         ];
         last-selected-power-profile = "power-saver";
       };
