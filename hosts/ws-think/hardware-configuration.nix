@@ -22,6 +22,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.zfs.forceImportRoot = false;
   hardware.cpu.intel.updateMicrocode = true;
 
   # Filesystems
