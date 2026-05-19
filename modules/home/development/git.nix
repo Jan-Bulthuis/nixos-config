@@ -39,7 +39,7 @@ in
     programs.git = {
       enable = true;
 
-      extraConfig = {
+      settings = {
         pull = {
           rebase = false;
         };
