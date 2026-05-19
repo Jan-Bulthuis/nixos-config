@@ -33,7 +33,7 @@ in
       # pkgs-stable.winbox
       winbox4
       # whatsapp-for-linux
-      wasistlos
+      karere
       discord
       steam
       spotify
