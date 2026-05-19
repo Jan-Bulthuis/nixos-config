@@ -16,7 +16,11 @@ in
     # TODO: Add nvidia settings back in
     # TODO: Move to nvidia module
     hardware.nvidia = {
-      open = true;
+      open = false;
+      prime = {
+        intelBusId = "PCI:0@0:2:0";
+        nvidiaBusId = "PCI:1@0:0:0";
+      };
     };
   };
 }
