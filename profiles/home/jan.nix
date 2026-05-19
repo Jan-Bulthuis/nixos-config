@@ -50,6 +50,10 @@ in
       vlc
       authenticator
       hotspot
+      btop
+      winboat
+      hieroglyphic
+      shortwave
 
       podman
       podman-compose
@@ -57,6 +61,14 @@ in
       gnome-network-displays
       gnome-logs
     ];
+
+    programs.zathura = {
+      enable = true;
+      options = {
+        synctex = true;
+        synctex-editor-command = "${pkgs.texlab}/bin/texlab inverse-search -i %{input} -l %{line}";
+      };
+    };
 
     programs.helix = {
       enable = true;
@@ -68,6 +80,34 @@ in
       #     fallback = "default";
       #   };
       # };
+      settings =
+        let
+          move_line_up = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "move_line_up"
+            "paste_before"
+          ];
+          move_line_down = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "paste_after"
+          ];
+        in
+        {
+          keys.normal = {
+            "A-up" = move_line_up;
+            "A-down" = move_line_down;
+            "A-k" = move_line_up;
+            "A-j" = move_line_down;
+          };
+          keys.select = {
+            "A-up" = move_line_up;
+            "A-down" = move_line_down;
+            "A-k" = move_line_up;
+            "A-j" = move_line_down;
+          };
+        };
       extraPackages = with pkgs; [
         bash-language-server # Bash
         fish-lsp # Fish
@@ -97,7 +137,8 @@ in
         ruff # Python
         basedpyright # Python
 
-        helix-gpt # Copilot
+        #helix-gpt # Copilot
+        ltex-ls-plus # Spellchecking
 
         # texlab # Latex, Bibtex
         # bibtex-tidy # Bibtex
@@ -116,6 +157,22 @@ in
       ];
       languages = {
         language-server = {
+          ltex = {
+            command = "ltex-ls-plus";
+            config.ltex = { };
+          };
+          texlab = {
+            command = "texlab";
+            config.texlab = {
+              build.onSave = true;
+              forwardSearch.executable = "${config.programs.zathura.package}/bin/zathura";
+              forwardSearch.args = [
+                "--synctex-forward"
+                "%l:1:%f"
+                "%p"
+              ];
+            };
+          };
           basedpyright = {
             command = "basedpyright-langserver";
             args = [ "--stdio" ];
@@ -133,6 +190,16 @@ in
           };
         };
         language = [
+          {
+            name = "latex";
+            # language-servers = [
+            #   { name = "texlab"; }
+            #   { name = "ltex"; }
+            # ];
+            soft-wrap = {
+              enable = true;
+            };
+          }
           {
             name = "python";
             language-servers = [
