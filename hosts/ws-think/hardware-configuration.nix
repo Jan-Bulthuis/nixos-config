@@ -7,6 +7,9 @@
   # Set hostid (required for ZFS)
   networking.hostId = "deadbeef";
 
+  # Use thermald
+  services.thermald.ignoreCpuidCheck = true;
+
   # Hardware configuration
   hardware.enableRedistributableFirmware = true;
   boot.initrd.availableKernelModules = [
