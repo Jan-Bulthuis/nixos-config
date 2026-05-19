@@ -18,7 +18,7 @@ in
     # Development packages
     home.packages = with pkgs; [
       nix-tree
-      nixfmt-rfc-style
+      nixfmt
       nixd
     ];
 
