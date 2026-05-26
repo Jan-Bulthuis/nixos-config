@@ -45,6 +45,7 @@
       ".SteamCloud"
       ".thunderbird"
       ".vscode"
+      ".vscode-shared"
       ".wine"
       ".Wolfram"
     ];
