@@ -46,6 +46,7 @@
       ".thunderbird"
       ".vscode"
       ".vscode-shared"
+      ".var/app"
       ".wine"
       ".Wolfram"
     ];
