@@ -52,6 +52,18 @@
 
   services.netbird = {
     enable = true;
+    # package = pkgs.netbird.overrideAttrs (
+    #   final: prev: {
+    #     version = "0.66.3";
+    #     src = pkgs.fetchFromGitHub {
+    #       owner = "netbirdio";
+    #       repo = "netbird";
+    #       tag = "v${final.version}";
+    #       hash = "sha256-Cj9AcdWdHAfdBbqKAkwk3/Vy24XicjTZpmRXLYkyx3k=";
+    #     };
+    #     vendorHash = "sha256-vyf3zLTMtkmt+AXfCTRSPZ/TaJ8VP/5IzNbJwxQcfPs=";
+    #   }
+    # );
   };
 
   # SSH X11 forwarding
@@ -66,8 +78,23 @@
         "passwd program" = "/run/wrappers/bin/passwd %u";
         "security" = "user";
         "client min protocol" = "NT1";
+        "server min protocol" = "NT1";
       };
     };
+  };
+
+  # GStreamer
+  environment.systemPackages = with pkgs; [
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
+  ];
+  environment.variables = {
+    GST_PLUGIN_PATH = "/run/current-system/sw/lib/gstreamer-1.0/";
   };
 
   # TODO: Remove once laptop is properly integrated into domain
