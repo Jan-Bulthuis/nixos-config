@@ -40,7 +40,7 @@ in
       # feishin
       eduvpn-client
       ryubing
-      bottles
+      # bottles
       prismlauncher
       foliate
       wireshark
@@ -54,6 +54,20 @@ in
       winboat
       hieroglyphic
       shortwave
+      clairvoyant
+      constrict
+      curtail
+      gnome-decoder
+      dialect
+      impression
+      keypunch
+      gnome-mahjongg
+      textpieces
+      video-trimmer
+      wike
+      davinci-resolve
+      kdePackages.kdenlive
+      kicad
 
       podman
       podman-compose
