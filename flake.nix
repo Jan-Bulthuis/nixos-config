@@ -18,6 +18,9 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
 
+    # VS Code extensions
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     # MADD
     # madd.url = "git+https://git.bulthuis.dev/Jan/madd";
     # madd.inputs.nixpkgs.follows = "nixpkgs";
