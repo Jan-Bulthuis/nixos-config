@@ -21,6 +21,7 @@ in
     };
     modules.git.ignores = [
       ".direnv"
+      ".envrc"
     ];
   };
 }
