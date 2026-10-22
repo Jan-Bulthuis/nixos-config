@@ -47,7 +47,7 @@ in
 
       settings.user.name = cfg.user;
       settings.user.email = cfg.email;
-      # ignores = cfg.ignores;
+      ignores = cfg.ignores;
     };
   };
 }
