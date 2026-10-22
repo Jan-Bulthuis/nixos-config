@@ -9,6 +9,18 @@ let
 
   nixpkgs-config = {
     allowUnfree = true;
+
+    permittedInsecurePackages =
+      let
+        insecurePackages = [
+          "electron-39.8.10"
+          "pnpm-10.34.0"
+        ];
+      in
+      if builtins.length insecurePackages > 0 then
+        lib.trace "Allowing [${lib.strings.join ", " insecurePackages}] which is/are insecure" insecurePackages
+      else
+        [ ];
   };
 
   importDir =
