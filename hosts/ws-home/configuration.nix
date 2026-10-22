@@ -18,7 +18,7 @@
   # Matter controller
   services.matterjs-server = {
     enable = true;
-    listenAddress = "127.0.0.1";
+    listenAddress = "::1";
   };
   modules.impermanence.directories = [
     "/var/lib/private/matterjs-server"
@@ -32,7 +32,7 @@
     5540 # Matter
   ];
 
-  # Home Assistant, only integrating with matterjs-server
+  # Home Assistant
   services.home-assistant = {
     enable = true;
     extraComponents = [ "matter" ];
