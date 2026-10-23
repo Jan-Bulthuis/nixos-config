@@ -50,9 +50,13 @@
   # Home Assistant
   services.home-assistant = {
     enable = true;
-    extraComponents = [ "matter" ];
+    extraComponents = [
+      "matter"
+      "mobile_app"
+    ];
     config = {
       homeassistant = { };
+      mobile_app = { };
       http = {
         use_x_forwarded_for = true;
         # TODO: Narrow down to the address the internal gateway connects from
