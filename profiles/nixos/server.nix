@@ -27,7 +27,7 @@ in
         '';
       };
       domain = {
-        enable = true;
+        enable = mkDefault true;
         join = {
           userFile = config.sops.secrets."vm-join/user".path;
           passwordFile = config.sops.secrets."vm-join/password".path;

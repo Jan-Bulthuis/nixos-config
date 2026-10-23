@@ -13,6 +13,7 @@
   modules = {
     profiles.server.enable = true;
     disko.profile = "ws-home";
+    domain.enable = false;
   };
 
   # Matter controller
