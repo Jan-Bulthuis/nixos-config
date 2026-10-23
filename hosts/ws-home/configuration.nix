@@ -53,6 +53,8 @@
     extraComponents = [
       "matter"
       "mobile_app"
+      "otbr"
+      "thread"
     ];
     config = {
       homeassistant = { };
