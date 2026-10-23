@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/sda"; # TODO: Verify on the actual machine (may be /dev/nvme0n1)
+        device = "/dev/nvme0n1";
         imageSize = "32G"; # For test VMs
         content = {
           type = "gpt";
