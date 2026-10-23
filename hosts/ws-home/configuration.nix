@@ -16,6 +16,15 @@
     domain.enable = false;
   };
 
+  # Let the kernel handle router advertisements, so the route to the
+  # Thread network advertised by the OTBR gets installed
+  networking.dhcpcd.IPv6rs = false;
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.default.accept_ra_rt_info_max_plen" = 64;
+    "net.ipv6.conf.eno1.accept_ra" = 1;
+    "net.ipv6.conf.eno1.accept_ra_rt_info_max_plen" = 64;
+  };
+
   # Matter controller
   services.matterjs-server = {
     enable = true;
@@ -44,6 +53,11 @@
     extraComponents = [ "matter" ];
     config = {
       homeassistant = { };
+      http = {
+        use_x_forwarded_for = true;
+        # TODO: Narrow down to the address the internal gateway connects from
+        trusted_proxies = [ "10.10.0.0/16" ];
+      };
     };
   };
   networking.firewall.allowedTCPPorts = [
