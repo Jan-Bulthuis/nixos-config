@@ -8,7 +8,7 @@ in
   options.modules.impermanence = {
     enable = mkEnableOption "Impermanence";
     directories = mkOption {
-      type = types.listOf types.str;
+      type = types.listOf (types.either types.str types.attrs);
       default = [ ];
       description = ''
         Directories that should be stored in persistent storage.

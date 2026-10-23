@@ -22,7 +22,12 @@
   };
   modules.impermanence.directories = [
     "/var/lib/private/matterjs-server"
-    "/var/lib/hass"
+    {
+      directory = "/var/lib/hass";
+      user = "hass";
+      group = "hass";
+      mode = "0700";
+    }
   ];
   systemd.tmpfiles.rules = [
     "d /var/lib/private 0700 root root -"
