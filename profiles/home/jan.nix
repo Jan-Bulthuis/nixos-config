@@ -264,6 +264,10 @@ in
         enable = true;
         user = "Jan-Bulthuis";
         email = "git@bulthuis.dev";
+        signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+        allowedSigners = [
+          "git@bulthuis.dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKxoQSxfYqf9ITN8Fhckk8WbY4dwtBAXOhC9jxihJvq"
+        ];
         # TODO: Move
         ignores = [
           ".envrc"
