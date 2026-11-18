@@ -176,11 +176,11 @@
     },
     "secrets": {
       "locked": {
-        "lastModified": 1793195490,
-        "narHash": "sha256-1ReF2oGuTGF1osuK3Pc0N4C5QKQfoSbv/2HO3OJCkqw=",
+        "lastModified": 1795000895,
+        "narHash": "sha256-DzTRUpiuhSmPJm/MjcUwNLxVbhWxjC1TGLyj41kXnr4=",
         "ref": "refs/heads/main",
-        "rev": "02313098cbcf69356df75ba0895c913b053a2edf",
-        "revCount": 22,
+        "rev": "557ab40690eb4320e36c5e57b73bfba1ecb73393",
+        "revCount": 23,
         "type": "git",
         "url": "ssh://gitea@git.bulthuis.dev/Jan/nixos-secrets"
       },
