@@ -20,8 +20,7 @@ let
   wgIf = "wg-seedbox";
   dataDir = "/var/lib/seedbox";
   downloadsDir = "${dataDir}/downloads";
-  webuiProxyPort = 8081; # localhost of this host only
-  webuiPort = 8080; # inside the namespace
+  webuiPort = 8081;
   sharePort = 8091;
 
   secret = name: config.sops.secrets."seedbox/${name}".path;
@@ -130,8 +129,8 @@ in
       InaccessiblePaths = [ "-/run/nscd" ];
       ReadWritePaths = [ dataDir ];
 
-      # Initial settings, and the incoming port from the secret on every start. Other
-      # settings are left to the web interface.
+      # Defaults on first start, and the settings this setup depends on on every
+      # start. Everything else is left to the web interface.
       ExecStartPre = pkgs.writeShellScript "seedbox-config" ''
         set -euo pipefail
         PATH=${
@@ -139,33 +138,29 @@ in
             with pkgs;
             [
               coreutils
-              gnused
+              crudini
             ]
           )
         }
-        port=$(tr -dc 0-9 < ${secret "port"})
         cfg=${dataDir}/qBittorrent/config/qBittorrent.conf
         mkdir -p ${downloadsDir} "$(dirname "$cfg")"
+        set_() { crudini --set "$cfg" "$@"; }
+
         if [ ! -f "$cfg" ]; then
-          cat > "$cfg" <<EOF
-        [BitTorrent]
-        Session\DefaultSavePath=${downloadsDir}
-        Session\Interface=${wgIf}
-        Session\InterfaceName=${wgIf}
-        Session\LSDEnabled=false
-        Session\QueueingSystemEnabled=false
-        Session\Port=$port
-
-        [Network]
-        PortForwardingEnabled=false
-
-        [Preferences]
-        WebUI\Address=127.0.0.1
-        WebUI\Port=${toString webuiPort}
-        EOF
-        else
-          sed -i -E "s|^Session\\\\Port=.*|Session\\\\Port=$port|" "$cfg"
+          touch "$cfg"
+          set_ BitTorrent 'Session\DefaultSavePath' ${downloadsDir}
+          set_ BitTorrent 'Session\LSDEnabled' false
+          set_ BitTorrent 'Session\QueueingSystemEnabled' false
         fi
+
+        set_ BitTorrent 'Session\Port' "$(tr -dc 0-9 < ${secret "port"})"
+        set_ BitTorrent 'Session\Interface' ${wgIf}
+        set_ BitTorrent 'Session\InterfaceName' ${wgIf}
+        set_ Network PortForwardingEnabled false
+        set_ Preferences 'WebUI\Address' 127.0.0.1
+        set_ Preferences 'WebUI\Port' ${toString webuiPort}
+        # Only reachable through this host's localhost
+        set_ Preferences 'WebUI\HostHeaderValidation' false
       '';
     };
   };
@@ -173,7 +168,7 @@ in
   # Web interface on this host's localhost, proxied into the namespace
   systemd.sockets.seedbox-webui = {
     wantedBy = [ "sockets.target" ];
-    listenStreams = [ "127.0.0.1:${toString webuiProxyPort}" ];
+    listenStreams = [ "127.0.0.1:${toString webuiPort}" ];
   };
   systemd.services.seedbox-webui = netnsDeps // {
     requires = [ "qbittorrent.service" ];
