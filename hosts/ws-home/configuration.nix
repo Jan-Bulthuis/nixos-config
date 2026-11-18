@@ -93,5 +93,8 @@
   };
 
   # Set up hardware
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./seedbox.nix
+  ];
 }
