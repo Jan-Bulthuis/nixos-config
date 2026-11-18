@@ -8,6 +8,18 @@
 
   modules.profiles.jan.enable = true;
 
+  # Open Beat Saber OneClick links on the Steam Frame
+  modules.beatsaber-oneclick = {
+    enable = true;
+    host = "steamos@frame.local";
+  };
+
+  # Larger text while the desktop is streamed to the Steam Frame
+  modules.steam-frame-desktop = {
+    enable = true;
+    streamingTextScale = 1.2;
+  };
+
   # home.packages = with pkgs; [
   #   opencloud-desktop
   #   code-nautilus

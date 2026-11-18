@@ -27,7 +27,14 @@
       "wireshark"
       "podman"
       "libvirtd"
+      "networkmanager"
     ];
+  };
+
+  # Steam Frame wireless adapter
+  modules.steam-frame = {
+    enable = true;
+    regulatoryDomain = "NL";
   };
 
   # Set up impermanence
