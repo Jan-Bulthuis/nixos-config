@@ -31,8 +31,10 @@ let
   inNetns = {
     NetworkNamespacePath = "/run/netns/${netns}";
   };
+  # Stopped with the namespace, and restarted along with it
   netnsDeps = {
     bindsTo = [ "seedbox-netns.service" ];
+    partOf = [ "seedbox-netns.service" ];
     after = [ "seedbox-netns.service" ];
   };
 in
@@ -89,8 +91,19 @@ in
       ip netns add ${netns}
       ip -n ${netns} link set lo up
 
+      # Only the settings wg understands (wg-quick strip insists on a .conf file name)
+      stripped=$(grep -viE '^\s*(Address|DNS|MTU|Table|SaveConfig|(Pre|Post)(Up|Down))\s*=' "$conf")
+      if ! grep -qi '^\s*PrivateKey' <<<"$stripped" || ! grep -qi '^\s*\[Peer\]' <<<"$stripped"; then
+        echo "seedbox/wireguard has no PrivateKey or [Peer]" >&2
+        exit 1
+      fi
+
       ip link add ${wgIf} type wireguard
-      wg setconf ${wgIf} <(wg-quick strip "$conf")
+      wg setconf ${wgIf} <(printf '%s\n' "$stripped")
+      if ! wg show ${wgIf} peers | grep -q .; then
+        echo "WireGuard peer was not configured" >&2
+        exit 1
+      fi
       ip link set ${wgIf} netns ${netns}
       for addr in $(field Address); do
         ip -n ${netns} addr add "$addr" dev ${wgIf}
