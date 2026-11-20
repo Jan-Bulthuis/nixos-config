@@ -6,15 +6,8 @@
   ...
 }:
 
-# Always-on torrent client, confined to a VPN-only network namespace, plus a
-# read-only, password-protected WebDAV share of its downloads for the local network.
-#
-# Everything provider-specific lives in secrets:
-#   seedbox/wireguard       wg-quick style config (keys, peer, Address, DNS, MTU)
-#   seedbox/port            the incoming port forwarded by the VPN
-#   seedbox/share-password  password for the share (user "seedbox")
-#
-# Web interface: only on this host's localhost, e.g. `ssh -L 8081:127.0.0.1:8081 ws-home`
+# Torrent client confined to a VPN-only network namespace, plus a WebDAV share.
+# See seedbox.md.
 let
   netns = "seedbox";
   wgIf = "wg-seedbox";
@@ -31,7 +24,6 @@ let
   inNetns = {
     NetworkNamespacePath = "/run/netns/${netns}";
   };
-  # Stopped with the namespace, and restarted along with it
   netnsDeps = {
     bindsTo = [ "seedbox-netns.service" ];
     partOf = [ "seedbox-netns.service" ];
@@ -60,15 +52,15 @@ in
   ];
   systemd.tmpfiles.rules = [ "d ${downloadsDir} 0750 ${user} ${group} -" ];
 
-  # Network namespace whose only route out is the WireGuard interface. The interface
-  # is created here and moved into the namespace, so its encrypted traffic uses the
-  # host's network, but nothing inside the namespace can reach anything else.
+  boot.kernelModules = [ "tcp_bbr" ];
+
   systemd.services.seedbox-netns = {
     description = "Network namespace for the seedbox";
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
     path = with pkgs; [
       iproute2
+      procps
       wireguard-tools
       gnugrep
       gnused
@@ -91,7 +83,7 @@ in
       ip netns add ${netns}
       ip -n ${netns} link set lo up
 
-      # Only the settings wg understands (wg-quick strip insists on a .conf file name)
+      # wg-quick strip requires a .conf file name
       stripped=$(grep -viE '^\s*(Address|DNS|MTU|Table|SaveConfig|(Pre|Post)(Up|Down))\s*=' "$conf")
       if ! grep -qi '^\s*PrivateKey' <<<"$stripped" || ! grep -qi '^\s*\[Peer\]' <<<"$stripped"; then
         echo "seedbox/wireguard has no PrivateKey or [Peer]" >&2
@@ -115,7 +107,13 @@ in
         ip -n ${netns} -6 route add default dev ${wgIf}
       fi
 
-      # DNS only through the tunnel
+      # Faster TCP to distant peers
+      ip netns exec ${netns} sysctl -q -w \
+        net.ipv4.tcp_congestion_control=bbr \
+        net.ipv4.tcp_wmem="4096 65536 16777216" \
+        net.ipv4.tcp_rmem="4096 131072 16777216" \
+        net.ipv4.tcp_slow_start_after_idle=0
+
       field DNS | grep -v ':' | sed 's/^/nameserver /' > /run/seedbox/resolv.conf
       echo 'hosts: files dns' > /run/seedbox/nsswitch.conf
     '';
@@ -133,8 +131,7 @@ in
 
   systemd.services.qbittorrent = netnsDeps // {
     serviceConfig = inNetns // {
-      # Resolve names only with the tunnel's DNS. The host's nscd would resolve them
-      # outside the namespace, so it is hidden.
+      # nscd would bypass the tunnel's DNS
       BindReadOnlyPaths = [
         "/run/seedbox/resolv.conf:/etc/resolv.conf"
         "/run/seedbox/nsswitch.conf:/etc/nsswitch.conf"
@@ -142,8 +139,6 @@ in
       InaccessiblePaths = [ "-/run/nscd" ];
       ReadWritePaths = [ dataDir ];
 
-      # Defaults on first start, and the settings this setup depends on on every
-      # start. Everything else is left to the web interface.
       ExecStartPre = pkgs.writeShellScript "seedbox-config" ''
         set -euo pipefail
         PATH=${
@@ -172,13 +167,11 @@ in
         set_ Network PortForwardingEnabled false
         set_ Preferences 'WebUI\Address' 127.0.0.1
         set_ Preferences 'WebUI\Port' ${toString webuiPort}
-        # Only reachable through this host's localhost
         set_ Preferences 'WebUI\HostHeaderValidation' false
       '';
     };
   };
 
-  # Web interface on this host's localhost, proxied into the namespace
   systemd.sockets.seedbox-webui = {
     wantedBy = [ "sockets.target" ];
     listenStreams = [ "127.0.0.1:${toString webuiPort}" ];
@@ -193,8 +186,6 @@ in
     };
   };
 
-  # Read-only share of the downloads on the local network, password protected and
-  # not announced anywhere
   systemd.services.seedbox-share = {
     description = "Seedbox downloads share";
     wantedBy = [ "multi-user.target" ];
