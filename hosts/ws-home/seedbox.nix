@@ -13,8 +13,10 @@ let
   wgIf = "wg-seedbox";
   dataDir = "/var/lib/seedbox";
   downloadsDir = "${dataDir}/downloads";
+  certDir = "${dataDir}/webui-tls";
   webuiPort = 8081;
   sharePort = 8091;
+  inherit (config.networking) hostName;
 
   secret = name: config.sops.secrets."seedbox/${name}".path;
   secretFile = "${inputs.secrets}/secrets/ws-home.enc.yaml";
@@ -147,12 +149,21 @@ in
             [
               coreutils
               crudini
+              openssl
             ]
           )
         }
         cfg=${dataDir}/qBittorrent/config/qBittorrent.conf
         mkdir -p ${downloadsDir} "$(dirname "$cfg")"
-        set_() { crudini --set "$cfg" "$@"; }
+        set_() { crudini --ini-options=nospace --set "$cfg" "$@"; }
+
+        if [ ! -f ${certDir}/cert.pem ]; then
+          mkdir -p ${certDir}
+          openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes \
+            -days 3650 -subj /CN=${hostName} -addext subjectAltName=DNS:${hostName},DNS:seedbox.bulthuis.dev \
+            -keyout ${certDir}/key.pem -out ${certDir}/cert.pem
+          chmod 600 ${certDir}/key.pem
+        fi
 
         if [ ! -f "$cfg" ]; then
           touch "$cfg"
@@ -165,16 +176,25 @@ in
         set_ BitTorrent 'Session\Interface' ${wgIf}
         set_ BitTorrent 'Session\InterfaceName' ${wgIf}
         set_ Network PortForwardingEnabled false
-        set_ Preferences 'WebUI\Address' 127.0.0.1
-        set_ Preferences 'WebUI\Port' ${toString webuiPort}
-        set_ Preferences 'WebUI\HostHeaderValidation' false
+        # qBittorrent 5 reads these from [WebUI], drop the old keys
+        for k in Address Port HostHeaderValidation LocalHostAuth 'HTTPS\Enabled' 'HTTPS\CertificatePath' 'HTTPS\KeyPath'; do
+          crudini --del "$cfg" Preferences "WebUI\\$k"
+        done
+        set_ WebUI 'Address' 127.0.0.1
+        set_ WebUI 'Port' ${toString webuiPort}
+        set_ WebUI 'HostHeaderValidation' false
+        # Proxied clients appear as localhost, so they must not skip the login
+        set_ WebUI 'LocalHostAuth' true
+        set_ WebUI 'HTTPS\Enabled' true
+        set_ WebUI 'HTTPS\CertificatePath' ${certDir}/cert.pem
+        set_ WebUI 'HTTPS\KeyPath' ${certDir}/key.pem
       '';
     };
   };
 
   systemd.sockets.seedbox-webui = {
     wantedBy = [ "sockets.target" ];
-    listenStreams = [ "127.0.0.1:${toString webuiPort}" ];
+    listenStreams = [ (toString webuiPort) ];
   };
   systemd.services.seedbox-webui = netnsDeps // {
     requires = [ "qbittorrent.service" ];
@@ -208,5 +228,8 @@ in
         --addr :${toString sharePort} --read-only --dir-cache-time 15s
     '';
   };
-  networking.firewall.interfaces.eno1.allowedTCPPorts = [ sharePort ];
+  networking.firewall.interfaces.eno1.allowedTCPPorts = [
+    webuiPort
+    sharePort
+  ];
 }
